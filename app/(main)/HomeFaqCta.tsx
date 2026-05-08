@@ -1,30 +1,75 @@
-import Link from "next/link";
+"use client";
+
+import { useState } from "react";
+import Image from "next/image";
 import styles from "./homeFaqCta.module.scss";
+import { INDUSTRY } from "@/constants/Images/images";
+import { submitContactForm } from "@/utils/zohoCRM";
 
 const homeFaqs = [
   {
     question: "What does Autocracy Machinery manufacture?",
     answer:
-      "Autocracy Machinery manufactures trenchers, attachments, post hole diggers, aquatic weed harvesters, floating pontoons, and infrastructure machines for telecom, water management, solar, agriculture, landscaping, construction, and environmental applications.",
+      "Autocracy Machinery manufactures trenchers, attachments, aquatic weed harvesters, pontoons, and infrastructure machines for field applications.",
   },
   {
     question: "Which Autocracy Machinery equipment is used for OFC cable laying?",
     answer:
-      "Autocracy Machinery trenchers and related utility trenching machines are used for OFC cable laying, telecom duct routes, pipeline trenching, irrigation lines, and solar cable trenching projects.",
+      "Trenchers and utility trenching machines support OFC cable laying, duct routes, pipelines, irrigation, and solar cable projects.",
   },
   {
     question: "Can Autocracy Machinery help select the right model?",
     answer:
-      "Yes. Buyers can share application details, soil or water conditions, trench depth, route length, carrier compatibility, and output goals so the Autocracy team can guide suitable products and models.",
+      "Yes. Share application, soil conditions, depth, route length, carrier fit, and output goals for model guidance.",
   },
   {
     question: "Where can I compare Autocracy Machinery products by industry?",
     answer:
-      "Use the industries page to compare machinery by application, including OFC telecommunications, water management, solar energy, agriculture, landscaping, construction, civil engineering, and environmental sustainability.",
+      "Use the industries page to compare machines for telecom, water management, solar, agriculture, construction, and more.",
+  },
+  {
+    question: "Do you offer machines for water management?",
+    answer:
+      "Yes. Autocracy offers aquatic weed harvesters, pontoons, lake cleaners, and related environmental equipment.",
+  },
+  {
+    question: "Can I request brochures before buying?",
+    answer:
+      "Yes. Product and model brochures can be requested from the brochure page or relevant product pages.",
+  },
+  {
+    question: "Are machines available for agriculture applications?",
+    answer:
+      "Yes. Autocracy machines support trenching, landscaping, irrigation, sod harvesting, and other agriculture workflows.",
+  },
+  {
+    question: "Can products be matched to project conditions?",
+    answer:
+      "Yes. The team can review location, terrain, soil, depth, productivity, and machine-fit requirements.",
+  },
+  {
+    question: "How do I get pricing or a quote?",
+    answer:
+      "Submit your contact details and project requirements, and the Autocracy team will follow up with guidance.",
+  },
+  {
+    question: "Does Autocracy support multiple industries?",
+    answer:
+      "Yes. Machines are used across telecom, water, solar, agriculture, defence, construction, and environmental projects.",
   },
 ];
 
 export default function HomeFaqCta() {
+  const [formData, setFormData] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    industry: "",
+    location: "",
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -36,6 +81,59 @@ export default function HomeFaqCta() {
         text: faq.answer,
       },
     })),
+  };
+
+  const handleInputChange = (field: keyof typeof formData, value: string) => {
+    setFormData((current) => ({
+      ...current,
+      [field]: value,
+    }));
+  };
+
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    if (
+      !formData.name ||
+      !formData.phone ||
+      !formData.email ||
+      !formData.industry ||
+      !formData.location
+    ) {
+      return;
+    }
+
+    setIsSubmitting(true);
+
+    try {
+      const success = await submitContactForm({
+        name: formData.name,
+        phone: formData.phone,
+        email: formData.email,
+        industry: formData.industry,
+        state: formData.location,
+        webLeadType: "Project Support",
+        enquiryType: "Machine Selection",
+      });
+
+      if (success) {
+        setIsSubmitted(true);
+        setFormData({
+          name: "",
+          phone: "",
+          email: "",
+          industry: "",
+          location: "",
+        });
+      } else {
+        alert("Failed to submit form. Please try again.");
+      }
+    } catch (error) {
+      console.error("Error submitting project support form:", error);
+      alert("Failed to submit form. Please try again.");
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -55,15 +153,33 @@ export default function HomeFaqCta() {
         </p>
       </div>
       <div className={styles.faqGrid}>
-        {homeFaqs.map((faq) => (
-          <article key={faq.question} className={styles.faqCard}>
-            <h3>{faq.question}</h3>
-            <p>{faq.answer}</p>
-          </article>
-        ))}
+        {[homeFaqs.slice(0, 5), homeFaqs.slice(5, 10)].map(
+          (column, columnIndex) => (
+            <div
+              key={`home-faq-column-${columnIndex}`}
+              className={styles.faqColumn}
+            >
+              {column.map((faq) => (
+                <article key={faq.question} className={styles.faqCard}>
+                  <h3>{faq.question}</h3>
+                  <p>{faq.answer}</p>
+                </article>
+              ))}
+            </div>
+          )
+        )}
       </div>
       <div className={styles.ctaSection}>
-        <div>
+        <div className={styles.ctaImageContainer}>
+          <Image
+            src={INDUSTRY.SAMPLE_INDUSTRY}
+            alt="Autocracy machinery"
+            width={760}
+            height={520}
+            className={styles.ctaImage}
+          />
+        </div>
+        <div className={styles.ctaFormContainer}>
           <p className={styles.eyebrow}>Project Support</p>
           <h2>Find the right machine for your application</h2>
           <p>
@@ -71,14 +187,91 @@ export default function HomeFaqCta() {
             trenchers, attachments, aquatic weed harvesters, and industry-ready
             model options.
           </p>
-        </div>
-        <div className={styles.ctaActions}>
-          <Link href="/contact-us" className={styles.primaryAction}>
-            Get a Quote
-          </Link>
-          <Link href="/brochure" className={styles.secondaryAction}>
-            View Brochures
-          </Link>
+          {isSubmitted ? (
+            <div className={styles.ctaSuccess}>
+              <h3>Thank you!</h3>
+              <p>We received your details and will get back to you shortly.</p>
+              <button type="button" onClick={() => setIsSubmitted(false)}>
+                Submit another request
+              </button>
+            </div>
+          ) : (
+            <form className={styles.ctaForm} onSubmit={handleSubmit}>
+              <label>
+                <span>Name *</span>
+                <input
+                  type="text"
+                  value={formData.name}
+                  onChange={(event) =>
+                    handleInputChange("name", event.target.value)
+                  }
+                  placeholder="Type here"
+                  required
+                />
+              </label>
+              <label>
+                <span>Phone number *</span>
+                <input
+                  type="tel"
+                  value={formData.phone}
+                  onChange={(event) =>
+                    handleInputChange("phone", event.target.value)
+                  }
+                  placeholder="Type here"
+                  required
+                />
+              </label>
+              <label>
+                <span>Email *</span>
+                <input
+                  type="email"
+                  value={formData.email}
+                  onChange={(event) =>
+                    handleInputChange("email", event.target.value)
+                  }
+                  placeholder="Type here"
+                  required
+                />
+              </label>
+              <label>
+                <span>Industry *</span>
+                <input
+                  type="text"
+                  value={formData.industry}
+                  onChange={(event) =>
+                    handleInputChange("industry", event.target.value)
+                  }
+                  placeholder="Type here"
+                  required
+                />
+              </label>
+              <label>
+                <span>Location *</span>
+                <input
+                  type="text"
+                  value={formData.location}
+                  onChange={(event) =>
+                    handleInputChange("location", event.target.value)
+                  }
+                  placeholder="Type here"
+                  required
+                />
+              </label>
+              <button
+                type="submit"
+                disabled={
+                  isSubmitting ||
+                  !formData.name ||
+                  !formData.phone ||
+                  !formData.email ||
+                  !formData.industry ||
+                  !formData.location
+                }
+              >
+                {isSubmitting ? "SUBMITTING..." : "SUBMIT"}
+              </button>
+            </form>
+          )}
         </div>
       </div>
     </section>
