@@ -1,4 +1,5 @@
 @use "../../../../styles/mixins" as *;
+@use "../../../../styles/varriables" as *;
 
 .modelContainer {
   padding: 1.5rem clamp(1rem, 3vw, 2rem) 0;
@@ -1198,7 +1199,7 @@
     gap: clamp(2rem, 3.5vw, 3.5rem);
     align-items: start;
     width: 100%;
-    padding-inline: 7.5rem;
+    padding-inline: $site-gutter-desktop;
   }
 
   .productHeroMediaColumn {
@@ -1499,7 +1500,7 @@
     width: 100%;
     background-color: #f5f5f5;
     margin-top: clamp(3rem, 6vw, 5rem);
-    padding: clamp(2.5rem, 5vw, 4rem) 7.5rem;
+    padding: clamp(2.5rem, 5vw, 4rem) $site-gutter-desktop;
   }
 
   .productSpecsHeader {
@@ -1558,7 +1559,7 @@
   .productKeyFeaturesSection {
     width: 100%;
     background-color: #fff;
-    padding: clamp(3rem, 6vw, 5rem) 7.5rem clamp(3.5rem, 7vw, 6rem);
+    padding: clamp(3rem, 6vw, 5rem) $site-gutter-desktop clamp(3.5rem, 7vw, 6rem);
   }
 
   .productKeyFeaturesHeader {
@@ -1638,7 +1639,7 @@
   .productApplicationsSection {
     width: 100%;
     background-color: #f5f5f5;
-    padding: clamp(3rem, 6vw, 5rem) 7.5rem;
+    padding: clamp(3rem, 6vw, 5rem) $site-gutter-desktop;
   }
 
   .productApplicationsHeader {
@@ -1709,7 +1710,7 @@
   .productFaqModelSection {
     width: 100%;
     background-color: #f5f5f5;
-    padding: clamp(3rem, 6vw, 5rem) 7.5rem;
+    padding: clamp(3rem, 6vw, 5rem) $site-gutter-desktop;
   }
 
   .productFaqModelHeader {
@@ -1770,11 +1771,11 @@
   .modelDetails,
   .tableDetails,
   .moreModels {
-    padding-inline: 7.5rem;
+    padding-inline: $site-gutter-desktop;
   }
 
   .yellowArea {
-    margin-inline: 7.5rem;
+    margin-inline: $site-gutter-desktop;
   }
 
   @include lg-max {

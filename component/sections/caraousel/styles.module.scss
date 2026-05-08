@@ -103,7 +103,7 @@
       z-index: 9;
       position: absolute;
       bottom: 4rem;
-      left: 7.5rem;
+      left: $site-gutter-desktop;
       display: flex;
       flex-direction: column;
       gap: 1rem;
@@ -111,7 +111,7 @@
       @include sm-max {
         gap: 0.4rem;
         bottom: 5rem;
-        left: 2rem;
+        left: $site-gutter-mobile;
       }
 
       .title {

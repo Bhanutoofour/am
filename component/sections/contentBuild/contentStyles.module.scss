@@ -7,7 +7,7 @@
   align-items: flex-start;
   gap: 4.5625rem;
   width: 100%;
-  padding: 4rem 7.5rem;
+  padding: 4rem $site-gutter-desktop;
   margin-top: 4rem;
   @include sm-max {
     gap: 2.5rem;

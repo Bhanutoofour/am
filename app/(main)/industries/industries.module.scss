@@ -3,7 +3,7 @@
 
 .industriesPage {
   width: 100%;
-  padding: clamp(3rem, 6vw, 5.5rem) 7.5rem clamp(3.5rem, 7vw, 6rem);
+  padding: clamp(3rem, 6vw, 5.5rem) $site-gutter-desktop clamp(3.5rem, 7vw, 6rem);
   background-color: #fff;
 
   @include lg-max {

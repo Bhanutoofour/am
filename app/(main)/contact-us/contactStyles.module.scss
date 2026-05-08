@@ -1,9 +1,10 @@
 @use "../../../styles/mixins" as *;
+@use "../../../styles/varriables" as *;
 
 .contactUsContainer {
   width: 100%;
   max-width: none;
-  padding: 2.5rem 7.5rem;
+  padding: 2.5rem $site-gutter-desktop;
   display: flex;
   flex-direction: column;
   gap: 2.5rem;

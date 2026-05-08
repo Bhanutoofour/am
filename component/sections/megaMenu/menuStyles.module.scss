@@ -1,7 +1,7 @@
 @use "../../../styles/varriables" as *;
 @use "../../../styles/mixins" as *;
 
-$menu-desktop-padding: 7.5rem;
+$menu-desktop-padding: $site-gutter-desktop;
 
 .megamenu {
   width: 100%;
@@ -21,6 +21,10 @@ $menu-desktop-padding: 7.5rem;
   overflow-y: auto;
 
   @include lg-max {
-    padding: 1.25rem 1rem 1.5rem;
+    padding: 1.25rem $site-gutter-tablet 1.5rem;
+  }
+
+  @include md-max {
+    padding-inline: $site-gutter-mobile;
   }
 }

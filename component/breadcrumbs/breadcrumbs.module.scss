@@ -1,17 +1,18 @@
 @use "../../styles/mixins" as *;
+@use "../../styles/varriables" as *;
 
 .breadcrumbs {
   width: 100%;
   background-color: #fff;
   border-bottom: 1px solid #ececec;
-  padding: 0.625rem 7.5rem;
+  padding: 0.625rem $site-gutter-desktop;
 
   @include lg-max {
-    padding-inline: 2rem;
+    padding-inline: $site-gutter-tablet;
   }
 
   @include md-max {
-    padding-inline: 1rem;
+    padding-inline: $site-gutter-mobile;
   }
 
   ol {

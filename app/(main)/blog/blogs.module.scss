@@ -7,7 +7,7 @@
   width: 100%;
   max-width: none;
   min-height: calc(100vh - 100px);
-  padding: 2.5rem 7.5rem;
+  padding: 2.5rem $site-gutter-desktop;
 
   @include lg-max {
     padding: 2.5rem 2rem;

@@ -18,6 +18,7 @@ import ContentBuild from "@/component/sections/contentBuild/ContentBuild";
 import { Metadata } from "next";
 import HomeStructuredData from "./HomeStructuredData";
 import Certificates from "@/component/sections/certificate/Certificates";
+import HomeFaqCta from "./HomeFaqCta";
 
 export default async function Home() {
   const products = await getActiveProducts();
@@ -38,6 +39,7 @@ export default async function Home() {
       <Certificates data={CertificateData} />
       <Media data={MediaData} />
       <Testimonials testimonials={testimonials} clients={clients} />
+      <HomeFaqCta />
     </>
   );
 }

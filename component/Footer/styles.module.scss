@@ -1,7 +1,7 @@
 @use "../../styles/varriables" as *;
 @use "../../styles/mixins" as *;
 
-$section-padding: 7.5rem;
+$section-padding: $site-gutter-desktop;
 
 .footer {
   width: 100%;
@@ -32,8 +32,8 @@ $section-padding: 7.5rem;
     right: $section-padding;
     width: auto;
     @include sm-max {
-      left: 1rem;
-      right: 1rem;
+      left: $site-gutter-mobile;
+      right: $site-gutter-mobile;
       width: 100%;
     }
     .yellowContainerText {
@@ -77,8 +77,11 @@ $section-padding: 7.5rem;
     align-items: flex-start;
     border-bottom: 1px solid $text-secondary;
     padding: 3rem $section-padding 2rem;
+    @include lg-max {
+      padding-inline: $site-gutter-tablet;
+    }
     @include sm-max {
-      padding: 3rem 1rem 2rem;
+      padding: 3rem $site-gutter-mobile 2rem;
     }
     .linkContainer {
       display: flex;
