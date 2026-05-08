@@ -26,29 +26,35 @@
     width: 100%;
     display: flex;
     align-items: center;
-    justify-content: stretch;
+    justify-content: center;
   }
   .certificateMarqueeContent {
     height: auto;
-    width: 100%;
+    width: fit-content;
     max-width: 100%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: repeat(5, 13rem);
+    justify-content: center;
+    justify-items: center;
     gap: 1.25rem;
+
     @include lg-max {
-      flex-wrap: wrap;
-      justify-content: center;
+      grid-template-columns: repeat(3, 13rem);
     }
 
     @include sm-max {
-      flex-wrap: wrap;
       align-items: center;
-      justify-content: center;
+      grid-template-columns: repeat(auto-fit, minmax(10rem, 13rem));
       width: 100%;
       gap: 0.5rem;
       padding: 0 2rem;
     }
+  }
+
+  .cardWrapper {
+    width: 13rem;
+    display: flex;
+    justify-content: center;
   }
   .mainHeading {
     font-size: 3rem;
