@@ -31,13 +31,6 @@ const ProductMenu: React.FC<ProductProps> = ({ ProductItems, onHide }) => {
               onClick={onHide}
               onMouseEnter={() => setEachProductId(product?.id)}
               onMouseLeave={() => setEachProductId(null)}
-              style={{
-                border: `${
-                  eachProductId === product?.id
-                    ? "1px solid #f9c300"
-                    : "1px solid #E4E4E4"
-                }`,
-              }}
             >
               <div className={styles.eachProductList}>
                 <Image

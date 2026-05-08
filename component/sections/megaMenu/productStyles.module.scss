@@ -4,44 +4,60 @@
   width: 100%;
   max-width: none;
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  grid-auto-rows: 6.25rem;
-  gap: 0.5rem 0.625rem;
-  overflow-y: auto;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-auto-rows: 4.875rem;
+  gap: 0.625rem;
+  overflow: visible;
 
   .eachProduct {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 1.125rem;
+    gap: 0.75rem;
+    width: 100%;
+    height: 100%;
+    padding: 0 0.875rem 0 1rem;
     position: relative;
     cursor: pointer;
     background: #fff;
+    border: 1px solid #e1e1e1;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+    &:hover {
+      border-color: #f9c300;
+      box-shadow: inset 0 0 0 1px rgba(249, 195, 0, 0.18);
+    }
+
     .eachProductList {
       display: flex;
       align-items: center;
-      gap: 1.25rem;
+      gap: 0.875rem;
       min-width: 0;
+      flex: 1 1 auto;
+
       .image {
-        width: 4.75rem;
-        height: 4rem;
+        width: 4rem;
+        height: 3rem;
         object-fit: contain;
         flex: 0 0 auto;
       }
+
       p {
         font-family: "Roboto", sans-serif;
-        font-size: 1rem;
+        font-size: 0.9375rem;
         font-weight: 700;
         font-stretch: 75%;
         font-variation-settings: "wdth" 75;
-        line-height: 120%;
+        line-height: 115%;
         color: $text-primary;
-        white-space: nowrap;
+        white-space: normal;
+        overflow-wrap: anywhere;
       }
     }
+
     .dropdown {
-      width: 1.5rem;
-      height: 1.5rem;
+      width: 1.375rem;
+      height: 1.375rem;
       flex: 0 0 auto;
       transform: rotate(-90deg);
       transform-origin: center;
@@ -49,8 +65,12 @@
     }
   }
 
-  .active::before {
-    display: none;
+  .active {
+    border-color: #f9c300;
+
+    &::before {
+      display: none;
+    }
   }
 
   .emptyState {

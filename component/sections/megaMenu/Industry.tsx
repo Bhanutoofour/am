@@ -72,13 +72,6 @@ const IndustryMenu: React.FC<IndustryProps> = ({ industryItems, onHide }) => {
                   selectedProductId === product?.id ? `${styles.active}` : ""
                 }`}
                 onClick={onHide}
-                style={{
-                  border: `${
-                    selectedProductId === product?.id
-                      ? "1px solid #f9c300"
-                      : "1px solid #E4E4E4"
-                  }`,
-                }}
                 onMouseEnter={() => setSelectedProductId(product?.id)}
                 onMouseLeave={() => setSelectedProductId(null)}
               >
