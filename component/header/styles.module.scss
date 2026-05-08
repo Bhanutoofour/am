@@ -69,7 +69,7 @@ $header-tablet-padding: 2rem;
       }
       p {
         font-family: "Roboto", sans-serif;
-        font-size: 0.8125rem;
+        font-size: 0.875rem;
         font-weight: 600;
         line-height: 105%;
         font-stretch: 75%;
@@ -202,7 +202,7 @@ $header-tablet-padding: 2rem;
         p {
           font-family: "Roboto", sans-serif;
           font-size: 1rem;
-          font-weight: 700;
+          font-weight: 600;
           line-height: 1.5rem;
           font-stretch: 75%;
           font-variation-settings: "wdth" 75;
@@ -215,7 +215,7 @@ $header-tablet-padding: 2rem;
         color: $text-primary;
         font-family: "Roboto", sans-serif;
         font-size: 1rem;
-        font-weight: 700;
+        font-weight: 600;
         line-height: 1.5rem;
         font-stretch: 75%;
         font-variation-settings: "wdth" 75;
@@ -295,7 +295,7 @@ $header-tablet-padding: 2rem;
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: clamp(1rem, 1.7vw, 1.5rem);
+  gap: clamp(0.75rem, 1.25vw, 1.125rem);
   min-height: 1.5rem;
 
   @include md-max {
