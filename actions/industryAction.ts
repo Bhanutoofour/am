@@ -69,7 +69,7 @@ export const getActiveIndustries = async (): Promise<ActiveIndustry[]> => {
     return groupedIndustries;
   } catch (error) {
     console.error("Error fetching active industries:", error);
-    throw error;
+    return [];
   }
 };
 

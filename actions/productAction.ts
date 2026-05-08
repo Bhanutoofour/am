@@ -35,7 +35,7 @@ export const getActiveProducts = async (): Promise<ActiveProduct[]> => {
     return processedResult;
   } catch (error) {
     console.error("Error fetching active products:", error);
-    throw error;
+    return [];
   }
 };
 

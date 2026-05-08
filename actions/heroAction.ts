@@ -11,7 +11,7 @@ export const getHeroSections = async (): Promise<HeroSection[]> => {
     return result;
   } catch (error) {
     console.error("Error fetching hero sections:", error);
-    throw error;
+    return [];
   }
 };
 
