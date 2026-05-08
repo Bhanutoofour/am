@@ -111,6 +111,7 @@ const Products: React.FC<ProductsProps> = ({ products }) => {
                   <Link
                     key={data.id}
                     href={`/products/${productSlug(data?.title ?? "")}`}
+                    className="keen-slider__slide"
                   >
                     <ProductCard
                       title={data.title}

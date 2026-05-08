@@ -384,6 +384,7 @@ export default function ProductClient({
               <Link
                 key={product.id}
                 href={`${basePath}/products/${productSlug(product.title ?? "")}`}
+                className="keen-slider__slide"
               >
                 <ProductCard
                   title={product.title}

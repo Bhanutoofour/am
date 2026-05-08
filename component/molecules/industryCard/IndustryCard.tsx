@@ -25,12 +25,11 @@ const IndustryCard: React.FC<IndustryCardProps> = ({
   return (
     <Link
       href={`${basePath}/industries/${titleToSlug(title)}`}
-      style={{ width: "100%"}}
+      className={isIndustryPage ? "keen-slider__slide" : undefined}
+      style={{ width: "100%" }}
     >
       <div
-        className={`${styles.industryCard} ${
-          isIndustryPage ? "keen-slider__slide" : ""
-        }`}
+        className={styles.industryCard}
         style={
           isLastCard
             ? {

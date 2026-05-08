@@ -118,17 +118,16 @@ const Caraousel: React.FC<CaraouselProps> = ({ heroData }) => {
         style={{ width: "100%", height: "100%" }}
       >
         {heroData.map((src, idx) => (
-          <div key={idx} className={styles.caraouselContainer}>
-            <div
-              className="keen-slider__slide fader__slide"
-              style={{ width: "100%", height: 581 }}
-            >
+          <div
+            key={idx}
+            className={`keen-slider__slide fader__slide ${styles.caraouselContainer}`}
+          >
               <div
                 style={{
-                  opacity: opacities[idx],
+                  opacity: opacities[idx] ?? 1,
                   position: "relative",
                   width: "100%",
-                  height: 581,
+                  height: "100%",
                 }}
               >
                 <img
@@ -179,7 +178,6 @@ const Caraousel: React.FC<CaraouselProps> = ({ heroData }) => {
                   height={53}
                 />
               </div>
-            </div>
           </div>
         ))}
       </div>
