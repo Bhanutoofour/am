@@ -13,6 +13,7 @@ export interface ZohoFormData {
   enquiryType?: string;
   comments?: string;
   countryAm?: string;
+  state?: string;
   findDealer?: string;
   additionalData?: Record<string, string>;
 }
@@ -114,6 +115,7 @@ export const submitContactForm = async (data: {
   webLeadType?: string;
   enquiryType?: string;
   comments?: string;
+  state?: string;
 }): Promise<boolean> => {
   try {
     return await submitToZohoCRM({
@@ -126,6 +128,7 @@ export const submitContactForm = async (data: {
       webLeadType: data.webLeadType,
       enquiryType: data.enquiryType,
       comments: data.comments,
+      state: data.state,
     });
   } catch (error) {
     console.error("Error in submitContactForm:", error);

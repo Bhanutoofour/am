@@ -164,6 +164,26 @@ function buildProductModelFaqs(
       question: `How do I get a quote for ${modelName}?`,
       answer: `Use the quote button and share your project details. The Autocracy team can guide model fit, brochure details, and next steps for ${productName.toLowerCase()} requirements.`,
     },
+    {
+      question: `Which industries commonly use ${modelName}?`,
+      answer: `${modelName} can support industry applications where teams need reliable ${productName.toLowerCase()} output, controlled site execution, and practical equipment fit.`,
+    },
+    {
+      question: `Can ${modelName} work in mixed site conditions?`,
+      answer: `${modelName} is intended for practical field deployment, helping operators plan around soil, access, productivity, and site constraints before work begins.`,
+    },
+    {
+      question: `What details should I share before buying ${modelName}?`,
+      answer: `Share your industry, site location, working depth or output needs, available carrier or fleet details, and timeline so the team can recommend the right configuration.`,
+    },
+    {
+      question: `Is brochure support available for ${modelName}?`,
+      answer: `Yes. Use the brochure request option to receive available model information, specifications, and supporting details for ${modelName}.`,
+    },
+    {
+      question: `Can Autocracy help confirm the right model for my location?`,
+      answer: `Yes. Submit your contact details, industry, and location, and the Autocracy team can help review model fit for your project conditions.`,
+    },
   ];
 }
 
@@ -813,23 +833,45 @@ export default function ProductModalClient({
                 </p>
               </div>
               <div className={styles.productFaqModelGrid}>
-                {productModelFaqs.map((faq) => (
-                  <article
-                    key={faq.question}
-                    className={styles.productFaqModelCard}
-                  >
-                    <h3 className={styles.productFaqModelQuestion}>
-                      {faq.question}
-                    </h3>
-                    <p className={styles.productFaqModelAnswer}>
-                      {faq.answer}
-                    </p>
-                  </article>
-                ))}
+                {[productModelFaqs.slice(0, 5), productModelFaqs.slice(5, 10)].map(
+                  (column, columnIndex) => (
+                    <div
+                      key={`faq-column-${columnIndex}`}
+                      className={styles.productFaqModelColumn}
+                    >
+                      {column.map((faq) => (
+                        <article
+                          key={faq.question}
+                          className={styles.productFaqModelCard}
+                        >
+                          <h3 className={styles.productFaqModelQuestion}>
+                            {faq.question}
+                          </h3>
+                          <p className={styles.productFaqModelAnswer}>
+                            {faq.answer}
+                          </p>
+                        </article>
+                      ))}
+                    </div>
+                  )
+                )}
               </div>
             </section>
           </>
         )}
+
+      {pageVariant === "productModel" && (
+        <ContactUs
+          image={modelData?.generalImage || modelData?.coverImage || ""}
+          altText={
+            modelData?.generalImageAltText ||
+            modelData?.coverImageAltText ||
+            "Model support"
+          }
+          productName={modelData?.productName || "product"}
+          model={modelData?.modelNumber}
+        />
+      )}
 
       {pageVariant !== "productModel" &&
         modelData?.keyFeatures &&
@@ -868,7 +910,7 @@ export default function ProductModalClient({
         </div>
       )}
 
-      {pageVariant !== "industry" && (
+      {pageVariant !== "industry" && pageVariant !== "productModel" && (
         <div className={styles.yellowArea}>
           <h2 className={styles.yellowHeading}>
             {`Ready to power up your projects with the ${modelData?.modelNumber}?`}
@@ -945,11 +987,17 @@ export default function ProductModalClient({
           </div>
         </div>
       )}
-      <ContactUs
-        image={modelData?.generalImage || ""}
-        altText={modelData?.generalImageAltText || "Trencher Machine in Action"}
-        productName={modelData?.productName || "product"}
-      />
+      {pageVariant !== "productModel" && (
+        <ContactUs
+          image={modelData?.generalImage || ""}
+          altText={
+            modelData?.generalImageAltText || "Trencher Machine in Action"
+          }
+          productName={modelData?.productName || "product"}
+          industry={industryTitle}
+          model={modelData?.modelNumber}
+        />
+      )}
       {showDownloadModal && (
         <BrochureDownloadModal
           setShowModal={setShowDownloadModal}

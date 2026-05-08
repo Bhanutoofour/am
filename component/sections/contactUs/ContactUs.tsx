@@ -14,6 +14,8 @@ const ContactUs: React.FC<{
     name: "",
     email: "",
     phone: "",
+    industry: industry || "",
+    location: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -22,7 +24,13 @@ const ContactUs: React.FC<{
     e.preventDefault();
 
     try {
-      if (!formData.name || !formData.email || !formData.phone) {
+      if (
+        !formData.name ||
+        !formData.email ||
+        !formData.phone ||
+        !formData.industry ||
+        !formData.location
+      ) {
         return;
       }
 
@@ -33,14 +41,21 @@ const ContactUs: React.FC<{
         const success = await submitContactForm({
           ...formData,
           product: productName,
-          industry: industry,
+          industry: formData.industry,
           model: model,
+          state: formData.location,
           webLeadType: "Need Assistance with Product",
         });
 
         if (success) {
           setIsSubmitted(true);
-          setFormData({ name: "", email: "", phone: "" });
+          setFormData({
+            name: "",
+            email: "",
+            phone: "",
+            industry: industry || "",
+            location: "",
+          });
         } else {
           alert("Failed to submit form. Please try again.");
         }
@@ -135,7 +150,7 @@ const ContactUs: React.FC<{
             />
           </div>
           <div className={styles.inputGroup}>
-            <label htmlFor="phone">Phone *</label>
+            <label htmlFor="phone">Phone number *</label>
             <input
               type="tel"
               id="phone"
@@ -146,6 +161,30 @@ const ContactUs: React.FC<{
               onChange={(e) => handleInputChange("phone", e.target.value)}
             />
           </div>
+          <div className={styles.inputGroup}>
+            <label htmlFor="industry">Industry *</label>
+            <input
+              type="text"
+              id="industry"
+              name="industry"
+              placeholder="Type here"
+              required
+              value={formData.industry}
+              onChange={(e) => handleInputChange("industry", e.target.value)}
+            />
+          </div>
+          <div className={styles.inputGroup}>
+            <label htmlFor="location">Location *</label>
+            <input
+              type="text"
+              id="location"
+              name="location"
+              placeholder="Type here"
+              required
+              value={formData.location}
+              onChange={(e) => handleInputChange("location", e.target.value)}
+            />
+          </div>
           <button
             type="submit"
             className={styles.submitButton}
@@ -153,7 +192,9 @@ const ContactUs: React.FC<{
               isSubmitting ||
               !formData.name ||
               !formData.email ||
-              !formData.phone
+              !formData.phone ||
+              !formData.industry ||
+              !formData.location
             }
           >
             {isSubmitting ? "SUBMITTING..." : "SUBMIT FORM"}

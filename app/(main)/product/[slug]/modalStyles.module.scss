@@ -1828,8 +1828,14 @@
     gap: 1.5rem;
   }
 
+  .productFaqModelColumn {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
   .productFaqModelCard {
-    min-height: 10rem;
+    min-height: 11rem;
     border: 1px solid #dcdcdc;
     border-radius: 0.5rem;
     background-color: #fff;
@@ -1963,6 +1969,10 @@
 
     .productFaqModelGrid {
       grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .productFaqModelColumn {
       gap: 1rem;
     }
 
