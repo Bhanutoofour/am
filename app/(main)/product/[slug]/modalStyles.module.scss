@@ -1,0 +1,1913 @@
+@use "../../../../styles/mixins" as *;
+
+.modelContainer {
+  padding: 1.5rem clamp(1rem, 3vw, 2rem) 0;
+  background-color: #fff;
+  max-width: 84rem;
+  width: 100%;
+  margin: 0 auto;
+  font-family: "Roboto", sans-serif;
+
+  @include sm-max {
+    padding: 0;
+  }
+
+  .imageWrapper {
+    width: 100%;
+    aspect-ratio: 1500 / 768;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .image {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    @include sm-max {
+      height: 21.25rem;
+      aspect-ratio: auto;
+
+      .image {
+        height: 100%;
+      }
+    }
+  }
+
+  .infoSection {
+    background: #000;
+    color: #fff;
+    padding: clamp(1.25rem, 2vw, 1.75rem) clamp(1rem, 2.4vw, 2rem);
+    width: 100%;
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      @include lg-max {
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      .titleArea {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
+      }
+
+      .title {
+        font-weight: 400;
+        font-family: "DaggerSquare", "Roboto", sans-serif;
+        font-size: 2rem;
+        font-style: oblique;
+        line-height: 120%;
+        text-transform: uppercase;
+        @include sm-max {
+          font-size: 1.25rem;
+        }
+      }
+
+      .subtitle {
+        font-weight: 400;
+        font-size: 0.875rem;
+        line-height: 120%;
+        letter-spacing: 0%;
+
+        span {
+          color: #f7c300;
+        }
+      }
+    }
+  }
+
+  .ctaButtons {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    flex-shrink: 0;
+    font-weight: 600;
+    font-style: normal;
+    font-size: 1rem;
+    line-height: 20px;
+    letter-spacing: 0%;
+    text-align: center;
+
+    @include lg-max {
+      padding: 0;
+    }
+    @include sm-max {
+      width: 100%;
+      padding: 1rem 0 0 0;
+      flex-wrap: wrap;
+    }
+
+    .brochure,
+    .quote {
+      padding: 0.75rem 1.5rem;
+      font-weight: 600;
+      cursor: pointer;
+      border: none;
+      font-size: 1rem;
+      min-height: 2.875rem;
+      @include sm-max {
+        flex: 1 1 10rem;
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+      }
+    }
+
+    .brochure {
+      background-color: transparent;
+      color: #fff;
+      border: 1px solid #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.625rem;
+
+      &:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
+    }
+
+    .quote {
+      background-color: #f7c300;
+      color: #000;
+    }
+  }
+
+  .specGrid {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    align-items: stretch;
+    padding: 0;
+    background-color: #f5f5f5;
+
+    @include lg-max {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    @include md-max {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    @include sm-max {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .eachCard {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 0.5rem;
+      width: 100%;
+      min-height: 5.25rem;
+      padding: 0.875rem 1rem;
+      border-right: 1px solid #e1e1e1;
+
+      @include sm-max {
+        min-height: 4.75rem;
+        border-bottom: 1px solid #e1e1e1;
+      }
+
+      .label {
+        font-weight: 600;
+        font-size: 0.75rem;
+        line-height: 120%;
+        letter-spacing: 0%;
+        vertical-align: middle;
+        color: #707071;
+        overflow-wrap: anywhere;
+      }
+
+      .value {
+        font-weight: 600;
+        font-size: 1rem;
+        line-height: 120%;
+        letter-spacing: 0%;
+        vertical-align: middle;
+      }
+    }
+  }
+
+  .projectFitSection {
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(22rem, 39.375rem);
+    gap: 3rem;
+    align-items: start;
+    padding: 1.5rem 0 3rem;
+    border-top: 1px solid #d9d9d9;
+    border-bottom: 1px solid #d9d9d9;
+    margin-top: 2.5rem;
+
+    @include sm-max {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      padding: 1.5rem 1.25rem;
+    }
+  }
+
+  .projectFitCopy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    max-width: 58rem;
+  }
+
+  .projectFitHeading {
+    color: #01060a;
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-size: 2.25rem;
+    font-weight: 700;
+    line-height: 105%;
+    letter-spacing: 0;
+    max-width: 48rem;
+
+    @include sm-max {
+      font-size: 1.75rem;
+      line-height: 115%;
+    }
+  }
+
+  .projectFitParagraph {
+    color: #0a0a0b;
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-weight: 400 !important;
+    font-size: 15px;
+    line-height: 150%;
+    letter-spacing: 0;
+    font-stretch: 75%;
+    font-variation-settings: "wdth" 75;
+    max-width: 54rem;
+
+    @include sm-max {
+      font-size: 14px;
+    }
+  }
+
+  .projectFitReadMore {
+    background: transparent;
+    border: 0;
+    color: #01060a;
+    cursor: pointer;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 120%;
+    padding: 0;
+    text-align: left;
+  }
+
+  .fieldPrioritiesCard {
+    width: 100%;
+    border: 1px solid #d7d7d7;
+    border-radius: 0.5rem;
+    background-color: #f5f5f5;
+    padding: 1.75rem 1.625rem;
+
+    @include sm-max {
+      padding: 1.25rem;
+    }
+  }
+
+  .fieldPrioritiesTitle {
+    color: #52677f;
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 120%;
+    margin-bottom: 1.75rem;
+  }
+
+  .fieldPrioritiesList {
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .fieldPriorityItem {
+    display: grid;
+    grid-template-columns: 1.875rem minmax(0, 1fr);
+    gap: 1rem;
+    align-items: start;
+    color: #06162f;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 150%;
+
+    @include sm-max {
+      font-size: 0.875rem;
+    }
+  }
+
+  .fieldPriorityIcon {
+    width: 1.875rem;
+    height: 1.875rem;
+    border-radius: 0.375rem;
+    background-color: #f7c300;
+    position: relative;
+    flex: 0 0 auto;
+
+    &::after {
+      content: "";
+      width: 0.75rem;
+      height: 0.375rem;
+      border-left: 0.125rem solid #01060a;
+      border-bottom: 0.125rem solid #01060a;
+      position: absolute;
+      left: 0.5625rem;
+      top: 0.5625rem;
+      transform: rotate(-45deg);
+    }
+  }
+
+  .applicationFitSection {
+    width: 100%;
+    background-color: #f5f5f5;
+    border-bottom: 1px solid #d9d9d9;
+    padding: 2rem 1.5rem 2.5rem;
+    margin-bottom: 2.3125rem;
+
+    @include sm-max {
+      padding: 2.5rem 1.25rem;
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  .applicationFitEyebrow {
+    color: #52677f;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 140%;
+    letter-spacing: 0;
+    font-stretch: 75%;
+    font-variation-settings: "wdth" 75;
+    margin-bottom: 1rem;
+  }
+
+  .applicationFitHeading {
+    color: #01060a;
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-size: 2.25rem;
+    font-weight: 700;
+    line-height: 105%;
+    letter-spacing: 0;
+    margin-bottom: 2.625rem;
+
+    @include sm-max {
+      font-size: 1.75rem;
+      line-height: 115%;
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  .applicationFitGrid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.25rem;
+
+    @include md-max {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    @include sm-max {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  }
+
+  .applicationFitCard {
+    min-height: 8.75rem;
+    border: 1px solid #d7d7d7;
+    border-radius: 0.5rem;
+    background-color: #fff;
+    padding: 1.75rem 1.625rem;
+
+    @include sm-max {
+      min-height: auto;
+      padding: 1.25rem;
+    }
+  }
+
+  .applicationFitCardLabel {
+    color: #52677f;
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 140%;
+    letter-spacing: 0;
+    font-stretch: 75%;
+    font-variation-settings: "wdth" 75;
+    margin-bottom: 1rem;
+  }
+
+  .applicationFitCardText {
+    color: #3b3b3c;
+    font-family: "Roboto", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+    font-size: 14px;
+    line-height: 150%;
+    letter-spacing: 0;
+    font-stretch: 75%;
+    font-variation-settings: "wdth" 75;
+  }
+
+  .projectExecutionSection {
+    width: 100%;
+    padding: 4.5rem 0 3.5rem;
+
+    @include sm-max {
+      padding: 2.5rem 1.25rem;
+    }
+  }
+
+  .projectExecutionHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 3.25rem;
+
+    @include sm-max {
+      margin-bottom: 2rem;
+    }
+  }
+
+  .projectExecutionEyebrow,
+  .projectExecutionIndustry,
+  .executionPrioritiesEyebrow {
+    color: #52677f;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 140%;
+    letter-spacing: 0;
+    text-transform: uppercase;
+    font-stretch: 75%;
+    font-variation-settings: "wdth" 75;
+  }
+
+  .projectExecutionHeading,
+  .executionPrioritiesHeading {
+    color: #01060a;
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-size: 2.25rem;
+    font-weight: 700;
+    line-height: 105%;
+    letter-spacing: 0;
+    max-width: 52rem;
+
+    @include sm-max {
+      font-size: 1.75rem;
+      line-height: 115%;
+    }
+  }
+
+  .projectExecutionLayout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(26rem, 48.75rem);
+    gap: 3.25rem;
+    align-items: end;
+
+    @include md-max {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+  }
+
+  .projectExecutionCopy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .projectExecutionSubheading {
+    color: #01060a;
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 120%;
+    letter-spacing: 0;
+    max-width: 43rem;
+
+    @include sm-max {
+      font-size: 1.375rem;
+    }
+  }
+
+  .projectExecutionParagraphs,
+  .executionPrioritiesParagraphs {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    color: #3b3b3c;
+
+    p {
+      font-family: "Roboto", sans-serif;
+      font-style: normal;
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 150%;
+      letter-spacing: 0;
+      font-stretch: 75%;
+      font-variation-settings: "wdth" 75;
+    }
+  }
+
+  .projectExecutionMedia {
+    width: 100%;
+    overflow: hidden;
+    border: 1px solid #01060a;
+    border-radius: 0.5rem;
+    background-color: #000;
+    aspect-ratio: 16 / 9;
+  }
+
+  .projectExecutionIframe,
+  .projectExecutionImage {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+
+  .executionPrioritiesSection {
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(24rem, 48.75rem) minmax(0, 1fr);
+    gap: 2.25rem;
+    align-items: center;
+    padding: 3.5rem 0 4rem;
+
+    @include md-max {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    @include sm-max {
+      padding: 2.5rem 1.25rem;
+    }
+  }
+
+  .executionPrioritiesImageWrap {
+    width: 100%;
+    min-height: 24rem;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    background-color: #f5f5f5;
+
+    @include sm-max {
+      min-height: 16rem;
+    }
+  }
+
+  .executionPrioritiesImage {
+    width: 100%;
+    height: 100%;
+    min-height: 24rem;
+    display: block;
+    object-fit: cover;
+
+    @include sm-max {
+      min-height: 16rem;
+    }
+  }
+
+  .executionPrioritiesCopy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .executionPrioritiesParagraphs {
+    max-width: 43rem;
+  }
+
+  .workflowSection {
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(18rem, 26rem) minmax(0, 1fr);
+    gap: 6.5rem;
+    align-items: start;
+    padding: 4rem 0 4.5rem;
+
+    @include md-max {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    @include sm-max {
+      padding: 2.5rem 1.25rem;
+    }
+  }
+
+  .workflowIntro {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .workflowEyebrow {
+    color: #52677f;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 140%;
+    letter-spacing: 0;
+    font-stretch: 75%;
+    font-variation-settings: "wdth" 75;
+  }
+
+  .workflowHeading {
+    color: #01060a;
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-size: 2.25rem;
+    font-weight: 700;
+    line-height: 105%;
+    letter-spacing: 0;
+
+    @include sm-max {
+      font-size: 1.75rem;
+      line-height: 115%;
+    }
+  }
+
+  .workflowGrid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.25rem;
+
+    @include sm-max {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  }
+
+  .workflowCard {
+    min-height: 10.75rem;
+    border: 1px solid #d7d7d7;
+    border-radius: 0.5rem;
+    background-color: #fff;
+    padding: 1.625rem;
+  }
+
+  .workflowStepNumber {
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 0.375rem;
+    background-color: #f7c300;
+    color: #01060a;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 100%;
+    margin-bottom: 1.5rem;
+  }
+
+  .workflowStepTitle {
+    color: #01060a;
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 120%;
+    letter-spacing: 0;
+    margin-bottom: 1rem;
+
+    @include sm-max {
+      font-size: 1.375rem;
+    }
+  }
+
+  .workflowStepDescription {
+    color: #3b3b3c;
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+    letter-spacing: 0;
+    font-stretch: 75%;
+    font-variation-settings: "wdth" 75;
+  }
+
+  .applicationSupportSection {
+    width: 100%;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    gap: 3rem;
+    align-items: center;
+    background-color: #f5f5f5;
+    border-top: 1px solid #d9d9d9;
+    border-bottom: 1px solid #d9d9d9;
+    padding: 4.75rem 1.25rem 5.25rem;
+
+    @include md-max {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    @include sm-max {
+      padding: 2.5rem 1.25rem;
+    }
+  }
+
+  .applicationSupportCopy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    max-width: 58rem;
+  }
+
+  .applicationSupportEyebrow {
+    color: #52677f;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 140%;
+    letter-spacing: 0;
+    font-stretch: 75%;
+    font-variation-settings: "wdth" 75;
+  }
+
+  .applicationSupportHeading {
+    color: #01060a;
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-size: 2.25rem;
+    font-weight: 700;
+    line-height: 105%;
+    letter-spacing: 0;
+    max-width: 50rem;
+
+    @include sm-max {
+      font-size: 1.75rem;
+      line-height: 115%;
+    }
+  }
+
+  .applicationSupportText {
+    color: #3b3b3c;
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+    letter-spacing: 0;
+    font-stretch: 75%;
+    font-variation-settings: "wdth" 75;
+    max-width: 55rem;
+  }
+
+  .applicationSupportActions {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+
+    @include sm-max {
+      width: 100%;
+      flex-direction: column;
+      align-items: stretch;
+    }
+  }
+
+  .applicationSupportQuote,
+  .applicationSupportBrochure {
+    min-width: 14.75rem;
+    min-height: 4.375rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    border-radius: 0.25rem;
+    padding: 0 1.5rem;
+    font-size: 1rem;
+    font-weight: 700;
+    line-height: 120%;
+    letter-spacing: 0;
+
+    @include sm-max {
+      width: 100%;
+      min-width: 0;
+    }
+  }
+
+  .applicationSupportQuote {
+    background-color: #01060a;
+    color: #f7c300;
+  }
+
+  .applicationSupportBrochure {
+    background-color: #fff;
+    border: 1px solid #bfc3c7;
+    color: #01060a;
+
+    &:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+  }
+
+  .modelDetails {
+    margin-top: clamp(2rem, 4vw, 3rem);
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+  }
+
+  .tableDetails {
+    display: grid;
+    grid-template-columns: minmax(18rem, 28rem) minmax(0, 1fr);
+    gap: clamp(2rem, 5vw, 4rem);
+    align-items: flex-start;
+    margin-top: clamp(3rem, 6vw, 5.375rem);
+
+    @include md-max {
+      grid-template-columns: 1fr;
+    }
+
+    @include sm-max {
+      gap: 1.25rem;
+      padding: 1.25rem;
+    }
+  }
+
+  .tableDesc {
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    width: 100%;
+    align-items: flex-start;
+    @include sm-max {
+      width: 100%;
+    }
+    .tableDescHeading {
+      font-family: "Roboto", sans-serif;
+      font-weight: 700;
+      font-style: normal;
+      font-size: 2.25rem;
+      line-height: 105%;
+      letter-spacing: 0;
+      @include sm-max {
+        font-size: 1.75rem;
+        line-height: 115%;
+      }
+    }
+    .tableDescPara {
+      color: #3b3b3c;
+      font-family: "Roboto", sans-serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 14px;
+      line-height: 150%;
+      letter-spacing: 0;
+      font-stretch: 75%;
+      font-variation-settings: "wdth" 75;
+    }
+  }
+
+  .specTable {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95rem;
+    border: 1px solid #ccc;
+    @include sm-max {
+      width: 100%;
+    }
+
+    th,
+    td {
+      padding: 0.5rem;
+      border-bottom: 1px solid #ccc;
+      text-align: left;
+      font-family: "Roboto", sans-serif;
+      font-weight: 400;
+      font-style: normal;
+      font-size: 14px;
+      line-height: 120%;
+      letter-spacing: 0%;
+      text-transform: uppercase;
+    }
+
+    th {
+      background-color: #000;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    tr:nth-child(even) {
+      background-color: #f9f9f9;
+    }
+  }
+
+  .moreModels {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: clamp(1.5rem, 4vw, 3rem);
+    margin-top: clamp(3rem, 6vw, 4.75rem);
+
+    .modelContainerHeading {
+      font-family: "Roboto", sans-serif;
+      font-weight: 700;
+      font-style: normal;
+      font-size: 2.25rem;
+      line-height: 105%;
+      letter-spacing: 0%;
+      @include sm-max {
+        font-size: 1.75rem;
+        line-height: 115%;
+        padding: 0 1rem;
+      }
+    }
+
+    .modelCardContainer {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      width: 100%;
+    }
+  }
+
+  .yellowArea {
+    background-color: #f7c300;
+    color: #000;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    margin-top: clamp(3rem, 6vw, 5.375rem);
+    padding: clamp(1.25rem, 3vw, 2rem);
+    justify-content: space-between;
+    gap: 1.5rem;
+    position: relative;
+    @include sm-max {
+      margin: 3.125rem 1rem;
+      padding: 1.25rem;
+    }
+    .yellowHeading {
+      font-family: "Roboto", sans-serif;
+      font-style: normal;
+      font-weight: 700;
+      font-size: 2.25rem;
+      line-height: 105%;
+      letter-spacing: 0;
+      flex: 1 1 24rem;
+      width: auto;
+      @include sm-max {
+        width: 100%;
+        font-size: 1.75rem;
+        line-height: 115%;
+      }
+    }
+    .triangle {
+      width: 1rem;
+      height: 1rem;
+      background-color: #f7c300;
+      position: absolute;
+      bottom: 93%;
+      left: 6rem;
+      transform: rotate(45deg);
+      @include sm-max {
+        bottom: 96%;
+      }
+    }
+  }
+
+  .productFaqSection {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+    padding: 4rem 1.25rem 3rem;
+
+    @include sm-max {
+      gap: 1.5rem;
+      padding: 2.5rem 1.25rem 2rem;
+    }
+  }
+
+  .productFaqHeader {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.75rem;
+    text-align: center;
+  }
+
+  .productFaqHeading {
+    color: #01060a;
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-size: 2.25rem;
+    font-weight: 700;
+    line-height: 105%;
+    letter-spacing: 0;
+
+    @include sm-max {
+      font-size: 1.75rem;
+      line-height: 115%;
+    }
+  }
+
+  .productFaqIntro {
+    color: #3b3b3c;
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+    letter-spacing: 0;
+    font-stretch: 75%;
+    font-variation-settings: "wdth" 75;
+  }
+
+  .productFaqGrid {
+    width: 100%;
+    max-width: 73.5rem;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+
+    @include sm-max {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  }
+
+  .productFaqCard {
+    min-height: 9.25rem;
+    border: 1px solid #d7d7d7;
+    border-radius: 0.5rem;
+    background-color: #f5f5f5;
+    padding: 1.75rem 1.875rem;
+
+    @include sm-max {
+      min-height: auto;
+      padding: 1.25rem;
+    }
+  }
+
+  .productFaqQuestion {
+    color: #01060a;
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 120%;
+    letter-spacing: 0;
+    margin-bottom: 0.875rem;
+
+    @include sm-max {
+      font-size: 1.25rem;
+    }
+  }
+
+  .productFaqAnswer {
+    color: #3b3b3c;
+    font-family: "Roboto", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 150%;
+    letter-spacing: 0;
+    font-stretch: 75%;
+    font-variation-settings: "wdth" 75;
+  }
+}
+
+.industryModelContainer {
+  --model-page-variant: industry;
+
+  .imageWrapper {
+    height: 360px;
+    aspect-ratio: auto;
+
+    .image {
+      object-position: center center;
+    }
+  }
+
+  .infoSection {
+    min-height: 60px;
+    padding: 0.75rem 1.25rem;
+
+    .header {
+      min-height: 3.5rem;
+    }
+  }
+
+  .specGrid {
+    min-height: 60px;
+
+    .eachCard {
+      min-height: 60px;
+      padding: 0.625rem 0.875rem;
+      gap: 0.25rem;
+    }
+  }
+
+  .infoSection {
+    .header {
+      .title {
+        font-size: 2.75rem;
+        line-height: 110%;
+
+        @include sm-max {
+          font-size: 2rem;
+        }
+      }
+
+      .subtitle {
+        font-size: 0.875rem;
+        line-height: 150%;
+      }
+    }
+  }
+
+  .projectFitHeading,
+  .applicationFitHeading,
+  .projectExecutionHeading,
+  .executionPrioritiesHeading,
+  .workflowHeading,
+  .applicationSupportHeading,
+  .productFaqHeading,
+  .tableDesc .tableDescHeading,
+  .moreModels .modelContainerHeading {
+    font-size: 2rem;
+    line-height: 112%;
+
+    @include sm-max {
+      font-size: 1.75rem;
+      line-height: 115%;
+    }
+  }
+
+  .projectExecutionSubheading,
+  .workflowStepTitle,
+  .productFaqQuestion {
+    font-size: 1.5rem;
+    line-height: 120%;
+
+    @include sm-max {
+      font-size: 1.375rem;
+    }
+  }
+
+  .projectFitParagraph,
+  .applicationFitCardText,
+  .workflowStepDescription,
+  .applicationSupportText,
+  .productFaqAnswer,
+  .tableDesc .tableDescPara,
+  .projectExecutionParagraphs p,
+  .executionPrioritiesParagraphs p {
+    font-size: 0.875rem;
+    line-height: 150%;
+  }
+}
+
+.productModelContainer {
+  --model-page-variant: product-model;
+  max-width: none;
+  padding: 2.25rem 0 0;
+
+  .productHeroSection {
+    display: grid;
+    grid-template-columns: minmax(0, 60fr) minmax(0, 40fr);
+    gap: clamp(2rem, 3.5vw, 3.5rem);
+    align-items: start;
+    width: 100%;
+    padding-inline: 7.5rem;
+  }
+
+  .productHeroMediaColumn {
+    min-width: 0;
+  }
+
+  .productHeroMediaFrame {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border-radius: 0.5rem;
+    background-color: #eef2f4;
+  }
+
+  .productHeroImage,
+  .productHeroVideo {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+
+  .productHeroBadge {
+    position: absolute;
+    top: 1.75rem;
+    left: 1.75rem;
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    min-height: 2.625rem;
+    border-radius: 0.25rem;
+    background-color: #01060a;
+    color: #f7c300;
+    padding: 0 1.375rem;
+    font-size: 1rem;
+    font-weight: 800;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  .productHeroArrow {
+    position: absolute;
+    top: 50%;
+    z-index: 2;
+    width: 4.25rem;
+    height: 4.25rem;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.9);
+    color: #01060a;
+    font-size: 2.75rem;
+    font-weight: 400;
+    line-height: 1;
+    transform: translateY(-50%);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .productHeroArrowPrev {
+    left: 1.5rem;
+  }
+
+  .productHeroArrowNext {
+    right: 1.5rem;
+  }
+
+  .productHeroDots {
+    position: absolute;
+    left: 50%;
+    bottom: 1.75rem;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    transform: translateX(-50%);
+  }
+
+  .productHeroDot {
+    width: 1rem;
+    height: 1rem;
+    border-radius: 999px;
+    background-color: #fff;
+    opacity: 0.95;
+  }
+
+  .productHeroDotActive {
+    width: 3.5rem;
+    background-color: #f7c300;
+  }
+
+  .productHeroThumbs {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.5rem;
+    margin-top: 1.75rem;
+  }
+
+  .productHeroThumb {
+    position: relative;
+    aspect-ratio: 4 / 3;
+    overflow: hidden;
+    border: 1px solid transparent;
+    border-radius: 0.5rem;
+    background-color: #f3f3f3;
+  }
+
+  .productHeroThumbActive {
+    border-color: #f7c300;
+  }
+
+  .productHeroThumbImage {
+    width: 100%;
+    height: 100%;
+    display: block;
+    object-fit: cover;
+  }
+
+  .productHeroPlayIcon {
+    position: absolute;
+    inset: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgba(0, 0, 0, 0.28);
+    color: #fff;
+    font-size: 1.625rem;
+  }
+
+  .productHeroSpecs {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1rem;
+    margin-top: 2.5rem;
+  }
+
+  .productHeroSpecCard {
+    min-height: 5.75rem;
+    border-radius: 0.5rem;
+    background-color: #f5f5f5;
+    padding: 1rem 1.25rem;
+    text-align: center;
+  }
+
+  .productHeroSpecLabel {
+    display: block;
+    color: #667084;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 140%;
+    font-stretch: 75%;
+    font-variation-settings: "wdth" 75;
+    margin-bottom: 0.5rem;
+  }
+
+  .productHeroSpecValue {
+    color: #01060a;
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 130%;
+  }
+
+  .productHeroContent {
+    padding-top: 0.25rem;
+  }
+
+  .productHeroProduct {
+    color: #52677f;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 140%;
+    text-transform: uppercase;
+    font-stretch: 75%;
+    font-variation-settings: "wdth" 75;
+    margin-bottom: 1.25rem;
+  }
+
+  .productHeroTitle {
+    color: #01060a;
+    font-family: "DaggerSquare", "Roboto", sans-serif;
+    font-size: 2.75rem;
+    font-style: oblique;
+    font-weight: 400;
+    line-height: 105%;
+    text-transform: uppercase;
+    margin-bottom: 1.375rem;
+  }
+
+  .productHeroSubtitle {
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+    color: #2f3d4d;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 140%;
+    font-stretch: 75%;
+    font-variation-settings: "wdth" 75;
+
+    span {
+      color: #f7c300;
+    }
+
+    strong {
+      color: #01060a;
+      font-weight: 800;
+    }
+  }
+
+  .productHeroDivider {
+    height: 1px;
+    width: 100%;
+    background-color: #d9d9d9;
+    margin: 2.75rem 0 2rem;
+  }
+
+  .productHeroOverview {
+    h2 {
+      color: #01060a;
+      font-size: 2rem;
+      font-weight: 800;
+      line-height: 115%;
+      margin-bottom: 1rem;
+    }
+
+    h3 {
+      color: #243246;
+      font-size: 1.5rem;
+      font-weight: 400;
+      line-height: 140%;
+      font-stretch: 75%;
+      font-variation-settings: "wdth" 75;
+      margin-bottom: 1.5rem;
+    }
+  }
+
+  .productHeroOverviewText {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+
+    p {
+      color: #1d2c40;
+      font-size: 0.875rem;
+      font-weight: 400;
+      line-height: 150%;
+      font-stretch: 75%;
+      font-variation-settings: "wdth" 75;
+    }
+  }
+
+  .productHeroReadMore {
+    color: #01060a;
+    font-size: 1rem;
+    font-weight: 800;
+    line-height: 120%;
+    margin-top: 1.75rem;
+  }
+
+  .productHeroActions {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    gap: 1rem;
+  }
+
+  .productHeroQuote,
+  .productHeroBrochure {
+    min-height: 4.875rem;
+    border-radius: 0.25rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    padding: 0 1.5rem;
+    font-size: 1rem;
+    font-weight: 800;
+    line-height: 120%;
+    letter-spacing: 0.04em;
+  }
+
+  .productHeroQuote {
+    background-color: #f7c300;
+    color: #01060a;
+  }
+
+  .productHeroBrochure {
+    border: 1px solid #bfc3c7;
+    background-color: #fff;
+    color: #01060a;
+
+    &:disabled {
+      opacity: 0.45;
+      cursor: not-allowed;
+    }
+  }
+
+  .productSpecsSection {
+    width: 100%;
+    background-color: #f5f5f5;
+    margin-top: clamp(3rem, 6vw, 5rem);
+    padding: clamp(2.5rem, 5vw, 4rem) 7.5rem;
+  }
+
+  .productSpecsHeader {
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+  }
+
+  .productSpecsHeading {
+    color: #01060a;
+    font-size: clamp(2rem, 3vw, 2.875rem);
+    font-weight: 800;
+    line-height: 110%;
+    letter-spacing: 0;
+    margin-bottom: 1rem;
+  }
+
+  .productSpecsIntro {
+    color: #1d2c40;
+    font-size: 1.125rem;
+    font-weight: 400;
+    line-height: 150%;
+    font-stretch: 75%;
+    font-variation-settings: "wdth" 75;
+  }
+
+  .productSpecsGrid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 1.375rem;
+  }
+
+  .productSpecsCard {
+    min-height: 7.25rem;
+    border: 1px solid #dcdcdc;
+    border-radius: 0.5rem;
+    background-color: #fff;
+    padding: 1.875rem 1.625rem;
+  }
+
+  .productSpecsLabel {
+    color: #5e6d84;
+    font-size: 1.125rem;
+    font-weight: 400;
+    line-height: 140%;
+    font-stretch: 75%;
+    font-variation-settings: "wdth" 75;
+    margin-bottom: 0.5rem;
+  }
+
+  .productSpecsValue {
+    color: #01060a;
+    font-size: 1.125rem;
+    font-weight: 500;
+    line-height: 140%;
+  }
+
+  .productKeyFeaturesSection {
+    width: 100%;
+    background-color: #fff;
+    padding: clamp(3rem, 6vw, 5rem) 7.5rem clamp(3.5rem, 7vw, 6rem);
+  }
+
+  .productKeyFeaturesHeader {
+    margin-bottom: clamp(2.25rem, 4vw, 3.5rem);
+  }
+
+  .productKeyFeaturesHeading {
+    color: #01060a;
+    font-size: clamp(2rem, 3vw, 2.875rem);
+    font-weight: 800;
+    line-height: 110%;
+    letter-spacing: 0;
+    margin-bottom: 1rem;
+  }
+
+  .productKeyFeaturesIntro {
+    color: #1d2c40;
+    font-size: 1.125rem;
+    font-weight: 400;
+    line-height: 150%;
+    font-stretch: 75%;
+    font-variation-settings: "wdth" 75;
+  }
+
+  .productKeyFeaturesGrid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: clamp(3rem, 6vw, 6rem);
+    row-gap: clamp(3rem, 6vw, 4.75rem);
+  }
+
+  .productKeyFeatureItem {
+    display: grid;
+    grid-template-columns: 4.25rem minmax(0, 1fr);
+    gap: 1.75rem;
+    align-items: start;
+  }
+
+  .productKeyFeatureIcon {
+    width: 4.25rem;
+    height: 4.25rem;
+    border-radius: 0.5rem;
+    background-color: #fff7df;
+    position: relative;
+
+    &::after {
+      content: "";
+      width: 1rem;
+      height: 0.5rem;
+      border-left: 0.1875rem solid #f7c300;
+      border-bottom: 0.1875rem solid #f7c300;
+      position: absolute;
+      left: 1.625rem;
+      top: 1.75rem;
+      transform: rotate(-45deg);
+    }
+  }
+
+  .productKeyFeatureTitle {
+    color: #01060a;
+    font-size: 1.5rem;
+    font-weight: 800;
+    line-height: 115%;
+    letter-spacing: 0;
+    margin-bottom: 1.125rem;
+  }
+
+  .productKeyFeatureText {
+    color: #1d2c40;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 150%;
+    font-stretch: 75%;
+    font-variation-settings: "wdth" 75;
+  }
+
+  .productApplicationsSection {
+    width: 100%;
+    background-color: #f5f5f5;
+    padding: clamp(3rem, 6vw, 5rem) 7.5rem;
+  }
+
+  .productApplicationsHeader {
+    max-width: 58rem;
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+  }
+
+  .productApplicationsEyebrow {
+    color: #52677f;
+    font-size: 0.875rem;
+    font-weight: 700;
+    line-height: 140%;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    margin-bottom: 0.75rem;
+  }
+
+  .productApplicationsHeading {
+    color: #01060a;
+    font-size: 2rem;
+    font-weight: 800;
+    line-height: 110%;
+    letter-spacing: 0;
+    margin-bottom: 1rem;
+  }
+
+  .productApplicationsIntro {
+    color: #1d2c40;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 150%;
+    font-stretch: 75%;
+    font-variation-settings: "wdth" 75;
+  }
+
+  .productApplicationsGrid {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 1.25rem;
+  }
+
+  .productApplicationCard {
+    min-height: 12rem;
+    border: 1px solid #dcdcdc;
+    border-radius: 0.5rem;
+    background-color: #fff;
+    padding: 1.75rem 1.5rem;
+  }
+
+  .productApplicationTitle {
+    color: #01060a;
+    font-size: 1.5rem;
+    font-weight: 800;
+    line-height: 120%;
+    letter-spacing: 0;
+    margin-bottom: 1rem;
+  }
+
+  .productApplicationText {
+    color: #1d2c40;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 150%;
+    font-stretch: 75%;
+    font-variation-settings: "wdth" 75;
+  }
+
+  .productFaqModelSection {
+    width: 100%;
+    background-color: #f5f5f5;
+    padding: clamp(3rem, 6vw, 5rem) 7.5rem;
+  }
+
+  .productFaqModelHeader {
+    max-width: 52rem;
+    margin-bottom: clamp(2rem, 4vw, 3rem);
+  }
+
+  .productFaqModelHeading {
+    color: #01060a;
+    font-size: clamp(2rem, 3vw, 2.875rem);
+    font-weight: 800;
+    line-height: 110%;
+    letter-spacing: 0;
+    margin-bottom: 1rem;
+  }
+
+  .productFaqModelIntro {
+    color: #1d2c40;
+    font-size: 1.125rem;
+    font-weight: 400;
+    line-height: 150%;
+    font-stretch: 75%;
+    font-variation-settings: "wdth" 75;
+  }
+
+  .productFaqModelGrid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.5rem;
+  }
+
+  .productFaqModelCard {
+    min-height: 10rem;
+    border: 1px solid #dcdcdc;
+    border-radius: 0.5rem;
+    background-color: #fff;
+    padding: 1.75rem 1.875rem;
+  }
+
+  .productFaqModelQuestion {
+    color: #01060a;
+    font-size: 1.375rem;
+    font-weight: 800;
+    line-height: 120%;
+    letter-spacing: 0;
+    margin-bottom: 0.875rem;
+  }
+
+  .productFaqModelAnswer {
+    color: #1d2c40;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 150%;
+    font-stretch: 75%;
+    font-variation-settings: "wdth" 75;
+  }
+
+  .modelDetails,
+  .tableDetails,
+  .moreModels {
+    padding-inline: 7.5rem;
+  }
+
+  .yellowArea {
+    margin-inline: 7.5rem;
+  }
+
+  @include lg-max {
+    .productHeroSection,
+    .modelDetails,
+    .tableDetails,
+    .moreModels {
+      padding-inline: 4rem;
+    }
+
+    .productSpecsSection,
+    .productKeyFeaturesSection,
+    .productApplicationsSection,
+    .productFaqModelSection {
+      padding-left: 4rem;
+      padding-right: 4rem;
+    }
+
+    .yellowArea {
+      margin-inline: 4rem;
+    }
+  }
+
+  @include sm-max {
+    padding-top: 0;
+
+    .productHeroSection {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+      padding-inline: 0;
+    }
+
+    .productHeroMediaFrame {
+      border-radius: 0;
+    }
+
+    .productHeroBadge {
+      top: 1rem;
+      left: 1rem;
+    }
+
+    .productHeroArrow {
+      width: 3rem;
+      height: 3rem;
+      font-size: 2rem;
+    }
+
+    .productHeroArrowPrev {
+      left: 1rem;
+    }
+
+    .productHeroArrowNext {
+      right: 1rem;
+    }
+
+    .productHeroThumbs,
+    .productHeroSpecs,
+    .productHeroActions {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+      padding-inline: 1rem;
+    }
+
+    .productHeroContent {
+      padding: 0 1rem;
+    }
+
+    .productSpecsSection {
+      margin-top: 2.5rem;
+      padding: 2.5rem 1rem;
+    }
+
+    .productSpecsGrid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .productKeyFeaturesSection {
+      padding: 2.75rem 1rem 3rem;
+    }
+
+    .productKeyFeaturesGrid {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .productApplicationsSection {
+      padding: 2.75rem 1rem;
+    }
+
+    .productApplicationsGrid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .productFaqModelSection {
+      padding: 2.75rem 1rem;
+    }
+
+    .productFaqModelGrid {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+
+    .productKeyFeatureItem {
+      grid-template-columns: 3.5rem minmax(0, 1fr);
+      gap: 1rem;
+    }
+
+    .productKeyFeatureIcon {
+      width: 3.5rem;
+      height: 3.5rem;
+
+      &::after {
+        left: 1.25rem;
+        top: 1.375rem;
+      }
+    }
+
+    .productHeroSubtitle {
+      flex-wrap: wrap;
+    }
+
+    .productHeroDivider {
+      margin: 1.75rem 0 1.5rem;
+    }
+
+    .modelDetails,
+    .tableDetails,
+    .moreModels,
+    .yellowArea {
+      padding-inline: 0;
+      margin-inline: 0;
+    }
+  }
+}

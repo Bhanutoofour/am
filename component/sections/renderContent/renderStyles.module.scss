@@ -1,0 +1,128 @@
+@use "../../../styles/mixins" as *;
+
+.privacyPolicyCont {
+    width: 100%;
+    max-width: 900px;
+    padding: 4rem 1.5rem;
+    color: #222;
+    max-width: 44rem;
+    width: 100%;
+  
+    h1 {
+        font-weight: 700;
+        font-size: 40px;
+        line-height: 105%;        
+    }
+  
+    h2 {
+        font-weight: 600;
+        font-size: 24px;
+        line-height: 114.99999999999999%;
+        margin-bottom: 1rem;     
+    }
+  
+    p {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 150%;
+    }
+  
+    ul {
+    //   list-style: none;
+      padding-left: 1.2rem;
+      margin-bottom: 1.5rem;
+  
+      li {
+        position: relative;
+        font-size: .875rem;
+        line-height: 1.7;
+        margin-bottom: 0.5rem;
+        color: #444;
+      }
+    }
+  }
+  
+  .Intro {
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    align-items: flex-start;
+    margin-bottom: 3.3125rem;
+
+
+  
+    p {
+      font-size: .875rem;
+      line-height: 1.8;
+      color: #555;
+      max-width: 800px;
+    }
+  }
+
+  .yellowBar{
+    margin-bottom: 2rem;
+  }
+  
+  .sections {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 3rem;
+    margin-bottom: 3rem;
+  }
+
+  .left1{
+    left: 0;
+    top: 25rem;
+    transform: scaleX(-1);
+    @include sm-max{
+        display: none;
+    }
+  }
+
+  .left2{
+    left: 0;
+    bottom: 85rem;
+    transform: scaleX(-1);
+    @include sm-max{
+        display: none;
+    }
+  }
+
+  .right1{
+    right: 0;
+    top: 60rem;
+    @include sm-max{
+        display: none;
+    }
+  }
+
+  .right2{
+    right: 0;
+    bottom: 55rem;
+    @include sm-max{
+        display: none;
+    }
+  }
+  
+//   // Responsive
+//   @media (max-width: 768px) {
+//     .privacyPolicyCont {
+//       padding: 2rem 1rem;
+  
+//       h1 {
+//         font-size: 2rem;
+//       }
+  
+//       h2 {
+//         font-size: 1.25rem;
+//       }
+  
+//       p,
+//       li {
+//         font-size: .875rem;
+//       }
+//     }
+//   }
+  

@@ -1,0 +1,208 @@
+@use "../../../styles/varriables" as *;
+@use "../../../styles/mixins" as *;
+
+.modelContainer {
+  padding-top: 1.5rem;
+  background-color: #fff;
+  max-width: 80rem;
+  width: 100%;
+  @include sm-max {
+    padding-top: 0;
+  }
+
+  .imageWrapper {
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .image {
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+    @include sm-max {
+      height: 21.25rem;
+
+      .image {
+        height: 100%;
+      }
+    }
+  }
+
+  .infoSectionSkeleton {
+    background: #f8f9fa;
+    padding: 1.375rem 1.5rem;
+    width: 100%;
+    border: 1px solid #e9ecef;
+
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+
+      @include lg-max {
+        flex-wrap: wrap;
+      }
+      .titleArea {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+        align-items: flex-start;
+
+        .title {
+          border-radius: 6px;
+        }
+
+        .subtitle {
+          border-radius: 4px;
+        }
+      }
+
+      .ctaButtons {
+        display: flex;
+        flex-direction: row;
+        gap: 1rem;
+        flex-shrink: 0;
+        font-weight: 600;
+        font-style: Condensed SemiBold;
+        font-size: 1rem;
+        line-height: 20px;
+        letter-spacing: 0%;
+        text-align: center;
+
+        @include lg-max {
+          padding: 0.875rem 0;
+        }
+        @include sm-max {
+          padding: 2.5rem 0 0 0;
+          flex-wrap: wrap;
+        }
+
+        .brochure,
+        .quote {
+          border-radius: 6px;
+        }
+      }
+    }
+  }
+
+  .specGrid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    padding: 2rem 1.5rem;
+    border-bottom: 1px solid #e7e7e7;
+
+    .eachCard {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      .label {
+        border-radius: 4px;
+      }
+
+      .value {
+        border-radius: 4px;
+      }
+    }
+  }
+
+  .modelDetails {
+    padding: 2rem 1.5rem;
+    border-bottom: 1px solid #e7e7e7;
+  }
+
+  .tableDetails {
+    padding: 2rem 1.5rem;
+    border-bottom: 1px solid #e7e7e7;
+
+    .tableDesc {
+      margin-bottom: 2rem;
+
+      .tableDescHeading {
+        border-radius: 6px;
+        margin-bottom: 1rem;
+      }
+
+      .tableDescPara {
+        border-radius: 4px;
+      }
+    }
+
+    .specTable {
+      width: 100%;
+      border-collapse: collapse;
+
+      th,
+      td {
+        padding: 1rem;
+        text-align: left;
+        border-bottom: 1px solid #e7e7e7;
+      }
+
+      th {
+        font-weight: 600;
+        background-color: #f8f9fa;
+      }
+    }
+  }
+
+  .yellowArea {
+    background-color: #fbb040;
+    padding: 3rem 1.5rem;
+    text-align: center;
+    position: relative;
+    margin: 2rem 0;
+
+    .yellowHeading {
+      border-radius: 6px;
+      margin-bottom: 2rem;
+    }
+
+    .ctaButtons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+
+      .brochure,
+      .quote {
+        border-radius: 6px;
+      }
+    }
+
+    .triangle {
+      position: absolute;
+      bottom: -20px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 0;
+      height: 0;
+      border-left: 20px solid transparent;
+      border-right: 20px solid transparent;
+      border-top: 20px solid #fbb040;
+    }
+  }
+
+  .moreModels {
+    padding: 2rem 1.5rem;
+
+    .modelContainerHeading {
+      border-radius: 6px;
+      margin-bottom: 2rem;
+    }
+
+    .modelCardContainer {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      @include sm-max {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+    }
+  }
+}

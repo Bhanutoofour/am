@@ -1,0 +1,781 @@
+@use "../../../styles/mixins" as *;
+
+.aboutUsContainer {
+  display: flex;
+  font-family: Roboto, sans-serif;
+  flex-direction: column;
+  gap: 3.75rem;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  position: relative;
+  padding: 2.5rem 7.5rem;
+  margin: 0 auto;
+  white-space: pre-line;
+
+  @include lg-max {
+    padding: 2.5rem 2rem;
+  }
+
+  @include md-max {
+    padding: 2rem 1rem;
+  }
+
+  @include sm-max {
+    gap: 2rem;
+    padding: 1.25rem 1rem;
+  }
+
+  .pageTitle {
+    font-weight: 700;
+    font-size: 2.5rem;
+    line-height: 105%;
+    letter-spacing: 0%;
+    text-align: center;
+    padding: 0;
+    @include sm-max {
+      font-size: 1.5rem;
+    }
+  }
+
+  .collageContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(2, 14.125rem);
+    gap: 1rem;
+    width: 100%;
+    max-width: none;
+    margin-bottom: 3.75rem;
+    padding: 0;
+    @include sm-max {
+      grid-template-columns: repeat(3, 1fr);
+      grid-template-rows: repeat(3, 9.75rem);
+      gap: 0.5rem;
+      margin-bottom: 2rem;
+    }
+
+    .item {
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:nth-child(1) {
+        grid-column: 1 / 2;
+        grid-row: 1 / 2;
+        @include sm-max {
+          grid-column: 2 / 3;
+          grid-row: 2 / 3;
+        }
+      }
+
+      &:nth-child(2) {
+        grid-column: 2 / 4;
+        grid-row: 1 / 2;
+        @include sm-max {
+          grid-column: 1 / 4;
+          grid-row: 3 / 4;
+        }
+      }
+
+      &:nth-child(3) {
+        grid-column: 4 / 5;
+        grid-row: 1 / 3;
+        @include sm-max {
+          grid-column: 1 / 2;
+          grid-row: 2 / 3;
+        }
+      }
+
+      &:nth-child(4) {
+        grid-column: 1 / 3;
+        grid-row: 2 / 3;
+        @include sm-max {
+          grid-column: 1 / 4;
+          grid-row: 1 / 2;
+        }
+      }
+
+      &:nth-child(5) {
+        grid-column: 3 / 4;
+        grid-row: 2 / 3;
+        @include sm-max {
+          grid-column: 3 / 4;
+          grid-row: 2 / 3;
+        }
+      }
+
+      .collageImage {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+
+        &:hover {
+          transform: scale(1.05);
+        }
+      }
+    }
+  }
+
+  .missionVisionSection {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    width: 100%;
+    max-width: none;
+    margin-bottom: 0.75rem;
+    padding: 0;
+    @include sm-max {
+      flex-direction: column;
+      gap: 2rem;
+    }
+
+    .missionVisionCard {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      padding: 1.5rem;
+      background-color: #f9c300;
+      @include sm-max {
+        gap: 1.5rem;
+        padding: 1.25rem;
+      }
+
+      .iconWrapper {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 4rem;
+        height: 4rem;
+        @include sm-max {
+          width: 3rem;
+          height: 3rem;
+        }
+
+        .icon {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+
+      .content {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        text-align: left;
+        @include sm-max {
+          gap: 0.75rem;
+        }
+      }
+
+      .cardTitle {
+        font-family: Roboto, sans-serif;
+        font-weight: 400;
+        font-size: 1rem;
+        line-height: 120%;
+        letter-spacing: 0%;
+        @include sm-max {
+          font-size: 0.875rem;
+        }
+      }
+
+      .cardDescription {
+        font-family: Roboto, sans-serif;
+        font-weight: 600;
+        font-size: 1rem;
+        line-height: 140%;
+        letter-spacing: 0%;
+        @include sm-max {
+          font-size: 0.875rem;
+        }
+      }
+    }
+
+    .valuesCard {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      align-items: flex-start;
+      gap: 0.5rem;
+      padding: 1.5rem;
+      background-color: #f6f6f7;
+      @include sm-max {
+        padding: 1.25rem;
+        gap: 0.75rem;
+      }
+
+      .introText {
+        white-space: pre-line;
+        font-family: Roboto, sans-serif;
+        font-weight: 400;
+        font-size: 0.75rem;
+        line-height: 150%;
+        @include sm-max {
+          font-size: 0.625rem;
+        }
+      }
+
+      .mainTitle {
+        font-weight: 600;
+        font-size: 1.5rem;
+        line-height: 110%;
+        @include sm-max {
+          font-size: 1.25rem;
+        }
+      }
+    }
+  }
+
+  .teamSection {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #f6f6f7;
+    padding: 3.5rem 0;
+    width: 100%;
+    @include sm-max {
+      padding: 2rem 0;
+    }
+  }
+
+  .headerSection {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 1rem;
+    max-width: 565px;
+    margin-bottom: 4rem;
+    @include sm-max {
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+      padding: 0;
+    }
+
+    .headerTitle {
+      font-family: Roboto, sans-serif;
+      font-weight: 700;
+      font-size: 2.5rem;
+      line-height: 105%;
+      letter-spacing: 0;
+      text-align: center;
+      @include sm-max {
+        font-size: 1.5rem;
+      }
+    }
+
+    .headerDescription {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      max-width: 800px;
+      color: #3b3b3c;
+      @include sm-max {
+        gap: 1rem;
+      }
+
+      p {
+        font-family: Roboto, sans-serif;
+        font-weight: 400;
+        font-size: 16px;
+        line-height: 150%;
+        letter-spacing: 0;
+        text-align: center;
+        @include sm-max {
+          font-size: 0.875rem;
+        }
+      }
+    }
+  }
+
+  .contentSection {
+    width: 100%;
+    max-width: none;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 1rem;
+    align-items: flex-start;
+    margin-bottom: 1.5rem;
+    background: #fff;
+    padding: 2rem;
+    padding-left: 3.5rem;
+    @include sm-max {
+      flex-direction: column;
+      gap: 1.5rem;
+      padding: 1.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .textContent {
+      max-width: 29.0625rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+      @include sm-max {
+        max-width: 100%;
+        gap: 1rem;
+      }
+
+      .sectionTitle {
+        font-family: Roboto, sans-serif;
+        font-weight: 700;
+        font-size: 2rem;
+        line-height: 105%;
+        letter-spacing: 0;
+        @include sm-max {
+          font-size: 1.5rem;
+        }
+      }
+
+      .sectionText {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+        text-align: left;
+        @include sm-max {
+          gap: 1rem;
+        }
+
+        p {
+          font-family: Roboto, sans-serif;
+          font-weight: 400;
+          font-size: 0.875rem;
+          line-height: 150%;
+          letter-spacing: 0;
+          @include sm-max {
+            font-size: 0.75rem;
+          }
+        }
+      }
+    }
+
+    .imageContent {
+      width: 23.5625rem;
+      height: auto;
+      @include sm-max {
+        width: 100%;
+        height: 10.8125rem;
+      }
+
+      .contentImage {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+
+  .founderSection {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3.5rem;
+    padding: 0;
+    @include sm-max {
+      gap: 2rem;
+      padding: 0;
+    }
+
+    .founderTitle {
+      font-family: Roboto, sans-serif;
+      font-weight: 700;
+      font-style: Condensed Bold;
+      font-size: 2.5rem;
+      line-height: 105%;
+      letter-spacing: 0;
+      text-align: center;
+      color: #0a0a0b;
+      max-width: 38rem;
+      @include sm-max {
+        font-size: 1.5rem;
+        max-width: 100%;
+      }
+    }
+
+    .foundersContainer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 3.5rem;
+      max-width: none;
+      width: 100%;
+      @include sm-max {
+        flex-direction: column;
+        gap: 2rem;
+      }
+
+      .founderCard {
+        flex: 1;
+        display: flex;
+        flex-direction: row;
+        gap: 1.5rem;
+        align-items: flex-start;
+        @include sm-max {
+          flex-direction: column;
+          gap: 1.5rem;
+          width: 100%;
+          align-items: center;
+        }
+
+        .founderImageWrapper {
+          position: relative;
+          width: 12.5rem;
+          height: 13.75rem;
+          flex-shrink: 0;
+          overflow: hidden;
+          @include sm-max {
+            width: 100%;
+            max-width: 7.25rem;
+            height: auto;
+          }
+
+          .founderImage {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+
+          .founderOverlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(
+              180deg,
+              rgba(10, 10, 11, 0) 0%,
+              #0a0a0b 100%
+            );
+            padding: 0.75rem;
+            padding-bottom: 0.5rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            @include sm-max {
+              display: none;
+            }
+
+            .founderInfo {
+              display: flex;
+              flex-direction: column;
+              gap: 0.125rem;
+              flex: 1;
+
+              .founderName {
+                font-family: Roboto, sans-serif;
+                font-weight: 800;
+                font-size: 0.875rem;
+                line-height: 120%;
+                letter-spacing: 0;
+                color: #fff;
+              }
+
+              .founderRole {
+                font-family: Roboto, sans-serif;
+                color: #fff;
+                font-weight: 400;
+                font-size: 0.625rem;
+                line-height: 120%;
+                letter-spacing: 0;
+              }
+            }
+
+            .linkedinIcon {
+              width: 1.125rem;
+              height: 1.125rem;
+              flex-shrink: 0;
+              cursor: pointer;
+
+              img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+              }
+            }
+          }
+        }
+
+        .founderText {
+          flex: 1;
+          display: flex;
+          align-items: center;
+          @include sm-max {
+            width: 100%;
+            flex-direction: column;
+            align-items: center;
+            gap: 1rem;
+          }
+
+          .mobileFounderInfo {
+            display: none;
+            @include sm-max {
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              gap: 0.5rem;
+            }
+
+            .mobileFounderName {
+              font-family: Roboto, sans-serif;
+              font-weight: 700;
+              font-size: 1rem;
+              line-height: 120%;
+              letter-spacing: 0;
+              color: #0a0a0b;
+              margin: 0;
+              text-align: center;
+            }
+
+            .mobileFounderRole {
+              font-family: Roboto, sans-serif;
+              font-weight: 400;
+              font-size: .875rem;
+              line-height: 120%;
+              letter-spacing: 0;
+              color: #0a0a0b;
+              margin: 0;
+              text-align: center;
+            }
+
+            .mobileLinkedinIcon {
+              width: 1.25rem;
+              height: 1.25rem;
+
+              img {
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+              }
+            }
+          }
+
+          .founderDescription {
+            font-family: Roboto, sans-serif;
+            font-weight: 400;
+            font-size: 0.875rem;
+            line-height: 150%;
+            color: #3b3b3c;
+            margin: 0;
+            text-align: left;
+            white-space: pre-line;
+            @include sm-max {
+              text-align: center;
+              font-size: 0.875rem;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .initiativesSection {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+    padding: 3.75rem 0;
+    background: #f6f6f7;
+    @include sm-max {
+      gap: 1.5rem;
+      padding: 2rem 0;
+    }
+
+    .initiativesHeader {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+      max-width: 35.3125rem;
+      text-align: center;
+      width: 100%;
+      padding: 0;
+      @include sm-max {
+        gap: 0.75rem;
+      }
+
+      .initiativesTitle {
+        font-family: Roboto, sans-serif;
+        font-weight: 700;
+        font-size: 2.5rem;
+        line-height: 105%;
+        letter-spacing: 0;
+        color: #0a0a0b;
+        @include sm-max {
+          font-size: 1.5rem;
+        }
+      }
+
+      .initiativesDescription {
+        font-family: Roboto, sans-serif;
+        font-weight: 400;
+        font-size: 1rem;
+        line-height: 150%;
+        letter-spacing: 0;
+        color: #3b3b3c;
+        @include sm-max {
+          font-size: 0.875rem;
+        }
+      }
+    }
+
+    .initiativesMarqueeContainer {
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .initiativesMarqueeTrack {
+      display: flex;
+      animation: initiativesMarquee 30s linear infinite;
+      width: max-content;
+      gap: 1rem;
+
+      &:hover {
+        animation-play-state: paused;
+        @include sm-max {
+          animation-play-state: running;
+        }
+      }
+
+      .initiativesImageWrapper {
+        flex-shrink: 0;
+        width: 22.75rem;
+        height: 18.5625rem;
+        opacity: 1;
+        overflow: hidden;
+        @include sm-max {
+          width: 18rem;
+          height: 14rem;
+        }
+
+        .initiativesImage {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+    }
+  }
+
+  @keyframes initiativesMarquee {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(-50%);
+    }
+  }
+
+  .excellenceSection {
+    width: 100%;
+    max-width: none;
+    display: flex;
+    flex-direction: row;
+    padding: 0;
+    gap: 2rem;
+    align-items: flex-start;
+    justify-content: space-between;
+    @include sm-max {
+      flex-direction: column;
+      gap: 2rem;
+      padding: 0;
+    }
+
+    .excellenceContent {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      @include sm-max {
+        gap: 1.5rem;
+      }
+
+      .excellenceTitle {
+        font-family: Roboto, sans-serif;
+        font-weight: 700;
+        font-size: 2.5rem;
+        line-height: 120%;
+        color: #0a0a0b;
+        @include sm-max {
+          font-size: 1.5rem;
+        }
+      }
+
+      .pillarsContainer {
+        display: flex;
+        flex-direction: column;
+        gap: 1.5rem;
+        @include sm-max {
+          gap: 1.25rem;
+        }
+
+        .pillarItem {
+          display: flex;
+          flex-direction: column;
+          gap: 0.5rem;
+          @include sm-max {
+            gap: 0.375rem;
+          }
+
+          .pillarTitle {
+            font-family: Roboto, sans-serif;
+            font-weight: 700;
+            font-size: 1.25rem;
+            line-height: 120%;
+            color: #0a0a0b;
+            @include sm-max {
+              font-size: 1rem;
+            }
+          }
+
+          .pillarDescription {
+            font-family: Roboto, sans-serif;
+            font-weight: 400;
+            font-size: 1rem;
+            line-height: 150%;
+            color: #585858;
+            margin: 0;
+            @include sm-max {
+              font-size: 0.875rem;
+            }
+          }
+        }
+      }
+    }
+
+    .excellenceImageWrapper {
+      width: 24rem;
+      height: 27rem;
+      @include sm-max {
+        display: none;
+      }
+
+      .excellenceImage {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        @include sm-max {
+          height: auto;
+        }
+      }
+    }
+  }
+}
+
+.aboutUsAwards {
+  margin-top: 0 !important;
+  padding: 0 !important;
+}

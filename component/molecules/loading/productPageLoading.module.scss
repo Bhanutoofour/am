@@ -1,0 +1,185 @@
+@use "../../../styles/varriables" as *;
+@use "../../../styles/mixins" as *;
+
+.productContainer {
+  width: 100%;
+  max-width: 80rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 1.5rem 0;
+  gap: 1rem;
+
+  .productDetails {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    width: 100%;
+    @include sm-max {
+      padding: 1rem 1.25rem;
+    }
+
+    .productInfo {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+      width: 100%;
+
+      .productHeading {
+        border-radius: 8px;
+      }
+
+      .productDescription {
+        border-radius: 4px;
+      }
+    }
+
+    .industryTags {
+      display: flex;
+      flex-direction: row;
+      gap: 0.25rem;
+      @include sm-max {
+        flex-wrap: wrap;
+      }
+
+      .eachIndustry {
+        border-radius: 2.5rem;
+      }
+    }
+  }
+
+  .modelContainerHeading {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0.4rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid $text-primary;
+    position: relative;
+    @include sm-max {
+      display: none;
+    }
+
+    .headingSection {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+
+      .headingText {
+        border-radius: 6px;
+      }
+    }
+
+    .filterSeries {
+      display: flex;
+      flex-direction: row;
+      gap: 1rem;
+      align-items: center;
+
+      .headingSelect {
+        border-radius: 6px;
+      }
+    }
+  }
+
+  .modelContainer {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 2rem;
+    width: 100%;
+    padding: 2rem 0;
+
+    .modelCard {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      .modelImage {
+        border-radius: 8px;
+      }
+
+      .modelInfo {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        .modelTitle {
+          border-radius: 4px;
+        }
+
+        .modelDescription {
+          border-radius: 4px;
+        }
+      }
+    }
+  }
+
+  .sliderWrapper {
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    margin-bottom: 2rem;
+    @include sm-max {
+      gap: 1rem;
+      padding: 0 1.5rem;
+    }
+
+    .carouselHeader {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      align-items: center;
+      justify-content: space-between;
+
+      .caraouselHeading {
+        border-radius: 6px;
+      }
+
+      .navButtons {
+        display: flex;
+        gap: 1.5rem;
+        align-items: center;
+        @include sm-max {
+          display: none;
+        }
+
+        .arrowButton {
+          border-radius: 6px;
+        }
+      }
+    }
+
+    .productCarousel,
+    .industryCarousel {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      gap: 1rem;
+      overflow-x: auto;
+
+      .productCard,
+      .industryCard {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        min-width: 200px;
+
+        .productImage,
+        .industryImage {
+          border-radius: 8px;
+        }
+
+        .productTitle,
+        .industryTitle {
+          border-radius: 4px;
+        }
+      }
+    }
+  }
+}

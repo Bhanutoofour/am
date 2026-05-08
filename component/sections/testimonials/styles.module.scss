@@ -1,0 +1,216 @@
+@use "../../../styles/varriables" as *;
+@use "../../../styles/mixins" as *;
+
+.testimonialSection {
+  width: 100%;
+  padding: 3.5rem 7.5rem;
+  background: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+  @include lg-max {
+    padding: 2.5rem 1rem 4.75rem 1rem;
+  }
+}
+
+.content {
+  max-width: none;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+
+  .dots {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    button {
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+  }
+}
+
+.testimonialHeadingContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-right: 0;
+  @include sm-max {
+    margin-right: 0;
+  }
+}
+
+.sectionTitle {
+  width: 100%;
+  font-size: 2rem;
+  font-weight: 700;
+  color: $text-primary;
+  @include sm-max {
+    font-weight: 600;
+    font-size: 1.5rem;
+    text-wrap: nowrap;
+    line-height: 114.99999999999999%;
+    text-align: center;
+  }
+}
+
+.sectionSubTitle {
+  font-size: 1rem;
+  color: #3b3b3c;
+  margin-top: 0.5rem;
+  @include sm-max {
+    display: none;
+  }
+}
+
+.navButtons {
+  display: flex;
+  gap: 1rem;
+  @include sm-max {
+    display: none;
+  }
+
+  .arrowButton {
+    border: 1px solid #000;
+    padding: 0.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &.disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+  }
+}
+
+.testimonialCarousel {
+  // display: flex;
+  width: 100%;
+  // gap: 1rem;
+}
+
+.testimonialCard {
+  background: #fff;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  @include sm-max {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px,
+      rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  }
+}
+
+.quoteIcon {
+  width: 2.5rem;
+  height: 2rem;
+}
+
+.quote {
+  font-size: 0.95rem;
+  color: $text-primary;
+  line-height: 1.5;
+}
+
+.authorSection {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: auto;
+
+  .avatar {
+    border-radius: 50%;
+    border: 1px solid #f5f5f5;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    font-weight: 700;
+    width: 3.125rem;
+    height: 3.125rem;
+    background-color: #79a3f27a;
+    color: #79a3f2;
+  }
+
+  .author {
+    font-weight: 600;
+    font-size: 1.25rem;
+    color: $text-primary;
+  }
+
+  .location {
+    font-weight: 400;
+    font-style: SemiBold;
+    font-size: 14px;
+    line-height: 24px;
+    color: #9d9d9d;
+  }
+}
+
+.slidingStripContainer {
+  margin-top: 1rem;
+  height: 4px;
+  width: 15rem;
+  background-color: #fff;
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+  align-self: center;
+}
+
+.slidingStrip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 20%;
+  background-color: #000;
+  border-radius: 2px;
+  transition: left 0.3s ease;
+  will-change: transform;
+}
+
+.happyClient {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  background-color: #ffff;
+  padding: 8.125rem 7.5rem;
+  width: 100%;
+  @include sm-max {
+    display: none;
+  }
+  .happyHeader {
+    font-size: 20px;
+    font-weight: 600;
+    letter-spacing: 0%;
+    line-height: 24px;
+    color: #6c6c6d;
+    text-align: center;
+  }
+  .clientImageBox {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 2rem 3rem;
+    align-items: center;
+    width: 100%;
+  }
+
+  .clientLogo {
+    width: auto;
+    max-width: 15rem;
+    height: 4.375rem;
+    object-fit: contain;
+  }
+}

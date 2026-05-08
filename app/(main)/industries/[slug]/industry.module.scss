@@ -1,0 +1,210 @@
+@use "../../../../styles/varriables" as *;
+@use "../../../../styles/mixins" as *;
+
+.industryHome {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  align-items: center;
+  width: 100%;
+  max-width: 80rem;
+  @include sm-max {
+    gap: 0;
+  }
+
+  .industryData {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    gap: 2rem;
+    padding: 0 1rem;
+    @include sm-max {
+      flex-direction: column;
+      padding: 1rem;
+    }
+  }
+
+  .industryInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    flex: 1;
+    width: 100%;
+    word-break: break-all;
+    .industryHeading {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: $text-primary;
+      line-height: 105%;
+    }
+    .industryDescription {
+      font-size: 0.875rem;
+      font-weight: 400;
+      color: $text-primary;
+      line-height: 150%;
+      width: 80%;
+      @include sm-max {
+        font-weight: 400;
+        font-size: 0.875rem;
+        line-height: 150%;
+      }
+    }
+  }
+
+  .brochureButton {
+    all: unset;
+    font-size: 1rem;
+    line-height: 1.25rem;
+    font-weight: 600;
+    padding: 0.875rem 1.5rem;
+    background-color: #01060a;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 0.625rem;
+    opacity: 1;
+    &:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    @include sm-max {
+      font-size: 0.875rem;
+      padding: 0.75rem 1.5rem;
+    }
+  }
+
+  .bannerSlider {
+    display: flex;
+    height: 27.5rem;
+    overflow: hidden;
+    @include sm-max {
+      height: 11.25rem;
+    }
+  }
+
+  .bannerSlide {
+    width: 100%;
+    height: 100%;
+  }
+
+  .bannerImage {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .gradientOverlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      180deg,
+      rgba(1, 6, 10, 0) 43.53%,
+      #01060a 142.21%
+    );
+    pointer-events: none;
+  }
+
+  .productHolder {
+    // width: 100%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.25rem;
+    padding: 0 16px;
+    @include md-max {
+      padding: 4rem 1rem;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0.5625rem;
+      width: auto;
+    }
+    @include sm-max {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @media screen and (max-width: 450px) {
+      justify-content: center;
+    }
+  }
+  .sliderWrapper {
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    margin-bottom: 11.25rem;
+    @include sm-max {
+      gap: 1rem;
+      padding: 0 1.5rem;
+    }
+    .carouselHeader {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      align-items: center;
+      justify-content: space-between;
+      .caraouselHeading {
+        font-size: 2.5rem;
+        font-weight: 700;
+        @include sm-max {
+          font-size: 1.75rem;
+          font-weight: 600;
+        }
+      }
+      .navButtons {
+        display: flex;
+        gap: 1.5rem;
+        align-items: center;
+        @include sm-max {
+          display: none;
+        }
+        .arrowButton {
+          padding: 0.75rem;
+          border: 0.0625rem solid #01060a;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          &.disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+          }
+        }
+      }
+    }
+    .industryCarousel {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      padding: 0.2rem;
+    }
+  }
+  .industryEmptyState {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 12rem;
+    border: 0.0625rem solid $border-grey;
+    gap: 2rem;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 2rem;
+    border-radius: 8px;
+  }
+  .imageContainer {
+    width: 100%;
+    max-width: 80rem;
+    height: 27.5rem;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    @include sm-max {
+      width: 100%;
+      height: 11.25rem;
+    }
+  }
+}

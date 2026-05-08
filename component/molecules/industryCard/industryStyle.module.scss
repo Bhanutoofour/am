@@ -1,0 +1,153 @@
+@use "../../../styles/varriables" as *;
+@use "../../../styles/mixins" as *;
+
+.industryCard {
+  width: 100%;
+  height: 20rem;
+  position: relative;
+  cursor: pointer;
+  outline: 0.25rem solid transparent;
+  @include sm-max {
+    height: 12.5rem;
+  }
+}
+
+.industryImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 8.375rem;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 11.21%, #000000 94.32%);
+  background-blend-mode: multiply;
+  z-index: 1;
+  transition: all 0.2s ease-in-out;
+}
+
+.industryDetail {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+  transition: all 0.2s ease-in-out;
+}
+
+.cardTitle {
+  margin: 1.25rem;
+  margin-top: auto;
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 120%;
+  color: $text-secondary;
+  @include sm-max {
+    font-size: 0.875rem !important;
+  }
+}
+
+.hoverArrow {
+  width: 8.5625rem;
+  height: 3rem;
+  border-bottom-left-radius: 0.125rem;
+  background: $button-text;
+  clip-path: polygon(0% 0%, 60% 0, 100% 100%, 100% 100%, 0% 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 1.25rem;
+  display: flex;
+  transition: all 0.2s ease-in-out;
+  display: none;
+
+  .arrow {
+    width: 1.75rem;
+    height: 1.0625rem;
+  }
+
+  &.skeletonCard {
+    outline: none;
+  }
+}
+.industryImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.overlay {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 8.375rem;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 11.21%, #000000 94.32%);
+  background-blend-mode: multiply;
+  z-index: 1;
+  transition: all 0.2s ease-in-out;
+}
+
+.industryDetail {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+  transition: all 0.2s ease-in-out;
+}
+
+.cardTitle {
+  margin: 1.25rem;
+  margin-top: auto;
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 120%;
+  color: $text-secondary;
+}
+
+.hoverArrow {
+  width: 8.5625rem;
+  height: 3rem;
+  border-bottom-left-radius: 0.125rem;
+  background: $button-text;
+  clip-path: polygon(0% 0%, 60% 0, 100% 100%, 100% 100%, 0% 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 1.25rem;
+  display: flex;
+  transition: all 0.2s ease-in-out;
+  display: none;
+
+  .arrow {
+    width: 1.75rem;
+    height: 1.0625rem;
+  }
+}
+@media (hover: hover) and (pointer: fine) {
+  .industryCard:hover {
+    .overlay {
+      height: inherit;
+      background: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0) 11.21%,
+        #000000 100%
+      );
+    }
+    .industryDetail {
+      border: 0.25rem solid $button-text;
+    }
+
+    &.skeletonCard {
+      .industryDetail {
+        outline: none;
+      }
+    }
+    .hoverArrow {
+      display: flex;
+    }
+  }
+}

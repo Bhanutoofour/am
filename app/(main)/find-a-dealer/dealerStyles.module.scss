@@ -1,0 +1,214 @@
+@use "../../../styles/mixins" as *;
+.dealerContainer {
+  max-width: 44rem;
+  width: 100%;
+  padding: 2.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+  @include sm-max {
+    padding: 1.25rem;
+    gap: 1.5rem;
+  }
+  .dealerHeading {
+    font-weight: 700;
+    font-style: Condensed Bold;
+    font-size: 40px;
+    line-height: 105%;
+    @include sm-max {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+  }
+  .formArea {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 2rem;
+    width: 100%;
+  }
+  .radioBtnCont {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 0.5rem;
+    @include sm-max {
+      gap: 1rem;
+    }
+  }
+  .inputCont {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+  }
+  .nameNcountry {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.5rem;
+    width: 100%;
+    @include sm-max {
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+  }
+
+  .countryDropdownContainer {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    width: 100%;
+  }
+
+  .countryLabel {
+    color: #0a0a0b;
+    margin-bottom: 0.25rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 1.4;
+  }
+
+  .required {
+    color: #ef4444;
+  }
+
+  .countryDropdown {
+    width: 100%;
+  }
+  .findBtn {
+    // width: 11.875rem;
+    height: 3rem;
+    background-color: #000;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+  }
+  .modalContainer {
+    width: 100vw;
+    height: 100vh;
+    background-color: #01060a66;
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    @include sm-max {
+      bottom: 0;
+      top: unset;
+      right: 0;
+      align-items: flex-end;
+    }
+  }
+  .modalBox {
+    width: 24.25rem;
+    height: 40.0625rem;
+    opacity: 1;
+    position: relative;
+    padding: 1.5rem;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    .closeIcon {
+      position: absolute;
+      top: 1rem;
+      right: 1rem;
+      cursor: pointer;
+      @include sm-max {
+        top: 1rem;
+        right: 1rem;
+      }
+    }
+
+    @include sm-max {
+      width: 100%;
+      height: 36.25rem;
+      gap: 1rem;
+    }
+  }
+  .stepTwoContainer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 8rem;
+    gap: 1rem;
+    .topPortion {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+    }
+    .yellowRound {
+      border-radius: 50%;
+      width: 88px;
+      height: 5.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      background-color: #f9c300;
+    }
+    .topPortionContent {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 1rem;
+    }
+    .topPortionHeading {
+      font-weight: 500;
+      font-style: Condensed Medium;
+      font-size: 1.5rem;
+      line-height: 140%;
+      text-align: center;
+    }
+    .thankYouForSharing {
+      font-weight: 400;
+      font-size: 0.875rem;
+      line-height: 140%;
+      text-align: center;
+      color: #585858;
+    }
+    .sharingContent {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+    .bottomPortion {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .needAssistance {
+      font-weight: 400;
+      font-style: Condensed SemiBold;
+      font-size: 16px;
+      line-height: 20px;
+      text-align: center;
+      text-decoration: underline;
+    }
+    .callUs {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 140%;
+      text-align: center;
+      color: #585858;
+    }
+  }
+}

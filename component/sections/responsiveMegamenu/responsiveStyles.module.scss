@@ -1,0 +1,160 @@
+@use "../../../styles/varriables" as *;
+@use "../../../styles/mixins" as *;
+
+.mobileMenuContainer {
+  width: 100svw;
+  height: calc(100svh - 2rem);
+  background-color: $bg-color;
+  z-index: 20;
+  position: absolute;
+  top: 2rem;
+  left: 0;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-in-out;
+  overflow: hidden;
+  
+  &.slideIn {
+    transform: translateX(0);
+  }
+  
+  &.slideOut {
+    transform: translateX(-100%);
+  }
+  .menuContent {
+    height: calc(100% - 8.25rem);
+    padding: 1.5rem 1.25rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    .menuItem {
+      font-weight: 600;
+      font-size: 0.875rem;
+      line-height: 105%;
+      color: $text-primary;
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      justify-content: space-between;
+      width: 100%;
+      padding: 0.875rem 0.5rem;
+      text-transform: uppercase;
+      text-decoration: none;
+    }
+  }
+  .contactDetails {
+    padding: 1.25rem;
+    background-color: #f5f5f5;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: flex-start;
+
+    @include xsm-max {
+      padding: 1rem;
+      gap: 1rem;
+    }
+  }
+  .contactHolder {
+    display: flex;
+    flex-direction: row;
+    gap: 1.9375rem;
+    align-items: center;
+  }
+  .call {
+    display: flex;
+    flex-direction: row;
+    gap: 0.5rem;
+    align-items: center;
+  }
+  .callNumber {
+    font-weight: 600;
+    font-size: 0.875rem;
+    line-height: 105%;
+    text-align: center;
+  }
+  .btnHolder {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    width: 100%;
+
+    @include xsm-max {
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .quoteBtn,
+    .brochureBtn {
+      all: unset;
+      padding: 0.875rem 1.5rem;
+      font-weight: 600;
+      font-size: 0.875rem;
+      line-height: 1.25rem;
+      text-align: center;
+      background-color: #f9c300;
+      border: 1px solid #f9c300;
+      cursor: pointer;
+      box-sizing: border-box;
+
+      @include xsm-max {
+        width: 100%;
+        justify-content: center;
+      }
+    }
+    .brochureBtn {
+      border: 1px solid #01060a;
+      background-color: transparent;
+      display: flex;
+      align-items: center;
+      gap: 0.875rem;
+    }
+  }
+  .menuHeading {
+    display: flex;
+    width: 100%;
+    gap: 0.75rem;
+    align-items: center;
+    font-weight: 600;
+    font-size: 1.125rem;
+    line-height: 120%;
+    text-transform: uppercase;
+    padding-bottom: 1.5rem;
+  }
+  .productWrapper{
+    display: flex;
+    flex-direction: column;
+    gap: .375rem;
+    width: 100%;
+    height: calc(100% - 45px);
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  .eachProduct {
+    width: 100%;
+    padding: 0 .5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid #f5f5f5;
+    .eachProductList {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      p {
+        font-size: 14px;
+        font-weight: 500;
+        line-height: 120%;
+        color: $text-primary;
+      }
+    }
+    .dropdown {
+      transform: rotate(-90deg);
+      transform-origin: center;
+      transition: transform 0.3s ease;
+    }
+  }
+}

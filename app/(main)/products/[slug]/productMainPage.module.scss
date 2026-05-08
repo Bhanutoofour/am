@@ -1,0 +1,327 @@
+@use "../../../../styles/varriables" as *;
+@use "../../../../styles/mixins" as *;
+
+.productContainer {
+  width: 100%;
+  max-width: 80rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: calc(1rem + 25px) 0 1.75rem;
+  gap: 1rem;
+
+  .productDetails {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 100%;
+    @include sm-max {
+      flex-direction: column;
+      align-items: flex-start;
+      padding: 1rem 1.25rem;
+    }
+  }
+
+  .productContent {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    flex: 1 1 auto;
+    max-width: 49rem;
+    min-width: 0;
+    @include sm-max {
+      width: 100%;
+      max-width: none;
+    }
+  }
+
+  .productInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    width: 100%;
+
+    .productHeading {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: $text-primary;
+      line-height: 105%;
+      width: 100%;
+
+      @include sm-max {
+        font-size: 1.75rem;
+        font-weight: 600;
+        line-height: 114.99999999999999%;
+      }
+    }
+
+    .productDescription {
+      font-weight: 400;
+      font-size: 14px;
+      color: #000000cc;
+      line-height: 140%;
+      letter-spacing: 0;
+      width: 100%;
+
+      @include sm-max {
+        text-align: justify;
+      }
+    }
+  }
+
+  .productImageWrapper {
+    flex: 0 0 clamp(17rem, 34vw, 32rem);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 16rem;
+    overflow: hidden;
+    @include sm-max {
+      width: 100%;
+      min-height: auto;
+    }
+  }
+
+  .productImage {
+    width: 100%;
+    height: auto;
+    object-fit: contain;
+    display: block;
+    transform: translateY(calc(-2.25rem - 10px));
+
+    @include sm-max {
+      transform: none;
+    }
+  }
+
+  .industryTags {
+    display: flex;
+    flex-direction: row;
+    gap: 0.25rem;
+
+    @include sm-max {
+      flex-wrap: wrap;
+    }
+
+    .eachIndustry {
+      width: fit-content;
+      background-color: rgba(218, 218, 218, 0.626);
+      border-radius: 2.5rem;
+      padding: 0.5rem 1.125rem;
+      min-height: 3rem;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      p {
+        font-size: 0.75rem;
+        font-weight: 400;
+        color: $text-primary;
+        line-height: 110%;
+        text-align: center;
+      }
+    }
+  }
+
+  .modelContainerHeading {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 0.4rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid $text-primary;
+    position: relative;
+    @include sm-max {
+      display: none;
+    }
+  }
+
+  .headingSection {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .headingText {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: $text-primary;
+    line-height: 105%;
+  }
+
+  .modelCount {
+    font-size: 0.875rem;
+    font-weight: 400;
+    color: #666;
+    line-height: 120%;
+  }
+
+  .filterSeries {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .resetFilterBtn {
+    background-color: #f0f0f0;
+    color: $text-primary;
+    border: 1px solid #d5d4d4;
+    border-radius: 0.375rem;
+    padding: 0.5rem 1rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+
+    &:hover {
+      background-color: #e0e0e0;
+      color: $text-primary;
+    }
+  }
+
+  .headingSelect {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 0.625rem;
+    cursor: pointer;
+    .selectText {
+      font-size: 1rem;
+      font-weight: 600;
+      color: $text-primary;
+      line-height: 105%;
+      width: 6.25rem;
+    }
+  }
+
+  .seriesFilterWrapper {
+    position: absolute;
+    right: 8rem;
+    top: 100%;
+    z-index: 1;
+  }
+
+  .modelFilterWrapper {
+    position: absolute;
+    right: 0;
+    top: 100%;
+    z-index: 1;
+  }
+
+  .filterContainer {
+    border: 1px solid #d5d4d4;
+    padding: 0.375rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+    width: fit-content;
+    border-radius: 0.4375rem;
+    background-color: #fff;
+  }
+
+  .filterBtn {
+    background-color: transparent;
+    color: $text-primary;
+    border: 1px solid #d5d4d4;
+    border-radius: 0.375rem;
+    padding: 0.5rem 3rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease, color 0.2s ease;
+
+    &:hover {
+      background-color: #e7e7e7;
+      color: $text-primary;
+    }
+  }
+
+  .modelContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    @include sm-max {
+      background-color: #f5f5f5;
+    }
+  }
+
+  .noModelsMessage {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem 0;
+
+    p {
+      font-size: 1.125rem;
+      font-weight: 500;
+      color: $text-primary;
+      text-align: center;
+    }
+  }
+
+  .sliderWrapper {
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    margin-top: 7.5rem;
+    @include sm-max {
+      gap: 1rem;
+      margin-top: 3.5rem;
+      padding: 0 1.5rem;
+    }
+    .carouselHeader {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      align-items: center;
+      justify-content: space-between;
+      .caraouselHeading {
+        font-size: 2.5rem;
+        font-weight: 700;
+        @include sm-max {
+          font-size: 1.75rem;
+          font-weight: 600;
+        }
+      }
+      .navButtons {
+        display: flex;
+        gap: 1.5rem;
+        align-items: center;
+        @include sm-max {
+          display: none;
+        }
+        .arrowButton {
+          padding: 0.75rem;
+          border: 0.0625rem solid #01060a;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          &.disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+          }
+        }
+      }
+    }
+    .industryCarousel {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      padding: 0.2rem;
+    }
+  }
+}
+
+.industryProductContainer {
+  --product-page-variant: industry;
+}

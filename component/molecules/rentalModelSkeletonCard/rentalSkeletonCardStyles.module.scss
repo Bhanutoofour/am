@@ -1,0 +1,42 @@
+@use "../../../styles/mixins" as *;
+
+.card {
+  display: flex;
+  gap: 20px;
+  border: 1px solid #e0e0e0;
+  align-items: flex-start;
+  padding: 6px;
+  width: 100%;
+  border-radius: 8px;
+  height: 345px;
+  @include sm-max {
+    flex-direction: column;
+    border: none;
+    justify-content: center;
+  }
+}
+
+.imageWrapper {
+  width: 400px;
+  height: 100%;
+  overflow: hidden;
+  border-radius: 8px;
+  @include sm-max {
+    width: 21.875rem;
+    height: 21rem;
+    margin: auto;
+  }
+}
+
+.contentWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 0.5rem;
+}
+
+.buttonWrapper {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}

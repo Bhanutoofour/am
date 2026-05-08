@@ -1,0 +1,82 @@
+@use "../../../styles/varriables" as *;
+@use "../../../styles/mixins" as *;
+
+.buildSection {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4.5625rem;
+  width: 100%;
+  padding: 4rem 7.5rem;
+  margin-top: 4rem;
+  @include sm-max {
+    gap: 2.5rem;
+    margin-top: 0.75rem;
+  }
+}
+
+.buildCardTitle {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  .buildTitle {
+    font-weight: 700;
+    font-style: Condensed Bold;
+    font-size: 2.5rem;
+    line-height: 120%;
+    @include sm-max {
+      font-size: 1.5rem;
+    }
+  }
+}
+
+.BuildCardContainer {
+  display: flex;
+  flex-direction: row;
+  max-width: none;
+  width: 100%;
+  gap: 3rem;
+  @include sm-max {
+    flex-direction: column;
+  }
+
+  .wrapper {
+    display: flex;
+  }
+
+  .bar {
+    background-color: #f9c300;
+    height: 0.8125rem;
+    width: 57px;
+    clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
+
+    &.small {
+      width: 1.4375rem;
+      height: 0.8125rem;
+      clip-path: polygon(40% 0, 100% 0, 57% 100%, 0% 100%);
+    }
+  }
+
+  .buildCard {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  .cardTitle {
+    font-weight: 600;
+    font-style: Condensed SemiBold;
+    font-size: 1.4rem;
+    line-height: 114.99999999999999%;
+    color: #111113;
+    @include sm-max {
+      font-size: 1.25rem;
+    }
+  }
+
+  .cardDesc {
+    font-weight: 400;
+    font-size: 0.875rem;
+    line-height: 150%;
+    color: #3b3b3c;
+  }
+}

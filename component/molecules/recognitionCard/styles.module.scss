@@ -1,0 +1,44 @@
+.recognitionCard{
+    display: flex;
+    flex-direction: column;
+    gap: .75rem;
+    align-items: center;
+    justify-content: center;
+    width: 13rem;
+    min-height: 17rem;
+    padding: 1.5rem 1.25rem;
+    // border-right: 0.0625rem solid #AEAEAE;
+    position: relative;
+    border-right: none;
+    &::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        height: 60%; // adjust as needed
+        width: 1px;
+        background: linear-gradient(90deg,rgba(42, 123, 155, 1) 0%, rgba(255, 255, 255, 1) 0%, rgba(174, 174, 174, 1) 50%, rgba(255, 255, 255, 1) 100%);
+    }
+    &.noBorder::after {
+        display: none;
+    }
+    .image{
+        width: auto;
+        height: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .title{
+        font-size: .875rem;
+    font-weight: 700;
+    line-height: 130%;
+    text-align: center;
+    min-height: 2.75rem;
+    height: auto;
+
+    display: block;
+    overflow: visible;
+    }
+}

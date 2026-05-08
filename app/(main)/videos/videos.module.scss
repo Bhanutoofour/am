@@ -1,0 +1,477 @@
+@use "@/styles/varriables.scss" as *;
+@use "@/styles/mixins.scss" as *;
+@use "sass:color";
+
+.videosPage {
+  background-color: #fff;
+  width: 100%;
+  max-width: 1280px;
+  min-height: calc(100vh - 100px);
+  padding: 2.5rem 0;
+
+  @include lg-max {
+    padding: 2.5rem 1rem;
+  }
+  @include sm-max {
+    padding: 2rem 1rem;
+  }
+}
+
+.pageHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 2rem;
+
+  @include lg-min {
+    .filterIconButton {
+      display: none;
+    }
+  }
+}
+
+.pageTitle {
+  font-size: 2.5rem;
+  line-height: 105%;
+  letter-spacing: 0;
+  margin: 0;
+  color: $text-primary;
+
+  @include sm-max {
+    font-size: 2rem;
+  }
+}
+
+.filterIconButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  transition: opacity 0.2s ease;
+
+  &:hover {
+    opacity: 0.7;
+  }
+
+  &:active {
+    opacity: 0.5;
+  }
+}
+
+.container {
+  display: grid;
+  height: calc(100vh - 108.8px);
+  grid-template-columns: 280px 1fr;
+  gap: 2rem;
+
+  @include lg-max {
+    grid-template-columns: 250px 1fr;
+    gap: 2rem;
+  }
+
+  @include md-max {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+}
+
+// Sidebar Overlay
+.sidebarOverlay {
+  display: none;
+
+  @include md-max {
+    display: block;
+    position: fixed;
+    top: 108.8px; // Start below header
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 998;
+    animation: fadeIn 0.3s ease;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+// Sidebar Styles
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 108.8px);
+  overflow-y: auto;
+  gap: 0.75rem;
+  scrollbar-width: 0;
+  background-color: #fff;
+
+  &::-webkit-scrollbar {
+    width: 0;
+    display: none;
+  }
+
+  @include md-max {
+    position: fixed;
+    top: 108.8px; // Start below header
+    left: 0;
+    width: 320px;
+    max-width: 85vw;
+    height: calc(100vh - 108.8px); // Fill remaining space below header
+    z-index: 999;
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+    border-right: 1px solid $border-grey;
+    padding: 2rem 1.5rem;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+
+    &.sidebarOpen {
+      transform: translateX(0);
+    }
+  }
+
+  @include lg-min {
+    position: static;
+    transform: none;
+    border-right: none;
+    padding: 0;
+    box-shadow: none;
+  }
+}
+
+.filterHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  cursor: pointer;
+  border-bottom: 1px solid $border-grey;
+  padding-bottom: 0.75rem;
+
+  h2 {
+    font-size: 1.25rem;
+    line-height: 105%;
+    letter-spacing: 0;
+    color: $text-primary;
+    margin: 0;
+  }
+
+  h3 {
+    line-height: 105%;
+    letter-spacing: 0;
+    font-weight: 600;
+    font-size: 1rem;
+    color: $text-primary;
+  }
+}
+
+.filterHeaderActions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.closeSidebarButton {
+  display: none;
+
+  @include md-max {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.25rem;
+    transition: opacity 0.2s ease;
+
+    &:hover {
+      opacity: 0.7;
+    }
+
+    &:active {
+      opacity: 0.5;
+    }
+  }
+}
+
+.resetButton {
+  color: $text-primary;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 105%;
+  letter-spacing: 0;
+  text-decoration: underline;
+  text-decoration-style: solid;
+  text-decoration-offset: 0;
+  text-decoration-thickness: 0;
+}
+
+.filterSection {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.filterTitle {
+  font-weight: 600;
+  font-size: 1rem;
+  color: $text-primary;
+  margin: 0;
+}
+
+.toggleIcon {
+  font-size: 1.5rem;
+  font-weight: 300;
+  color: $text-primary;
+  cursor: pointer;
+  user-select: none;
+}
+
+// Radio Group
+.radioGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.radioLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  color: $sub-text;
+  position: relative;
+  padding-left: 28px;
+
+  input[type="radio"] {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    margin: 0;
+    opacity: 0;
+    position: absolute;
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+  }
+
+  span {
+    user-select: none;
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  // Custom radio button - unchecked state (gray border, white inside)
+  span::before {
+    content: "";
+    position: absolute;
+    left: -28px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    border: 2px solid #ccc;
+    border-radius: 50%;
+    background: white;
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+  }
+
+  // Custom radio button - checked state (yellow border)
+  input[type="radio"]:checked + span::before {
+    border: 2px solid $primary-color;
+  }
+
+  // Yellow circle inside when checked
+  input[type="radio"]:checked + span::after {
+    content: "";
+    position: absolute;
+    left: -22px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: $primary-color;
+    z-index: 1;
+  }
+}
+
+// Checkbox Group
+.checkboxGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-height: 300px;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+
+  &::-webkit-scrollbar {
+    width: 2px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 3px;
+
+    &:hover {
+      background: #555;
+    }
+  }
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  cursor: pointer;
+  font-size: 0.875rem;
+  color: $sub-text;
+
+  input[type="checkbox"] {
+    cursor: pointer;
+    width: 18px;
+    height: 18px;
+    accent-color: $primary-color;
+    flex-shrink: 0;
+  }
+
+  span {
+    user-select: none;
+  }
+}
+
+// Video Grid
+.videoGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.5rem;
+  height: calc(100vh - 108.8px);
+  overflow-y: auto;
+  scrollbar-width: 0;
+
+  &::-webkit-scrollbar {
+    width: 0;
+    display: none;
+  }
+  @include md-max {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  @include xsm-max {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+// Video Card
+.videoCard {
+  cursor: pointer;
+}
+
+.videoThumbnail {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  margin-bottom: 1rem;
+  overflow: hidden;
+  background: #f0f0f0;
+}
+
+.thumbnailImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.playButton {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1;
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translate(-50%, -50%) scale(1.05);
+  }
+}
+
+.videoInfo {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.videoDate {
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 140%;
+  letter-spacing: 0;
+  color: #8a8a8a;
+  @include sm-max {
+    font-size: 0.8rem;
+  }
+}
+
+.videoTitle {
+  font-weight: 600;
+  font-size: 1.2rem;
+  line-height: 115%;
+  letter-spacing: 0;
+  color: #111113;
+  @include sm-max {
+    font-size: 1.1rem;
+  }
+}
+
+// No Results
+.noResults {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 60px 20px;
+  color: #666;
+
+  h3 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #333;
+  }
+
+  p {
+    margin-bottom: 20px;
+  }
+}
+
+.clearAllButton {
+  background: $primary-color;
+  color: $secondary-color;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s ease;
+
+  &:hover {
+    background: color.adjust($primary-color, $lightness: -10%);
+  }
+}

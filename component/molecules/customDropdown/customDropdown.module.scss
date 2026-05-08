@@ -1,0 +1,271 @@
+@use "@/styles/varriables.scss" as *;
+@use "@/styles/mixins.scss" as *;
+
+.customDropdown {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  font-family: inherit;
+}
+
+.dropdownTrigger {
+  padding: 0.75rem 1rem;
+  border: 1px solid #e4e4e4;
+  background: white;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.3s ease;
+  color: #0a0a0b;
+  padding-right: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 2.7813rem;
+  box-sizing: border-box;
+
+  &:hover {
+    border-color: #f9c300;
+  }
+
+  &:focus {
+    outline: none;
+    border-color: #f9c300;
+    box-shadow: 0 0 0 3px rgba(249, 195, 0, 0.1);
+  }
+
+  &:disabled {
+    background-color: #f5f5f5;
+    color: #a0a0a0;
+    cursor: not-allowed;
+  }
+
+  // Mobile specific fixes
+  @media (max-width: 768px) {
+    font-size: 16px; // Prevent zoom on iOS
+    padding: 0.875rem 1rem;
+    min-height: 48px; // Better touch target
+
+    &:focus {
+      font-size: 16px; // Prevent zoom on focus
+    }
+  }
+}
+
+.selectedValue {
+  flex: 1;
+  font-size: 16px;
+  font-weight: 400;
+  color: #0a0a0b;
+  text-align: left;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #0a0a0b;
+  transition: transform 0.3s ease;
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  flex-shrink: 0;
+}
+
+.arrowDown {
+  transform: translateY(-50%) rotate(0deg);
+}
+
+.arrowUp {
+  transform: translateY(-50%) rotate(180deg);
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #e4e4e4;
+  border-radius: 4px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  margin-top: 4px;
+  overflow: hidden;
+  animation: slideDown 0.2s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.searchContainer {
+  padding: 12px;
+  border-bottom: 1px solid #f0f0f0;
+  background: #f8f9fa;
+}
+
+.searchInput {
+  width: 100%;
+  padding: 8px 12px;
+  border: 1px solid #e9ecef;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+  transition: border-color 0.3s ease;
+
+  &:focus {
+    border-color: #f9c300;
+    box-shadow: 0 0 0 2px rgba(25, 118, 210, 0.1);
+  }
+
+  &::placeholder {
+    color: #9ca3af;
+  }
+}
+
+.optionsList {
+  max-height: 200px;
+  overflow-y: auto;
+  padding: 4px 0;
+}
+
+.option {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  border: none;
+  background: white;
+  width: 100%;
+  text-align: left;
+  color: #0a0a0b;
+
+  &:hover {
+    background-color: #f9c300;
+  }
+
+  &.selected {
+    background-color: #f9c300;
+    color: #0a0a0b;
+    font-weight: 500;
+  }
+}
+
+.optionLabel {
+  flex: 1;
+  font-size: 14px;
+  color: inherit;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.checkmark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #f9c300;
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+
+.noResults {
+  padding: 16px;
+  text-align: center;
+  color: #9ca3af;
+  font-size: 14px;
+  font-style: italic;
+}
+
+// Open state
+.customDropdown.open {
+  .dropdownTrigger {
+    border-color: #f9c300;
+    box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.1);
+  }
+}
+
+// Responsive design
+@include sm-max {
+  .customDropdown {
+    max-width: 100%;
+  }
+
+  .dropdownTrigger {
+    padding: 10px 14px;
+    min-height: 44px;
+  }
+
+  .selectedValue {
+    font-size: 13px;
+  }
+
+  .option {
+    padding: 10px 14px;
+  }
+
+  .optionLabel {
+    font-size: 13px;
+  }
+
+  .searchInput {
+    padding: 6px 10px;
+    font-size: 13px;
+  }
+}
+
+@include xsm-max {
+  .dropdownTrigger {
+    padding: 8px 12px;
+    min-height: 40px;
+  }
+
+  .selectedValue {
+    font-size: 12px;
+  }
+
+  .option {
+    padding: 8px 12px;
+  }
+
+  .optionLabel {
+    font-size: 12px;
+  }
+}
+
+// Custom scrollbar for options list
+.optionsList {
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #c1c1c1;
+    border-radius: 3px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #a8a8a8;
+  }
+}

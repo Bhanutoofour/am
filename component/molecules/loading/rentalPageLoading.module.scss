@@ -1,0 +1,36 @@
+@use "../../../styles/mixins" as *;
+.rentalSkeleton {
+  max-width: 65rem;
+  width: 100%;
+  padding: 2.5rem 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2.625rem;
+  align-items: flex-start;
+  @include sm-max {
+    padding: 0;
+  }
+  .rentalHeadingSkeleton {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  .rentalCardContainerSkeleton {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+}
+
+.contentHeading {
+  width: 100%;
+  max-width: 23.5625rem;
+}
+.contentPara {
+  width: 100%;
+  max-width: 34.5625rem;
+}

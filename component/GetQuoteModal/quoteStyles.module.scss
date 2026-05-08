@@ -1,0 +1,179 @@
+@use "../../styles/mixins" as *;
+
+.quotePage {
+  width: 100vw;
+  height: 100vh;
+  background-color: #01060a66;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+
+  @include sm-max {
+    bottom: 0;
+    top: unset;
+    right: 0;
+    align-items: flex-end;
+  }
+  .quoteModal {
+    width: 24.25rem;
+    height: 40.0625rem;
+    opacity: 1;
+    padding: 1.5rem;
+    background-color: #ffffff;
+    position: relative;
+
+    @include sm-max {
+      width: 100%;
+      height: 36.25rem;
+    }
+  }
+  .closingState {
+    display: flex;
+    width: 100%;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .progressBarContainer {
+    display: flex;
+    flex-direction: row;
+    padding: 1rem 0;
+    width: 100%;
+    .progressBar {
+      width: 100%;
+      height: 0.375rem;
+      background-color: #f6f6f6;
+    }
+    .showProgress {
+      height: 0.375rem;
+      background-color: #f9c300;
+      transition: width 0.3s ease-in-out;
+    }
+  }
+  .quoteContent {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+    .quoteHeading {
+      font-weight: 500;
+      font-style: Condensed Medium;
+      font-size: 1.75rem;
+      line-height: 140%;
+      color: #0a0a0b;
+    }
+    .quoteDesc {
+      font-weight: 400;
+      font-size: 0.875rem;
+      line-height: 140%;
+      color: #585858;
+    }
+  }
+  .quoteStepItems {
+    width: 100%;
+    .stepContainer {
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+      padding: 1.5rem 0;
+    }
+    .stepThreeContainer {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 2rem;
+      .topPortion {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 2rem;
+      }
+      .yellowRound {
+        border-radius: 50%;
+        width: 88px;
+        height: 5.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2rem;
+        background-color: #f9c300;
+      }
+      .topPortionContent {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+      }
+      .topPortionHeading {
+        font-weight: 500;
+        font-style: Condensed Medium;
+        font-size: 1.5rem;
+        line-height: 140%;
+        text-align: center;
+      }
+      .thankYouForSharing {
+        font-weight: 400;
+        font-size: 0.875rem;
+        line-height: 140%;
+        text-align: center;
+        color: #585858;
+      }
+      .bottomPortion {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      .needAssistance {
+        font-weight: 600;
+        font-style: Condensed SemiBold;
+        font-size: 16px;
+        line-height: 20px;
+        text-align: center;
+      }
+      .callUs {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 140%;
+        text-align: center;
+        color: #585858;
+      }
+    }
+  }
+  .quoteButton {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: #0a0a0b;
+    color: #f6ffff;
+    font-size: 1rem;
+    padding: 0.875rem 1.5rem;
+
+    &:disabled {
+      background-color: #636363;
+      color: #b0b0b0;
+      cursor: not-allowed;
+    }
+  }
+}
+.closeIcon {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  cursor: pointer;
+  @include sm-max {
+    top: 1rem;
+    right: 1rem;
+  }
+}

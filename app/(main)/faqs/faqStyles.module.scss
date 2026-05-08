@@ -1,0 +1,48 @@
+@use "../../../styles/mixins" as *;
+
+.faqContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 3.75rem;
+  align-items: center;
+  justify-content: center;
+  max-width: 60rem;
+  width: 100%;
+  position: relative;
+  padding: 0 16px;
+  @include sm-max {
+    gap: 1rem;
+  }
+  .faqHeader {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    padding-top: 2.5rem;
+    background-color: #fff;
+    .faqHeading {
+      font-weight: 700;
+      font-style: Condensed Bold;
+      font-size: 40px;
+      line-height: 105%;
+      text-align: center;
+      @include sm-max {
+        font-weight: 600;
+        font-size: 1.5rem;
+        line-height: 114.99999999999999%;
+      }
+    }
+    .faqHeadingDetails {
+      font-weight: 400;
+      font-size: 14px;
+      line-height: 150%;
+      text-align: center;
+      color: #000000cc;
+      @include sm-max {
+        width: 80%;
+      }
+    }
+  }
+}

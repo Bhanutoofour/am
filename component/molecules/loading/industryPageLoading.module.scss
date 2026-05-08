@@ -1,0 +1,149 @@
+@use "../../../styles/varriables" as *;
+@use "../../../styles/mixins" as *;
+
+.industryHome {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  align-items: center;
+  width: 100%;
+  max-width: 80rem;
+  @include sm-max {
+    gap: 0;
+  }
+
+  .bannerSkeleton {
+    width: 100%;
+    max-width: 80rem;
+
+    .bannerImage {
+      width: 100%;
+      border-radius: 0;
+    }
+  }
+
+  .industryData {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    justify-content: space-between;
+    width: 100%;
+    gap: 2rem;
+    @include sm-max {
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .industryInfo {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 1rem;
+      flex: 1;
+      width: 100%;
+      padding: 1.5rem;
+
+      .industryHeading {
+        border-radius: 8px;
+      }
+
+      .industryDescription {
+        border-radius: 4px;
+      }
+    }
+
+    .brochureButton {
+      border-radius: 8px;
+    }
+  }
+
+  .productHolder {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1.25rem;
+    @include sm-max {
+      padding: 4rem 1rem;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 0.5625rem;
+      width: auto;
+    }
+    @media screen and (max-width: 450px) {
+      justify-content: center;
+    }
+
+    .productCard {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      .productImage {
+        border-radius: 8px;
+      }
+
+      .productTitle {
+        border-radius: 4px;
+      }
+    }
+  }
+
+  .sliderWrapper {
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
+    margin-bottom: 11.25rem;
+    @include sm-max {
+      gap: 1rem;
+      padding: 0 1.5rem;
+    }
+
+    .carouselHeader {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      align-items: center;
+      justify-content: space-between;
+
+      .caraouselHeading {
+        border-radius: 6px;
+      }
+
+      .navButtons {
+        display: flex;
+        gap: 1.5rem;
+        align-items: center;
+        @include sm-max {
+          display: none;
+        }
+
+        .arrowButton {
+          border-radius: 6px;
+        }
+      }
+    }
+
+    .industryCarousel {
+      display: flex;
+      flex-direction: row;
+      width: 100%;
+      padding: 0.2rem;
+      gap: 1rem;
+
+      .industryCard {
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+        min-width: 200px;
+
+        .industryImage {
+          border-radius: 8px;
+        }
+
+        .industryTitle {
+          border-radius: 4px;
+        }
+      }
+    }
+  }
+}

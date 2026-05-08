@@ -1,0 +1,751 @@
+@use "../../../styles/varriables" as *;
+@use "../../../styles/mixins" as *;
+@use "sass:color";
+
+.careersContainer {
+  max-width: 100%;
+  margin: 0 auto;
+  width: 100%;
+  padding: 0;
+}
+
+.heroSection {
+  width: 100%;
+  background-color: #f6f6f7;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @include sm-max {
+    padding: 1rem;
+  }
+}
+
+.collageWrapper {
+  position: relative;
+  width: 100%;
+  min-height: 36.375rem;
+  margin: 0 auto;
+
+  @include sm-max {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    min-height: auto;
+    padding: 1rem 0;
+  }
+}
+
+.imageBox {
+  position: absolute;
+  overflow: hidden;
+
+  img {
+    display: block;
+  }
+
+  @include sm-max {
+    position: relative !important;
+    border-radius: 0;
+    box-shadow: none;
+    top: auto !important;
+    left: auto !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: auto !important;
+    // height: auto !important;
+  }
+}
+
+.collageImage {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.topLeft {
+  top: 4rem;
+  left: 0;
+  width: 12.125rem;
+  height: 8.0625rem;
+
+  @include sm-max {
+    order: 1;
+    width: 30%;
+    flex: 0 0 30%;
+    height: 7.25rem;
+  }
+}
+
+.topRight {
+  top: 5.375rem;
+  right: 4.0625rem;
+
+  width: 14.9375rem;
+  height: 8.625rem;
+
+  @include sm-max {
+    order: 5;
+    width: 30%;
+    flex: 0 0 30%;
+  }
+}
+
+.middleLeft {
+  top: 16rem;
+  left: 16.625rem;
+  width: 8.625rem;
+  height: 6.25rem;
+
+  @include sm-max {
+    display: none;
+  }
+}
+
+.bottomLeft {
+  bottom: 2rem;
+  left: 2rem;
+
+  width: 19.125rem;
+  height: 10rem;
+
+  @include sm-max {
+    order: 4;
+    width: 66%;
+    flex: 0 0 66%;
+    margin-top: 3.125rem;
+  }
+}
+
+.bottomRight {
+  bottom: 2.375rem;
+  right: 2rem;
+
+  width: 26.875rem;
+  height: 11.875rem;
+
+  @include sm-max {
+    order: 2;
+    width: 66%;
+    flex: 0 0 66%;
+    margin-top: 2.375rem;
+  }
+}
+
+.centerContent {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  z-index: 10;
+  padding: 2rem;
+
+  @include sm-max {
+    position: relative;
+    order: 3;
+    top: auto;
+    left: auto;
+    transform: none;
+    width: 100%;
+    padding: 2rem 1rem;
+  }
+}
+
+.heroTitle {
+  font-size: 3rem;
+  font-weight: 700;
+  color: $text-primary;
+  line-height: 1.2;
+  margin-bottom: 2rem;
+
+  @include sm-max {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.ctaButton {
+  padding: 0.875rem 2rem;
+  background-color: $secondary-color;
+  color: $text-secondary;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-transform: uppercase;
+  text-decoration: none;
+  display: inline-block;
+
+  &:hover {
+    background-color: color.adjust($secondary-color, $lightness: 10%);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  }
+
+  @include sm-max {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.875rem;
+  }
+}
+
+// Build the Future Section
+.buildFutureSection {
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+
+  @include sm-max {
+    padding: 3rem 1rem;
+  }
+}
+
+.buildFutureTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: $text-primary;
+  margin-bottom: 3rem;
+  white-space: pre-line;
+
+  @include sm-max {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+  }
+}
+
+.valuesGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+
+  @include sm-max {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.valueCard {
+  display: flex;
+  flex-direction: column;
+}
+
+.valueTitle {
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: $text-primary;
+  margin-bottom: 0.625rem;
+  padding-top: 0.75rem;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5rem;
+    height: 4px;
+    background-color: $primary-color;
+  }
+
+  @include sm-max {
+    font-size: 1.125rem;
+
+    &::before {
+      width: 4rem;
+    }
+  }
+}
+
+.valueDescription {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: $sub-text;
+}
+
+// Stories That Inspire Section
+.storiesSection {
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: 1.5rem 1rem;
+  padding-bottom: 4rem;
+
+  @include sm-max {
+    padding: 3rem 1rem;
+  }
+}
+
+.storiesTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: $text-primary;
+  margin-bottom: 3rem;
+  text-align: center;
+
+  @include sm-max {
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+  }
+}
+
+.testimonialsGrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+
+  @include sm-max {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+.testimonialCard {
+  background-color: #f6f6f7;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.quoteIcon {
+  width: 40px;
+  height: 40px;
+  filter: brightness(0) saturate(100%) invert(79%) sepia(72%) saturate(1095%)
+    hue-rotate(359deg) brightness(102%) contrast(96%);
+}
+
+.testimonialText {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: $sub-text;
+}
+
+.testimonialAuthor {
+  margin-top: auto;
+}
+
+.authorName {
+  font-size: 1rem;
+  font-weight: 700;
+  color: $text-primary;
+  margin-bottom: 0.25rem;
+}
+
+.authorRole {
+  font-size: 0.875rem;
+  color: $sub-text;
+}
+
+// Life at Autocracy Section
+.lifeSection {
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+
+  @include sm-max {
+    padding: 3rem 1rem;
+  }
+}
+
+.lifeTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: $text-primary;
+  text-align: center;
+  margin-bottom: 0.75rem;
+
+  @include sm-max {
+    font-size: 1.5rem;
+    text-align: left;
+  }
+}
+
+.lifeIntro {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: $sub-text;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto 3rem;
+
+  @include sm-max {
+    text-align: left;
+    margin-bottom: 2rem;
+  }
+}
+
+.lifeGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 3rem 3.75rem;
+
+  @include sm-max {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.lifeCard {
+  display: flex;
+  flex-direction: column;
+}
+
+.lifeCardTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: $text-primary;
+  margin-bottom: 1rem;
+  padding-top: 0.75rem;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5rem;
+    height: 0.25rem;
+    background-color: $primary-color;
+  }
+
+  @include sm-max {
+    font-size: 1.125rem;
+
+    &::before {
+      width: 4rem;
+    }
+  }
+}
+
+.lifeCardText {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: $sub-text;
+}
+
+// Empowered by Diversity Section
+.diversitySection {
+  width: 100%;
+  margin: 0 auto;
+  background-color: #f6f6f7;
+}
+
+.diversityWrapper {
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+
+  @include sm-max {
+    padding: 3rem 1rem;
+  }
+}
+
+.diversityTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: $text-primary;
+  margin-bottom: 0.75rem;
+
+  @include sm-max {
+    font-size: 1.5rem;
+  }
+}
+
+.diversityIntro {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: $sub-text;
+  margin-bottom: 2.5rem;
+  max-width: 30rem;
+}
+
+.diversityContent {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3.25rem;
+
+  @include sm-max {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.diversityLeft {
+  display: flex;
+  align-items: flex-start;
+}
+
+.diversityImageWrapper {
+  position: relative;
+  width: 100%;
+  width: 31.5rem;
+  height: 20.625rem;
+
+  @include sm-max {
+    width: 100%;
+    height: auto;
+  }
+}
+
+.diversityImage {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.diversityRight {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.diversityCard {
+  display: flex;
+  flex-direction: column;
+  gap: 0.625rem;
+}
+
+.diversityCardTitle {
+  font-size: 1.375rem;
+  font-weight: 700;
+  color: $text-primary;
+  padding-top: 0.75rem;
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 5rem;
+    height: 0.25rem;
+    background-color: $primary-color;
+  }
+
+  @include sm-max {
+    font-size: 1.125rem;
+
+    &::before {
+      width: 4rem;
+    }
+  }
+}
+
+.diversityCardText {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: $sub-text;
+
+  strong {
+    color: $text-primary;
+  }
+}
+
+// Kickstart Your Journey Section
+.kickstartSection {
+  width: 100%;
+  margin: 0 auto;
+  background-color: #f6f6f7;
+}
+
+.kickstartWrapper {
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+
+  @include sm-max {
+    padding: 3rem 1rem;
+  }
+}
+
+.kickstartTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: $text-primary;
+  text-align: center;
+  margin-bottom: 0.75rem;
+
+  @include sm-max {
+    font-size: 1.5rem;
+    text-align: left;
+  }
+}
+
+.kickstartIntro {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: $sub-text;
+  text-align: center;
+  margin: 0 auto;
+  margin-bottom: 4rem;
+  max-width: 30rem;
+
+  @include sm-max {
+    text-align: left;
+    margin-bottom: 2rem;
+  }
+}
+
+.opportunitiesGrid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 51.5rem;
+  margin: 0 auto;
+}
+
+.opportunityCard {
+  display: grid;
+  grid-template-columns: 1fr 22.75rem;
+  gap: 1rem;
+  background-color: #fff;
+  padding: 1.5rem;
+  align-items: start;
+
+  @include sm-max {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    padding: 0;
+    background-color: transparent;
+  }
+}
+
+.opportunityContent {
+  display: flex;
+  flex-direction: column;
+
+  @include sm-max {
+    order: 2;
+  }
+}
+
+.opportunityTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: $text-primary;
+  margin-bottom: 0.5rem;
+
+  @include sm-max {
+    font-size: 1.125rem;
+  }
+}
+
+.opportunityText {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: $sub-text;
+}
+
+.opportunityImageWrapper {
+  width: 100%;
+  height: 16.125rem;
+  overflow: hidden;
+  flex-shrink: 0;
+
+  @include sm-max {
+    order: 1;
+    height: auto;
+    margin-bottom: 0.5rem;
+  }
+}
+
+.opportunityImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+// Join Our Mission Section
+.joinSection {
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: 4rem 2rem;
+
+  @include sm-max {
+    padding: 3rem 1rem;
+  }
+}
+
+.joinContent {
+  display: grid;
+  grid-template-columns: 1fr 450px;
+  gap: 4rem;
+  align-items: center;
+
+  @include sm-max {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.joinLeft {
+  display: flex;
+  flex-direction: column;
+}
+
+.joinTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: $text-primary;
+  margin-bottom: 1.5rem;
+
+  @include sm-max {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+}
+
+.joinText {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: $sub-text;
+  margin-bottom: 1.25rem;
+
+  @include sm-max {
+    margin-bottom: 1rem;
+  }
+}
+
+.joinLabel {
+  font-size: 0.9375rem;
+  color: $sub-text;
+  margin-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.joinEmail {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: $text-primary;
+  text-decoration: underline;
+  transition: color 0.3s ease;
+
+  &:hover {
+    color: $primary-color;
+  }
+}
+
+.joinRight {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  @include sm-max {
+    order: -1;
+  }
+}
+
+.joinImage {
+  width: 100%;
+  height: auto;
+  display: block;
+
+  @include sm-max {
+    max-width: 300px;
+    margin: 0 auto;
+  }
+}

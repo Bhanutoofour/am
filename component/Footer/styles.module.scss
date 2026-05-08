@@ -1,0 +1,193 @@
+@use "../../styles/varriables" as *;
+@use "../../styles/mixins" as *;
+
+$section-padding: 7.5rem;
+
+.footer {
+  width: 100%;
+  background-color: $secondary-color;
+  display: flex;
+  justify-content: center;
+  position: relative;
+  height: 40.93rem;
+  padding-top: 10rem;
+  padding-bottom: 5rem;
+  margin-top: 10rem;
+  @include sm-max {
+    height: auto;
+  }
+  .yellowContainer {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    max-width: none;
+    width: 100%;
+    background-color: $primary-color;
+    padding: 2rem;
+    position: absolute;
+    top: -15%;
+    left: $section-padding;
+    right: $section-padding;
+    width: auto;
+    @include sm-max {
+      left: 1rem;
+      right: 1rem;
+      width: 100%;
+    }
+    .yellowContainerText {
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+      align-items: center;
+      max-width: 29.37rem;
+      width: 100%;
+      @include sm-max {
+        padding-bottom: 2.5rem;
+      }
+      .headText {
+        font-size: 2rem;
+        font-weight: 900;
+        color: $text-primary;
+        line-height: 105%;
+        @include sm-max {
+          font-size: 1.5rem;
+          line-height: 120%;
+        }
+      }
+      .subText {
+        font-size: 1rem;
+        font-weight: 400;
+        color: $sub-text;
+        line-height: 1.5rem;
+        @include sm-max {
+          font-size: 0.9rem;
+        }
+      }
+    }
+  }
+  .footerContent {
+    width: 100%;
+    max-width: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 1px solid $text-secondary;
+    padding: 3rem $section-padding 2rem;
+    @include sm-max {
+      padding: 3rem 1rem 2rem;
+    }
+    .linkContainer {
+      display: flex;
+      align-items: flex-start;
+      gap: 3rem;
+      margin-top: 2rem;
+      .footerLink {
+        display: flex;
+        flex-direction: column;
+        gap: 1.3rem;
+        .footerLinkHeader {
+          font-size: 0.8rem;
+          font-weight: 700;
+          line-height: 150%;
+          color: $text-secondary;
+        }
+        .footerLinks {
+          display: flex;
+          flex-direction: column;
+          gap: 0.3rem;
+          a {
+            font-size: 0.8rem;
+            font-weight: 400;
+            line-height: 24px;
+            color: $text-secondary;
+            transition: color 0.3s ease;
+
+            &:hover {
+              color: $primary-color;
+            }
+          }
+          p {
+            font-size: 0.8rem;
+            font-weight: 400;
+            line-height: 24px;
+            color: $text-secondary;
+            transition: color 0.3s ease;
+            opacity: 0.5;
+            cursor: not-allowed;
+          }
+
+          .contactLink {
+            cursor: pointer;
+            text-decoration: none;
+
+            &:hover {
+              color: $primary-color;
+              text-decoration: underline;
+            }
+          }
+        }
+      }
+      @include sm-max {
+        flex-wrap: wrap-reverse;
+        gap: 1rem 4rem;
+      }
+    }
+    .aboutContainer {
+      max-width: 283px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2.3rem;
+      .image {
+        width: 10.62rem;
+        height: 2.5rem;
+      }
+      .address {
+        font-weight: 400;
+        font-size: 12px;
+        line-height: 150%;
+        color: $text-secondary;
+      }
+      .socialMedia {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 1.3rem;
+        cursor: pointer;
+      }
+      @include xsm-max {
+        // padding-left: 1.25rem;
+        padding-top: 1rem;
+      }
+    }
+  }
+}
+
+.rights {
+  position: absolute;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 150%;
+  letter-spacing: 0%;
+  color: #f3f3f3;
+  bottom: 2.5rem;
+  left: $section-padding;
+  right: $section-padding;
+  width: auto;
+  text-align: center;
+}
+
+.routeItems {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 150%;
+  color: #f3f3f3;
+}

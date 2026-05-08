@@ -1,0 +1,131 @@
+@use "@/styles/varriables.scss" as *;
+@use "@/styles/mixins.scss" as *;
+
+.productsPageLoading {
+  min-height: 100vh;
+  width: 100%;
+  max-width: 1024px;
+  padding: 3rem 1rem;
+}
+
+.headerSection {
+  border-bottom: 1px solid #000;
+  padding-bottom: 1.375rem;
+  margin-bottom: 26px;
+}
+
+.headerContent {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 16px;
+
+  @include xsm-max {
+    flex-direction: column;
+  }
+}
+
+.titleSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.titleSkeleton {
+  height: 2.5rem;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  border-radius: 4px;
+  width: 300px;
+}
+
+.subtitleSkeleton {
+  height: 0.875rem;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  border-radius: 4px;
+  width: 200px;
+}
+
+.filterSection {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+
+  @include sm-max {
+    align-items: stretch;
+  }
+}
+
+.filterSkeleton {
+  height: 48px;
+  width: 200px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  border-radius: 6px;
+}
+
+.productsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 20px;
+
+  @include md-max {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @include sm-max {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.productCardSkeleton {
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border: 1px solid #f0f0f0;
+}
+
+.productImageSkeleton {
+  height: 200px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+.productInfoSkeleton {
+  padding: 20px;
+}
+
+.productTitleSkeleton {
+  height: 24px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  border-radius: 4px;
+  margin-bottom: 12px;
+  width: 80%;
+}
+
+.productIndustrySkeleton {
+  height: 20px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+  border-radius: 4px;
+  width: 60%;
+}
+
+@keyframes loading {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}

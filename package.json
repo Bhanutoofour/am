@@ -1,0 +1,40 @@
+{
+  "name": "autocracy",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "db:studio": "npx drizzle-kit studio",
+    "db:push": "npx drizzle-kit push",
+    "db:generate": "npx drizzle-kit generate",
+    "db:migrate": "npx drizzle-kit migrate",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^1.0.0",
+    "@tiptap/extension-image": "^3.10.1",
+    "@tiptap/extension-link": "^3.10.1",
+    "@tiptap/react": "^3.10.1",
+    "@tiptap/starter-kit": "^3.10.1",
+    "dotenv": "^16.5.0",
+    "drizzle-orm": "^0.43.1",
+    "keen-slider": "^6.8.6",
+    "next": "^15.3.6",
+    "ra-data-simple-rest": "^5.8.0",
+    "react": "^19.0.0",
+    "react-admin": "^5.8.0",
+    "react-dom": "^19.0.0",
+    "react-loading-skeleton": "^3.5.0",
+    "sass": "^1.87.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^19",
+    "@types/react-dom": "^19",
+    "drizzle-kit": "^0.31.0",
+    "tsx": "^4.19.4",
+    "typescript": "^5"
+  }
+}

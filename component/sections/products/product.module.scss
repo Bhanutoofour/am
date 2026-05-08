@@ -1,0 +1,229 @@
+@use "../../../styles/varriables" as *;
+@use "../../../styles/mixins" as *;
+
+.productSection {
+  width: 100%;
+  padding: 2.8125rem 7.5rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f5f5f5;
+  @include sm-max {
+    padding: 2rem 1rem;
+  }
+}
+
+.content {
+  max-width: none;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+  @include sm-max {
+    gap: 1.5rem;
+  }
+}
+
+.productHeadingContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  max-width: none;
+  width: 100%;
+
+  .navigationContainer {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .viewAll {
+    border: 1px solid #3b3b3c;
+    padding: 0.875rem 1.5rem;
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1.25rem;
+    letter-spacing: 0;
+    text-align: center;
+    color: #01060a;
+
+    @include xsm-max {
+      padding: 0.5rem 0.75rem;
+      font-size: 0.75rem;
+    }
+  }
+
+  .navButtons {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+    @include sm-max {
+      display: none;
+    }
+    .arrowButton {
+      padding: 0.75rem;
+      border: 0.0625rem solid #01060a;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      &.disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+      }
+    }
+  }
+}
+
+.sectionCorner {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.sectionTitle {
+  font-weight: 700;
+  font-size: 2.5rem;
+  line-height: 105%;
+  text-align: center;
+  color: $text-primary;
+  @include sm-max {
+    font-size: 1.75rem;
+    text-align: left;
+  }
+}
+
+.productGrid {
+  display: flex;
+  width: 100%;
+  max-width: none;
+  gap: 1.25rem;
+  flex-direction: row;
+  flex-wrap: nowrap;
+
+  @include sm-max {
+    padding: 0.3rem;
+    overflow-x: auto;
+
+    // Hide scrollbar for WebKit (Chrome, Safari)
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    // Hide scrollbar for Firefox
+    scrollbar-width: none;
+
+    // Hide scrollbar for IE and Edge (legacy)
+    -ms-overflow-style: none;
+  }
+}
+
+.productAllCarousel {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding: 0.2rem;
+}
+
+.productCard {
+  width: 100%;
+  min-width: 14rem;
+  height: 19rem;
+  position: relative;
+  cursor: pointer;
+  border-radius: 0.25rem;
+  outline: 0.0625rem solid $border-grey;
+}
+
+.productImage {
+  width: 100%;
+  height: 12.75rem;
+}
+
+.productDetail {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+  border-radius: 0.25rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.cardTitle {
+  margin: 1.25rem;
+  margin-top: auto;
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 120%;
+  color: $text-primary;
+  text-align: center;
+}
+
+.hoverArrow {
+  width: 8.5625rem;
+  height: 3rem;
+  border-bottom-left-radius: 0.125rem;
+  background: $button-text;
+  clip-path: polygon(0% 0%, 60% 0, 100% 100%, 100% 100%, 0% 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 1.25rem;
+  display: flex;
+  transition: all 0.2s ease-in-out;
+  display: none;
+
+  .arrow {
+    width: 1.75rem;
+    height: 1.0625rem;
+  }
+}
+
+.productCard:hover {
+  .overlay {
+    height: inherit;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 11.21%, #000000 100%);
+  }
+  .productDetail {
+    outline: 0.25rem solid $button-text;
+  }
+  .hoverArrow {
+    display: flex;
+  }
+}
+
+.veiwAll {
+  padding: 0.875rem 2rem;
+}
+
+.caraouselWrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.slidingStripContainer {
+  margin-top: 1rem;
+  height: 4px;
+  width: 15rem;
+  background-color: #fff;
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.slidingStrip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 20%;
+  background-color: #000;
+  border-radius: 2px;
+  transition: left 0.3s ease;
+  will-change: transform;
+}

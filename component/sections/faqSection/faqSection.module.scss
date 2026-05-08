@@ -1,0 +1,72 @@
+.faqSectionHolder {
+  width: 100%;
+  height: calc(100% - 11.1875rem);
+  display: flex;
+  align-items: flex-start;
+  flex-direction: row;
+  gap: 6rem;
+  position: relative;
+  .sectionHolder {
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.25rem;
+    position: sticky;
+    top: 7.4375rem;
+  }
+  .rightSectionElement {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 120%;
+    letter-spacing: 0%;
+    color: #0a0a0b8e;
+    text-wrap: nowrap;
+    cursor: pointer;
+  }
+  .qnaHolder {
+    width: 75%;
+    display: flex;
+    flex-direction: column;
+    gap: 2.5rem;
+    // height: calc(100vh - 18.75rem);
+    // overflow: scroll;
+  }
+  .qnaCategory {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    scroll-margin-top: 7.4375rem;
+  }
+  .qnaCategoryTitle {
+    font-weight: 600;
+    font-style: Condensed;
+    font-size: 24px;
+    line-height: 114.99999999999999%;
+  }
+  .qnaItem {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid #dddddd;
+    cursor: pointer;
+  }
+  .qnaQuestion {
+    font-weight: 500;
+    font-style: Condensed Medium;
+    font-size: 16px;
+    line-height: 105%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .qnaAnswer {
+    font-weight: 400;
+    font-style: Regular;
+    font-size: 14px;
+    line-height: 140%;
+    color: #6c6c6d;
+    transition: "all 0.3s ease";
+  }
+}

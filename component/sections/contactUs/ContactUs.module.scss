@@ -1,0 +1,99 @@
+@use "../../../styles/mixins" as *;
+.contactUsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  align-items: flex-start;
+  background: #f5f5f5;
+  margin-top: clamp(3rem, 7vw, 6rem);
+  min-height: 31.0625rem;
+
+  @include sm-max {
+    min-height: auto;
+    flex-direction: column;
+  }
+}
+
+.imageBox {
+  position: relative;
+  width: 50%;
+  height: 100%;
+  overflow: hidden;
+  @include sm-max {
+    width: 100%;
+  }
+  .trencherImage {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+    display: block;
+  }
+}
+
+.needAssistance {
+  width: 50%;
+  display: flex;
+  padding: clamp(1.5rem, 4vw, 2.5rem);
+  flex-direction: column;
+
+  @include sm-max {
+    width: 100%;
+  }
+
+  .assistanceHeader {
+    font-size: clamp(1.5rem, 3vw, 1.8rem);
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    line-height: 115%;
+  }
+
+  .assistanceForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1.2rem;
+
+    .inputGroup {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+
+      label {
+        font-weight: 400;
+        font-size: 1rem;
+        line-height: 140%;
+      }
+
+      input {
+        padding: 0.75rem;
+        font-size: 1rem;
+        border: none;
+        background-color: #fff;
+        &::placeholder {
+          color: #c2c2c2;
+        }
+      }
+
+      input:focus {
+        outline: none;
+        border-color: #000;
+      }
+    }
+
+    .submitButton {
+      margin-top: 1.5rem;
+      padding: 0.85rem;
+      background-color: #ffcc00;
+      color: #000;
+      font-weight: 600;
+      font-size: 1rem;
+      border: none;
+      border-radius: 0.25rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: #e6b800;
+      }
+    }
+  }
+}
