@@ -62,10 +62,11 @@ function buildProductModelMedia(
 ): ProductModelMedia[] {
   if (!modelData) return [];
 
-  const media: ProductModelMedia[] = [];
+  const imageMedia: ProductModelMedia[] = [];
+  const videoMedia: ProductModelMedia[] = [];
 
   if (modelData.coverImage) {
-    media.push({
+    imageMedia.push({
       type: "image",
       src: modelData.coverImage,
       thumbnail: modelData.coverImage,
@@ -76,7 +77,7 @@ function buildProductModelMedia(
 
   modelData.modelDescription?.forEach((item) => {
     if (item.image) {
-      media.push({
+      imageMedia.push({
         type: "image",
         src: item.image,
         thumbnail: item.image,
@@ -87,7 +88,7 @@ function buildProductModelMedia(
 
     const embedUrl = getYouTubeEmbedUrl(item.youtubeLink);
     if (embedUrl) {
-      media.push({
+      videoMedia.push({
         type: "video",
         src: embedUrl,
         thumbnail: item.image || modelData.coverImage,
@@ -97,7 +98,7 @@ function buildProductModelMedia(
     }
   });
 
-  return media.filter(
+  return [...imageMedia, ...videoMedia].filter(
     (item, index, items) =>
       item.src &&
       items.findIndex((mediaItem) => mediaItem.src === item.src) === index
@@ -475,14 +476,64 @@ export default function ProductModalClient({
       ) : (
         <>
           <div className={styles.imageWrapper}>
-            <Image
-              src={modelData?.coverImage || ""}
-              alt={modelData?.coverImageAltText || "Model cover image"}
-              width={1500}
-              height={768}
-              className={styles.image}
-              priority
-            />
+            {selectedMedia?.type === "video" ? (
+              <iframe
+                src={selectedMedia.src}
+                title={selectedMedia.title}
+                width={1500}
+                height={768}
+                frameBorder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowFullScreen
+                className={styles.imageVideo}
+              />
+            ) : (
+              selectedMedia?.src && (
+                <Image
+                  src={selectedMedia.src}
+                  alt={selectedMedia.alt}
+                  width={1500}
+                  height={768}
+                  className={styles.image}
+                  priority
+                />
+              )
+            )}
+            {productModelMedia.length > 1 && (
+              <>
+                <button
+                  type="button"
+                  className={`${styles.mediaArrow} ${styles.mediaArrowPrev}`}
+                  onClick={() => goToMedia("previous")}
+                  aria-label="Previous media"
+                >
+                  &lt;
+                </button>
+                <button
+                  type="button"
+                  className={`${styles.mediaArrow} ${styles.mediaArrowNext}`}
+                  onClick={() => goToMedia("next")}
+                  aria-label="Next media"
+                >
+                  &gt;
+                </button>
+                <div className={styles.mediaDots}>
+                  {productModelMedia.map((item, index) => (
+                    <button
+                      type="button"
+                      key={`${item.src}-${index}`}
+                      className={
+                        index === selectedMediaIndex
+                          ? `${styles.mediaDot} ${styles.mediaDotActive}`
+                          : styles.mediaDot
+                      }
+                      onClick={() => setSelectedMediaIndex(index)}
+                      aria-label={`Show ${item.type} ${index + 1}`}
+                    />
+                  ))}
+                </div>
+              </>
+            )}
           </div>
 
           <div className={styles.infoSection}>

@@ -24,10 +24,21 @@ const Products: React.FC<ProductsProps> = ({ products }) => {
     router.push("/products");
   };
 
+  const slidesPerView = (() => {
+    if (!width) return 4;
+    if (width >= SCREENS.TAB_LANDSCAPE) return 4;
+    if (width >= SCREENS.TAB_PORTRAIT) return 3;
+    if (width >= SCREENS.MOBILE_LANDSCAPE) return 2.25;
+    if (width >= SCREENS.MOBILE_MIDSCREEN) return 1.6;
+    return 1.12;
+  })();
+
+  const slideSpacing = width && width >= SCREENS.MOBILE_LANDSCAPE ? 24 : 14;
+
   const [sliderRef, instanceRef] = useKeenSlider({
     slides: {
-      perView: width && width > SCREENS.MOBILE_MIDSCREEN ? 4 : 1.5,
-      spacing: 16,
+      perView: slidesPerView,
+      spacing: slideSpacing,
     },
     slideChanged(slider) {
       setCurrentSlide(slider.track.details.rel);
@@ -39,21 +50,21 @@ const Products: React.FC<ProductsProps> = ({ products }) => {
 
   const perViewValue = (() => {
     const slidesOption = instanceRef.current?.options?.slides;
-    if (typeof slidesOption === "number") {
-      return slidesOption;
-    }
+    if (typeof slidesOption === "number") return slidesOption;
     if (
       typeof slidesOption === "object" &&
       slidesOption !== null &&
       "perView" in slidesOption
     ) {
-      return slidesOption.perView || 0;
+      return Number(slidesOption.perView) || 0;
     }
     return 0;
   })();
 
   const totalSlides = instanceRef.current?.track?.details?.slides.length || 0;
-  const maxSlide = totalSlides - Number(perViewValue);
+  const maxSlide =
+    instanceRef.current?.track?.details?.maxIdx ??
+    Math.max(0, Math.ceil(totalSlides - Number(perViewValue)));
 
   const stripPosition = maxSlide > 0 ? (currentSlide / maxSlide) * 80 : 0;
 

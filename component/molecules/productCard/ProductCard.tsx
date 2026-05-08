@@ -21,7 +21,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
     <div
       className={`${styles.productCard} ${
         isProductPage && styles.productCardGrey
-      } keen-slider__slide`}
+      }`}
     >
       <Image
         src={imageSrc}

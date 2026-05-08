@@ -3,12 +3,24 @@
 
 .productContainer {
   width: 100%;
-  max-width: 80rem;
+  max-width: none;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  padding: calc(1rem + 25px) 0 1.75rem;
+  padding: calc(1rem + 25px) $site-gutter-desktop 1.75rem;
   gap: 1rem;
+
+  @include lg-max {
+    padding-inline: $site-gutter-tablet;
+  }
+
+  @include md-max {
+    padding-inline: $site-gutter-mobile;
+  }
+
+  @include sm-max {
+    padding: 1.5rem 1rem 1.75rem;
+  }
 
   .productDetails {
     display: flex;
@@ -20,7 +32,7 @@
     @include sm-max {
       flex-direction: column;
       align-items: flex-start;
-      padding: 1rem 1.25rem;
+      padding: 1rem 0;
     }
   }
 
