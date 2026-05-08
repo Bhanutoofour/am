@@ -78,42 +78,57 @@ $section-padding: $site-gutter-desktop;
   .footerContent {
     width: 100%;
     max-width: none;
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    justify-content: space-between;
+    display: grid;
+    grid-template-columns: minmax(18rem, 28rem) minmax(0, 1fr);
+    gap: clamp(4rem, 10vw, 10rem);
     align-items: flex-start;
     border-bottom: 1px solid $text-secondary;
     padding: 3rem $section-padding 2rem;
+
     @include lg-max {
       padding-inline: $site-gutter-tablet;
+      gap: 4rem;
     }
+
+    @include md-max {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+    }
+
     @include sm-max {
       padding: 2rem $site-gutter-mobile 2rem;
+      gap: 2rem;
     }
+
     .linkContainer {
-      display: flex;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(9rem, 1fr));
       align-items: flex-start;
-      gap: 3rem;
-      margin-top: 2rem;
+      gap: clamp(2.5rem, 5vw, 4.5rem);
+      margin-top: 0;
+      justify-self: stretch;
+
       .footerLink {
         display: flex;
         flex-direction: column;
-        gap: 1.3rem;
+        gap: 1rem;
+
         .footerLinkHeader {
-          font-size: 0.8rem;
+          font-size: 0.95rem;
           font-weight: 700;
           line-height: 150%;
           color: $text-secondary;
         }
+
         .footerLinks {
           display: flex;
           flex-direction: column;
-          gap: 0.3rem;
+          gap: 0.65rem;
+
           a {
-            font-size: 0.8rem;
-            font-weight: 400;
-            line-height: 24px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            line-height: 150%;
             color: $text-secondary;
             transition: color 0.3s ease;
 
@@ -121,10 +136,11 @@ $section-padding: $site-gutter-desktop;
               color: $primary-color;
             }
           }
+
           p {
-            font-size: 0.8rem;
+            font-size: 0.95rem;
             font-weight: 400;
-            line-height: 24px;
+            line-height: 150%;
             color: $text-secondary;
             transition: color 0.3s ease;
             opacity: 0.5;
@@ -142,37 +158,50 @@ $section-padding: $site-gutter-desktop;
           }
         }
       }
+
+      @include md-max {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+
       @include sm-max {
-        flex-wrap: wrap-reverse;
-        gap: 1rem 4rem;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 1.75rem 2rem;
+      }
+
+      @include xsm-max {
+        grid-template-columns: 1fr;
       }
     }
+
     .aboutContainer {
-      max-width: 283px;
+      max-width: 24rem;
       width: 100%;
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      gap: 2.3rem;
+      gap: 2rem;
+
       .image {
-        width: 10.62rem;
-        height: 2.5rem;
+        width: 13rem;
+        height: auto;
       }
+
       .address {
         font-weight: 400;
-        font-size: 12px;
+        font-size: 0.95rem;
         line-height: 150%;
         color: $text-secondary;
       }
+
       .socialMedia {
         display: flex;
         flex-direction: row;
         align-items: center;
-        gap: 1.3rem;
+        gap: 1.5rem;
         cursor: pointer;
       }
+
       @include xsm-max {
-        // padding-left: 1.25rem;
         padding-top: 1rem;
       }
     }
@@ -198,7 +227,7 @@ $section-padding: $site-gutter-desktop;
   gap: 1rem;
   align-items: center;
   font-weight: 400;
-  font-size: 12px;
+  font-size: 0.875rem;
   line-height: 150%;
   color: #f3f3f3;
 }
