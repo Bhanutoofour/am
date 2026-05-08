@@ -1,0 +1,2068 @@
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[7].use[3]!./node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[14].oneOf[7].use[4]!./node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[14].oneOf[7].use[5]!./component/sections/caraousel/styles.module.scss ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+.styles_caraousel__UsApP {
+  width: 100%;
+  position: relative;
+  height: 36.3125rem;
+  overflow: hidden;
+  background: linear-gradient(180deg, rgba(1, 6, 10, 0) 43.53%, #01060a 142.21%);
+}
+@media (max-width: 768px) {
+  .styles_caraousel__UsApP {
+    height: 36.3125rem;
+  }
+}
+.styles_caraousel__UsApP .keen-slider {
+  height: 100%;
+}
+.styles_caraousel__UsApP .keen-slider__slide {
+  height: 100%;
+  min-height: 100%;
+}
+.styles_caraousel__UsApP .styles_leftButton__kcLk4,
+.styles_caraousel__UsApP .styles_rightButton__3_lgb {
+  height: 2.75rem;
+  width: 2.75rem;
+  background-color: rgba(0, 0, 0, 0.3019607843);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #ffffff;
+  position: absolute;
+  font-size: 1.4rem;
+  z-index: 9;
+  cursor: pointer;
+  border: none;
+}
+@media (max-width: 768px) {
+  .styles_caraousel__UsApP .styles_leftButton__kcLk4,
+  .styles_caraousel__UsApP .styles_rightButton__3_lgb {
+    height: 2rem;
+    width: 2rem;
+    font-size: 1rem;
+  }
+}
+.styles_caraousel__UsApP .styles_leftButton__kcLk4 {
+  top: 40%;
+  left: 2rem;
+}
+@media (max-width: 768px) {
+  .styles_caraousel__UsApP .styles_leftButton__kcLk4 {
+    left: 1rem;
+  }
+}
+.styles_caraousel__UsApP .styles_rightButton__3_lgb {
+  top: 40%;
+  right: 2rem;
+}
+@media (max-width: 768px) {
+  .styles_caraousel__UsApP .styles_rightButton__3_lgb {
+    right: 1rem;
+  }
+}
+.styles_caraousel__UsApP .styles_dots__TylsO {
+  position: absolute;
+  left: 50%;
+  bottom: 2rem;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transform: translateX(-50%);
+}
+@media (max-width: 768px) {
+  .styles_caraousel__UsApP .styles_dots__TylsO {
+    bottom: 1rem;
+  }
+}
+.styles_caraousel__UsApP .styles_dots__TylsO button {
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+.styles_caraousel__UsApP .styles_certificates__8V9Aj {
+  display: flex;
+  flex-direction: row;
+  gap: 1.4rem;
+  align-items: center;
+  position: absolute;
+  bottom: 3.5rem;
+  right: 5rem;
+  z-index: 9;
+}
+@media (max-width: 768px) {
+  .styles_caraousel__UsApP .styles_certificates__8V9Aj {
+    display: none;
+  }
+}
+.styles_caraousel__UsApP .styles_caraouselContainer__Jaccr {
+  position: relative;
+  height: 100%;
+  width: 100%;
+}
+.styles_caraousel__UsApP .styles_caraouselContainer__Jaccr .styles_caraouselContent__qxMgh {
+  z-index: 9;
+  position: absolute;
+  bottom: 4rem;
+  left: 7.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  align-items: flex-start;
+}
+@media (max-width: 768px) {
+  .styles_caraousel__UsApP .styles_caraouselContainer__Jaccr .styles_caraouselContent__qxMgh {
+    gap: 0.4rem;
+    bottom: 5rem;
+    left: 2rem;
+  }
+}
+.styles_caraousel__UsApP .styles_caraouselContainer__Jaccr .styles_caraouselContent__qxMgh .styles_title__P3fgH {
+  max-width: 39rem;
+  width: 100%;
+  font-family: "Roboto", sans-serif;
+  font-weight: 900;
+  font-size: 44px;
+  line-height: 105%;
+  font-stretch: 75%;
+  font-variation-settings: "wdth" 75;
+  letter-spacing: 0;
+  font-style: normal;
+  color: #ffffff;
+}
+@media (max-width: 768px) {
+  .styles_caraousel__UsApP .styles_caraouselContainer__Jaccr .styles_caraouselContent__qxMgh .styles_title__P3fgH {
+    font-size: 1.5rem;
+    line-height: 120%;
+    width: 100%;
+  }
+}
+.styles_caraousel__UsApP .styles_caraouselContainer__Jaccr .styles_caraouselContent__qxMgh .styles_titleLine__1Qh64 {
+  display: block;
+}
+.styles_caraousel__UsApP .styles_caraouselContainer__Jaccr .styles_caraouselContent__qxMgh .styles_titleLine__1Qh64:not(.styles_titleLineSecond__mbYlq) {
+  white-space: nowrap;
+}
+@media (max-width: 768px) {
+  .styles_caraousel__UsApP .styles_caraouselContainer__Jaccr .styles_caraouselContent__qxMgh .styles_titleLine__1Qh64:not(.styles_titleLineSecond__mbYlq) {
+    white-space: normal;
+  }
+}
+.styles_caraousel__UsApP .styles_caraouselContainer__Jaccr .styles_caraouselContent__qxMgh .styles_titleLineSecond__mbYlq {
+  white-space: nowrap;
+}
+@media (max-width: 768px) {
+  .styles_caraousel__UsApP .styles_caraouselContainer__Jaccr .styles_caraouselContent__qxMgh .styles_titleLineSecond__mbYlq {
+    white-space: normal;
+  }
+}
+.styles_caraousel__UsApP .styles_caraouselContainer__Jaccr .styles_caraouselContent__qxMgh .styles_description__3ZDVc {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  font-size: 1.125rem;
+  width: 31rem;
+  max-width: 100%;
+  line-height: 140%;
+  letter-spacing: 0;
+  font-style: normal;
+  color: #ffffff;
+}
+@media (max-width: 768px) {
+  .styles_caraousel__UsApP .styles_caraouselContainer__Jaccr .styles_caraouselContent__qxMgh .styles_description__3ZDVc {
+    font-size: 0.875rem;
+    line-height: 140%;
+  }
+}
+.styles_caraousel__UsApP .styles_caraouselContainer__Jaccr .styles_caraouselContent__qxMgh .styles_heroButton__JFo30 {
+  width: 9.4375rem;
+  min-width: 9.125rem;
+  max-width: 12.5rem;
+  height: 3rem;
+  min-height: 3rem;
+  gap: 0.625rem;
+  padding: 0.875rem 2rem;
+}
+.styles_caraousel__UsApP .styles_caraouselContainer__Jaccr .styles_caraouselContent__qxMgh .styles_heroButton__JFo30 p {
+  font-family: "Roboto", sans-serif;
+  font-weight: 600;
+  font-size: 0.9375rem;
+  font-stretch: 75%;
+  font-variation-settings: "wdth" 75;
+  line-height: 1.25rem;
+  letter-spacing: 0;
+  text-align: center;
+}
+/*!******************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[10].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[10].use[3]!./node_modules/keen-slider/keen-slider.min.css ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************/
+.keen-slider:not([data-keen-slider-disabled]){-webkit-touch-callout:none;-webkit-tap-highlight-color:transparent;align-content:flex-start;display:flex;overflow:hidden;position:relative;touch-action:pan-y;-webkit-user-select:none;-moz-user-select:none;user-select:none;-khtml-user-select:none;width:100%}.keen-slider:not([data-keen-slider-disabled]) .keen-slider__slide{min-height:100%;overflow:hidden;position:relative;width:100%}.keen-slider:not([data-keen-slider-disabled])[data-keen-slider-reverse]{flex-direction:row-reverse}.keen-slider:not([data-keen-slider-disabled])[data-keen-slider-v]{flex-wrap:wrap}
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[7].use[3]!./node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[14].oneOf[7].use[4]!./node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[14].oneOf[7].use[5]!./component/molecules/button/styles.module.scss ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+.styles_button__JkUxy {
+  min-width: 8.75rem;
+  min-height: 2.75rem;
+  padding: 0.45rem 1.25rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.625rem;
+  justify-content: center;
+}
+.styles_button__JkUxy p {
+  font-size: 1rem;
+  line-height: 1;
+  font-weight: 700;
+  font-stretch: 75%;
+  text-transform: uppercase;
+}
+@media (max-width: 768px) {
+  .styles_button__JkUxy p {
+    font-size: 0.75rem;
+  }
+}
+.styles_button__JkUxy:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+@media (max-width: 768px) {
+  .styles_button__JkUxy {
+    padding: 0.5rem;
+  }
+}
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[7].use[3]!./node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[14].oneOf[7].use[4]!./node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[14].oneOf[7].use[5]!./component/GetQuoteModal/quoteStyles.module.scss ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+.quoteStyles_quotePage__KEyDT {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(1, 6, 10, 0.4);
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+@media (max-width: 768px) {
+  .quoteStyles_quotePage__KEyDT {
+    bottom: 0;
+    top: unset;
+    right: 0;
+    align-items: flex-end;
+  }
+}
+.quoteStyles_quotePage__KEyDT .quoteStyles_quoteModal__cZmpt {
+  width: 24.25rem;
+  height: 40.0625rem;
+  opacity: 1;
+  padding: 1.5rem;
+  background-color: #ffffff;
+  position: relative;
+}
+@media (max-width: 768px) {
+  .quoteStyles_quotePage__KEyDT .quoteStyles_quoteModal__cZmpt {
+    width: 100%;
+    height: 36.25rem;
+  }
+}
+.quoteStyles_quotePage__KEyDT .quoteStyles_closingState__Pejdz {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+}
+.quoteStyles_quotePage__KEyDT .quoteStyles_progressBarContainer__LbtNM {
+  display: flex;
+  flex-direction: row;
+  padding: 1rem 0;
+  width: 100%;
+}
+.quoteStyles_quotePage__KEyDT .quoteStyles_progressBarContainer__LbtNM .quoteStyles_progressBar__D0DZy {
+  width: 100%;
+  height: 0.375rem;
+  background-color: #f6f6f6;
+}
+.quoteStyles_quotePage__KEyDT .quoteStyles_progressBarContainer__LbtNM .quoteStyles_showProgress__zha1k {
+  height: 0.375rem;
+  background-color: #f9c300;
+  transition: width 0.3s ease-in-out;
+}
+.quoteStyles_quotePage__KEyDT .quoteStyles_quoteContent__RX9tC {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+.quoteStyles_quotePage__KEyDT .quoteStyles_quoteContent__RX9tC .quoteStyles_quoteHeading__eS2vN {
+  font-weight: 500;
+  font-style: Condensed Medium;
+  font-size: 1.75rem;
+  line-height: 140%;
+  color: #0a0a0b;
+}
+.quoteStyles_quotePage__KEyDT .quoteStyles_quoteContent__RX9tC .quoteStyles_quoteDesc__qy7Et {
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 140%;
+  color: #585858;
+}
+.quoteStyles_quotePage__KEyDT .quoteStyles_quoteStepItems__RVYjp {
+  width: 100%;
+}
+.quoteStyles_quotePage__KEyDT .quoteStyles_quoteStepItems__RVYjp .quoteStyles_stepContainer__Qlqrn {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding: 1.5rem 0;
+}
+.quoteStyles_quotePage__KEyDT .quoteStyles_quoteStepItems__RVYjp .quoteStyles_stepThreeContainer__Qh8Bl {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 2rem;
+}
+.quoteStyles_quotePage__KEyDT .quoteStyles_quoteStepItems__RVYjp .quoteStyles_stepThreeContainer__Qh8Bl .quoteStyles_topPortion__BNjoo {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+}
+.quoteStyles_quotePage__KEyDT .quoteStyles_quoteStepItems__RVYjp .quoteStyles_stepThreeContainer__Qh8Bl .quoteStyles_yellowRound__JRGlC {
+  border-radius: 50%;
+  width: 88px;
+  height: 5.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  background-color: #f9c300;
+}
+.quoteStyles_quotePage__KEyDT .quoteStyles_quoteStepItems__RVYjp .quoteStyles_stepThreeContainer__Qh8Bl .quoteStyles_topPortionContent__yyCgp {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+.quoteStyles_quotePage__KEyDT .quoteStyles_quoteStepItems__RVYjp .quoteStyles_stepThreeContainer__Qh8Bl .quoteStyles_topPortionHeading__lFt5U {
+  font-weight: 500;
+  font-style: Condensed Medium;
+  font-size: 1.5rem;
+  line-height: 140%;
+  text-align: center;
+}
+.quoteStyles_quotePage__KEyDT .quoteStyles_quoteStepItems__RVYjp .quoteStyles_stepThreeContainer__Qh8Bl .quoteStyles_thankYouForSharing__GlJGi {
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 140%;
+  text-align: center;
+  color: #585858;
+}
+.quoteStyles_quotePage__KEyDT .quoteStyles_quoteStepItems__RVYjp .quoteStyles_stepThreeContainer__Qh8Bl .quoteStyles_bottomPortion__wYFqF {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+}
+.quoteStyles_quotePage__KEyDT .quoteStyles_quoteStepItems__RVYjp .quoteStyles_stepThreeContainer__Qh8Bl .quoteStyles_needAssistance__zj9HS {
+  font-weight: 600;
+  font-style: Condensed SemiBold;
+  font-size: 16px;
+  line-height: 20px;
+  text-align: center;
+}
+.quoteStyles_quotePage__KEyDT .quoteStyles_quoteStepItems__RVYjp .quoteStyles_stepThreeContainer__Qh8Bl .quoteStyles_callUs__Jfyzc {
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 140%;
+  text-align: center;
+  color: #585858;
+}
+.quoteStyles_quotePage__KEyDT .quoteStyles_quoteButton__wZM0u {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  background-color: #0a0a0b;
+  color: #f6ffff;
+  font-size: 1rem;
+  padding: 0.875rem 1.5rem;
+}
+.quoteStyles_quotePage__KEyDT .quoteStyles_quoteButton__wZM0u:disabled {
+  background-color: #636363;
+  color: #b0b0b0;
+  cursor: not-allowed;
+}
+
+.quoteStyles_closeIcon__6gGzz {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  cursor: pointer;
+}
+@media (max-width: 768px) {
+  .quoteStyles_closeIcon__6gGzz {
+    top: 1rem;
+    right: 1rem;
+  }
+}
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[7].use[3]!./node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[14].oneOf[7].use[4]!./node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[14].oneOf[7].use[5]!./component/molecules/quoteInputs/selectStyles.module.scss ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+.selectStyles_selectWrapper__8wQu7 {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.5rem;
+  width: 100%;
+  position: relative;
+}
+@media (max-width: 768px) {
+  .selectStyles_selectWrapper__8wQu7 {
+    z-index: 1;
+  }
+  .selectStyles_selectWrapper__8wQu7:focus-within {
+    z-index: 10;
+  }
+}
+
+.selectStyles_label__SiT73 {
+  font-weight: 500;
+  font-size: 0.875rem;
+  line-height: 1.4;
+  color: #0a0a0b;
+  margin-bottom: 0.25rem;
+}
+
+.selectStyles_required__iHaah {
+  color: #f9c300;
+  margin-left: 2px;
+}
+
+.selectStyles_select__KXOzp,
+.selectStyles_mobileCoeSelect__2hMpE {
+  padding: 0.75rem 1rem;
+  border: 1px solid #e4e4e4;
+  background: white;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 1.5;
+  cursor: pointer;
+  width: 100%;
+  transition: all 0.3s ease;
+  color: #0a0a0b;
+  padding-right: 2.5rem;
+}
+.selectStyles_select__KXOzp:hover,
+.selectStyles_mobileCoeSelect__2hMpE:hover {
+  border-color: #f9c300;
+}
+.selectStyles_select__KXOzp:focus,
+.selectStyles_mobileCoeSelect__2hMpE:focus {
+  outline: none;
+  border-color: #f9c300;
+  box-shadow: 0 0 0 3px rgba(249, 195, 0, 0.1);
+}
+.selectStyles_select__KXOzp:disabled,
+.selectStyles_mobileCoeSelect__2hMpE:disabled {
+  background-color: #f5f5f5;
+  color: #a0a0a0;
+  cursor: not-allowed;
+}
+.selectStyles_select__KXOzp option,
+.selectStyles_mobileCoeSelect__2hMpE option {
+  padding: 0.5rem;
+  background: white;
+  color: #0a0a0b;
+}
+.selectStyles_select__KXOzp option:hover,
+.selectStyles_mobileCoeSelect__2hMpE option:hover {
+  background-color: #f9c300;
+}
+@media (max-width: 768px) {
+  .selectStyles_select__KXOzp,
+  .selectStyles_mobileCoeSelect__2hMpE {
+    font-size: 16px;
+    padding: 0.875rem 1rem;
+    min-height: 48px;
+  }
+  .selectStyles_select__KXOzp:focus,
+  .selectStyles_mobileCoeSelect__2hMpE:focus {
+    font-size: 16px;
+  }
+}
+@supports (-webkit-appearance: none) {
+  .selectStyles_select__KXOzp,
+  .selectStyles_mobileCoeSelect__2hMpE {
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%230a0a0b' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6,9 12,15 18,9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 16px;
+    padding-right: 2.5rem;
+  }
+}
+
+.selectStyles_mobileCoeSelect__2hMpE {
+  width: 30%;
+  padding: 0.25rem;
+  border: none;
+  height: 100%;
+  border-right: 1px solid #e4e4e4;
+}
+
+.selectStyles_formInputWrapper__2cMsy {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 100%;
+  position: relative;
+}
+
+.selectStyles_input__QJOHt,
+.selectStyles_mobileInput__qJcJp {
+  padding: 0.75rem 1rem;
+  border: 1px solid #e4e4e4;
+  font-size: 16px;
+  outline: none;
+  color: #0a0a0b;
+  transition: all 0.3s ease;
+  width: 100%;
+}
+.selectStyles_input__QJOHt::placeholder,
+.selectStyles_mobileInput__qJcJp::placeholder {
+  color: #a0a0a0;
+  font-size: 16px;
+}
+.selectStyles_input__QJOHt:hover,
+.selectStyles_mobileInput__qJcJp:hover {
+  border-color: #f9c300;
+}
+.selectStyles_input__QJOHt:focus,
+.selectStyles_mobileInput__qJcJp:focus {
+  outline: none;
+  border-color: #f9c300;
+  box-shadow: 0 0 0 3px rgba(249, 195, 0, 0.1);
+}
+
+.selectStyles_mobileWrapper__NzG1T {
+  display: flex;
+  align-items: center;
+  border: 1px solid #e4e4e4;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.selectStyles_mobileWrapper__NzG1T:focus-within {
+  border-color: #f9c300;
+  box-shadow: 0 0 0 3px rgba(249, 195, 0, 0.1);
+}
+
+.selectStyles_dropdownMenu__fE_7D {
+  max-height: 200px;
+  overflow-y: auto;
+  border: 1px solid #ccc;
+  background: #fff;
+  position: absolute;
+  z-index: 10;
+  width: 120px;
+  top: 100%;
+}
+
+.selectStyles_dropdownOption__PJVjj {
+  padding: 6px 10px;
+  cursor: pointer;
+}
+.selectStyles_dropdownOption__PJVjj:hover {
+  background: #f5f5f5;
+}
+
+.selectStyles_dropdownTrigger__ur_Tc {
+  padding: 0 8px;
+  border-right: 1px solid #e4e4e4;
+  cursor: pointer;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: center;
+}
+
+.selectStyles_mobileInput__qJcJp {
+  border: none;
+  flex: 1 1;
+  padding: 0.75rem 1rem;
+  outline: none;
+}
+.selectStyles_mobileInput__qJcJp::-webkit-outer-spin-button, .selectStyles_mobileInput__qJcJp::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.selectStyles_mobileInput__qJcJp[type=number] {
+  -moz-appearance: textfield;
+}
+
+.selectStyles_formCheckboxWrapper__Degvd {
+  display: flex;
+  align-items: center;
+}
+
+.selectStyles_checkboxLabel__d8pPB {
+  display: flex;
+  cursor: pointer;
+  font-size: 14px;
+  color: #000;
+  gap: 0.75rem;
+}
+
+.selectStyles_checkboxInput__HcyGn {
+  display: none;
+}
+
+.selectStyles_checkboxCustom__BWICi {
+  width: 1.125rem;
+  height: 1rem;
+  border: 1px solid #000;
+  border-radius: 2px;
+  margin-top: 4px;
+  position: relative;
+}
+.selectStyles_checkboxCustom__BWICi::after {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 5px;
+  width: 3px;
+  height: 7px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  display: none;
+}
+
+.selectStyles_checkboxInput__HcyGn:checked + .selectStyles_checkboxCustom__BWICi {
+  background-color: #000;
+}
+
+.selectStyles_checkboxInput__HcyGn:checked + .selectStyles_checkboxCustom__BWICi::after {
+  display: block;
+}
+
+.selectStyles_labelText__5fDO_ {
+  font-size: 14px;
+  line-height: 20px;
+  width: 80%;
+}
+
+.selectStyles_radioWrapper__rPGjB {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 400;
+  color: #111;
+}
+
+.selectStyles_radioInput__6JlcU {
+  display: none;
+}
+
+.selectStyles_radioCustom__FNDH1 {
+  width: 18px;
+  height: 18px;
+  border: 2px solid #111;
+  border-radius: 50%;
+  margin-right: 8px;
+  position: relative;
+  flex-shrink: 0;
+}
+.selectStyles_radioCustom__FNDH1::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  background: #111;
+  border-radius: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: transform 0.2s ease-in-out;
+}
+
+.selectStyles_radioInput__6JlcU:checked + .selectStyles_radioCustom__FNDH1::after {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.selectStyles_radioLabel___2P_q {
+  line-height: 1;
+}
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[7].use[3]!./node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[14].oneOf[7].use[4]!./node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[14].oneOf[7].use[5]!./component/sections/certificate/certificate.module.scss ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+.certificate_certificateContainer__3e0yQ {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  width: 100%;
+  height: auto;
+  padding: 4.625rem 7.5rem;
+  position: relative;
+  background-color: #f5f5f5;
+}
+@media (max-width: 768px) {
+  .certificate_certificateContainer__3e0yQ {
+    padding: 2.5rem 0;
+  }
+}
+.certificate_certificateContainer__3e0yQ .certificate_sectionCorner__tbGpr {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+@media (max-width: 768px) {
+  .certificate_certificateContainer__3e0yQ .certificate_sectionCorner__tbGpr {
+    display: none;
+  }
+}
+.certificate_certificateContainer__3e0yQ .certificate_certificateMarquee__v8In_ {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: stretch;
+}
+.certificate_certificateContainer__3e0yQ .certificate_certificateMarqueeContent__DbkHM {
+  height: auto;
+  width: 100%;
+  max-width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 1.25rem;
+}
+@media (max-width: 1279px) {
+  .certificate_certificateContainer__3e0yQ .certificate_certificateMarqueeContent__DbkHM {
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+@media (max-width: 768px) {
+  .certificate_certificateContainer__3e0yQ .certificate_certificateMarqueeContent__DbkHM {
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 0.5rem;
+    padding: 0 2rem;
+  }
+}
+.certificate_certificateContainer__3e0yQ .certificate_mainHeading__YfYAh {
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 105%;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+@media (max-width: 768px) {
+  .certificate_certificateContainer__3e0yQ .certificate_mainHeading__YfYAh {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+  }
+}
+/*!**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[7].use[3]!./node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[14].oneOf[7].use[4]!./node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[14].oneOf[7].use[5]!./component/molecules/recognitionCard/styles.module.scss ***!
+  \**************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+.styles_recognitionCard__YrMRq {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: center;
+  width: 13rem;
+  min-height: 17rem;
+  padding: 1.5rem 1.25rem;
+  position: relative;
+  border-right: none;
+}
+.styles_recognitionCard__YrMRq::after {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 60%;
+  width: 1px;
+  background: linear-gradient(90deg, rgb(42, 123, 155) 0%, rgb(255, 255, 255) 0%, rgb(174, 174, 174) 50%, rgb(255, 255, 255) 100%);
+}
+.styles_recognitionCard__YrMRq.styles_noBorder__7Pb8r::after {
+  display: none;
+}
+.styles_recognitionCard__YrMRq .styles_image__AM21H {
+  width: auto;
+  height: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.styles_recognitionCard__YrMRq .styles_title__C34y_ {
+  font-size: 0.875rem;
+  font-weight: 700;
+  line-height: 130%;
+  text-align: center;
+  min-height: 2.75rem;
+  height: auto;
+  display: block;
+  overflow: visible;
+}
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[7].use[3]!./node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[14].oneOf[7].use[4]!./node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[14].oneOf[7].use[5]!./component/sections/contentBuild/contentStyles.module.scss ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+.contentStyles_buildSection__EGCbi {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 4.5625rem;
+  width: 100%;
+  padding: 4rem 7.5rem;
+  margin-top: 4rem;
+}
+@media (max-width: 768px) {
+  .contentStyles_buildSection__EGCbi {
+    gap: 2.5rem;
+    margin-top: 0.75rem;
+  }
+}
+
+.contentStyles_buildCardTitle__UbClu {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.contentStyles_buildCardTitle__UbClu .contentStyles_buildTitle__N_Z1u {
+  font-weight: 700;
+  font-style: Condensed Bold;
+  font-size: 2.5rem;
+  line-height: 120%;
+}
+@media (max-width: 768px) {
+  .contentStyles_buildCardTitle__UbClu .contentStyles_buildTitle__N_Z1u {
+    font-size: 1.5rem;
+  }
+}
+
+.contentStyles_BuildCardContainer__6jOtY {
+  display: flex;
+  flex-direction: row;
+  max-width: none;
+  width: 100%;
+  gap: 3rem;
+}
+@media (max-width: 768px) {
+  .contentStyles_BuildCardContainer__6jOtY {
+    flex-direction: column;
+  }
+}
+.contentStyles_BuildCardContainer__6jOtY .contentStyles_wrapper__f9S0y {
+  display: flex;
+}
+.contentStyles_BuildCardContainer__6jOtY .contentStyles_bar__op6gZ {
+  background-color: #f9c300;
+  height: 0.8125rem;
+  width: 57px;
+  -webkit-clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
+          clip-path: polygon(0 0, 100% 0, 85% 100%, 0 100%);
+}
+.contentStyles_BuildCardContainer__6jOtY .contentStyles_bar__op6gZ.contentStyles_small___3s4l {
+  width: 1.4375rem;
+  height: 0.8125rem;
+  -webkit-clip-path: polygon(40% 0, 100% 0, 57% 100%, 0% 100%);
+          clip-path: polygon(40% 0, 100% 0, 57% 100%, 0% 100%);
+}
+.contentStyles_BuildCardContainer__6jOtY .contentStyles_buildCard__2n2kX {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.contentStyles_BuildCardContainer__6jOtY .contentStyles_cardTitle__1jaZK {
+  font-weight: 600;
+  font-style: Condensed SemiBold;
+  font-size: 1.4rem;
+  line-height: 115%;
+  color: #111113;
+}
+@media (max-width: 768px) {
+  .contentStyles_BuildCardContainer__6jOtY .contentStyles_cardTitle__1jaZK {
+    font-size: 1.25rem;
+  }
+}
+.contentStyles_BuildCardContainer__6jOtY .contentStyles_cardDesc__ug45X {
+  font-weight: 400;
+  font-size: 0.875rem;
+  line-height: 150%;
+  color: #3b3b3c;
+}
+/*!************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[7].use[3]!./node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[14].oneOf[7].use[4]!./node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[14].oneOf[7].use[5]!./component/sections/Industries/industries.module.scss ***!
+  \************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+.industries_industrySection__Eaxuq {
+  width: 100%;
+  padding: 5.5625rem 7.5rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+@media (max-width: 768px) {
+  .industries_industrySection__Eaxuq {
+    padding: 1rem;
+  }
+}
+
+.industries_content__WR3B4 {
+  max-width: none;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+}
+@media (max-width: 768px) {
+  .industries_content__WR3B4 {
+    gap: 2rem;
+  }
+}
+
+.industries_sectionCorner__wNLTi {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+@media (max-width: 768px) {
+  .industries_sectionCorner__wNLTi {
+    display: none;
+  }
+}
+
+.industries_sectionTitle__GQgrC {
+  font-weight: 900;
+  font-size: 3rem;
+  line-height: 105%;
+  text-align: center;
+  color: #0a0a0b;
+}
+@media (max-width: 768px) {
+  .industries_sectionTitle__GQgrC {
+    font-size: 1.75rem;
+  }
+}
+
+.industries_industryGrid__3S9sM {
+  display: grid;
+  max-width: none;
+  width: 100%;
+  grid-gap: 1.25rem;
+  gap: 1.25rem;
+  grid-template-columns: repeat(4, 1fr);
+}
+@media (max-width: 768px) {
+  .industries_industryGrid__3S9sM {
+    gap: 0.75rem;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.industries_industryCard__REryn {
+  width: 100%;
+  height: 20rem;
+  position: relative;
+  cursor: pointer;
+  border-radius: 0.25rem;
+  outline: 0.25rem solid transparent;
+}
+
+.industries_industryImage__qMu31 {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.industries_overlay__RdD_n {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 8.375rem;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 11.21%, #000000 94.32%);
+  background-blend-mode: multiply;
+  z-index: 1;
+  border-radius: 0.25rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.industries_industryDetail__OdAvs {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+  transition: all 0.2s ease-in-out;
+}
+
+.industries_cardTitle__18WYZ {
+  margin: 1.25rem;
+  margin-top: auto;
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 120%;
+  color: #ffffff;
+}
+
+.industries_hoverArrow__MM6sD {
+  width: 8.5625rem;
+  height: 3rem;
+  border-bottom-left-radius: 0.125rem;
+  background: #f9c300;
+  -webkit-clip-path: polygon(0% 0%, 60% 0, 100% 100%, 100% 100%, 0% 100%);
+          clip-path: polygon(0% 0%, 60% 0, 100% 100%, 100% 100%, 0% 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 1.25rem;
+  display: flex;
+  transition: all 0.2s ease-in-out;
+  display: none;
+}
+.industries_hoverArrow__MM6sD .industries_arrow__y2cn6 {
+  width: 1.75rem;
+  height: 1.0625rem;
+}
+
+.industries_industryCard__REryn:hover .industries_overlay__RdD_n {
+  height: inherit;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 11.21%, #000000 100%);
+}
+.industries_industryCard__REryn:hover .industries_industryDetail__OdAvs {
+  outline: 0.25rem solid #f9c300;
+}
+.industries_industryCard__REryn:hover .industries_hoverArrow__MM6sD {
+  display: flex;
+}
+
+.industries_veiwAll__QedU7 {
+  padding: 0.875rem 2rem;
+}
+/*!******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[7].use[3]!./node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[14].oneOf[7].use[4]!./node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[14].oneOf[7].use[5]!./component/molecules/industryCard/industryStyle.module.scss ***!
+  \******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+.industryStyle_industryCard___BGGs {
+  width: 100%;
+  height: 20rem;
+  position: relative;
+  cursor: pointer;
+  outline: 0.25rem solid transparent;
+}
+@media (max-width: 768px) {
+  .industryStyle_industryCard___BGGs {
+    height: 12.5rem;
+  }
+}
+
+.industryStyle_industryImage__RuoKs {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.industryStyle_overlay__TXkE_ {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 8.375rem;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 11.21%, #000000 94.32%);
+  background-blend-mode: multiply;
+  z-index: 1;
+  transition: all 0.2s ease-in-out;
+}
+
+.industryStyle_industryDetail__DH0nM {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+  transition: all 0.2s ease-in-out;
+}
+
+.industryStyle_cardTitle__5y4Z4 {
+  margin: 1.25rem;
+  margin-top: auto;
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 120%;
+  color: #ffffff;
+}
+@media (max-width: 768px) {
+  .industryStyle_cardTitle__5y4Z4 {
+    font-size: 0.875rem !important;
+  }
+}
+
+.industryStyle_hoverArrow__DEyYL {
+  width: 8.5625rem;
+  height: 3rem;
+  border-bottom-left-radius: 0.125rem;
+  background: #f9c300;
+  -webkit-clip-path: polygon(0% 0%, 60% 0, 100% 100%, 100% 100%, 0% 100%);
+          clip-path: polygon(0% 0%, 60% 0, 100% 100%, 100% 100%, 0% 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 1.25rem;
+  display: flex;
+  transition: all 0.2s ease-in-out;
+  display: none;
+}
+.industryStyle_hoverArrow__DEyYL .industryStyle_arrow__1Jnv0 {
+  width: 1.75rem;
+  height: 1.0625rem;
+}
+.industryStyle_hoverArrow__DEyYL.industryStyle_skeletonCard__kV89D {
+  outline: none;
+}
+
+.industryStyle_industryImage__RuoKs {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.industryStyle_overlay__TXkE_ {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 8.375rem;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 11.21%, #000000 94.32%);
+  background-blend-mode: multiply;
+  z-index: 1;
+  transition: all 0.2s ease-in-out;
+}
+
+.industryStyle_industryDetail__DH0nM {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+  transition: all 0.2s ease-in-out;
+}
+
+.industryStyle_cardTitle__5y4Z4 {
+  margin: 1.25rem;
+  margin-top: auto;
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 120%;
+  color: #ffffff;
+}
+
+.industryStyle_hoverArrow__DEyYL {
+  width: 8.5625rem;
+  height: 3rem;
+  border-bottom-left-radius: 0.125rem;
+  background: #f9c300;
+  -webkit-clip-path: polygon(0% 0%, 60% 0, 100% 100%, 100% 100%, 0% 100%);
+          clip-path: polygon(0% 0%, 60% 0, 100% 100%, 100% 100%, 0% 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 1.25rem;
+  display: flex;
+  transition: all 0.2s ease-in-out;
+  display: none;
+}
+.industryStyle_hoverArrow__DEyYL .industryStyle_arrow__1Jnv0 {
+  width: 1.75rem;
+  height: 1.0625rem;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .industryStyle_industryCard___BGGs:hover .industryStyle_overlay__TXkE_ {
+    height: inherit;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 11.21%, #000000 100%);
+  }
+  .industryStyle_industryCard___BGGs:hover .industryStyle_industryDetail__DH0nM {
+    border: 0.25rem solid #f9c300;
+  }
+  .industryStyle_industryCard___BGGs:hover.industryStyle_skeletonCard__kV89D .industryStyle_industryDetail__DH0nM {
+    outline: none;
+  }
+  .industryStyle_industryCard___BGGs:hover .industryStyle_hoverArrow__DEyYL {
+    display: flex;
+  }
+}
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[7].use[3]!./node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[14].oneOf[7].use[4]!./node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[14].oneOf[7].use[5]!./component/sections/media/mediaStyles.module.scss ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+.mediaStyles_mediaCard__f1Zaf {
+  border: 1px solid #c6c6c6;
+  padding: 1.5rem;
+  width: 18.5rem;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-shrink: 0;
+  margin-right: 1rem;
+}
+@media (max-width: 768px) {
+  .mediaStyles_mediaCard__f1Zaf {
+    min-height: max-content;
+    height: -webkit-fill-available;
+  }
+}
+.mediaStyles_mediaCard__f1Zaf .mediaStyles_mediaCardLogo__XsUHY {
+  margin-bottom: 1.5rem;
+}
+.mediaStyles_mediaCard__f1Zaf .mediaStyles_mediaCardLogo__XsUHY img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+@media (max-width: 768px) {
+  .mediaStyles_mediaCard__f1Zaf .mediaStyles_mediaCardLogo__XsUHY {
+    margin-bottom: 0.8rem;
+  }
+}
+.mediaStyles_mediaCard__f1Zaf .mediaStyles_mediaCardTitle__IzfqO {
+  font-weight: 700;
+  font-style: Condensed Bold;
+  font-size: 1.2rem;
+  line-height: 120%;
+  margin-bottom: 1.25rem;
+}
+@media (max-width: 768px) {
+  .mediaStyles_mediaCard__f1Zaf .mediaStyles_mediaCardTitle__IzfqO {
+    font-size: 1.25rem;
+    margin-bottom: 0.8rem;
+  }
+}
+.mediaStyles_mediaCard__f1Zaf .mediaStyles_mediaCardDesc__ZvmD5 {
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 150%;
+  color: #3b3b3c;
+  margin-bottom: 0.375rem;
+}
+@media (max-width: 768px) {
+  .mediaStyles_mediaCard__f1Zaf .mediaStyles_mediaCardDesc__ZvmD5 {
+    font-size: 0.875rem;
+  }
+}
+.mediaStyles_mediaCard__f1Zaf .mediaStyles_mediaCardLink__pJDnS {
+  font-size: 0.95rem;
+  color: #3871c8;
+  text-decoration: none;
+  font-weight: 400;
+  line-height: 150%;
+  letter-spacing: 0%;
+  margin-top: auto;
+}
+.mediaStyles_mediaCard__f1Zaf .mediaStyles_mediaCardLink__pJDnS:hover {
+  text-decoration: underline;
+}
+
+.mediaStyles_mediaContainer__Nb_OP {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.875rem;
+  padding: 5rem 7.5rem;
+  position: relative;
+}
+@media (max-width: 768px) {
+  .mediaStyles_mediaContainer__Nb_OP {
+    padding: 3rem 1rem;
+  }
+}
+
+.mediaStyles_mediaTitle__FVW4J {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: -moz-fit-content;
+  width: fit-content;
+  gap: 0.375rem;
+}
+.mediaStyles_mediaTitle__FVW4J .mediaStyles_title__eI48V {
+  font-weight: 700;
+  font-style: Condensed Bold;
+  font-size: 40px;
+  line-height: 120%;
+}
+@media (max-width: 768px) {
+  .mediaStyles_mediaTitle__FVW4J .mediaStyles_title__eI48V {
+    font-size: 1.5rem;
+  }
+}
+
+.mediaStyles_mediaWrapper__vhuy1 {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.mediaStyles_marqueeContainer__ApPQ6 {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.mediaStyles_marqueeTrack__zYn_G {
+  display: flex;
+  animation: mediaStyles_marquee__r50Gu 30s linear infinite;
+  width: max-content;
+}
+.mediaStyles_marqueeTrack__zYn_G:hover {
+  animation-play-state: paused;
+}
+@media (max-width: 768px) {
+  .mediaStyles_marqueeTrack__zYn_G:hover {
+    animation-play-state: running;
+  }
+}
+
+@keyframes mediaStyles_marquee__r50Gu {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+/*!*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[7].use[3]!./node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[14].oneOf[7].use[4]!./node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[14].oneOf[7].use[5]!./component/sections/products/product.module.scss ***!
+  \*******************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+.product_productSection__diwHL {
+  width: 100%;
+  padding: 2.8125rem 7.5rem;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #f5f5f5;
+}
+@media (max-width: 768px) {
+  .product_productSection__diwHL {
+    padding: 2rem 1rem;
+  }
+}
+
+.product_content__0PYxM {
+  max-width: none;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+}
+@media (max-width: 768px) {
+  .product_content__0PYxM {
+    gap: 1.5rem;
+  }
+}
+
+.product_productHeadingContainer__2Roet {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  max-width: none;
+  width: 100%;
+}
+.product_productHeadingContainer__2Roet .product_navigationContainer__iDWLe {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+.product_productHeadingContainer__2Roet .product_viewAll__twci4 {
+  border: 1px solid #3b3b3c;
+  padding: 0.875rem 1.5rem;
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.25rem;
+  letter-spacing: 0;
+  text-align: center;
+  color: #01060a;
+}
+@media (max-width: 575px) {
+  .product_productHeadingContainer__2Roet .product_viewAll__twci4 {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.75rem;
+  }
+}
+.product_productHeadingContainer__2Roet .product_navButtons__sG0iS {
+  display: flex;
+  gap: 1.5rem;
+  align-items: center;
+}
+@media (max-width: 768px) {
+  .product_productHeadingContainer__2Roet .product_navButtons__sG0iS {
+    display: none;
+  }
+}
+.product_productHeadingContainer__2Roet .product_navButtons__sG0iS .product_arrowButton__MwZe6 {
+  padding: 0.75rem;
+  border: 0.0625rem solid #01060a;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.product_productHeadingContainer__2Roet .product_navButtons__sG0iS .product_arrowButton__MwZe6.product_disabled__JZEIf {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.product_sectionCorner__OcOqm {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.product_sectionTitle__84fUi {
+  font-weight: 700;
+  font-size: 2.5rem;
+  line-height: 105%;
+  text-align: center;
+  color: #0a0a0b;
+}
+@media (max-width: 768px) {
+  .product_sectionTitle__84fUi {
+    font-size: 1.75rem;
+    text-align: left;
+  }
+}
+
+.product_productGrid__n1rgw {
+  display: flex;
+  width: 100%;
+  max-width: none;
+  gap: 1.25rem;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+@media (max-width: 768px) {
+  .product_productGrid__n1rgw {
+    padding: 0.3rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  .product_productGrid__n1rgw::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.product_productAllCarousel__nbxcq {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  padding: 0.2rem;
+}
+
+.product_productCard__BAAjg {
+  width: 100%;
+  min-width: 14rem;
+  height: 19rem;
+  position: relative;
+  cursor: pointer;
+  border-radius: 0.25rem;
+  outline: 0.0625rem solid #cfcfd0;
+}
+
+.product_productImage__zOKWf {
+  width: 100%;
+  height: 12.75rem;
+}
+
+.product_productDetail___8fQA {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+  border-radius: 0.25rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.product_cardTitle__1GrGJ {
+  margin: 1.25rem;
+  margin-top: auto;
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 120%;
+  color: #0a0a0b;
+  text-align: center;
+}
+
+.product_hoverArrow__gpy_e {
+  width: 8.5625rem;
+  height: 3rem;
+  border-bottom-left-radius: 0.125rem;
+  background: #f9c300;
+  -webkit-clip-path: polygon(0% 0%, 60% 0, 100% 100%, 100% 100%, 0% 100%);
+          clip-path: polygon(0% 0%, 60% 0, 100% 100%, 100% 100%, 0% 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 1.25rem;
+  display: flex;
+  transition: all 0.2s ease-in-out;
+  display: none;
+}
+.product_hoverArrow__gpy_e .product_arrow__ymCRg {
+  width: 1.75rem;
+  height: 1.0625rem;
+}
+
+.product_productCard__BAAjg:hover .product_overlay__IlgR9 {
+  height: inherit;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0) 11.21%, #000000 100%);
+}
+.product_productCard__BAAjg:hover .product_productDetail___8fQA {
+  outline: 0.25rem solid #f9c300;
+}
+.product_productCard__BAAjg:hover .product_hoverArrow__gpy_e {
+  display: flex;
+}
+
+.product_veiwAll__9vHNQ {
+  padding: 0.875rem 2rem;
+}
+
+.product_caraouselWrapper__5sJVu {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.product_slidingStripContainer__tS6YR {
+  margin-top: 1rem;
+  height: 4px;
+  width: 15rem;
+  background-color: #fff;
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+}
+
+.product_slidingStrip__bgW7O {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 20%;
+  background-color: #000;
+  border-radius: 2px;
+  transition: left 0.3s ease;
+  will-change: transform;
+}
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[7].use[3]!./node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[14].oneOf[7].use[4]!./node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[14].oneOf[7].use[5]!./component/molecules/productCard/productStyle.module.scss ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+.productStyle_productCard__t1QwF {
+  height: 19rem;
+  position: relative;
+  cursor: pointer;
+  background-color: #fff;
+}
+.productStyle_productCard__t1QwF.productStyle_productCardGrey__4Y2rN {
+  background-color: #f5f5f5;
+  border: 0.0625rem solid #cfcfd0;
+}
+@media (max-width: 768px) {
+  .productStyle_productCard__t1QwF {
+    min-width: auto;
+    height: 14.5rem;
+  }
+}
+
+.productStyle_productImage__XBw2W {
+  width: 100%;
+  height: 12.75rem;
+}
+@media (max-width: 768px) {
+  .productStyle_productImage__XBw2W {
+    height: 9.25rem;
+  }
+}
+
+.productStyle_productDetail__D2_6v {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  z-index: 2;
+  transition: all 0.2s ease-in-out;
+}
+
+.productStyle_cardTitle__C9rke {
+  margin: 1rem;
+  margin-top: auto;
+  font-weight: 600;
+  font-size: 1.25rem;
+  line-height: 120%;
+  color: #0a0a0b;
+  text-align: center;
+  text-transform: uppercase;
+}
+@media (max-width: 768px) {
+  .productStyle_cardTitle__C9rke {
+    font-size: 0.875rem;
+  }
+}
+
+.productStyle_hoverArrow__H7rXJ {
+  width: 8.5625rem;
+  height: 3rem;
+  border-bottom-left-radius: 0.125rem;
+  background: #f9c300;
+  -webkit-clip-path: polygon(0% 0%, 60% 0, 100% 100%, 100% 100%, 0% 100%);
+          clip-path: polygon(0% 0%, 60% 0, 100% 100%, 100% 100%, 0% 100%);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 1.25rem;
+  display: flex;
+  transition: all 0.2s ease-in-out;
+  display: none;
+}
+.productStyle_hoverArrow__H7rXJ .productStyle_arrow___KwK7 {
+  width: 1.75rem;
+  height: 1.0625rem;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .productStyle_productCard__t1QwF:hover .productStyle_overlay__Y8lL7 {
+    height: inherit;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 11.21%, #000000 100%);
+  }
+  .productStyle_productCard__t1QwF:hover .productStyle_productDetail__D2_6v {
+    border: 0.25rem solid #f9c300;
+  }
+  .productStyle_productCard__t1QwF:hover.productStyle_skeletonCard__OzZNB .productStyle_productDetail__D2_6v {
+    border: none;
+  }
+  .productStyle_productCard__t1QwF:hover .productStyle_hoverArrow__H7rXJ {
+    display: flex;
+  }
+}
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[7].use[3]!./node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[14].oneOf[7].use[4]!./node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[14].oneOf[7].use[5]!./component/sections/recognitions/styles.module.scss ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+.styles_recognitionContainer__B6bKX {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.2rem;
+  width: 100%;
+  height: auto;
+  padding: 3.75rem 7.5rem;
+  margin-top: 4rem;
+  position: relative;
+  /* --- Carousel wrapper --- */
+  /* --- Dots navigation --- */
+}
+@media (max-width: 768px) {
+  .styles_recognitionContainer__B6bKX {
+    padding: 2rem 0;
+  }
+}
+.styles_recognitionContainer__B6bKX .styles_sectionCorner__R2KDK {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+@media (max-width: 768px) {
+  .styles_recognitionContainer__B6bKX .styles_sectionCorner__R2KDK {
+    display: none;
+  }
+}
+.styles_recognitionContainer__B6bKX .styles_mainHeading__8U29c {
+  font-size: 3rem;
+  font-weight: 900;
+  line-height: 105%;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+@media (max-width: 768px) {
+  .styles_recognitionContainer__B6bKX .styles_mainHeading__8U29c {
+    font-size: 1.75rem;
+    margin-bottom: 1rem;
+  }
+}
+.styles_recognitionContainer__B6bKX .styles_carouselSect__e29rD {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 4rem;
+  max-width: none;
+  width: 100%;
+  justify-content: space-between;
+  margin-top: 4.5rem;
+}
+@media (max-width: 768px) {
+  .styles_recognitionContainer__B6bKX .styles_carouselSect__e29rD {
+    flex-direction: column;
+    padding: 2.5rem 0;
+    margin: 0;
+  }
+}
+.styles_recognitionContainer__B6bKX .styles_carousel__G1YDl {
+  width: 100%;
+  max-width: none;
+  height: 21.5rem;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+}
+@media (max-width: 1279px) {
+  .styles_recognitionContainer__B6bKX .styles_carousel__G1YDl {
+    max-width: 21rem;
+    height: 11.125rem;
+  }
+}
+@media (max-width: 768px) {
+  .styles_recognitionContainer__B6bKX .styles_carousel__G1YDl {
+    max-width: 22.0625rem;
+    height: 11.125rem;
+  }
+}
+.styles_recognitionContainer__B6bKX .styles_cardWrapper__E4GQe {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+.styles_recognitionContainer__B6bKX .styles_awardImage__0hQ97 {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.styles_recognitionContainer__B6bKX .styles_awardImageColumn__fV41_ {
+  flex: 0 0 44rem;
+  min-width: 0;
+  overflow: hidden;
+}
+.styles_recognitionContainer__B6bKX .styles_awardImageColumn__fV41_ .styles_carousel__G1YDl {
+  width: 44rem;
+  max-width: 44rem;
+  height: 21.5rem;
+}
+.styles_recognitionContainer__B6bKX .styles_awardCardsColumn__vCx26 {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.styles_recognitionContainer__B6bKX .styles_awardCardsCarousel__9GaV3 {
+  max-width: none;
+  height: 20rem;
+}
+.styles_recognitionContainer__B6bKX .styles_dots__y_l6I {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 1.5rem;
+}
+.styles_recognitionContainer__B6bKX .styles_dot__sOuyP {
+  width: 10px;
+  height: 10px;
+  border: none;
+  background: #d1d1d1;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.styles_recognitionContainer__B6bKX .styles_dot__sOuyP.styles_active__puBsS {
+  background: #3b3b3c;
+}
+.styles_recognitionContainer__B6bKX .styles_awardsTitle__P6Dr6 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  gap: 1.625rem;
+}
+@media (max-width: 768px) {
+  .styles_recognitionContainer__B6bKX .styles_awardsTitle__P6Dr6 {
+    padding: 0 1rem;
+    gap: 0.5rem;
+  }
+}
+.styles_recognitionContainer__B6bKX .styles_awardsTitle__P6Dr6 .styles_awards__80_Ae {
+  font-weight: 400;
+  font-size: 1rem;
+  line-height: 150%;
+  letter-spacing: 90%;
+  text-align: center;
+  color: #3b3b3c;
+}
+.styles_recognitionContainer__B6bKX .styles_awardsTitle__P6Dr6 .styles_recognized__iy64M {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  max-width: 48.9121rem;
+  width: 100%;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.styles_recognitionContainer__B6bKX .styles_awardsTitle__P6Dr6 .styles_recognized__iy64M .styles_titleTwo__wx57q {
+  font-weight: 700;
+  font-style: Condensed Bold;
+  font-size: 40px;
+  line-height: 120%;
+  text-align: center;
+}
+@media (max-width: 768px) {
+  .styles_recognitionContainer__B6bKX .styles_awardsTitle__P6Dr6 .styles_recognized__iy64M .styles_titleTwo__wx57q {
+    font-size: 1.25rem;
+  }
+}
+.styles_recognitionContainer__B6bKX .styles_awardsTitle__P6Dr6 .styles_titleThree__1tWxm {
+  max-width: 42rem;
+  width: 100%;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 150%;
+  text-align: center;
+  color: #3b3b3c;
+}
+@media (max-width: 768px) {
+  .styles_recognitionContainer__B6bKX .styles_awardsTitle__P6Dr6 .styles_titleThree__1tWxm {
+    font-size: 0.75rem;
+    width: 70%;
+  }
+}
+/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[7].use[3]!./node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[14].oneOf[7].use[4]!./node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[14].oneOf[7].use[5]!./component/sections/testimonials/styles.module.scss ***!
+  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+.styles_testimonialSection__thjWB {
+  width: 100%;
+  padding: 3.5rem 7.5rem;
+  background: #f5f5f5;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.5rem;
+}
+@media (max-width: 1279px) {
+  .styles_testimonialSection__thjWB {
+    padding: 2.5rem 1rem 4.75rem 1rem;
+  }
+}
+
+.styles_content__JxQqX {
+  max-width: none;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.styles_content__JxQqX .styles_dots__ZzE_P {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.styles_content__JxQqX .styles_dots__ZzE_P button {
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.styles_testimonialHeadingContainer__E0dd9 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  margin-right: 0;
+}
+@media (max-width: 768px) {
+  .styles_testimonialHeadingContainer__E0dd9 {
+    margin-right: 0;
+  }
+}
+
+.styles_sectionTitle__fHYhl {
+  width: 100%;
+  font-size: 2rem;
+  font-weight: 700;
+  color: #0a0a0b;
+}
+@media (max-width: 768px) {
+  .styles_sectionTitle__fHYhl {
+    font-weight: 600;
+    font-size: 1.5rem;
+    text-wrap: nowrap;
+    line-height: 115%;
+    text-align: center;
+  }
+}
+
+.styles_sectionSubTitle__NcXwY {
+  font-size: 1rem;
+  color: #3b3b3c;
+  margin-top: 0.5rem;
+}
+@media (max-width: 768px) {
+  .styles_sectionSubTitle__NcXwY {
+    display: none;
+  }
+}
+
+.styles_navButtons__WDmdI {
+  display: flex;
+  gap: 1rem;
+}
+@media (max-width: 768px) {
+  .styles_navButtons__WDmdI {
+    display: none;
+  }
+}
+.styles_navButtons__WDmdI .styles_arrowButton__tnykc {
+  border: 1px solid #000;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.styles_navButtons__WDmdI .styles_arrowButton__tnykc.styles_disabled__Y4T3V {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.styles_testimonialCarousel__P2GA3 {
+  width: 100%;
+}
+
+.styles_testimonialCard__o3vAG {
+  background: #fff;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+@media (max-width: 768px) {
+  .styles_testimonialCard__o3vAG {
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 2px 5px -1px, rgba(0, 0, 0, 0.3) 0px 1px 3px -1px;
+  }
+}
+
+.styles_quoteIcon__JCxjE {
+  width: 2.5rem;
+  height: 2rem;
+}
+
+.styles_quote__0Jha1 {
+  font-size: 0.95rem;
+  color: #0a0a0b;
+  line-height: 1.5;
+}
+
+.styles_authorSection__oKqio {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-top: auto;
+}
+.styles_authorSection__oKqio .styles_avatar__0ounC {
+  border-radius: 50%;
+  border: 1px solid #f5f5f5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+  width: 3.125rem;
+  height: 3.125rem;
+  background-color: rgba(121, 163, 242, 0.4784313725);
+  color: #79a3f2;
+}
+.styles_authorSection__oKqio .styles_author__HBF67 {
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: #0a0a0b;
+}
+.styles_authorSection__oKqio .styles_location__TUEpA {
+  font-weight: 400;
+  font-style: SemiBold;
+  font-size: 14px;
+  line-height: 24px;
+  color: #9d9d9d;
+}
+
+.styles_slidingStripContainer__Wkj8X {
+  margin-top: 1rem;
+  height: 4px;
+  width: 15rem;
+  background-color: #fff;
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+  align-self: center;
+}
+
+.styles_slidingStrip__J2zU_ {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 20%;
+  background-color: #000;
+  border-radius: 2px;
+  transition: left 0.3s ease;
+  will-change: transform;
+}
+
+.styles_happyClient__M3uMN {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  background-color: white;
+  padding: 8.125rem 7.5rem;
+  width: 100%;
+}
+@media (max-width: 768px) {
+  .styles_happyClient__M3uMN {
+    display: none;
+  }
+}
+.styles_happyClient__M3uMN .styles_happyHeader__0L_2c {
+  font-size: 20px;
+  font-weight: 600;
+  letter-spacing: 0%;
+  line-height: 24px;
+  color: #6c6c6d;
+  text-align: center;
+}
+.styles_happyClient__M3uMN .styles_clientImageBox__aT4cW {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2rem 3rem;
+  align-items: center;
+  width: 100%;
+}
+.styles_happyClient__M3uMN .styles_clientLogo__BBBkR {
+  width: auto;
+  max-width: 15rem;
+  height: 4.375rem;
+  object-fit: contain;
+}

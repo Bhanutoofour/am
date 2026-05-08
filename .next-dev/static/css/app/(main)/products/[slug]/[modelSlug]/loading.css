@@ -1,0 +1,254 @@
+/*!***************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[10].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[10].use[3]!./node_modules/react-loading-skeleton/dist/skeleton.css ***!
+  \***************************************************************************************************************************************************************************************************************************************************************************************************/
+@keyframes react-loading-skeleton {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+.react-loading-skeleton {
+  --base-color: #ebebeb;
+  --highlight-color: #f5f5f5;
+  --animation-duration: 1.5s;
+  --animation-direction: normal;
+  --pseudo-element-display: block; /* Enable animation */
+
+  background-color: var(--base-color);
+
+  width: 100%;
+  border-radius: 0.25rem;
+  display: inline-flex;
+  line-height: 1;
+
+  position: relative;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  overflow: hidden;
+}
+
+.react-loading-skeleton::after {
+  content: ' ';
+  display: var(--pseudo-element-display);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 100%;
+  background-repeat: no-repeat;
+  background-image: var(
+    --custom-highlight-background,
+    linear-gradient(
+      90deg,
+      var(--base-color) 0%,
+      var(--highlight-color) 50%,
+      var(--base-color) 100%
+    )
+  );
+  transform: translateX(-100%);
+
+  animation-name: react-loading-skeleton;
+  animation-direction: var(--animation-direction);
+  animation-duration: var(--animation-duration);
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
+@media (prefers-reduced-motion) {
+  .react-loading-skeleton {
+    --pseudo-element-display: none; /* Disable animation */
+  }
+}
+
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[7].use[3]!./node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[14].oneOf[7].use[4]!./node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[14].oneOf[7].use[5]!./component/molecules/loading/modelPageLoading.module.scss ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+.modelPageLoading_modelContainer__r98Bz {
+  padding-top: 1.5rem;
+  background-color: #fff;
+  max-width: 80rem;
+  width: 100%;
+}
+@media (max-width: 768px) {
+  .modelPageLoading_modelContainer__r98Bz {
+    padding-top: 0;
+  }
+}
+.modelPageLoading_modelContainer__r98Bz .modelPageLoading_imageWrapper__JMuzU {
+  width: 100%;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modelPageLoading_modelContainer__r98Bz .modelPageLoading_imageWrapper__JMuzU .modelPageLoading_image__lvIys {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+}
+@media (max-width: 768px) {
+  .modelPageLoading_modelContainer__r98Bz .modelPageLoading_imageWrapper__JMuzU {
+    height: 21.25rem;
+  }
+  .modelPageLoading_modelContainer__r98Bz .modelPageLoading_imageWrapper__JMuzU .modelPageLoading_image__lvIys {
+    height: 100%;
+  }
+}
+.modelPageLoading_modelContainer__r98Bz .modelPageLoading_infoSectionSkeleton__Zk2Ns {
+  background: #f8f9fa;
+  padding: 1.375rem 1.5rem;
+  width: 100%;
+  border: 1px solid #e9ecef;
+}
+.modelPageLoading_modelContainer__r98Bz .modelPageLoading_infoSectionSkeleton__Zk2Ns .modelPageLoading_header__m3q5s {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+@media (max-width: 1279px) {
+  .modelPageLoading_modelContainer__r98Bz .modelPageLoading_infoSectionSkeleton__Zk2Ns .modelPageLoading_header__m3q5s {
+    flex-wrap: wrap;
+  }
+}
+.modelPageLoading_modelContainer__r98Bz .modelPageLoading_infoSectionSkeleton__Zk2Ns .modelPageLoading_header__m3q5s .modelPageLoading_titleArea__qu6Jp {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  align-items: flex-start;
+}
+.modelPageLoading_modelContainer__r98Bz .modelPageLoading_infoSectionSkeleton__Zk2Ns .modelPageLoading_header__m3q5s .modelPageLoading_titleArea__qu6Jp .modelPageLoading_title__H_vZI {
+  border-radius: 6px;
+}
+.modelPageLoading_modelContainer__r98Bz .modelPageLoading_infoSectionSkeleton__Zk2Ns .modelPageLoading_header__m3q5s .modelPageLoading_titleArea__qu6Jp .modelPageLoading_subtitle__0pHy2 {
+  border-radius: 4px;
+}
+.modelPageLoading_modelContainer__r98Bz .modelPageLoading_infoSectionSkeleton__Zk2Ns .modelPageLoading_header__m3q5s .modelPageLoading_ctaButtons__PYW3S {
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
+  flex-shrink: 0;
+  font-weight: 600;
+  font-style: Condensed SemiBold;
+  font-size: 1rem;
+  line-height: 20px;
+  letter-spacing: 0%;
+  text-align: center;
+}
+@media (max-width: 1279px) {
+  .modelPageLoading_modelContainer__r98Bz .modelPageLoading_infoSectionSkeleton__Zk2Ns .modelPageLoading_header__m3q5s .modelPageLoading_ctaButtons__PYW3S {
+    padding: 0.875rem 0;
+  }
+}
+@media (max-width: 768px) {
+  .modelPageLoading_modelContainer__r98Bz .modelPageLoading_infoSectionSkeleton__Zk2Ns .modelPageLoading_header__m3q5s .modelPageLoading_ctaButtons__PYW3S {
+    padding: 2.5rem 0 0 0;
+    flex-wrap: wrap;
+  }
+}
+.modelPageLoading_modelContainer__r98Bz .modelPageLoading_infoSectionSkeleton__Zk2Ns .modelPageLoading_header__m3q5s .modelPageLoading_ctaButtons__PYW3S .modelPageLoading_brochure___u99Q,
+.modelPageLoading_modelContainer__r98Bz .modelPageLoading_infoSectionSkeleton__Zk2Ns .modelPageLoading_header__m3q5s .modelPageLoading_ctaButtons__PYW3S .modelPageLoading_quote__R8jAH {
+  border-radius: 6px;
+}
+.modelPageLoading_modelContainer__r98Bz .modelPageLoading_specGrid___8do2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 1rem;
+  gap: 1rem;
+  padding: 2rem 1.5rem;
+  border-bottom: 1px solid #e7e7e7;
+}
+.modelPageLoading_modelContainer__r98Bz .modelPageLoading_specGrid___8do2 .modelPageLoading_eachCard__SGw86 {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.modelPageLoading_modelContainer__r98Bz .modelPageLoading_specGrid___8do2 .modelPageLoading_eachCard__SGw86 .modelPageLoading_label__TRDsI {
+  border-radius: 4px;
+}
+.modelPageLoading_modelContainer__r98Bz .modelPageLoading_specGrid___8do2 .modelPageLoading_eachCard__SGw86 .modelPageLoading_value___quYJ {
+  border-radius: 4px;
+}
+.modelPageLoading_modelContainer__r98Bz .modelPageLoading_modelDetails__0reTv {
+  padding: 2rem 1.5rem;
+  border-bottom: 1px solid #e7e7e7;
+}
+.modelPageLoading_modelContainer__r98Bz .modelPageLoading_tableDetails__7xh6N {
+  padding: 2rem 1.5rem;
+  border-bottom: 1px solid #e7e7e7;
+}
+.modelPageLoading_modelContainer__r98Bz .modelPageLoading_tableDetails__7xh6N .modelPageLoading_tableDesc__cANbq {
+  margin-bottom: 2rem;
+}
+.modelPageLoading_modelContainer__r98Bz .modelPageLoading_tableDetails__7xh6N .modelPageLoading_tableDesc__cANbq .modelPageLoading_tableDescHeading__XexB8 {
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+.modelPageLoading_modelContainer__r98Bz .modelPageLoading_tableDetails__7xh6N .modelPageLoading_tableDesc__cANbq .modelPageLoading_tableDescPara__QeLwp {
+  border-radius: 4px;
+}
+.modelPageLoading_modelContainer__r98Bz .modelPageLoading_tableDetails__7xh6N .modelPageLoading_specTable__c3vv_ {
+  width: 100%;
+  border-collapse: collapse;
+}
+.modelPageLoading_modelContainer__r98Bz .modelPageLoading_tableDetails__7xh6N .modelPageLoading_specTable__c3vv_ th,
+.modelPageLoading_modelContainer__r98Bz .modelPageLoading_tableDetails__7xh6N .modelPageLoading_specTable__c3vv_ td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid #e7e7e7;
+}
+.modelPageLoading_modelContainer__r98Bz .modelPageLoading_tableDetails__7xh6N .modelPageLoading_specTable__c3vv_ th {
+  font-weight: 600;
+  background-color: #f8f9fa;
+}
+.modelPageLoading_modelContainer__r98Bz .modelPageLoading_yellowArea__XBSJB {
+  background-color: #fbb040;
+  padding: 3rem 1.5rem;
+  text-align: center;
+  position: relative;
+  margin: 2rem 0;
+}
+.modelPageLoading_modelContainer__r98Bz .modelPageLoading_yellowArea__XBSJB .modelPageLoading_yellowHeading__Ub_d2 {
+  border-radius: 6px;
+  margin-bottom: 2rem;
+}
+.modelPageLoading_modelContainer__r98Bz .modelPageLoading_yellowArea__XBSJB .modelPageLoading_ctaButtons__PYW3S {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+.modelPageLoading_modelContainer__r98Bz .modelPageLoading_yellowArea__XBSJB .modelPageLoading_ctaButtons__PYW3S .modelPageLoading_brochure___u99Q,
+.modelPageLoading_modelContainer__r98Bz .modelPageLoading_yellowArea__XBSJB .modelPageLoading_ctaButtons__PYW3S .modelPageLoading_quote__R8jAH {
+  border-radius: 6px;
+}
+.modelPageLoading_modelContainer__r98Bz .modelPageLoading_yellowArea__XBSJB .modelPageLoading_triangle__kUbn_ {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-top: 20px solid #fbb040;
+}
+.modelPageLoading_modelContainer__r98Bz .modelPageLoading_moreModels__jpNz2 {
+  padding: 2rem 1.5rem;
+}
+.modelPageLoading_modelContainer__r98Bz .modelPageLoading_moreModels__jpNz2 .modelPageLoading_modelContainerHeading__xtpmN {
+  border-radius: 6px;
+  margin-bottom: 2rem;
+}
+.modelPageLoading_modelContainer__r98Bz .modelPageLoading_moreModels__jpNz2 .modelPageLoading_modelCardContainer__d7cJv {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-gap: 2rem;
+  gap: 2rem;
+}
+@media (max-width: 768px) {
+  .modelPageLoading_modelContainer__r98Bz .modelPageLoading_moreModels__jpNz2 .modelPageLoading_modelCardContainer__d7cJv {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}

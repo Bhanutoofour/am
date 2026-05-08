@@ -1,0 +1,158 @@
+/*!********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** css ./node_modules/next/dist/build/webpack/loaders/css-loader/src/index.js??ruleSet[1].rules[14].oneOf[7].use[2]!./node_modules/next/dist/build/webpack/loaders/postcss-loader/src/index.js??ruleSet[1].rules[14].oneOf[7].use[3]!./node_modules/next/dist/build/webpack/loaders/resolve-url-loader/index.js??ruleSet[1].rules[14].oneOf[7].use[4]!./node_modules/next/dist/compiled/sass-loader/cjs.js??ruleSet[1].rules[14].oneOf[7].use[5]!./app/notFound.module.scss ***!
+  \********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+.notFound_container__leQYT {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  padding: 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.notFound_content__CrGTW {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  max-width: 65rem;
+  width: 100%;
+  position: relative;
+  z-index: 2;
+  padding: 3rem 2rem;
+  border-radius: 1rem;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 28.75rem;
+}
+@media (max-width: 768px) {
+  .notFound_content__CrGTW {
+    padding: 2rem 1.5rem;
+    min-height: auto;
+  }
+}
+
+.notFound_backgroundText__4_qWI {
+  font-size: 7.5rem;
+  font-weight: 700;
+  color: #dedede;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  pointer-events: none;
+  line-height: 1;
+  opacity: 0.6;
+}
+@media (max-width: 1279px) {
+  .notFound_backgroundText__4_qWI {
+    font-size: 12rem;
+  }
+}
+@media (max-width: 1023px) {
+  .notFound_backgroundText__4_qWI {
+    font-size: 10rem;
+  }
+}
+@media (max-width: 768px) {
+  .notFound_backgroundText__4_qWI {
+    font-size: 6rem;
+  }
+}
+
+.notFound_title__GdRWw {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #0a0a0b;
+  margin-bottom: 0.75rem;
+  margin-top: 2rem;
+  z-index: 2;
+}
+@media (max-width: 1023px) {
+  .notFound_title__GdRWw {
+    font-size: 2rem;
+  }
+}
+@media (max-width: 768px) {
+  .notFound_title__GdRWw {
+    font-size: 1.5rem;
+  }
+}
+
+.notFound_description__2sQY2 {
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+  color: #555;
+  margin-bottom: 1.75rem;
+  max-width: 32rem;
+  z-index: 2;
+}
+@media (max-width: 768px) {
+  .notFound_description__2sQY2 {
+    font-size: 0.8125rem;
+    margin-bottom: 1.5rem;
+  }
+}
+
+.notFound_buttonContainer__CZHj9 {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+  z-index: 2;
+}
+@media (max-width: 768px) {
+  .notFound_buttonContainer__CZHj9 {
+    gap: 0.625rem;
+  }
+}
+
+.notFound_button__3vfVX {
+  padding: 0.875rem 2rem;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  letter-spacing: 0.5px;
+  border-radius: 0;
+  min-width: 8rem;
+}
+@media (max-width: 768px) {
+  .notFound_button__3vfVX {
+    padding: 0.75rem 1.5rem;
+    font-size: 0.75rem;
+    min-width: 7rem;
+  }
+}
+.notFound_button__3vfVX:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+.notFound_button__3vfVX:active {
+  transform: translateY(0);
+}
+
+.notFound_refreshButton__SWfZO {
+  background-color: #ffffff;
+  color: #0a0a0b;
+  border: 1.5px solid #0a0a0b;
+}
+.notFound_refreshButton__SWfZO:hover {
+  background-color: #0a0a0b;
+  color: #ffffff;
+}
+
+.notFound_homeButton__4ZTL0 {
+  background-color: #01060a;
+  color: #ffffff;
+  border: 1px solid #01060a;
+}
+.notFound_homeButton__4ZTL0:hover {
+  background-color: rgb(5.6363636364, 33.8181818182, 56.3636363636);
+  border-color: rgb(5.6363636364, 33.8181818182, 56.3636363636);
+}
