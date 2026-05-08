@@ -137,6 +137,7 @@ const Caraousel: React.FC<CaraouselProps> = ({ heroData }) => {
                     width: "100%",
                     height: "100%",
                     objectFit: "cover",
+                    objectPosition: "center center",
                   }}
                 />
                 <div

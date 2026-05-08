@@ -89,8 +89,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 16rem;
+    min-height: 14rem;
     overflow: hidden;
+    background-color: #fff;
     @include sm-max {
       width: 100%;
       min-height: auto;
@@ -101,8 +102,9 @@
     width: 100%;
     height: auto;
     object-fit: contain;
+    object-position: center center;
     display: block;
-    transform: translateY(calc(-2.25rem - 10px));
+    transform: none;
 
     @include sm-max {
       transform: none;

@@ -46,6 +46,11 @@ type ProductApplicationCard = {
   text: string;
 };
 
+type ProductIndustryFitCard = {
+  title: string;
+  text: string;
+};
+
 function getYouTubeEmbedUrl(url?: string): string {
   if (!url) return "";
   if (url.includes("youtube.com/embed/")) return url;
@@ -225,6 +230,32 @@ function buildProductApplicationCards(
   ];
 }
 
+function buildBestSuitedIndustryCards(
+  modelData: ModelObjectTypes | null
+): ProductIndustryFitCard[] {
+  const modelName = modelData?.modelNumber || "This model";
+  const productName = modelData?.productName || "machine";
+  const productLower = productName.toLowerCase();
+  const industryNames = [
+    ...(modelData?.industries || []),
+    "OFC Telecommunications",
+    "Water Management",
+    "Agriculture",
+    "Construction",
+    "Solar Energy",
+    "Defence",
+  ]
+    .map((industry) => industry.trim())
+    .filter(Boolean)
+    .filter((industry, index, list) => list.indexOf(industry) === index)
+    .slice(0, 6);
+
+  return industryNames.map((industry) => ({
+    title: industry,
+    text: `${modelName} is suited for ${industry.toLowerCase()} teams that need dependable ${productLower} performance, cleaner site execution, and faster project handoff.`,
+  }));
+}
+
 function buildOverviewExtraParagraphs(
   modelData: ModelObjectTypes | null
 ): string[] {
@@ -292,6 +323,7 @@ export default function ProductModalClient({
   const visibleSpecs = modelData?.keyFeatures?.slice(0, 3) || [];
   const productModelFaqs = buildProductModelFaqs(modelData);
   const productApplicationCards = buildProductApplicationCards(modelData);
+  const bestSuitedIndustryCards = buildBestSuitedIndustryCards(modelData);
   const overviewExtraParagraphs = buildOverviewExtraParagraphs(modelData);
   const goToMedia = (direction: "previous" | "next") => {
     if (!productModelMedia.length) return;
@@ -788,6 +820,42 @@ export default function ProductModalClient({
               </div>
             </section>
 
+            <section className={styles.productIndustryFitSection}>
+              <div className={styles.productIndustryFitHeader}>
+                <p className={styles.productIndustryFitEyebrow}>
+                  BEST SUITED FOR INDUSTRIES
+                </p>
+                <h2 className={styles.productIndustryFitHeading}>
+                  {`${modelData.modelNumber || "This model"} fits demanding ${
+                    modelData.productName?.toLowerCase() || "machine"
+                  } applications`}
+                </h2>
+                <p className={styles.productIndustryFitIntro}>
+                  {`Match ${
+                    modelData.modelNumber || "this model"
+                  } with industry use cases where equipment reliability, field output, and site readiness matter most.`}
+                </p>
+              </div>
+              <div className={styles.productIndustryFitGrid}>
+                {bestSuitedIndustryCards.map((card, index) => (
+                  <article
+                    key={`${card.title}-${index}`}
+                    className={styles.productIndustryFitCard}
+                  >
+                    <span className={styles.productIndustryFitNumber}>
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <h3 className={styles.productIndustryFitTitle}>
+                      {card.title}
+                    </h3>
+                    <p className={styles.productIndustryFitText}>
+                      {card.text}
+                    </p>
+                  </article>
+                ))}
+              </div>
+            </section>
+
             <section className={styles.productApplicationsSection}>
               <div className={styles.productApplicationsHeader}>
                 <p className={styles.productApplicationsEyebrow}>
@@ -820,6 +888,36 @@ export default function ProductModalClient({
                 ))}
               </div>
             </section>
+
+            {seriesData && seriesData.length > 0 && (
+              <div className={styles.moreModels}>
+                <h2 className={styles.modelContainerHeading}>
+                  {`More Models in ${modelData?.series} Series`}
+                </h2>
+                <div className={styles.modelCardContainer}>
+                  {seriesData.map((eachModel: any, ids: number) => {
+                    const basePath = seriesModelBasePath(
+                      eachModel,
+                      modelData?.productName,
+                      modelBasePath
+                    );
+                    return width && width > SCREENS.TAB_MINI ? (
+                      <ModelCard
+                        model={eachModel}
+                        key={ids}
+                        basePath={basePath}
+                      />
+                    ) : (
+                      <ModelResponsiveCard
+                        model={eachModel}
+                        key={ids}
+                        basePath={basePath}
+                      />
+                    );
+                  })}
+                </div>
+              </div>
+            )}
 
             <section className={styles.productFaqModelSection}>
               <div className={styles.productFaqModelHeader}>
@@ -958,7 +1056,7 @@ export default function ProductModalClient({
         />
       )}
 
-      {seriesData && seriesData.length > 0 && (
+      {pageVariant !== "productModel" && seriesData && seriesData.length > 0 && (
         <div className={styles.moreModels}>
           <h2 className={styles.modelContainerHeading}>
             {`More Models in ${modelData?.series} Series`}

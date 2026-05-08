@@ -332,6 +332,35 @@ export const getModelById = async (
     }
 
     const modelData = result[0];
+    const modelIndustryRows = await db
+      .select({ title: industries.title })
+      .from(modelIndustries)
+      .innerJoin(industries, eq(modelIndustries.industryId, industries.id))
+      .where(and(eq(modelIndustries.modelId, modelId), eq(industries.active, true)))
+      .orderBy(industries.id);
+
+    const productIndustryRows =
+      modelIndustryRows.length > 0
+        ? []
+        : await db
+            .select({ title: industries.title })
+            .from(productIndustries)
+            .innerJoin(industries, eq(productIndustries.industryId, industries.id))
+            .innerJoin(products, eq(productIndustries.productId, products.id))
+            .where(
+              and(
+                eq(products.title, modelData.productName),
+                eq(industries.active, true),
+              ),
+            )
+            .orderBy(industries.id);
+
+    const industryTitles = (modelIndustryRows.length > 0
+      ? modelIndustryRows
+      : productIndustryRows
+    )
+      .map((industry) => industry.title)
+      .filter((title): title is string => Boolean(title));
 
     const resultData = {
       id: modelData.id,
@@ -339,6 +368,7 @@ export const getModelById = async (
       modelTitle: modelData.modelTitle,
       machineType: modelData.machineType,
       productName: modelData.productName,
+      industries: industryTitles,
       series: modelData.series,
       coverImage: modelData.coverImage,
       coverImageAltText: modelData.coverImageAltText,

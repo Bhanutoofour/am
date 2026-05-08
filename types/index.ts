@@ -171,6 +171,7 @@ type ModelObjectTypes = {
   modelTitle: string;
   machineType: string;
   productName: string;
+  industries?: string[];
   series: string;
   coverImage: string;
   coverImageAltText: string;
