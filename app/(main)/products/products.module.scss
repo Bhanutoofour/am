@@ -4,8 +4,20 @@
 .productsPage {
   min-height: 100vh;
   width: 100%;
-  max-width: 1024px;
-  padding: 3rem 1rem;
+  max-width: none;
+  padding: 3rem $site-gutter-desktop;
+
+  @include lg-max {
+    padding-inline: $site-gutter-tablet;
+  }
+
+  @include md-max {
+    padding-inline: $site-gutter-mobile;
+  }
+
+  @include sm-max {
+    padding: 1.25rem $site-gutter-mobile 2rem;
+  }
 }
 
 .headerSection {
@@ -87,6 +99,10 @@
 
   @include xsm-max {
     grid-template-columns: 1fr;
+  }
+
+  :global(.product-page-card-image) {
+    transform: scale(1.12);
   }
 }
 

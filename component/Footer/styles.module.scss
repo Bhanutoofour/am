@@ -15,6 +15,8 @@ $section-padding: $site-gutter-desktop;
   margin-top: 10rem;
   @include sm-max {
     height: auto;
+    padding-top: 11.5rem;
+    margin-top: 6rem;
   }
   .yellowContainer {
     display: flex;
@@ -34,17 +36,22 @@ $section-padding: $site-gutter-desktop;
     @include sm-max {
       left: $site-gutter-mobile;
       right: $site-gutter-mobile;
-      width: 100%;
+      width: auto;
+      top: -4.75rem;
+      align-items: flex-start;
+      padding: 1.5rem;
+      gap: 1.25rem;
     }
     .yellowContainerText {
       display: flex;
       flex-direction: column;
       gap: 1.2rem;
-      align-items: center;
+      align-items: flex-start;
       max-width: 29.37rem;
       width: 100%;
       @include sm-max {
-        padding-bottom: 2.5rem;
+        gap: 1rem;
+        padding-bottom: 0;
       }
       .headText {
         font-size: 2rem;
@@ -63,6 +70,7 @@ $section-padding: $site-gutter-desktop;
         line-height: 1.5rem;
         @include sm-max {
           font-size: 0.9rem;
+          line-height: 1.55;
         }
       }
     }
@@ -81,7 +89,7 @@ $section-padding: $site-gutter-desktop;
       padding-inline: $site-gutter-tablet;
     }
     @include sm-max {
-      padding: 3rem $site-gutter-mobile 2rem;
+      padding: 2rem $site-gutter-mobile 2rem;
     }
     .linkContainer {
       display: flex;

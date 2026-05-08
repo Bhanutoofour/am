@@ -42,3 +42,22 @@
     overflow: visible;
     }
 }
+
+@media (max-width: 767px) {
+    .recognitionCard {
+        width: 10rem !important;
+        min-height: 15rem;
+        padding: 1.25rem 0.75rem;
+
+        .image img {
+            width: 5.75rem;
+            height: 5.75rem;
+            object-fit: contain;
+        }
+
+        .title {
+            font-size: 0.8125rem;
+            line-height: 130%;
+        }
+    }
+}

@@ -28,7 +28,9 @@ const ProductCard: React.FC<ProductCardProps> = ({
         alt={altText || title}
         width={width && width > SCREENS.MOBILE_LANDSCAPE ? 245 : 176}
         height={width && width > SCREENS.MOBILE_LANDSCAPE ? 272 : 186}
-        className={styles.productImage}
+        className={`${styles.productImage} ${
+          isProductPage ? "product-page-card-image" : ""
+        }`}
       />
       <div className={styles.productDetail}>
         <h2 className={styles.cardTitle}>{title}</h2>
