@@ -142,22 +142,4 @@ main.main {
     -webkit-overflow-scrolling: touch;
   }
 
-  body.mobile-menu-open {
-    #zsiq_float,
-    .zsiq_floatmain,
-    #zsiqwidget {
-      display: none !important;
-      visibility: hidden !important;
-      pointer-events: none !important;
-    }
-  }
-
-  #zsiq_float,
-  .zsiq_floatmain,
-  #zsiqwidget {
-    right: 0.75rem !important;
-    bottom: calc(5.25rem + env(safe-area-inset-bottom)) !important;
-    pointer-events: auto !important;
-    transform: none !important;
-  }
 }
