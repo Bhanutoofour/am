@@ -1,7 +1,6 @@
 import "../styles/globals.scss";
 import { Metadata } from "next";
 import Script from "next/script";
-import ZohoIosChatButton from "@/component/ZohoIosChatButton";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://autocracymachinery.com"),
@@ -187,7 +186,6 @@ export default function RootLayout({
           />
         </noscript>
         {children}
-        <ZohoIosChatButton />
       </body>
     </html>
   );
