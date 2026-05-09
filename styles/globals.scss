@@ -145,8 +145,7 @@ main.main {
   body.mobile-menu-open {
     #zsiq_float,
     .zsiq_floatmain,
-    #zsiqwidget,
-    iframe[src*="salesiq.zoho"] {
+    #zsiqwidget {
       display: none !important;
       visibility: hidden !important;
       pointer-events: none !important;
@@ -158,7 +157,7 @@ main.main {
   #zsiqwidget {
     right: 0.75rem !important;
     bottom: calc(5.25rem + env(safe-area-inset-bottom)) !important;
-    transform: scale(0.86);
-    transform-origin: bottom right;
+    pointer-events: auto !important;
+    transform: none !important;
   }
 }
