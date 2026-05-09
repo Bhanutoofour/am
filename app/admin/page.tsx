@@ -26,6 +26,7 @@ import { VideosEdit } from "./components/VideosEdit";
 import { BlogList } from "./blog-cms/components/BlogList";
 import { BlogCreate } from "./blog-cms/components/BlogCreate";
 import { BlogEdit } from "./blog-cms/components/BlogEdit";
+import { AdminCmsLayout } from "./components/AdminCmsLayout";
 import { isAdminAuthenticated, logoutAdmin } from "@/utils/auth";
 
 const AdminPage = () => {
@@ -87,7 +88,7 @@ const AdminPage = () => {
   const dataProvider = simpleRestProvider("/api");
 
   return (
-    <Admin dataProvider={dataProvider}>
+    <Admin dataProvider={dataProvider} layout={AdminCmsLayout}>
       <Resource
         name="hero-section"
         list={HeroList}

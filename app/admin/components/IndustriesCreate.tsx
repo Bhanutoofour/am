@@ -11,6 +11,7 @@ import {
   minLength,
 } from "react-admin";
 import { revalidateIndustryData } from "@/actions/industryAction";
+import { S3FileInput } from "./S3FileInput";
 
 export const IndustriesCreate = () => {
   const notify = useNotify();
@@ -153,18 +154,24 @@ export const IndustriesCreate = () => {
             fullWidth
             placeholder="Short description for search engines (150–160 characters recommended)"
           />
-          <TextInput source="thumbnail" validate={required()} fullWidth />
+          <S3FileInput
+            source="thumbnail"
+            label="Thumbnail"
+            folder="industries/thumbnails"
+            validate={required()}
+          />
           <TextInput
             source="thumbnailAltText"
             label="Thumbnail Alt Text"
             validate={required()}
             fullWidth
           />
-          <TextInput
+          <S3FileInput
             source="brochure"
-            label="Brochure URL (optional)"
+            label="Brochure (optional)"
+            folder="industries/brochures"
+            accept="application/pdf,image/*"
             defaultValue=""
-            fullWidth
           />
           <BooleanInput source="active" defaultValue={true} />
         </div>
@@ -177,11 +184,11 @@ export const IndustriesCreate = () => {
             validate={[required(), minLength(1)]}
           >
             <SimpleFormIterator>
-              <TextInput
+              <S3FileInput
                 source="imageUrl"
-                label="Banner Image URL"
+                label="Banner Image"
+                folder="industries/banners"
                 validate={required()}
-                fullWidth
               />
               <TextInput
                 source="altText"

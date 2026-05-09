@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "test": "tsx tests/run-tests.ts",
     "build": "next build",
     "db:studio": "npx drizzle-kit studio",
     "db:push": "npx drizzle-kit push",
@@ -13,13 +14,15 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@aws-sdk/client-s3": "^3.1045.0",
     "@neondatabase/serverless": "^1.0.0",
     "@tiptap/extension-image": "^3.10.1",
     "@tiptap/extension-link": "^3.10.1",
     "@tiptap/react": "^3.10.1",
     "@tiptap/starter-kit": "^3.10.1",
+    "@vercel/analytics": "^2.0.1",
     "dotenv": "^16.5.0",
-    "drizzle-orm": "^0.43.1",
+    "drizzle-orm": "^0.45.2",
     "keen-slider": "^6.8.6",
     "next": "^15.3.6",
     "ra-data-simple-rest": "^5.8.0",
@@ -33,7 +36,7 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "drizzle-kit": "^0.31.0",
+    "drizzle-kit": "^0.18.1",
     "tsx": "^4.19.4",
     "typescript": "^5"
   }

@@ -83,7 +83,7 @@ export const getProductsWithIndustries = async (): Promise<
     return productsWithIndustries;
   } catch (error) {
     console.error("Error fetching products with industries:", error);
-    throw error;
+    return [];
   }
 };
 

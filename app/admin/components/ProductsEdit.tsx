@@ -17,6 +17,7 @@ import {
   DeleteButton,
 } from "react-admin";
 import { revalidateProductData } from "@/actions/productAction";
+import { S3FileInput } from "./S3FileInput";
 
 const CustomToolbar = () => {
   const notify = useNotify();
@@ -220,7 +221,12 @@ export const ProductsEdit = () => {
             fullWidth
             placeholder="Short description for search engines (150–160 characters recommended)"
           />
-          <TextInput source="thumbnail" validate={required()} fullWidth />
+          <S3FileInput
+            source="thumbnail"
+            label="Thumbnail"
+            folder="products/thumbnails"
+            validate={required()}
+          />
           <TextInput
             source="thumbnailAltText"
             validate={required()}
@@ -248,11 +254,11 @@ export const ProductsEdit = () => {
           >
             <SelectArrayInput optionText="title" fullWidth />
           </ReferenceArrayInput>
-          <TextInput
+          <S3FileInput
             source="generalImage"
             label="General Image"
+            folder="products/general"
             validate={required()}
-            fullWidth
           />
           <TextInput
             source="generalImageAltText"
@@ -308,10 +314,11 @@ export const ProductsEdit = () => {
               fullWidth
               placeholder="Description for social media sharing"
             />
-            <TextInput
+            <S3FileInput
               source="seoSocialImage"
+              label="Social Image"
+              folder="products/social"
               validate={required()}
-              fullWidth
               placeholder="Image URL for social media sharing"
             />
           </div>

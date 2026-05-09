@@ -7,6 +7,7 @@ import {
   useRedirect,
 } from "react-admin";
 import { revalidateHeroData } from "@/actions/heroAction";
+import { S3FileInput } from "./S3FileInput";
 
 export const HeroCreate = () => {
   const notify = useNotify();
@@ -41,7 +42,12 @@ export const HeroCreate = () => {
       <SimpleForm validate={validate}>
         <TextInput source="title" validate={required()} />
         <TextInput source="description" validate={required()} />
-        <TextInput source="image" validate={required()} />
+        <S3FileInput
+          source="image"
+          label="Hero Image"
+          folder="hero"
+          validate={required()}
+        />
         <TextInput source="altText" validate={required()} />
       </SimpleForm>
     </Create>

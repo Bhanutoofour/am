@@ -23,6 +23,7 @@ import {
 import { useMemo, useEffect } from "react";
 import { useWatch } from "react-hook-form";
 import { revalidateModelData } from "@/actions/modelAction";
+import { S3FileInput } from "./S3FileInput";
 
 const machineTypeChoices = [
   { id: "Attachment", name: "Attachment" },
@@ -453,11 +454,11 @@ export const ModelsEdit = () => {
             Images
           </h3>
 
-          <TextInput
+          <S3FileInput
             source="thumbnail"
-            label="Thumbnail URL"
+            label="Thumbnail"
+            folder="models/thumbnails"
             validate={required()}
-            fullWidth
           />
           <TextInput
             source="thumbnailAltText"
@@ -466,11 +467,11 @@ export const ModelsEdit = () => {
             fullWidth
             placeholder="Describe the thumbnail image for accessibility"
           />
-          <TextInput
+          <S3FileInput
             source="coverImage"
-            label="Cover Image URL"
+            label="Cover Image"
+            folder="models/covers"
             validate={required()}
-            fullWidth
           />
           <TextInput
             source="coverImageAltText"
@@ -528,10 +529,11 @@ export const ModelsEdit = () => {
             helperText="Leave empty for default site copy."
           />
 
-          <TextInput
+          <S3FileInput
             source="brochure"
-            label="Brochure URL (Optional)"
-            fullWidth
+            label="Brochure (Optional)"
+            folder="models/brochures"
+            accept="application/pdf,image/*"
           />
 
           <ArrayInput
@@ -540,9 +542,10 @@ export const ModelsEdit = () => {
             validate={[required(), minLength(1)]}
           >
             <SimpleFormIterator>
-              <TextInput
+              <S3FileInput
                 source="image"
-                label="Image URL"
+                label="Image"
+                folder="models/details"
                 validate={required()}
               />
               <TextInput

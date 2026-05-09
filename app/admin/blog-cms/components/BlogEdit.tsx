@@ -15,6 +15,7 @@ import {
   SelectArrayInput,
 } from "react-admin";
 import { RichTextInput } from "./RichTextInput";
+import { S3FileInput } from "../../components/S3FileInput";
 import { revalidateBlogData } from "@/actions/blogAction";
 
 const CustomToolbar = () => {
@@ -187,7 +188,12 @@ export const BlogEdit = () => {
             fullWidth
             helperText="Short description/summary of the blog"
           />
-          <TextInput source="banner" validate={required()} fullWidth />
+          <S3FileInput
+            source="banner"
+            label="Banner"
+            folder="blogs/banners"
+            validate={required()}
+          />
           <TextInput
             source="bannerAltText"
             label="Banner Alt Text"
@@ -287,4 +293,3 @@ export const BlogEdit = () => {
     </Edit>
   );
 };
-

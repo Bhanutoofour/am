@@ -13,6 +13,7 @@ import {
   useRedirect,
 } from "react-admin";
 import { revalidateProductData } from "@/actions/productAction";
+import { S3FileInput } from "./S3FileInput";
 
 // Form-level validation to ensure at least one industry and one series is selected
 const validate = (values: any) => {
@@ -168,7 +169,12 @@ export const ProductsCreate = () => {
             fullWidth
             placeholder="Short description for search engines (150–160 characters recommended)"
           />
-          <TextInput source="thumbnail" validate={required()} fullWidth />
+          <S3FileInput
+            source="thumbnail"
+            label="Thumbnail"
+            folder="products/thumbnails"
+            validate={required()}
+          />
           <TextInput
             source="thumbnailAltText"
             validate={required()}
@@ -196,11 +202,11 @@ export const ProductsCreate = () => {
           >
             <SelectArrayInput optionText="title" fullWidth />
           </ReferenceArrayInput>
-          <TextInput
+          <S3FileInput
             source="generalImage"
             label="General Image"
+            folder="products/general"
             validate={required()}
-            fullWidth
           />
           <TextInput
             source="generalImageAltText"
@@ -256,10 +262,11 @@ export const ProductsCreate = () => {
               fullWidth
               placeholder="Description for social media sharing"
             />
-            <TextInput
+            <S3FileInput
               source="seoSocialImage"
+              label="Social Image"
+              folder="products/social"
               validate={required()}
-              fullWidth
               placeholder="Image URL for social media sharing"
             />
           </div>
