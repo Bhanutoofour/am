@@ -141,4 +141,24 @@ main.main {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
   }
+
+  body.mobile-menu-open {
+    #zsiq_float,
+    .zsiq_floatmain,
+    #zsiqwidget,
+    iframe[src*="salesiq.zoho"] {
+      display: none !important;
+      visibility: hidden !important;
+      pointer-events: none !important;
+    }
+  }
+
+  #zsiq_float,
+  .zsiq_floatmain,
+  #zsiqwidget {
+    right: 0.75rem !important;
+    bottom: calc(5.25rem + env(safe-area-inset-bottom)) !important;
+    transform: scale(0.86);
+    transform-origin: bottom right;
+  }
 }

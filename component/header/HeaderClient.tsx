@@ -47,11 +47,14 @@ const HeaderClient: React.FC<HeaderClientProps> = ({
   useEffect(() => {
     if (mobileMenu.show) {
       document.body.style.overflow = "hidden";
+      document.body.classList.add("mobile-menu-open");
     } else {
       document.body.style.overflow = "unset";
+      document.body.classList.remove("mobile-menu-open");
     }
     return () => {
       document.body.style.overflow = "unset";
+      document.body.classList.remove("mobile-menu-open");
     };
   }, [mobileMenu.show]);
 
