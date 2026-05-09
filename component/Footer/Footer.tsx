@@ -128,6 +128,7 @@ const Footer: React.FC = () => {
           </div>
           <div className={styles.routeItems}>
             <Link href="/privacy-policy">Privacy Policy</Link>
+            <Link href="/sitemap.html">Sitemap</Link>
             <Link href="/terms-and-conditions">Terms & Conditions</Link>
           </div>
         </div>
