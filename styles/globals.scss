@@ -143,3 +143,31 @@ main.main {
   }
 
 }
+
+.zoho-ios-chat-fallback {
+  display: none;
+}
+
+@supports (-webkit-touch-callout: none) {
+  .zoho-ios-chat-fallback {
+    position: fixed;
+    right: 1rem;
+    bottom: calc(1rem + env(safe-area-inset-bottom));
+    z-index: 9999;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 4.25rem;
+    height: 4.25rem;
+    border-radius: 50%;
+    background: #f9c300;
+    color: #01060a;
+    border: 0;
+    box-shadow: 0 0.625rem 1.5rem rgb(0 0 0 / 18%);
+    font-family: "Roboto", sans-serif;
+    font-size: 0.875rem;
+    font-weight: 800;
+    line-height: 1;
+    text-transform: uppercase;
+  }
+}
