@@ -50,7 +50,7 @@ export const getActiveModels = async (): Promise<
     return processedResult;
   } catch (error) {
     console.error("Error fetching active models:", error);
-    throw error;
+    return [];
   }
 };
 
@@ -92,7 +92,7 @@ export const getIndustryNestedModelSitemapRows = async (): Promise<
     }));
   } catch (error) {
     console.error("Error fetching industry nested model sitemap rows:", error);
-    throw error;
+    return [];
   }
 };
 
@@ -464,7 +464,7 @@ export const getRentalModel = async (): Promise<RentalModelTypes[]> => {
     return processedResult;
   } catch (error) {
     console.error("Error fetching rental models:", error);
-    throw error;
+    return [];
   }
 };
 
