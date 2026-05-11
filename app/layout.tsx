@@ -130,7 +130,21 @@ export default function RootLayout({
                 "siq4f016facf7a03801f99d2b59751634f50b4d62e351824b42da0066964937b0a8a924e77ab8ea3dde371fb1cf4a3f4084"
               }',
               values: {},
-              ready: function (){}
+              ready: function (){
+                var isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) ||
+                  (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
+                if (!isIOS || !$zoho.salesiq.chat || !$zoho.salesiq.visitor) {
+                  return;
+                }
+
+                try {
+                  $zoho.salesiq.visitor.question('Hi, I need assistance with Autocracy Machinery.');
+                  $zoho.salesiq.chat.mode('click');
+                } catch (error) {
+                  console.warn('Zoho SalesIQ iOS chat mode setup failed', error);
+                }
+              }
             };
             var d = document;
             s = d.createElement('script');
