@@ -127,6 +127,23 @@ main.main {
   overflow-x: hidden;
 }
 
+#zsiq_float,
+.zsiq_floatmain,
+#zsiqwidget,
+#zsiq_webwidget,
+iframe[src*="salesiq.zoho"],
+iframe[src*="salesiq.zohopublic"] {
+  z-index: 999999 !important;
+}
+
+#zsiqwidget,
+#zsiq_webwidget,
+iframe[src*="salesiq.zoho"],
+iframe[src*="salesiq.zohopublic"] {
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
 @media (max-width: 768px) {
   * {
     min-width: 0;
