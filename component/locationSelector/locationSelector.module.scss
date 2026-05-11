@@ -63,12 +63,12 @@
   position: absolute;
   top: 50%;
   right: 1.25rem;
-  width: 1.55rem;
-  height: 1.55rem;
-  border-right: 5px solid #e51b23;
-  border-bottom: 5px solid #e51b23;
+  width: 0.85rem;
+  height: 0.85rem;
+  border-right: 3px solid #0a0a0b;
+  border-bottom: 3px solid #0a0a0b;
   pointer-events: none;
-  transform: translateY(-70%) rotate(45deg);
+  transform: translateY(-60%) rotate(45deg);
 }
 
 .actions {
@@ -89,6 +89,12 @@
 .primaryButton {
   background: #f9c300;
   color: #0a0a0b;
+}
+
+.primaryButton:disabled,
+.inlineContinueButton:disabled {
+  cursor: wait;
+  opacity: 0.72;
 }
 
 .secondaryButton {
@@ -162,8 +168,8 @@
 
   .selectArrow {
     right: 1rem;
-    width: 1.25rem;
-    height: 1.25rem;
-    border-width: 4px;
+    width: 0.75rem;
+    height: 0.75rem;
+    border-width: 3px;
   }
 }

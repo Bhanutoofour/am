@@ -43,6 +43,7 @@ export default function LocationSelector() {
   const [isVisible, setIsVisible] = useState(false);
   const [selectedCountry, setSelectedCountry] = useState("India");
   const [showExportMessage, setShowExportMessage] = useState(false);
+  const [isRedirecting, setIsRedirecting] = useState(false);
 
   const countryOptions = useMemo(
     () =>
@@ -106,10 +107,15 @@ export default function LocationSelector() {
 
   const continueInternational = () => {
     window.localStorage.setItem(STORAGE_KEY, selectedCountry);
-    setIsVisible(false);
-    if (pathname !== "/") {
-      router.push("/");
-    }
+    setIsRedirecting(true);
+    window.setTimeout(() => {
+      setIsVisible(false);
+      if (pathname !== "/") {
+        router.push("/");
+      } else {
+        router.refresh();
+      }
+    }, 700);
   };
 
   const cancelSelection = () => {
@@ -155,8 +161,11 @@ export default function LocationSelector() {
                 type="button"
                 className={styles.inlineContinueButton}
                 onClick={continueInternational}
+                disabled={isRedirecting}
               >
-                Continue to our International Website
+                {isRedirecting
+                  ? "Redirecting..."
+                  : "Continue to our International Website"}
               </button>
             </div>
           )}
@@ -175,8 +184,9 @@ export default function LocationSelector() {
                 type="button"
                 className={styles.primaryButton}
                 onClick={continueInternational}
+                disabled={isRedirecting}
               >
-                Continue
+                {isRedirecting ? "Redirecting..." : "Continue"}
               </button>
             )}
               <button
