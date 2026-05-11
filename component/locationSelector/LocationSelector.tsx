@@ -89,8 +89,10 @@ export default function LocationSelector() {
 
   if (!isVisible) return null;
 
+  const isIndiaSelected = selectedCountry === "India";
+
   const confirmSelection = () => {
-    if (selectedCountry === "India") {
+    if (isIndiaSelected) {
       window.localStorage.setItem(STORAGE_KEY, selectedCountry);
       setIsVisible(false);
       if (!pathname?.startsWith("/en-in")) {
@@ -119,40 +121,23 @@ export default function LocationSelector() {
     <div className={styles.overlay} role="dialog" aria-modal="true">
       <div className={styles.modal}>
         <div className={styles.header}>
-          <h2>
-            {showExportMessage
-              ? "International availability"
-              : "Please confirm your location"}
-          </h2>
+          <h2>Please confirm your location</h2>
         </div>
 
-        {showExportMessage ? (
-          <div className={styles.content}>
-            <p className={styles.message}>
-              Congrats, we do export to {selectedCountry}.
-            </p>
-            <p className={styles.subMessage}>
-              Continue to our International Website for Autocracy Machinery
-              products, brochures, and project enquiries.
-            </p>
-            <button
-              type="button"
-              className={styles.primaryButton}
-              onClick={continueInternational}
-            >
-              Continue to our International Website
-            </button>
-          </div>
-        ) : (
-          <div className={styles.content}>
-            <label className={styles.label} htmlFor="country-selector">
-              Select Country
-            </label>
+        <div className={styles.content}>
+          <label className={styles.label} htmlFor="country-selector">
+            Select Country
+          </label>
+          <div className={styles.selectWrap}>
             <select
               id="country-selector"
               className={styles.select}
               value={selectedCountry}
-              onChange={(event) => setSelectedCountry(event.target.value)}
+              onChange={(event) => {
+                const country = event.target.value;
+                setSelectedCountry(country);
+                setShowExportMessage(country !== "India");
+              }}
             >
               {countryOptions.map((country) => (
                 <option key={country} value={country}>
@@ -160,7 +145,24 @@ export default function LocationSelector() {
                 </option>
               ))}
             </select>
-            <div className={styles.actions}>
+            <span className={styles.selectArrow} aria-hidden />
+          </div>
+
+          {showExportMessage && !isIndiaSelected && (
+            <div className={styles.exportMessage} role="status">
+              <p>Congrats, we do export to {selectedCountry}.</p>
+              <button
+                type="button"
+                className={styles.inlineContinueButton}
+                onClick={continueInternational}
+              >
+                Continue to our International Website
+              </button>
+            </div>
+          )}
+
+          <div className={styles.actions}>
+            {isIndiaSelected ? (
               <button
                 type="button"
                 className={styles.primaryButton}
@@ -168,6 +170,15 @@ export default function LocationSelector() {
               >
                 Confirm
               </button>
+            ) : (
+              <button
+                type="button"
+                className={styles.primaryButton}
+                onClick={continueInternational}
+              >
+                Continue
+              </button>
+            )}
               <button
                 type="button"
                 className={styles.secondaryButton}
@@ -175,9 +186,8 @@ export default function LocationSelector() {
               >
                 Cancel
               </button>
-            </div>
           </div>
-        )}
+        </div>
       </div>
     </div>
   );

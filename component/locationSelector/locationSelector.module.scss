@@ -10,7 +10,7 @@
 }
 
 .modal {
-  width: min(47rem, 100%);
+  width: min(35.25rem, 75vw);
   overflow: hidden;
   border-radius: 2px;
   background: #ffffff;
@@ -42,6 +42,8 @@
 }
 
 .select {
+  appearance: none;
+  -webkit-appearance: none;
   width: 100%;
   min-height: 3.9rem;
   border: 1px solid #b8b8b8;
@@ -50,7 +52,23 @@
   color: #222222;
   font-size: 1.15rem;
   font-weight: 500;
-  padding: 0 1rem;
+  padding: 0 4rem 0 1rem;
+}
+
+.selectWrap {
+  position: relative;
+}
+
+.selectArrow {
+  position: absolute;
+  top: 50%;
+  right: 1.25rem;
+  width: 1.55rem;
+  height: 1.55rem;
+  border-right: 5px solid #e51b23;
+  border-bottom: 5px solid #e51b23;
+  pointer-events: none;
+  transform: translateY(-70%) rotate(45deg);
 }
 
 .actions {
@@ -79,6 +97,32 @@
   color: #0a0a0b;
 }
 
+.exportMessage {
+  margin-top: 1rem;
+  border-left: 4px solid #f9c300;
+  background: #fff8d8;
+  padding: 1rem;
+  color: #0a0a0b;
+
+  p {
+    margin-bottom: 0.85rem;
+    font-size: 1rem;
+    font-weight: 800;
+    line-height: 1.35;
+  }
+}
+
+.inlineContinueButton {
+  min-height: 2.75rem;
+  width: 100%;
+  border-radius: 4px;
+  background: #0a0a0b;
+  color: #f9c300;
+  font-size: 0.95rem;
+  font-weight: 800;
+}
+
+/* Kept for older markup during hot refresh */
 .message {
   color: #0a0a0b;
   font-size: clamp(1.35rem, 2.5vw, 2rem);
@@ -114,5 +158,12 @@
     grid-template-columns: 1fr;
     gap: 0.85rem;
     margin-top: 1.5rem;
+  }
+
+  .selectArrow {
+    right: 1rem;
+    width: 1.25rem;
+    height: 1.25rem;
+    border-width: 4px;
   }
 }
