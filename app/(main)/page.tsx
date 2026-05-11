@@ -88,6 +88,10 @@ export const metadata: Metadata = {
   authors: [{ name: "Autocracy Machinery" }],
   alternates: {
     canonical: "https://autocracymachinery.com/",
+    languages: {
+      "en-IN": "https://autocracymachinery.com/en-in",
+      "x-default": "https://autocracymachinery.com/",
+    },
   },
   other: {
     "twitter:site": "@autocracymachinery",

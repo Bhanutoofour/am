@@ -1,7 +1,7 @@
 import Image from "next/image";
 import styles from "./industryStyle.module.scss";
-import Link from "next/link";
 import { titleToSlug } from "@/utils/slug";
+import LocalizedLink from "@/component/LocalizedLink";
 
 interface IndustryCardProps {
   title: string;
@@ -23,7 +23,7 @@ const IndustryCard: React.FC<IndustryCardProps> = ({
   basePath = "",
 }) => {
   return (
-    <Link
+    <LocalizedLink
       href={`${basePath}/industries/${titleToSlug(title)}`}
       className={isIndustryPage ? "keen-slider__slide" : undefined}
       style={{ width: "100%" }}
@@ -59,7 +59,7 @@ const IndustryCard: React.FC<IndustryCardProps> = ({
           </div>
         </div>
       </div>
-    </Link>
+    </LocalizedLink>
   );
 };
 

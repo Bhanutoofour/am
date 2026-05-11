@@ -5,10 +5,12 @@ import styles from "./industries.module.scss";
 
 interface IndustriesClientProps {
   industries: ActiveIndustry[];
+  basePath?: string;
 }
 
 export default function IndustriesClient({
   industries,
+  basePath = "",
 }: IndustriesClientProps) {
   const faqs = [
     {
@@ -78,6 +80,7 @@ export default function IndustriesClient({
               title={industry.title}
               imageSrc={industry.thumbnail}
               altText={industry.thumbnailAltText}
+              basePath={basePath}
             />
           ))}
         </div>

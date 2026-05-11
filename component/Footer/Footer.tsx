@@ -4,8 +4,8 @@ import Button from "../molecules/button/Button";
 import styles from "./styles.module.scss";
 import { useState } from "react";
 import GetQuoteModal from "../GetQuoteModal/GetQuoteModal";
-import Link from "next/link";
 import { HEADERS_ICON } from "@/constants/Images/images";
+import LocalizedLink from "@/component/LocalizedLink";
 
 const Footer: React.FC = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
@@ -127,9 +127,9 @@ const Footer: React.FC = () => {
             </a>
           </div>
           <div className={styles.routeItems}>
-            <Link href="/privacy-policy">Privacy Policy</Link>
-            <Link href="/sitemap.html">Sitemap</Link>
-            <Link href="/terms-and-conditions">Terms & Conditions</Link>
+            <LocalizedLink href="/privacy-policy">Privacy Policy</LocalizedLink>
+            <LocalizedLink href="/sitemap.html">Sitemap</LocalizedLink>
+            <LocalizedLink href="/terms-and-conditions">Terms & Conditions</LocalizedLink>
           </div>
         </div>
         <div className={styles.linkContainer}>
@@ -162,9 +162,9 @@ const Footer: React.FC = () => {
                     case "link":
                     default:
                       return link.type ? (
-                        <Link href={`${link.type ? link.type : ""}`} key={i}>
+                        <LocalizedLink href={`${link.type ? link.type : ""}`} key={i}>
                           {link.value}
-                        </Link>
+                        </LocalizedLink>
                       ) : (
                         <p key={link.value}>{link.value}</p>
                       );

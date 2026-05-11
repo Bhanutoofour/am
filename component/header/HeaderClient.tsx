@@ -6,7 +6,7 @@ import styles from "./styles.module.scss";
 import { HEADERS_ICON, ICONS } from "@/constants/Images/images";
 import useOutsideClick from "@/hooks/useOutsideClick"; // adjust path as needed
 import ResponsiveMegaMenu from "../sections/responsiveMegamenu/ResponsiveMegaMenu";
-import Link from "next/link";
+import LocalizedLink from "@/component/LocalizedLink";
 
 interface HeaderClientProps {
   menuOnly?: boolean;
@@ -144,9 +144,9 @@ const HeaderClient: React.FC<HeaderClientProps> = ({
         </div>
 
         {MENU_LINKS.map((item) => (
-          <Link key={item.href} href={item.href} className={styles.headerLink}>
+          <LocalizedLink key={item.href} href={item.href} className={styles.headerLink}>
             {item.label}
-          </Link>
+          </LocalizedLink>
         ))}
 
         {megaMenu.show && (
@@ -198,10 +198,10 @@ const HeaderClient: React.FC<HeaderClientProps> = ({
           />
           <p className={styles.caller}>+91 87904 73345</p>
         </a>
-        <Link href="/find-a-dealer" className={styles.barContent}>
+        <LocalizedLink href="/find-a-dealer" className={styles.barContent}>
           <Image src={ICONS.SEARCH} alt="Search" width={18} height={18} />
           <p className={styles.dealer}>FIND A DEALER</p>
-        </Link>
+        </LocalizedLink>
       </div>
       <ResponsiveMegaMenu
         industries={industries}

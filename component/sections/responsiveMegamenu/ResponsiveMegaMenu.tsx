@@ -3,9 +3,9 @@ import React, { useState } from "react";
 import styles from "./responsiveStyles.module.scss";
 import { ICONS } from "@/constants/Images/images";
 import Image from "next/image";
-import Link from "next/link";
 import GetQuoteModal from "@/component/GetQuoteModal/GetQuoteModal";
 import { titleToSlug, productSlug } from "@/utils/slug";
+import LocalizedLink from "@/component/LocalizedLink";
 
 type MegaMenuType = "industry" | "product" | "company" | "";
 
@@ -33,7 +33,7 @@ const IndustryItems: React.FC<megaMenuMobileProps> = ({
   return (
     <div className={styles.productWrapper}>
       {industries?.map((item, i) => (
-        <Link
+        <LocalizedLink
           key={i}
           href={`/industries/${titleToSlug(item.title)}`}
           style={{ width: "100%" }}
@@ -54,7 +54,7 @@ const IndustryItems: React.FC<megaMenuMobileProps> = ({
               style={{ transform: "rotate(-90deg)" }}
             />
           </div>
-        </Link>
+        </LocalizedLink>
       ))}
     </div>
   );
@@ -68,7 +68,7 @@ const ProductItems: React.FC<megaMenuMobileProps> = ({
   return (
     <div className={styles.productWrapper}>
       {products?.map((product) => (
-        <Link
+        <LocalizedLink
           key={product.id}
           href={`/products/${productSlug(product?.title ?? "")}`}
           onClick={() => {
@@ -96,7 +96,7 @@ const ProductItems: React.FC<megaMenuMobileProps> = ({
               className={styles.dropdown}
             />
           </div>
-        </Link>
+        </LocalizedLink>
       ))}
     </div>
   );
@@ -169,7 +169,7 @@ const ResponsiveMegaMenu: React.FC<megaMenuMobileProps> = ({
               )
             )}
             {MENU_LINKS.map((item) => (
-              <Link
+              <LocalizedLink
                 key={item.href}
                 href={item.href}
                 className={styles.menuItem}
@@ -178,7 +178,7 @@ const ResponsiveMegaMenu: React.FC<megaMenuMobileProps> = ({
                 }
               >
                 <p>{item.label}</p>
-              </Link>
+              </LocalizedLink>
             ))}
           </>
         )}
@@ -208,7 +208,7 @@ const ResponsiveMegaMenu: React.FC<megaMenuMobileProps> = ({
           >
             GET A QUOTE
           </button>
-          <Link
+          <LocalizedLink
             href={`/brochure`}
             onClick={() =>
               setMobileMenu?.((prev) => ({ ...prev, show: false }))
@@ -223,7 +223,7 @@ const ResponsiveMegaMenu: React.FC<megaMenuMobileProps> = ({
               />
               BROCHURE
             </button>
-          </Link>
+          </LocalizedLink>
         </div>
       </div>
       {showModal && (

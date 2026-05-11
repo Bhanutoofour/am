@@ -2,9 +2,9 @@
 import styles from "./productStyles.module.scss";
 import { ICONS } from "@/constants/Images/images";
 import Image from "next/image";
-import Link from "next/link";
 import { useState } from "react";
 import { productSlug } from "@/utils/slug";
+import LocalizedLink from "@/component/LocalizedLink";
 
 interface ProductProps {
   ProductItems: ActiveProduct[];
@@ -20,7 +20,7 @@ const ProductMenu: React.FC<ProductProps> = ({ ProductItems, onHide }) => {
     <div className={`${styles.productMenu}`}>
       {ProductItems.length > 0 ? (
         ProductItems.map((product) => (
-          <Link
+          <LocalizedLink
             key={product.id}
             href={`/products/${productSlug(product?.title ?? "")}`}
           >
@@ -54,7 +54,7 @@ const ProductMenu: React.FC<ProductProps> = ({ ProductItems, onHide }) => {
                 className={styles.dropdown}
               />
             </div>
-          </Link>
+          </LocalizedLink>
         ))
       ) : (
         <div className={styles.emptyState}>

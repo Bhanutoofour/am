@@ -3,8 +3,8 @@ import styles from "./industryStyles.module.scss";
 import { ICONS } from "@/constants/Images/images";
 import Image from "next/image";
 import { useState } from "react";
-import Link from "next/link";
 import { titleToSlug } from "@/utils/slug";
+import LocalizedLink from "@/component/LocalizedLink";
 interface IndustryProps {
   industryItems: ActiveIndustry[];
   onHide: () => void;
@@ -63,7 +63,7 @@ const IndustryMenu: React.FC<IndustryProps> = ({ industryItems, onHide }) => {
       >
         {selectedIndustry && selectedIndustry?.products?.length > 0 ? (
           selectedIndustry?.products.map((product) => (
-            <Link
+            <LocalizedLink
               key={product.id}
               href={`/industries/${titleToSlug(selectedIndustry.title ?? "")}/${titleToSlug(product.title ?? "")}`}
             >
@@ -97,7 +97,7 @@ const IndustryMenu: React.FC<IndustryProps> = ({ industryItems, onHide }) => {
                   className={styles.dropdown}
                 />
               </div>
-            </Link>
+            </LocalizedLink>
           ))
         ) : (
           <div className={styles.emptyState}>

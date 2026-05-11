@@ -6,10 +6,11 @@ import Image from "next/image";
 import { ICONS } from "@/constants/Images/images";
 import useWindowSize from "@/hooks/useWindowSize";
 import { useKeenSlider } from "keen-slider/react";
-import Link from "next/link";
 import { SCREENS } from "@/constants";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { productSlug } from "@/utils/slug";
+import LocalizedLink from "@/component/LocalizedLink";
+import { withLocalePrefix } from "@/utils/locale";
 
 interface ProductsProps {
   products: ActiveProduct[];
@@ -19,9 +20,10 @@ const Products: React.FC<ProductsProps> = ({ products }) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const { width } = useWindowSize();
   const router = useRouter();
+  const pathname = usePathname();
 
   const handleViewAll = () => {
-    router.push("/products");
+    router.push(withLocalePrefix("/products", pathname));
   };
 
   const slidesPerView = (() => {
@@ -119,7 +121,7 @@ const Products: React.FC<ProductsProps> = ({ products }) => {
                 className={`${styles.productAllCarousel} keen-slider`}
               >
                 {products.map((data) => (
-                  <Link
+                  <LocalizedLink
                     key={data.id}
                     href={`/products/${productSlug(data?.title ?? "")}`}
                     className="keen-slider__slide"
@@ -129,7 +131,7 @@ const Products: React.FC<ProductsProps> = ({ products }) => {
                       imageSrc={data.thumbnail}
                       altText={data.thumbnailAltText}
                     />
-                  </Link>
+                  </LocalizedLink>
                 ))}
               </div>
             </>

@@ -1,11 +1,11 @@
 import styles from "./styles.module.scss";
 import Image from "next/image";
-import Link from "next/link";
 import HeaderClient from "./HeaderClient";
 import { IMAGES } from "@/constants/Images/images";
 import { getActiveIndustries } from "@/actions/industryAction";
 import { getActiveProducts } from "@/actions/productAction";
 import GetQuoteHandler from "./GetQuoteHandeler";
+import LocalizedLink from "@/component/LocalizedLink";
 
 export default async function Header() {
   const industries = await getActiveIndustries();
@@ -32,9 +32,9 @@ export default async function Header() {
         <div className={styles.bottomBarContent}>
           <div className={styles.leftSide}>
             <div className={styles.image}>
-              <Link href="/" passHref>
+              <LocalizedLink href="/" passHref>
                 <Image src={IMAGES.LOGO} alt="logo" width={162} height={32} />
-              </Link>
+              </LocalizedLink>
             </div>
             {/* Industries and Products dropdowns will be interactive in HeaderClient */}
             <HeaderClient

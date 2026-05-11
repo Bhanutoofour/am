@@ -2,10 +2,10 @@
 
 import React, { useState, useMemo } from "react";
 import Image from "next/image";
-import Link from "next/link";
 import styles from "./blogs.module.scss";
 import { ICONS, INDUSTRY } from "@/constants/Images/images";
 import { formatDate } from "@/utils/videoHelpers";
+import LocalizedLink from "@/component/LocalizedLink";
 
 interface BlogWithRelations {
   id: number;
@@ -357,7 +357,7 @@ const BlogsClient: React.FC<BlogsClientProps> = ({
                 INDUSTRY.SAMPLE_INDUSTRY;
 
               return (
-                <Link
+                <LocalizedLink
                   key={blog.id}
                   href={`/blog/${blog.slug}`}
                   className={styles.blogCard}
@@ -389,7 +389,7 @@ const BlogsClient: React.FC<BlogsClientProps> = ({
                       {truncateDescription(blog.description)}
                     </p>
                   </div>
-                </Link>
+                </LocalizedLink>
               );
             })
           )}

@@ -2,9 +2,9 @@
 
 import React from "react";
 import Image from "next/image";
-import Link from "next/link";
 import styles from "./blog.module.scss";
 import { formatDate } from "@/utils/videoHelpers";
+import LocalizedLink from "@/component/LocalizedLink";
 
 interface BlogClientProps {
   blog: {
@@ -84,7 +84,7 @@ export default function BlogClient({
           <h2 className={styles.relatedHeading}>Related Blogs</h2>
           <div className={styles.relatedGrid}>
             {relatedBlogs.map((rb) => (
-              <a
+              <LocalizedLink
                 key={rb.id}
                 href={`/blog/${rb.slug}`}
                 className={styles.relatedCard}
@@ -103,7 +103,7 @@ export default function BlogClient({
                   </p>
                   <h3 className={styles.relatedTitle}>{rb.title}</h3>
                 </div>
-              </a>
+              </LocalizedLink>
             ))}
           </div>
         </section>
