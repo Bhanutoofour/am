@@ -1,6 +1,7 @@
 import "../styles/globals.scss";
 import { Metadata } from "next";
 import Script from "next/script";
+import LocationSelector from "@/component/locationSelector/LocationSelector";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://autocracymachinery.com"),
@@ -198,6 +199,7 @@ export default function RootLayout({
             alt=""
           />
         </noscript>
+        <LocationSelector />
         {children}
       </body>
     </html>
