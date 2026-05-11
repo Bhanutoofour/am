@@ -11,6 +11,11 @@ import {
 } from "@/app/(main)/product/[slug]/modelDetailMetadata";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+import {
+  indiaModelDescription,
+  indiaModelKeywords,
+  indiaModelTitle,
+} from "@/utils/indiaSeo";
 
 interface IndiaProductModelPageProps {
   params: Promise<{ slug: string; modelSlug: string }>;
@@ -30,7 +35,43 @@ export async function generateMetadata({
   if (!resolved) return modelDetailNotFoundMetadata;
 
   const canonical = `${SITE}/en-in/products/${productSlug}/${modelSlug}`;
-  return buildModelDetailMetadata(resolved.modelData, canonical);
+  const metadata = buildModelDetailMetadata(resolved.modelData, canonical);
+
+  return {
+    ...metadata,
+    title: indiaModelTitle(
+      resolved.modelData.modelNumber,
+      resolved.modelData.modelTitle
+    ),
+    description: indiaModelDescription(resolved.modelData),
+    keywords: indiaModelKeywords(resolved.modelData),
+    openGraph: {
+      ...metadata.openGraph,
+      title: indiaModelTitle(
+        resolved.modelData.modelNumber,
+        resolved.modelData.modelTitle
+      ),
+      description: indiaModelDescription(resolved.modelData),
+      url: canonical,
+      siteName: "Autocracy Machinery India",
+      locale: "en_IN",
+    },
+    twitter: {
+      ...metadata.twitter,
+      title: indiaModelTitle(
+        resolved.modelData.modelNumber,
+        resolved.modelData.modelTitle
+      ),
+      description: indiaModelDescription(resolved.modelData),
+    },
+    alternates: {
+      canonical,
+      languages: {
+        "en-IN": canonical,
+        "x-default": `${SITE}/products/${productSlug}/${modelSlug}`,
+      },
+    },
+  };
 }
 
 export default async function IndiaProductModelPage({

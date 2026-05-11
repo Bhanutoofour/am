@@ -112,18 +112,24 @@ function buildProductModelMedia(
 
 function buildFeatureDescription(
   modelData: ModelObjectTypes | null,
-  feature: ModelFeature
+  feature: ModelFeature,
+  isIndiaMarket = false
 ): string {
   const modelName = modelData?.modelNumber || "this model";
   const productName = (modelData?.productName || "projects").toLowerCase();
   const featureName = feature.name || "This feature";
   const featureValue = feature.value || "project-ready performance";
 
+  if (isIndiaMarket) {
+    return `${featureValue} ${featureName.toLowerCase()} capability helps ${modelName} support ${productName} work in India with controlled output, dependable operation, and smoother execution across OFC, irrigation, utility, agriculture, and construction sites.`;
+  }
+
   return `${featureValue} ${featureName.toLowerCase()} capability helps ${modelName} support practical ${productName} work with controlled output, dependable operation, and smoother field execution.`;
 }
 
 function buildProductModelFaqs(
-  modelData: ModelObjectTypes | null
+  modelData: ModelObjectTypes | null,
+  isIndiaMarket = false
 ): ProductModelFaq[] {
   const modelName = modelData?.modelNumber || "this model";
   const productName = modelData?.productName || "this product";
@@ -134,12 +140,18 @@ function buildProductModelFaqs(
 
   return [
     {
-      question: `What is ${modelName} used for?`,
-      answer: `${modelName} is designed for ${productName.toLowerCase()} applications where teams need dependable field execution, controlled output, and practical deployment across project sites.`,
+      question: isIndiaMarket
+        ? `What is ${modelName} used for in India?`
+        : `What is ${modelName} used for?`,
+      answer: isIndiaMarket
+        ? `${modelName} is designed for ${productName.toLowerCase()} applications in India, including OFC trenching, irrigation, utility routes, agriculture, construction, solar cable trenching, and water management projects.`
+        : `${modelName} is designed for ${productName.toLowerCase()} applications where teams need dependable field execution, controlled output, and practical deployment across project sites.`,
     },
     {
       question: `Is ${modelName} an attachment or equipment?`,
-      answer: `${modelName} is listed as a ${machineType.toLowerCase()}, helping buyers understand how it fits into their existing fleet and site workflow.`,
+      answer: isIndiaMarket
+        ? `${modelName} is listed as a ${machineType.toLowerCase()}, helping Indian contractors and project teams understand how it fits into existing tractors, carriers, fleets, and site workflows.`
+        : `${modelName} is listed as a ${machineType.toLowerCase()}, helping buyers understand how it fits into their existing fleet and site workflow.`,
     },
     {
       question: firstFeature
@@ -167,15 +179,21 @@ function buildProductModelFaqs(
     },
     {
       question: `How do I get a quote for ${modelName}?`,
-      answer: `Use the quote button and share your project details. The Autocracy team can guide model fit, brochure details, and next steps for ${productName.toLowerCase()} requirements.`,
+      answer: isIndiaMarket
+        ? `Use the quote button and share your industry, location in India, carrier details, and project requirement. The Autocracy team can guide model fit, brochure details, and next steps for ${productName.toLowerCase()} requirements.`
+        : `Use the quote button and share your project details. The Autocracy team can guide model fit, brochure details, and next steps for ${productName.toLowerCase()} requirements.`,
     },
     {
       question: `Which industries commonly use ${modelName}?`,
-      answer: `${modelName} can support industry applications where teams need reliable ${productName.toLowerCase()} output, controlled site execution, and practical equipment fit.`,
+      answer: isIndiaMarket
+        ? `${modelName} can support Indian telecom, water management, agriculture, construction, solar, defence, and utility infrastructure applications where reliable ${productName.toLowerCase()} output matters.`
+        : `${modelName} can support industry applications where teams need reliable ${productName.toLowerCase()} output, controlled site execution, and practical equipment fit.`,
     },
     {
       question: `Can ${modelName} work in mixed site conditions?`,
-      answer: `${modelName} is intended for practical field deployment, helping operators plan around soil, access, productivity, and site constraints before work begins.`,
+      answer: isIndiaMarket
+        ? `${modelName} is intended for practical Indian field deployment, helping operators plan around soil variation, access width, tractor or carrier fit, route length, productivity, and site constraints.`
+        : `${modelName} is intended for practical field deployment, helping operators plan around soil, access, productivity, and site constraints before work begins.`,
     },
     {
       question: `What details should I share before buying ${modelName}?`,
@@ -193,7 +211,8 @@ function buildProductModelFaqs(
 }
 
 function buildProductApplicationCards(
-  modelData: ModelObjectTypes | null
+  modelData: ModelObjectTypes | null,
+  isIndiaMarket = false
 ): ProductApplicationCard[] {
   const modelName = modelData?.modelNumber || "this model";
   const productName = modelData?.productName || "this product";
@@ -204,11 +223,13 @@ function buildProductApplicationCards(
 
   return [
     {
-      title: "Project Applications",
-      text: `${modelName} supports ${productName.toLowerCase()} work across utility routes, rural sites, and practical field conditions where consistent machine output matters.`,
+      title: isIndiaMarket ? "Applications in India" : "Project Applications",
+      text: isIndiaMarket
+        ? `${modelName} supports ${productName.toLowerCase()} work across Indian OFC routes, irrigation lines, rural roads, water management projects, construction utilities, solar sites, and practical field conditions.`
+        : `${modelName} supports ${productName.toLowerCase()} work across utility routes, rural sites, and practical field conditions where consistent machine output matters.`,
     },
     {
-      title: "Site Planning",
+      title: isIndiaMarket ? "Indian Site Planning" : "Site Planning",
       text: firstFeature
         ? `${firstFeature.value} ${firstFeature.name.toLowerCase()} helps teams plan equipment fit, route preparation, and day-to-day execution before deployment.`
         : `Teams can use the specifications above to plan deployment, route access, and output expectations before field work begins.`,
@@ -218,7 +239,7 @@ function buildProductApplicationCards(
       text: `${modelName} is configured as a ${machineType.toLowerCase()}, helping contractors and operators understand how it fits with existing fleet resources and site workflows.`,
     },
     {
-      title: "Operational Value",
+      title: isIndiaMarket ? "Value for Indian Projects" : "Operational Value",
       text: secondFeature
         ? `${secondFeature.value} ${secondFeature.name.toLowerCase()} supports controlled operation, while ${
             thirdFeature
@@ -231,7 +252,8 @@ function buildProductApplicationCards(
 }
 
 function buildBestSuitedIndustryCards(
-  modelData: ModelObjectTypes | null
+  modelData: ModelObjectTypes | null,
+  isIndiaMarket = false
 ): ProductIndustryFitCard[] {
   const modelName = modelData?.modelNumber || "This model";
   const productName = modelData?.productName || "machine";
@@ -252,12 +274,15 @@ function buildBestSuitedIndustryCards(
 
   return industryNames.map((industry) => ({
     title: industry,
-    text: `${modelName} is suited for ${industry.toLowerCase()} teams that need dependable ${productLower} performance, cleaner site execution, and faster project handoff.`,
+    text: isIndiaMarket
+      ? `${modelName} is suited for ${industry.toLowerCase()} projects in India that need dependable ${productLower} performance, cleaner site execution, and faster project handoff.`
+      : `${modelName} is suited for ${industry.toLowerCase()} teams that need dependable ${productLower} performance, cleaner site execution, and faster project handoff.`,
   }));
 }
 
 function buildOverviewExtraParagraphs(
-  modelData: ModelObjectTypes | null
+  modelData: ModelObjectTypes | null,
+  isIndiaMarket = false
 ): string[] {
   if (!modelData) return [];
 
@@ -272,9 +297,15 @@ function buildOverviewExtraParagraphs(
 
   return [
     featureSummary
-      ? `${modelName} brings together key working specifications such as ${featureSummary}, giving teams a clearer way to compare fit before deployment.`
-      : `${modelName} is built to support practical ${productName.toLowerCase()} work where site access, output goals, and operating reliability matter.`,
-    `As a ${machineType.toLowerCase()}, ${modelName} helps contractors and operators plan daily work with better control over field execution, machine fit, and project handoff.`,
+      ? isIndiaMarket
+        ? `${modelName} brings together key working specifications such as ${featureSummary}, helping Indian contractors compare machine fit before OFC, irrigation, utility, agriculture, construction, or water management deployment.`
+        : `${modelName} brings together key working specifications such as ${featureSummary}, giving teams a clearer way to compare fit before deployment.`
+      : isIndiaMarket
+        ? `${modelName} is built to support practical ${productName.toLowerCase()} work in India where route access, soil conditions, output goals, and operating reliability matter.`
+        : `${modelName} is built to support practical ${productName.toLowerCase()} work where site access, output goals, and operating reliability matter.`,
+    isIndiaMarket
+      ? `As a ${machineType.toLowerCase()}, ${modelName} helps Indian contractors, farmers, municipalities, and infrastructure teams plan daily work with better control over field execution, machine fit, and project handoff.`
+      : `As a ${machineType.toLowerCase()}, ${modelName} helps contractors and operators plan daily work with better control over field execution, machine fit, and project handoff.`,
   ];
 }
 
@@ -312,6 +343,7 @@ export default function ProductModalClient({
   const containerClassName = variantClassName
     ? `${styles.modelContainer} ${variantClassName}`
     : styles.modelContainer;
+  const isIndiaMarket = modelBasePath?.startsWith("/en-in") || false;
   const productModelMedia = buildProductModelMedia(modelData);
   const selectedMedia =
     productModelMedia[selectedMediaIndex] || productModelMedia[0];
@@ -321,10 +353,19 @@ export default function ProductModalClient({
       ? modelData?.modelDescription?.slice(1)
       : modelData?.modelDescription;
   const visibleSpecs = modelData?.keyFeatures?.slice(0, 3) || [];
-  const productModelFaqs = buildProductModelFaqs(modelData);
-  const productApplicationCards = buildProductApplicationCards(modelData);
-  const bestSuitedIndustryCards = buildBestSuitedIndustryCards(modelData);
-  const overviewExtraParagraphs = buildOverviewExtraParagraphs(modelData);
+  const productModelFaqs = buildProductModelFaqs(modelData, isIndiaMarket);
+  const productApplicationCards = buildProductApplicationCards(
+    modelData,
+    isIndiaMarket
+  );
+  const bestSuitedIndustryCards = buildBestSuitedIndustryCards(
+    modelData,
+    isIndiaMarket
+  );
+  const overviewExtraParagraphs = buildOverviewExtraParagraphs(
+    modelData,
+    isIndiaMarket
+  );
   const goToMedia = (direction: "previous" | "next") => {
     if (!productModelMedia.length) return;
 
@@ -466,7 +507,9 @@ export default function ProductModalClient({
 
           <div className={styles.productHeroContent}>
             <p className={styles.productHeroProduct}>
-              {modelData?.productName || "-"}
+              {isIndiaMarket
+                ? `${modelData?.productName || "Machine"} in India`
+                : modelData?.productName || "-"}
             </p>
             <h1 className={styles.productHeroTitle}>
               {modelData?.modelNumber || "-"}
@@ -812,7 +855,11 @@ export default function ProductModalClient({
                           {feature.name || "-"}
                         </h3>
                         <p className={styles.productKeyFeatureText}>
-                          {buildFeatureDescription(modelData, feature)}
+                          {buildFeatureDescription(
+                            modelData,
+                            feature,
+                            isIndiaMarket
+                          )}
                         </p>
                       </div>
                     </article>

@@ -7,6 +7,11 @@ import ProductPageLoading from "@/component/molecules/loading/ProductPageLoading
 import { Suspense } from "react";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+import {
+  indiaProductDescription,
+  indiaProductKeywords,
+  indiaProductTitle,
+} from "@/utils/indiaSeo";
 
 interface IndiaIndustryProductPageProps {
   params: Promise<{ slug: string; productSlug: string }>;
@@ -32,19 +37,17 @@ export async function generateMetadata({
 
   const seoData = productData.seoMetadata;
   const canonical = `${SITE}/en-in/industries/${slug}/${productSlug}`;
-  const title =
-    seoData?.pageTitle ||
-    `${productData.title} for ${industryData.title} in India | Autocracy`;
-  const description =
-    seoData?.pageDescription ||
-    `${productData.description} Built for Indian ${industryData.title} applications.`;
+  const title = indiaProductTitle(productData.title, industryData.title);
+  const description = indiaProductDescription(
+    productData.title,
+    industryData.title,
+    seoData?.pageDescription || productData.description
+  );
 
   return {
     title,
     description,
-    keywords:
-      seoData?.pageKeywords ||
-      `${productData.title} India, ${industryData.title} machinery India`,
+    keywords: indiaProductKeywords(productData.title, industryData.title),
     authors: [{ name: "Autocracy Machinery" }],
     robots: { index: true, follow: true },
     alternates: {
@@ -122,6 +125,8 @@ export default async function IndiaIndustryProductPage({
           modelBasePath={`/en-in/industries/${slug}/${productSlug}`}
           basePath="/en-in"
           pageVariant="industry"
+          market="india"
+          industryName={industryData.title}
         />
       </Suspense>
     </>

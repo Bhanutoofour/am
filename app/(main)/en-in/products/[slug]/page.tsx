@@ -7,6 +7,11 @@ import { getActiveIndustries } from "@/actions/industryAction";
 import { Metadata } from "next";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
+import {
+  indiaProductDescription,
+  indiaProductKeywords,
+  indiaProductTitle,
+} from "@/utils/indiaSeo";
 
 interface IndiaProductPageProps {
   params: Promise<{ slug: string }>;
@@ -30,19 +35,17 @@ export async function generateMetadata({
   const { productData } = resolved;
   const seoData = productData.seoMetadata;
   const canonical = `${SITE}/en-in/products/${slug}`;
-  const title =
-    seoData?.pageTitle ||
-    `${productData.title} in India | Autocracy Machinery`;
-  const description =
-    seoData?.pageDescription ||
-    `${productData.description} Built for Indian field conditions with reliable Autocracy Machinery support.`;
+  const title = indiaProductTitle(productData.title);
+  const description = indiaProductDescription(
+    productData.title,
+    undefined,
+    seoData?.pageDescription || productData.description
+  );
 
   return {
     title,
     description,
-    keywords:
-      seoData?.pageKeywords ||
-      `${productData.title}, ${productData.title} India, Autocracy Machinery India`,
+    keywords: indiaProductKeywords(productData.title),
     authors: [{ name: "Autocracy Machinery" }],
     robots: { index: true, follow: true },
     alternates: {
@@ -113,6 +116,7 @@ export default async function IndiaProductPage({
           productId={productId}
           modelBasePath={`/en-in/products/${slug}`}
           basePath="/en-in"
+          market="india"
         />
       </Suspense>
     </>

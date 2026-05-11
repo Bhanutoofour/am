@@ -15,6 +15,7 @@ import useOutsideClick from "@/hooks/useOutsideClick";
 import useWindowSize from "@/hooks/useWindowSize";
 import { productSlug } from "@/utils/slug";
 import styles from "./productMainPage.module.scss";
+import { indiaProductDescription, indiaProductTitle } from "@/utils/indiaSeo";
 
 interface FilterOptionsProps {
   setFilterData: Dispatch<SetStateAction<FilterState>>;
@@ -32,6 +33,8 @@ type ProductClientProps = {
   modelBasePath?: string;
   basePath?: string;
   pageVariant?: "product" | "industry";
+  market?: "global" | "india";
+  industryName?: string;
 };
 
 const FilterOptions: React.FC<FilterOptionsProps> = ({
@@ -78,6 +81,8 @@ export default function ProductClient({
   modelBasePath,
   basePath = "",
   pageVariant = "product",
+  market = "global",
+  industryName,
 }: ProductClientProps) {
   const { width } = useWindowSize();
   const [filterData, setFilterData] = useState<FilterState>({
@@ -213,6 +218,17 @@ export default function ProductClient({
     pageVariant === "industry"
       ? `${styles.productContainer} ${styles.industryProductContainer}`
       : styles.productContainer;
+  const isIndiaMarket = market === "india" || basePath === "/en-in";
+  const productHeading = isIndiaMarket
+    ? indiaProductTitle(productObj?.title, industryName)
+    : productObj?.title || "-";
+  const productDescription = isIndiaMarket
+    ? indiaProductDescription(
+        productObj?.title,
+        industryName,
+        productObj?.description
+      )
+    : productObj?.description || "No description available for this product";
 
   return (
     <div className={containerClassName}>
@@ -220,11 +236,10 @@ export default function ProductClient({
         <div className={styles.productContent}>
           <div className={styles.productInfo}>
             <h2 className={styles.productHeading}>
-              {productObj?.title || "-"}
+              {productHeading}
             </h2>
             <p className={styles.productDescription}>
-              {productObj?.description ||
-                "No description available for this product"}
+              {productDescription}
             </p>
           </div>
           <div className={styles.industryTags}>

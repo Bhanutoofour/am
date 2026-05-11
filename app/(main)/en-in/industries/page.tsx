@@ -19,5 +19,5 @@ export const metadata: Metadata = {
 export default async function IndiaIndustriesPage() {
   const industries = await getActiveIndustries();
 
-  return <IndustriesClient industries={industries} basePath="/en-in" />;
+  return <IndustriesClient industries={industries} basePath="/en-in" market="india" />;
 }

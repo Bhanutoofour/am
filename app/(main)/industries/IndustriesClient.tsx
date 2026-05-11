@@ -6,12 +6,15 @@ import styles from "./industries.module.scss";
 interface IndustriesClientProps {
   industries: ActiveIndustry[];
   basePath?: string;
+  market?: "global" | "india";
 }
 
 export default function IndustriesClient({
   industries,
   basePath = "",
+  market = "global",
 }: IndustriesClientProps) {
+  const isIndiaMarket = market === "india" || basePath === "/en-in";
   const faqs = [
     {
       question:
@@ -61,14 +64,16 @@ export default function IndustriesClient({
         }}
       />
       <section className={styles.heroSection}>
-        <p className={styles.eyebrow}>Industry Solutions</p>
-        <h1 className={styles.heading}>Choose Your Industry</h1>
+        <p className={styles.eyebrow}>
+          {isIndiaMarket ? "Industry Solutions in India" : "Industry Solutions"}
+        </p>
+        <h1 className={styles.heading}>
+          {isIndiaMarket ? "Choose Your Industry in India" : "Choose Your Industry"}
+        </h1>
         <p className={styles.intro}>
-          Explore Autocracy Machinery equipment by industry application,
-          including OFC telecommunications trenchers, water management
-          machines, solar cable trenching equipment, agriculture and
-          landscaping attachments, construction utility machines, and
-          environmental cleaning solutions.
+          {isIndiaMarket
+            ? "Explore Autocracy Machinery equipment for Indian industry applications, including OFC trenching machines in India, water management machinery, solar cable trenching equipment, agriculture attachments, construction utility machines, defence equipment, and environmental cleaning solutions built for Indian field conditions."
+            : "Explore Autocracy Machinery equipment by industry application, including OFC telecommunications trenchers, water management machines, solar cable trenching equipment, agriculture and landscaping attachments, construction utility machines, and environmental cleaning solutions."}
         </p>
       </section>
       {industries.length > 0 ? (
@@ -90,12 +95,15 @@ export default function IndustriesClient({
       <section className={styles.insightGrid}>
         <article className={styles.insightCard}>
           <span>01</span>
-          <h2>Match Equipment to Work Conditions</h2>
+          <h2>
+            {isIndiaMarket
+              ? "Match Machines to Indian Site Conditions"
+              : "Match Equipment to Work Conditions"}
+          </h2>
           <p>
-            Autocracy Machinery helps match trenchers, post hole diggers,
-            attachments, aquatic weed harvesters, and floating pontoons to
-            project type, ground or water conditions, operating corridor, and
-            productivity expectations.
+            {isIndiaMarket
+              ? "Autocracy Machinery helps match trenchers in India, post hole diggers, attachments, aquatic weed harvesters, and floating pontoons to soil, water, route access, carrier fit, and project productivity."
+              : "Autocracy Machinery helps match trenchers, post hole diggers, attachments, aquatic weed harvesters, and floating pontoons to project type, ground or water conditions, operating corridor, and productivity expectations."}
           </p>
         </article>
         <article className={styles.insightCard}>
