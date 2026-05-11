@@ -157,16 +157,9 @@ export default function LocationSelector() {
           {showExportMessage && !isIndiaSelected && (
             <div className={styles.exportMessage} role="status">
               <p>Congrats, we do export to {selectedCountry}.</p>
-              <button
-                type="button"
-                className={styles.inlineContinueButton}
-                onClick={continueInternational}
-                disabled={isRedirecting}
-              >
-                {isRedirecting
-                  ? "Redirecting..."
-                  : "Continue to our International Website"}
-              </button>
+              <span className={styles.inlineMessageText}>
+                Continue to our International Website
+              </span>
             </div>
           )}
 

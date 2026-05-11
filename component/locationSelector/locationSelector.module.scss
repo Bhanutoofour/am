@@ -91,8 +91,7 @@
   color: #0a0a0b;
 }
 
-.primaryButton:disabled,
-.inlineContinueButton:disabled {
+.primaryButton:disabled {
   cursor: wait;
   opacity: 0.72;
 }
@@ -118,14 +117,12 @@
   }
 }
 
-.inlineContinueButton {
-  min-height: 2.75rem;
-  width: 100%;
-  border-radius: 4px;
-  background: #0a0a0b;
+.inlineMessageText {
+  display: block;
   color: #f9c300;
-  font-size: 0.95rem;
-  font-weight: 800;
+  font-size: 1rem;
+  font-weight: 900;
+  line-height: 1.35;
 }
 
 /* Kept for older markup during hot refresh */
