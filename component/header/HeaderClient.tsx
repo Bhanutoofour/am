@@ -14,12 +14,16 @@ interface HeaderClientProps {
   products: ActiveProduct[];
 }
 
-type MegaMenuType = "industry" | "product" | "company" | "";
+type MegaMenuType = "industry" | "product" | "resources" | "";
 
 const MENU_LINKS = [
   { href: "/about-us", label: "About us" },
   { href: "/contact-us", label: "Contact us" },
-  { href: "/blog", label: "Blogs" },
+];
+
+const RESOURCE_LINKS = [
+  { href: "/blogs", label: "Blogs" },
+  { href: "/videos", label: "Videos" },
 ];
 
 const HeaderClient: React.FC<HeaderClientProps> = ({
@@ -141,6 +145,57 @@ const HeaderClient: React.FC<HeaderClientProps> = ({
               transition: "transform 0.3s ease",
             }}
           />
+        </div>
+
+        <div
+          className={styles.headerItem}
+          onClick={() =>
+            setMegaMenu((prev) => ({
+              type: "resources",
+              show: prev.type !== "resources" ? true : !prev.show,
+            }))
+          }
+        >
+          <p
+            style={{
+              color:
+                megaMenu.show && megaMenu.type === "resources"
+                  ? "#F9C300"
+                  : "#0a0a0b",
+            }}
+          >
+            Resources
+          </p>
+          <Image
+            src={
+              megaMenu.show && megaMenu.type === "resources"
+                ? ICONS.YELLOW_DROPDOWN
+                : ICONS.BLACK_DROPDOWN
+            }
+            alt="DropDownArrow"
+            width={18}
+            height={18}
+            style={{
+              transform:
+                megaMenu.show && megaMenu.type === "resources"
+                  ? "rotate(180deg)"
+                  : "rotate(0deg)",
+              transition: "transform 0.3s ease",
+            }}
+          />
+          {megaMenu.show && megaMenu.type === "resources" && (
+            <div className={styles.resourceMenu}>
+              {RESOURCE_LINKS.map((item) => (
+                <LocalizedLink
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setMegaMenu({ type: "", show: false })}
+                >
+                  {item.label}
+                </LocalizedLink>
+              ))}
+            </div>
+          )}
         </div>
 
         {MENU_LINKS.map((item) => (

@@ -1,4 +1,4 @@
-import Home from "@/app/(main)/page";
+import HomeContent from "@/app/(main)/HomeContent";
 import type { Metadata } from "next";
 import { indiaCanonical, rootCanonical } from "@/utils/locale";
 
@@ -25,4 +25,6 @@ export const metadata: Metadata = {
   },
 };
 
-export default Home;
+export default function IndiaHomePage() {
+  return <HomeContent />;
+}

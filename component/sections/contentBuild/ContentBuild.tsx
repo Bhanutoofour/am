@@ -3,14 +3,19 @@ import styles from "./contentStyles.module.scss";
 
 interface contentBuildProps {
   data: BuildForIndiaContentType[];
+  title?: React.ReactNode;
 }
 
-const ContentBuild: React.FC<contentBuildProps> = ({ data }) => {
+const ContentBuild: React.FC<contentBuildProps> = ({ data, title }) => {
   return (
     <div className={styles.buildSection}>
       <div className={styles.buildCardTitle}>
         <h2 className={styles.buildTitle}>
-          Built for India. Engineered <br /> for Efficiency.
+          {title || (
+            <>
+              Built for India. Engineered <br /> for Efficiency.
+            </>
+          )}
         </h2>
       </div>
       <div className={styles.BuildCardContainer}>
