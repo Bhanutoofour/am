@@ -156,9 +156,9 @@ export default function LocationSelector() {
 
           {showExportMessage && !isIndiaSelected && (
             <div className={styles.exportMessage} role="status">
-              <p>Congrats, we do export to {selectedCountry}.</p>
+              <p>Great news — we export to {selectedCountry}</p>
               <span className={styles.inlineMessageText}>
-                Continue to our International Website
+                Continue to Global Website
               </span>
             </div>
           )}
