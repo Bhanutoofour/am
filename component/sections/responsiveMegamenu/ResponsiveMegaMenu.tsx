@@ -7,7 +7,7 @@ import GetQuoteModal from "@/component/GetQuoteModal/GetQuoteModal";
 import { titleToSlug, productSlug } from "@/utils/slug";
 import LocalizedLink from "@/component/LocalizedLink";
 
-type MegaMenuType = "industry" | "product" | "company" | "";
+type MegaMenuType = "industry" | "product" | "resources" | "";
 
 const MENU_LINKS = [
   { href: "/about-us", label: "About us" },
@@ -102,10 +102,6 @@ const ProductItems: React.FC<megaMenuMobileProps> = ({
   );
 };
 
-const CompanyItems: React.FC<megaMenuMobileProps> = () => {
-  return <div></div>;
-};
-
 const ResponsiveMegaMenu: React.FC<megaMenuMobileProps> = ({
   industries,
   products,
@@ -146,8 +142,6 @@ const ResponsiveMegaMenu: React.FC<megaMenuMobileProps> = ({
             setMobileMenu={setMobileMenu}
             setSelected={setSelected}
           />
-        ) : selected === "company" ? (
-          <CompanyItems setMobileMenu={setMobileMenu} />
         ) : (
           <>
             {(["industry", "product"] as MegaMenuType[]).map(
