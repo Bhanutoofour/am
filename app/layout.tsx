@@ -5,10 +5,9 @@ import LocationSelector from "@/component/locationSelector/LocationSelector";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://autocracymachinery.com"),
-  title:
-    "Trencher Machine Manufacturer in India | Autocracy Machinery",
+  title: "Autocracy Machinery | Trenchers & Utility Machines",
   description:
-    "Autocracy Machinery manufactures trencher machines, solar EPC equipment, aquatic weed harvesters, tractor attachments, forklifts, and utility machinery for infrastructure, agriculture, water management, telecom, and construction projects.",
+    "Trencher machines, solar EPC equipment, aquatic weed harvesters, attachments, forklifts, and utility machines for field projects.",
   icons: {
     icon: "/favicon.ico",
   },
@@ -178,14 +177,15 @@ export default function RootLayout({
         }}
       />
 
-      <body style={{ position: "relative" }}>
+      <body className="site-body">
         {/* Google Tag Manager (noscript) */}
         <noscript>
           <iframe
+            title="Google Tag Manager"
             src="https://www.googletagmanager.com/ns.html?id=GTM-5FHWPPR4"
             height="0"
             width="0"
-            style={{ display: "none", visibility: "hidden" }}
+            className="hidden-tracking-frame"
           />
         </noscript>
 
@@ -194,7 +194,7 @@ export default function RootLayout({
           <img
             height="1"
             width="1"
-            style={{ display: "none" }}
+            className="hidden-tracking-pixel"
             src="https://www.facebook.com/tr?id=650403454281912&ev=PageView&noscript=1"
             alt=""
           />

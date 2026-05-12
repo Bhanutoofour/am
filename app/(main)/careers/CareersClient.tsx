@@ -397,19 +397,16 @@ const CareersClient = () => {
           <div className={styles.joinLeft}>
             <h2 className={styles.joinTitle}>Join Our Mission</h2>
             <p className={styles.joinText}>
-              If you're passionate about innovation, excellence, and impact —
+              If you're passionate about innovation, excellence, and impact,
               Autocracy Machinery is where your ambitions find purpose.
             </p>
             <p className={styles.joinText}>
               Join us, and be part of a team that's shaping the future of
               manufacturing and engineering in India.
             </p>
-            <p className={styles.joinLabel}>Send your resume to</p>
-            <a
-              href="mailto:hiring@autocracymachinery.com"
-              className={styles.joinEmail}
-            >
-              hiring@autocracymachinery.com
+            <p className={styles.joinLabel}>Share your profile with our team</p>
+            <a href="/contact-us" className={styles.joinEmail}>
+              Contact careers team
             </a>
           </div>
           <div className={styles.joinRight}>

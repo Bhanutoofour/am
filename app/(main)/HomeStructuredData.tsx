@@ -3,12 +3,29 @@ import Script from "next/script";
 export default function HomeStructuredData() {
   const structuredData = {
     "@context": "https://schema.org",
-    "@type": "Organization",
-    name: "Autocracy Machinery",
+    "@type": "LocalBusiness",
+    "@id": "https://autocracymachinery.com/#localbusiness",
+    name: "Autocracy Machinery Private Limited",
+    alternateName: "Autocracy Machinery",
     description:
-      "Autocracy Machinery manufactures trencher machines, tractor attachments, solar EPC equipment, aquatic weed harvesters, floating trash collectors, forklifts, sod machines, and utility equipment for infrastructure, agriculture, water management, telecom, and construction projects.",
+      "Manufacturer of trenchers, solar EPC equipment, aquatic weed harvesters, attachments, forklifts, and utility machines.",
     url: "https://autocracymachinery.com",
     logo: "https://d3du1kxieyd1np.cloudfront.net/assets/autcracy_machinery_logo.png",
+    image:
+      "https://d3du1kxieyd1np.cloudfront.net/assets/hero_section/trenching-machine-rudra-100xt.jpg",
+    telephone: "+91-8790473345",
+    priceRange: "$$",
+    foundingDate: "2020",
+    address: {
+      "@type": "PostalAddress",
+      streetAddress:
+        "Plot No.72/A, I.D.A. Phase-1, Lane-3, B N Reddy Nagar, Cherlapalli",
+      addressLocality: "Hyderabad",
+      addressRegion: "Telangana",
+      postalCode: "500051",
+      addressCountry: "IN",
+    },
+    areaServed: ["India", "Asia", "Africa", "Global"],
     sameAs: [
       "https://www.facebook.com/people/Autocracy-Machinery/61554797280328/",
       "https://www.linkedin.com/company/autocracy-machinery",
@@ -18,19 +35,10 @@ export default function HomeStructuredData() {
     contactPoint: {
       "@type": "ContactPoint",
       telephone: "+91-8790473345",
-      contactType: "customer service",
+      contactType: "sales and customer support",
       areaServed: "IN",
-      availableLanguage: "English",
+      availableLanguage: ["English", "Hindi", "Telugu"],
     },
-    address: {
-      "@type": "PostalAddress",
-      address:
-        "Plot No.72/A, Lane-3, B N Reddy Nagar, Cherlapalli, Hyderabad, Telangana 500051",
-      addressCountry: "IN",
-      addressLocality: "Hyderabad",
-    },
-    foundingDate: "2020",
-    industry: "Machinery Manufacturing",
     knowsAbout: [
       "Trencher Machines",
       "Chain Trenchers",
@@ -41,39 +49,6 @@ export default function HomeStructuredData() {
       "Tractor Attachments",
       "Utility Equipment",
     ],
-    hasOfferCatalog: {
-      "@type": "OfferCatalog",
-      name: "Autocracy Machinery Equipment Catalog",
-      itemListElement: [
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Product",
-            name: "Trencher Machines",
-            description:
-              "Chain trenchers, rock wheel trenchers, and compact trenching machines for OFC cable laying, irrigation pipelines, solar cable routes, and utility corridors.",
-          },
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Product",
-            name: "Solar EPC and Utility Attachments",
-            description:
-              "Sand fillers, pole stackers, forklifts, and tractor attachments for solar, construction, and infrastructure sites.",
-          },
-        },
-        {
-          "@type": "Offer",
-          itemOffered: {
-            "@type": "Product",
-            name: "Water Body Cleaning Machines",
-            description:
-              "Aquatic weed harvesters, floating trash collectors, and pontoons for lake, canal, pond, and reservoir maintenance.",
-          },
-        },
-      ],
-    },
   };
 
   return (

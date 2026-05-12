@@ -15,17 +15,16 @@ export default async function Home() {
 
 // Default SEO metadata for home page
 export const metadata: Metadata = {
-  title:
-    "Trencher Machine Manufacturer & Utility Equipment | Autocracy Machinery",
+  title: "Trencher Machines & Utility Equipment | Autocracy",
   description:
-    "Autocracy Machinery manufactures trencher machines, solar EPC equipment, aquatic weed harvesters, lake cleaning machines, tractor attachments, forklifts, and utility machinery for global infrastructure projects.",
+    "Explore trenchers, solar EPC equipment, aquatic weed harvesters, attachments, forklifts, and utility machines for field projects.",
   keywords:
     "trencher machine manufacturer, trenching machine, chain trencher, rock wheel trencher, solar EPC equipment, aquatic weed harvester, lake cleaning machine, tractor attachments, utility equipment",
   openGraph: {
     title:
-      "Trencher Machine Manufacturer & Utility Equipment | Autocracy Machinery",
+      "Trencher Machines & Utility Equipment | Autocracy",
     description:
-      "Explore Autocracy Machinery trenchers, attachments, solar EPC equipment, aquatic cleaning machines, forklifts, and utility equipment for infrastructure, agriculture, water, and construction work.",
+      "Explore trenchers, solar EPC equipment, aquatic cleaning machines, attachments, forklifts, and utility machines for field projects.",
     images: [
       {
         url: "https://d3du1kxieyd1np.cloudfront.net/assets/hero_section/trenching-machine-rudra-100xt.jpg",
@@ -41,9 +40,9 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title:
-      "Trencher Machine Manufacturer & Utility Equipment | Autocracy Machinery",
+      "Trencher Machines & Utility Equipment | Autocracy",
     description:
-      "Manufacturer of trenchers, solar EPC equipment, aquatic weed harvesters, tractor attachments, and utility machines for field projects.",
+      "Trenchers, solar EPC equipment, aquatic weed harvesters, attachments, and utility machines for field projects.",
     images: [
       "https://d3du1kxieyd1np.cloudfront.net/assets/autcracy_machinery_logo.png",
     ],

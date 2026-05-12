@@ -22,7 +22,7 @@ const MENU_LINKS = [
 ];
 
 const RESOURCE_LINKS = [
-  { href: "/blogs", label: "Blogs" },
+  { href: "/blog", label: "Blog" },
   { href: "/videos", label: "Videos" },
 ];
 

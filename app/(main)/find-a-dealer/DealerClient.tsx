@@ -76,7 +76,7 @@ const DealerDetailsSubmittedModal = ({
               {!noDealersFound ? (
                 <div className={styles.sharingContent}>
                   <p className={styles.thankYouForSharing}>
-                    We don’t have a dealer in your selected location right now,
+                    We don't have a dealer in your selected location right now,
                     but our team can still assist you directly with product
                     details, pricing, and support.
                   </p>
@@ -95,12 +95,9 @@ const DealerDetailsSubmittedModal = ({
           </div>
           <div className={styles.bottomPortion}>
             <p className={styles.thankYouForSharing}>For quick help: </p>
-            <a
-              href="mailto:sales@autocracymachinery.com"
-              className={styles.needAssistance}
-            >
-              sales@autocracymachinery.com
-            </a>
+            <Link href="/contact-us" className={styles.needAssistance}>
+              Contact sales support
+            </Link>
             <a href="tel:8790473345" className={styles.callUs}>
               Call us at: +91 87904 73345
             </a>

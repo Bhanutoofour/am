@@ -193,6 +193,27 @@ $section-padding: $site-gutter-desktop;
         color: $text-secondary;
       }
 
+      .businessAddress,
+      .businessPhone {
+        font-size: 0.875rem;
+        line-height: 150%;
+        color: $text-secondary;
+      }
+
+      .businessAddress {
+        margin-top: -1rem;
+      }
+
+      .businessPhone {
+        margin-top: -1.25rem;
+        font-weight: 700;
+        transition: color 0.3s ease;
+
+        &:hover {
+          color: $primary-color;
+        }
+      }
+
       .socialMedia {
         display: flex;
         flex-direction: row;

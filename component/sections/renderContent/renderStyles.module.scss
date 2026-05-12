@@ -72,6 +72,17 @@
     margin-bottom: 3rem;
   }
 
+  .contactIntro {
+    margin-bottom: 1rem;
+  }
+
+  .left1,
+  .left2,
+  .right1,
+  .right2 {
+    position: absolute;
+  }
+
   .left1{
     left: 0;
     top: 25rem;
@@ -105,24 +116,4 @@
         display: none;
     }
   }
-  
-//   // Responsive
-//   @media (max-width: 768px) {
-//     .privacyPolicyCont {
-//       padding: 2rem 1rem;
-  
-//       h1 {
-//         font-size: 2rem;
-//       }
-  
-//       h2 {
-//         font-size: 1.25rem;
-//       }
-  
-//       p,
-//       li {
-//         font-size: .875rem;
-//       }
-//     }
-//   }
   

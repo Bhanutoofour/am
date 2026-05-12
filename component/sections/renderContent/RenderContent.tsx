@@ -35,17 +35,17 @@ const RenderContent: React.FC<RenderContentProps> = ({data}) => {
       </div>
       <div className={styles.contactUs}>
         <h2>Contact Us</h2>
-        <p style={{ marginBottom: "1rem"}}>For any questions, concerns, or data-related requests, please contact:</p>
+        <p className={styles.contactIntro}>For any questions, concerns, or data-related requests, please contact:</p>
         <div>
             <h5>{data.contact.companyName}</h5>
             <p>{data.contact.email}</p>
             <p>{data.contact.address}</p>
         </div>
       </div>
-      <Image src={ICONS.CORNER_RIGHT} alt="section corners" width={150} height={150} style={{ position: "absolute"}} className={styles.left1} />
-      <Image src={ICONS.CORNER_RIGHT} alt="section corners" width={150} height={150} style={{ position: "absolute"}} className={styles.left2} />
-      <Image src={ICONS.CORNER_RIGHT} alt="section corners" width={150} height={150} style={{ position: "absolute"}} className={styles.right1} />
-      <Image src={ICONS.CORNER_RIGHT} alt="section corners" width={150} height={150} style={{ position: "absolute"}} className={styles.right2} />
+      <Image src={ICONS.CORNER_RIGHT} alt="section corners" width={150} height={150} className={styles.left1} />
+      <Image src={ICONS.CORNER_RIGHT} alt="section corners" width={150} height={150} className={styles.left2} />
+      <Image src={ICONS.CORNER_RIGHT} alt="section corners" width={150} height={150} className={styles.right1} />
+      <Image src={ICONS.CORNER_RIGHT} alt="section corners" width={150} height={150} className={styles.right2} />
       </div>
   )
 }

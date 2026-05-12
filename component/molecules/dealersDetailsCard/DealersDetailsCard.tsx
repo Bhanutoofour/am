@@ -24,7 +24,6 @@ const DealersDetailsCard: React.FC<DealersDetailsCardProps> = ({ data }) => {
     state,
     country,
     contactNumber,
-    email,
     fullAddress,
     availability,
   } = data;
@@ -70,9 +69,7 @@ const DealersDetailsCard: React.FC<DealersDetailsCardProps> = ({ data }) => {
             width={18}
             height={18}
           />
-          <a href={`mailto:${email}`} className={styles.link}>
-            {email}
-          </a>
+          <span className={styles.link}>Email available on request</span>
         </div>
         <div className={styles.row}>
           <Image

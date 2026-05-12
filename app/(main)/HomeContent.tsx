@@ -18,6 +18,7 @@ import ContentBuild from "@/component/sections/contentBuild/ContentBuild";
 import HomeStructuredData from "./HomeStructuredData";
 import Certificates from "@/component/sections/certificate/Certificates";
 import HomeFaqCta from "./HomeFaqCta";
+import HomeRawContent from "./HomeRawContent";
 
 export default async function HomeContent({
   contentBuildTitle,
@@ -34,6 +35,7 @@ export default async function HomeContent({
         Built for India - Leading Heavy Machinery and Trencher Manufacturer
       </h1>
       <HomeStructuredData />
+      <HomeRawContent />
       <Caraousel heroData={heroData} />
       <Industries industries={industries} />
       <Products products={products} />

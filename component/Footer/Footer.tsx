@@ -42,7 +42,7 @@ const Footer: React.FC = () => {
     {
       section: "Contact us",
       links: [
-        { value: "sales@autocracymachinery.com", type: "email" },
+        { value: "Email sales team", type: "/contact-us" },
         { value: "+91 87904 73345", type: "phone" },
       ],
     },
@@ -85,10 +85,18 @@ const Footer: React.FC = () => {
             attachments, aquatic cleaning machines, forklifts, and utility
             equipment for India and global project sites.
           </p>
+          <p className={styles.businessAddress}>
+            Plot No.72/A, I.D.A. Phase-1, Lane-3, B N Reddy Nagar,
+            Cherlapalli, Hyderabad, Telangana - 500051, India
+          </p>
+          <a href="tel:+918790473345" className={styles.businessPhone}>
+            +91 87904 73345
+          </a>
           <div className={styles.socialMedia}>
             <a
               href="https://www.linkedin.com/company/autocracy-machinery/"
               target="_blank"
+              rel="noopener noreferrer"
             >
               <Image
                 src={HEADERS_ICON.LinkedIn_YELLOW}
@@ -100,6 +108,7 @@ const Footer: React.FC = () => {
             <a
               href="https://www.youtube.com/@AutocracyMachinery"
               target="_blank"
+              rel="noopener noreferrer"
             >
               <Image
                 src={HEADERS_ICON.Youtube_YELLOW}
@@ -108,7 +117,11 @@ const Footer: React.FC = () => {
                 height={20}
               />
             </a>
-            <a href="https://x.com/aceautocracy" target="_blank">
+            <a
+              href="https://x.com/aceautocracy"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <Image
                 src={HEADERS_ICON.Twitter_YELLOW}
                 alt="twitter"
@@ -119,6 +132,7 @@ const Footer: React.FC = () => {
             <a
               href="https://www.facebook.com/people/Autocracy-Machinery/61554797280328"
               target="_blank"
+              rel="noopener noreferrer"
             >
               <Image
                 src={HEADERS_ICON.FACEBOOK_YELLOW}
@@ -141,16 +155,6 @@ const Footer: React.FC = () => {
               <div className={styles.footerLinks}>
                 {footPath.links?.map((link, i) => {
                   switch (link.type) {
-                    case "email":
-                      return (
-                        <a
-                          href={`mailto:${link.value}`}
-                          key={i}
-                          className={styles.contactLink}
-                        >
-                          {link.value}
-                        </a>
-                      );
                     case "phone":
                       return (
                         <a
@@ -178,7 +182,7 @@ const Footer: React.FC = () => {
         </div>
       </div>
       <p className={styles.rights}>
-        © 2026 All Rights Reserved to Autocracy Machinery
+        Copyright 2026 Autocracy Machinery. All rights reserved.
       </p>
       {showModal && (
         <GetQuoteModal showModal={showModal} setShowModal={setShowModal} />

@@ -127,9 +127,7 @@ const ContactUsClient = () => {
           </div>
           <div className={styles.contactInfo}>
             <Image src={ICONS.WHATSAPP} alt="email id" width={16} height={16} />
-            <a href="mailto:sales@autocracymachinery.com">
-              sales@autocracymachinery.com
-            </a>
+            <span>Use the form for sales and support enquiries</span>
           </div>
         </div>
       </div>

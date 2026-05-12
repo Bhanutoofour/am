@@ -39,12 +39,9 @@ const StepTwo = () => {
         </div>
       </div>
       <div className={styles.bottomPortion}>
-        <a
-          href="mailto:sales@autocracymachinery.com"
-          className={styles.needAssistance}
-        >
-          sales@autocracymachinery.com
-        </a>
+        <Link href="/contact-us" className={styles.needAssistance}>
+          Contact sales support
+        </Link>
         <a href="tel:8790473345" className={styles.callUs}>
           Call us at: +91 87904 73345
         </a>

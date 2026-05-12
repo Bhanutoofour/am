@@ -103,9 +103,8 @@
     ],
     contact: {
       companyName: "Autocracy Machinery Private Limited",
-      email: "sales@autocracymachinery.com",
+      email: "Use the Contact Us page for legal and support requests.",
       address:
         "Plot No.72/A, I.D.A. Phase-1, Lane-3, B N Reddy Nagar Cherlapalli, Hyderabad, Telangana 500051."
     }
   };
-  

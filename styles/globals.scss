@@ -78,6 +78,19 @@ table {
   max-width: 100%;
 }
 
+.site-body {
+  position: relative;
+}
+
+.hidden-tracking-frame {
+  display: none;
+  visibility: hidden;
+}
+
+.hidden-tracking-pixel {
+  display: none;
+}
+
 h1,
 h2,
 h3,
@@ -99,6 +112,18 @@ li {
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
+  border: 0;
+}
+
+.raw-html-summary {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: normal;
   border: 0;
 }
 
