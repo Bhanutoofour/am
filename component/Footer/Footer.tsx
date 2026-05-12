@@ -53,12 +53,13 @@ const Footer: React.FC = () => {
       <div className={styles.yellowContainer}>
         <div className={styles.yellowContainerText}>
           <p className={styles.headText}>
-            Built for Performance. Branded for You.
+            Built for Tough Sites. Ready for Your Project.
           </p>
           <p className={styles.subText}>
-            From trenchers to multi-utility machines, Autocracy Machinery
-            delivers rugged, customizable solutions—designed to power
-            infrastructure, telecom, and agri projects.
+            From trencher machines and solar EPC attachments to aquatic weed
+            harvesters and utility equipment, Autocracy Machinery delivers
+            rugged solutions for infrastructure, telecom, water, and
+            agriculture projects.
           </p>
         </div>
         <Button
@@ -80,8 +81,9 @@ const Footer: React.FC = () => {
             />
           </div>
           <p className={styles.address}>
-            Autocracy machinery is a trading style of Aceautocracy Machinery
-            Pvt. Limited, a company incorporated in India.
+            Autocracy Machinery Private Limited manufactures trenchers,
+            attachments, aquatic cleaning machines, forklifts, and utility
+            equipment for India and global project sites.
           </p>
           <div className={styles.socialMedia}>
             <a

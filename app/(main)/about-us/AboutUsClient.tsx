@@ -17,26 +17,23 @@ import Recognitions from "@/component/sections/recognitions/Recognitions";
 const AboutUsClient = () => {
   return (
     <div className={styles.aboutUsContainer}>
-      <h1
-        className={styles.pageTitle}
-      >{`Machines That Build.\nInnovation That Lasts.`}</h1>
+      <h1 className={styles.pageTitle}>
+        {`Engineering Machines\nfor Real Field Work.`}
+      </h1>
       <div className={styles.collageContainer}>
-        {ABOUTUSGRID.map((item, idx) => {
-          return (
-            <div key={`${idx} grid`} className={styles.item}>
-              <Image
-                src={item}
-                alt={"team collage"}
-                width={248}
-                height={226}
-                className={styles.collageImage}
-              />
-            </div>
-          );
-        })}
+        {ABOUTUSGRID.map((item, idx) => (
+          <div key={`${idx} grid`} className={styles.item}>
+            <Image
+              src={item}
+              alt="Autocracy Machinery team and manufacturing collage"
+              width={248}
+              height={226}
+              className={styles.collageImage}
+            />
+          </div>
+        ))}
       </div>
 
-      {/* Vision, Mission and Values Section */}
       <div className={styles.missionVisionSection}>
         <div className={styles.missionVisionCard}>
           <div className={styles.iconWrapper}>
@@ -51,9 +48,9 @@ const AboutUsClient = () => {
           <div className={styles.content}>
             <h3 className={styles.cardTitle}>Our Vision</h3>
             <p className={styles.cardDescription}>
-              To be the world's most trusted source for intelligent and
-              sustainable machinery – where every machine built reflects
-              superior quality, efficiency, and innovation.
+              To be a trusted global manufacturer of intelligent, sustainable,
+              and field-proven machinery for trenching, infrastructure, water
+              management, agriculture, and environmental applications.
             </p>
           </div>
         </div>
@@ -71,16 +68,16 @@ const AboutUsClient = () => {
           <div className={styles.content}>
             <h3 className={styles.cardTitle}>Our Mission</h3>
             <p className={styles.cardDescription}>
-              To design and deliver high-performance, cost-effective machinery
-              that drives productivity, precision, and progress – empowering
-              industries worldwide with Indian engineering excellence.
+              To design and manufacture high-performance, cost-effective
+              machinery that improves productivity, precision, and project
+              execution for contractors, farmers, municipalities, and EPC teams.
             </p>
           </div>
         </div>
 
         <div className={styles.valuesCard}>
           <p className={styles.introText}>
-            {`Every bolt, every weld, every\ninnovation carries a single mark –`}
+            {`Every bolt, every weld, every\ninnovation carries a single mark -`}
           </p>
           <h3 className={styles.mainTitle}>
             {`Make in India and Made for the World.`}
@@ -89,54 +86,55 @@ const AboutUsClient = () => {
       </div>
 
       <div className={styles.teamSection}>
-        {/* Header Section */}
         <div className={styles.headerSection}>
           <h2 className={styles.headerTitle}>
-            We Build the Machines That Build the Nation
+            We Build Trenchers and Utility Machines for the Work That Matters
           </h2>
           <div className={styles.headerDescription}>
             <p>
-              Autocracy Machinery is a Made-in-India engineering leader
-              manufacturing high-performance machines for telecom, water
-              management, solar, defence, and environmental sustainability.
+              Autocracy Machinery is a Made-in-India machinery manufacturer
+              building trenchers, tractor attachments, aquatic weed harvesters,
+              forklifts, and utility equipment for telecom, solar, water
+              management, agriculture, defence, and construction projects.
             </p>
             <p>
               Based in Hyderabad with ISO 9001 certification, we build rugged,
-              field-ready equipment that keeps India connected, powered, and
-              progressing.
+              field-ready machines that help teams lay cables, cut trenches,
+              clean water bodies, move materials, and complete projects with
+              better control.
             </p>
           </div>
         </div>
 
-        {/* Our Journey Section */}
         <div className={styles.contentSection}>
           <div className={styles.textContent}>
             <h3 className={styles.sectionTitle}>
-              Our Journey of Engineering Excellence
+              Our Journey in Specialised Machinery Manufacturing
             </h3>
             <div className={styles.sectionText}>
               <p>
                 <strong>
-                  Our journey is shaped by an engineering ethos of precision,
-                  reliability, and purposeful problem-solving.
+                  Our journey is shaped by practical engineering, application
+                  knowledge, and the discipline to solve field problems that
+                  standard machines often miss.
                 </strong>
               </p>
               <p>
-                Driven by a vision of strengthening India’s self-reliance, we
-                refine and validate every system to ensure dependable
-                performance in real-world conditions.
+                Driven by a vision of strengthening India's self-reliance, we
+                design, test, and refine machines for real soil conditions,
+                route constraints, water bodies, and operating environments.
               </p>
               <p>
-                With 40+ models across 13 product lines and a presence in 20+
-                states and global markets, our solutions remain cost-effective,
-                durable, and proudly indigenous.
+                With 40+ models across 13 product lines and a presence across
+                India and global markets, our solutions remain durable,
+                serviceable, and proudly indigenous.
               </p>
             </div>
           </div>
           <div className={styles.imageContent}>
             <Image
               src={ABOUTUSTEAM.TEAMIAMGE_1}
-              alt="Our Journey of Engineering Excellence"
+              alt="Autocracy Machinery engineering and manufacturing team"
               width={500}
               height={400}
               className={styles.contentImage}
@@ -144,32 +142,32 @@ const AboutUsClient = () => {
           </div>
         </div>
 
-        {/* Our Legacy Section */}
         <div className={styles.contentSection}>
           <div className={styles.textContent}>
             <h3 className={styles.sectionTitle}>Our Legacy of Innovation</h3>
             <div className={styles.sectionText}>
               <p>
                 <strong>
-                  Innovation is where we push boundaries and create what didn’t
-                  exist before.
+                  Innovation means building equipment that improves how people
+                  trench, lift, clean, harvest, move, and maintain field assets.
                 </strong>
               </p>
               <p>
-                We have introduced first-of-its-kind concepts, built
-                import-replacement solutions, and developed new technologies
-                that redefine what specialised machinery can achieve.
+                We have introduced import-replacement machines, compact
+                trenching solutions, water body cleaning equipment, and
+                application-specific attachments for demanding project sites.
               </p>
               <p>
-                Our legacy is shaped by breakthroughs that improve capability,
-                enhance efficiency, and set new standards for performance.
+                Our legacy is shaped by practical breakthroughs that improve
+                capability, reduce manual work, and help customers finish
+                projects with greater consistency.
               </p>
             </div>
           </div>
           <div className={styles.imageContent}>
             <Image
               src={ABOUTUSTEAM.TEAMIAMGE_2}
-              alt="Our Legacy of Innovation"
+              alt="Specialised machinery innovation at Autocracy Machinery"
               width={500}
               height={400}
               className={styles.contentImage}
@@ -177,7 +175,6 @@ const AboutUsClient = () => {
           </div>
         </div>
 
-        {/* Empowered by Diversity Section */}
         <div className={styles.contentSection}>
           <div className={styles.textContent}>
             <h3 className={styles.sectionTitle}>Empowered by Diversity</h3>
@@ -189,22 +186,22 @@ const AboutUsClient = () => {
                 </strong>
               </p>
               <p>
-                OWe firmly believe that bringing together people with different
-                backgrounds, experiences, and skills — including strong gender
-                representation across technical and leadership roles — leads to
+                We believe that bringing together people with different
+                backgrounds, experiences, and skills, including strong gender
+                representation across technical and leadership roles, leads to
                 richer ideas and stronger outcomes.
               </p>
               <p>
-                This diversity enhances our problem-solving, strengthens
-                collaboration, and elevates the quality of every solution we
-                create.
+                This diversity improves problem-solving, strengthens
+                collaboration, and raises the quality of every machine and
+                customer solution we create.
               </p>
             </div>
           </div>
           <div className={styles.imageContent}>
             <Image
               src={ABOUTUSTEAM.TEAMIAMGE_3}
-              alt="Empowered by Diversity"
+              alt="Diverse Autocracy Machinery team"
               width={500}
               height={400}
               className={styles.contentImage}
@@ -213,7 +210,6 @@ const AboutUsClient = () => {
         </div>
       </div>
 
-      {/* Founder Section */}
       <div className={styles.founderSection}>
         <h2 className={styles.founderTitle}>
           Our Founders: The Visionaries Behind the Machines
@@ -278,13 +274,13 @@ const AboutUsClient = () => {
         </div>
       </div>
 
-      {/* Initiatives Section */}
       <div className={styles.initiativesSection}>
         <div className={styles.initiativesHeader}>
-          <h2 className={styles.initiativesTitle}>The initiatives</h2>
+          <h2 className={styles.initiativesTitle}>The Initiatives</h2>
           <p className={styles.initiativesDescription}>
-            We are Autocracy Machinery Private Limited – a Hyderabad-based, ISO
-            9001 certified powerhouse of engineering innovation.
+            We are Autocracy Machinery Private Limited, a Hyderabad-based ISO
+            9001 certified manufacturer of trenchers, attachments, aquatic
+            cleaning machines, and infrastructure equipment.
           </p>
         </div>
         <div className={styles.initiativesMarqueeContainer}>
@@ -293,7 +289,7 @@ const AboutUsClient = () => {
               <div key={idx} className={styles.initiativesImageWrapper}>
                 <Image
                   src={image}
-                  alt={`Initiative ${idx + 1}`}
+                  alt={`Autocracy Machinery initiative ${idx + 1}`}
                   width={400}
                   height={300}
                   className={styles.initiativesImage}
@@ -304,7 +300,6 @@ const AboutUsClient = () => {
         </div>
       </div>
 
-      {/* Pillars of Excellence Section */}
       <div className={styles.excellenceSection}>
         <div className={styles.excellenceContent}>
           <h2 className={styles.excellenceTitle}>Our Pillars of Excellence</h2>
@@ -320,7 +315,7 @@ const AboutUsClient = () => {
         <div className={styles.excellenceImageWrapper}>
           <Image
             src={EXCELLENCE_DATA.SECTION_IMAGE}
-            alt="Our Pillars of Excellence"
+            alt="Autocracy Machinery quality, service, innovation, and field performance"
             width={600}
             height={600}
             className={styles.excellenceImage}
@@ -328,7 +323,11 @@ const AboutUsClient = () => {
         </div>
       </div>
 
-      <Recognitions data={AwardsData} title="Awards" conatinerClassName={styles.aboutUsAwards} />
+      <Recognitions
+        data={AwardsData}
+        title="Awards"
+        conatinerClassName={styles.aboutUsAwards}
+      />
     </div>
   );
 };

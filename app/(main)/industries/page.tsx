@@ -3,9 +3,9 @@ import type { Metadata } from "next";
 import IndustriesClient from "./IndustriesClient";
 
 export const metadata: Metadata = {
-  title: "Choose Your Industry | Autocracy Machinery",
+  title: "Industry Equipment for Telecom, Solar, Water & Agriculture | Autocracy",
   description:
-    "Explore Autocracy Machinery industry solutions for telecom, water management, solar energy, agriculture, construction, landscaping, and environmental applications.",
+    "Explore industry-specific trenchers, solar EPC equipment, water management machines, agriculture attachments, construction utility equipment, and environmental cleaning solutions.",
 };
 
 export default async function IndustriesPage() {

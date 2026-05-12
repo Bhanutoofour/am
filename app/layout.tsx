@@ -6,9 +6,9 @@ import LocationSelector from "@/component/locationSelector/LocationSelector";
 export const metadata: Metadata = {
   metadataBase: new URL("https://autocracymachinery.com"),
   title:
-    "Trencher Machines Manufacturer & Supplier India | Autocracy Machinery",
+    "Trencher Machine Manufacturer in India | Autocracy Machinery",
   description:
-    "Autocracy Machinery is India's global manufacturer of equipment and attachments, trenchers, padding, pole stacking, forklift, lake cleaner, sod harvester, sprigger and infielder.",
+    "Autocracy Machinery manufactures trencher machines, solar EPC equipment, aquatic weed harvesters, tractor attachments, forklifts, and utility machinery for infrastructure, agriculture, water management, telecom, and construction projects.",
   icons: {
     icon: "/favicon.ico",
   },

@@ -74,7 +74,9 @@ const Products: React.FC<ProductsProps> = ({ products }) => {
     <section className={styles.productSection}>
       <div className={styles.content}>
         <div className={styles.productHeadingContainer}>
-          <h4 className={styles.sectionTitle}>Our Products lineups</h4>
+          <h4 className={styles.sectionTitle}>
+            Trenchers, Attachments and Utility Machines
+          </h4>
           <div className={styles.navigationContainer}>
             <button className={styles.viewAll} onClick={handleViewAll}>
               VIEW ALL PRODUCTS

@@ -3,22 +3,22 @@ import type { Metadata } from "next";
 import FaqClient from "./FaqClient";
 
 export const metadata: Metadata = {
-  title: "Frequently Asked Questions - FAQs – Autocracy Machinery",
+  title: "FAQs - Trencher Machines, Rentals & Equipment | Autocracy Machinery",
   description:
-    "Quick answers to common questions about Autocracy Machinery products and services.",
+    "Find answers about Autocracy Machinery trenchers, solar EPC equipment, aquatic weed harvesters, tractor attachments, rentals, dealers, brochures, spares, and support.",
   alternates: { canonical: "https://autocracymachinery.com/faqs" },
   openGraph: {
-    title: "FAQs – Autocracy Machinery",
+    title: "Autocracy Machinery FAQs",
     description:
-      "Quick answers to common questions about Autocracy Machinery products and services.",
+      "Answers about trenching machines, utility equipment, water body cleaning machines, rentals, dealers, and support.",
     url: "https://autocracymachinery.com/faqs",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "FAQs – Autocracy Machinery",
+    title: "Autocracy Machinery FAQs",
     description:
-      "Quick answers to common questions about Autocracy Machinery products and services.",
+      "Common questions about Autocracy Machinery products, applications, rentals, and support.",
   },
 };
 

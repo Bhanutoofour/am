@@ -7,10 +7,11 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title:
-    "Autocracy Machinery – Heavy-Duty Industrial & Infrastructure Machines",
+    "Trencher Machines, Attachments & Utility Equipment | Autocracy Machinery",
   description:
-    "Autocracy Machinery offers heavy-duty industrial, infrastructure, and environmental machines, including trenchers, dredgers, forklifts, and aquatic weed harvesters.",
+    "Explore trencher machines, solar EPC equipment, tractor attachments, forklifts, aquatic weed harvesters, sod machines, and utility machinery from Autocracy Machinery.",
 };
+
 async function ProductsContent() {
   const [products, industries] = await Promise.all([
     getProductsWithIndustries(),

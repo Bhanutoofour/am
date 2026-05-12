@@ -45,7 +45,7 @@ const ContactUsClient = () => {
 
   return (
     <div className={styles.contactUsContainer}>
-      <h1>Contact us</h1>
+      <h1>Contact Autocracy Machinery</h1>
       <div className={styles.contactForm}>
         <div className={styles.contactSect}>
           <FormInput
@@ -112,7 +112,7 @@ const ContactUsClient = () => {
           <h3>Autocracy Machinery Pvt. Ltd.</h3>
           <p>
             Plot No.72/A, I.D.A. Phase-1, Lane-3, B N Reddy Nagar, Cherlapalli,
-            Hyderabad, Telangana – 500051, India
+            Hyderabad, Telangana - 500051, India
           </p>
         </div>
         <div className={styles.companyContact}>

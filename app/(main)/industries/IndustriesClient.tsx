@@ -20,12 +20,12 @@ export default function IndustriesClient({
       question:
         "How does Autocracy Machinery help choose trenchers and infrastructure machines?",
       answer:
-        "Autocracy Machinery recommends trenchers, attachments, aquatic weed harvesters, floating pontoons, and other infrastructure machines based on the application, soil or water conditions, required output, working depth, and carrier compatibility.",
+        "Autocracy Machinery recommends trenchers, attachments, aquatic weed harvesters, floating pontoons, and other infrastructure machines based on application, soil or water conditions, trench width, trench depth, required output, and carrier compatibility.",
     },
     {
       question: "Which industries use Autocracy Machinery trenching equipment?",
       answer:
-        "Autocracy Machinery trenching equipment is used for OFC telecommunications, water management, solar energy cable trenching, agriculture irrigation, landscaping, construction utility work, and civil engineering projects.",
+        "Autocracy Machinery trenching equipment is used for OFC telecommunications, solar cable trenching, water pipelines, irrigation, landscaping, construction utilities, defence corridors, and civil engineering projects.",
     },
     {
       question:
@@ -37,7 +37,7 @@ export default function IndustriesClient({
       question:
         "What details are available on Autocracy Machinery industry pages?",
       answer:
-        "Each industry page connects buyers to relevant Autocracy Machinery products, model specifications, application guidance, product images, videos, brochures, and quote options for that industry.",
+        "Each industry page connects buyers to relevant Autocracy Machinery products, model specifications, application guidance, product images, videos, brochures, and quote options for that application.",
     },
   ];
 
@@ -68,12 +68,14 @@ export default function IndustriesClient({
           {isIndiaMarket ? "Industry Solutions in India" : "Industry Solutions"}
         </p>
         <h1 className={styles.heading}>
-          {isIndiaMarket ? "Choose Your Industry in India" : "Choose Your Industry"}
+          {isIndiaMarket
+            ? "Find Equipment for Your Industry in India"
+            : "Find Equipment for Your Industry"}
         </h1>
         <p className={styles.intro}>
           {isIndiaMarket
-            ? "Explore Autocracy Machinery equipment for Indian industry applications, including OFC trenching machines in India, water management machinery, solar cable trenching equipment, agriculture attachments, construction utility machines, defence equipment, and environmental cleaning solutions built for Indian field conditions."
-            : "Explore Autocracy Machinery equipment by industry application, including OFC telecommunications trenchers, water management machines, solar cable trenching equipment, agriculture and landscaping attachments, construction utility machines, and environmental cleaning solutions."}
+            ? "Explore Autocracy Machinery equipment for Indian industry applications, including OFC trenching machines, solar cable trenching equipment, water pipeline trenchers, agriculture attachments, construction utility machines, defence trenching equipment, landscaping machines, and water body cleaning solutions built for Indian field conditions."
+            : "Explore Autocracy Machinery equipment by industry application, including OFC telecommunications trenchers, solar EPC equipment, water management machines, agriculture and landscaping attachments, construction utility machines, defence trenching equipment, and environmental cleaning solutions."}
         </p>
       </section>
       {industries.length > 0 ? (
@@ -102,8 +104,8 @@ export default function IndustriesClient({
           </h2>
           <p>
             {isIndiaMarket
-              ? "Autocracy Machinery helps match trenchers in India, post hole diggers, attachments, aquatic weed harvesters, and floating pontoons to soil, water, route access, carrier fit, and project productivity."
-              : "Autocracy Machinery helps match trenchers, post hole diggers, attachments, aquatic weed harvesters, and floating pontoons to project type, ground or water conditions, operating corridor, and productivity expectations."}
+              ? "Autocracy Machinery helps match trenchers in India, post hole diggers, solar attachments, aquatic weed harvesters, and floating pontoons to soil, water, route access, carrier fit, and project productivity."
+              : "Autocracy Machinery helps match trenchers, post hole diggers, utility attachments, aquatic weed harvesters, and floating pontoons to project type, ground or water conditions, operating corridor, and productivity expectations."}
           </p>
         </article>
         <article className={styles.insightCard}>
@@ -163,9 +165,9 @@ export default function IndustriesClient({
           <p>
             Autocracy Machinery helps project teams select industrial and
             infrastructure machines by real site requirements, including
-            trenching, OFC cable routing, pipeline routing, utility corridors,
-            irrigation trenching, solar infrastructure, environmental cleaning,
-            landscaping, and civil construction work.
+            trenching, OFC cable routing, pipeline trenching, utility corridors,
+            irrigation trenching, solar infrastructure, aquatic weed removal,
+            lake cleaning, landscaping, and civil construction work.
           </p>
           <p>
             Each industry page highlights relevant Autocracy Machinery products

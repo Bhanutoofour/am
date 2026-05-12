@@ -6,9 +6,9 @@ import { Suspense } from "react";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Industrial & Infrastructure Machines in India | Autocracy Machinery",
+  title: "Trencher Machines & Utility Equipment in India | Autocracy Machinery",
   description:
-    "Explore Autocracy Machinery products for India, including trenchers, aquatic weed harvesters, forklifts, attachments, and infrastructure equipment built for Indian worksites.",
+    "Explore Autocracy Machinery products in India, including chain trenchers, rock wheel trenchers, solar EPC equipment, aquatic weed harvesters, forklifts, attachments, and infrastructure equipment.",
   alternates: {
     canonical: "https://autocracymachinery.com/en-in/products",
     languages: {
@@ -29,8 +29,8 @@ async function ProductsContent() {
       products={products}
       industries={industries}
       basePath="/en-in"
-      pageTitle="Products for India"
-      pageSubtitle="Autocracy Machinery builds rugged trenchers, environmental machines, forklifts, attachments, and infrastructure equipment for Indian agriculture, telecom, water management, construction, solar, and defence projects. Our machines are engineered for Indian soil conditions, field uptime, and reliable after-sales support across demanding worksites."
+      pageTitle="Trenchers and Utility Machines for India"
+      pageSubtitle="Autocracy Machinery builds rugged trencher machines, solar EPC equipment, water body cleaning machines, forklifts, tractor attachments, and infrastructure equipment for Indian agriculture, telecom, water management, construction, solar, and defence projects. Our machines are engineered for Indian soil conditions, field uptime, and reliable after-sales support across demanding worksites."
     />
   );
 }

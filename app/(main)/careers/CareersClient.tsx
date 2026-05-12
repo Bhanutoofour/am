@@ -72,9 +72,9 @@ const CareersClient = () => {
           {/* Center Content */}
           <div className={styles.centerContent}>
             <h1 className={styles.heroTitle}>
-              Your Career. Your Impact.
+              Build Machines. Build Skills.
               <br />
-              Our Future.
+              Shape Real Projects.
             </h1>
             <a href="#join-section" className={styles.ctaButton}>
               Elevate your journey
@@ -86,7 +86,7 @@ const CareersClient = () => {
       {/* Build the Future Section */}
       <section className={styles.buildFutureSection}>
         <h2 className={styles.buildFutureTitle}>
-          {"Build the Future\nwith Us"}
+          {"Build Field-Ready\nMachines with Us"}
         </h2>
         <div className={styles.valuesGrid}>
           <div className={styles.valueCard}>
@@ -101,18 +101,18 @@ const CareersClient = () => {
           <div className={styles.valueCard}>
             <h3 className={styles.valueTitle}>Innovate Every Day</h3>
             <p className={styles.valueDescription}>
-              At Autocracy, innovation isn't a department — it's our culture.
-              You'll work with teams that challenge conventions, embrace new
-              ideas, and build cutting-edge machinery that defines the future of
-              manufacturing.
+              At Autocracy, innovation is practical and hands-on. You'll work
+              with teams that improve trenchers, attachments, water cleaning
+              machines, and utility equipment for demanding field applications.
             </p>
           </div>
           <div className={styles.valueCard}>
             <h3 className={styles.valueTitle}>Make It Matter</h3>
             <p className={styles.valueDescription}>
-              We give you the autonomy to own your projects, shape ideas, and
-              see them come to life. Every contribution here counts — because
-              your work directly fuels progress across industries.
+              We give you the autonomy to own projects, shape ideas, and see
+              them come to life. Every contribution counts because our machines
+              support telecom, solar, agriculture, water, and infrastructure
+              work.
             </p>
           </div>
         </div>

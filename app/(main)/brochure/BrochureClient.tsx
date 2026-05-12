@@ -79,7 +79,7 @@ const BrochureClient: React.FC = () => {
       {/* Desktop Layout */}
       {!isMobile && (
         <>
-          <h1 className={styles.navTitle}>Product Brochures</h1>
+          <h1 className={styles.navTitle}>Trencher and Equipment Brochures</h1>
           <div className={styles.innerContainer}>
             {/* Left Navigation */}
             <div className={styles.leftNav}>
@@ -138,7 +138,9 @@ const BrochureClient: React.FC = () => {
                     />
                   </div>
                   <p className={styles.placeholderText}>
-                    Please select a product from the list to view its brochures.
+                    Select a product to view brochures for trenchers,
+                    attachments, water management machines, and utility
+                    equipment.
                   </p>
                 </div>
               ) : (
@@ -206,7 +208,7 @@ const BrochureClient: React.FC = () => {
           {!showProductDetails ? (
             // Mobile: Initial State - Page title + Product list
             <>
-              <h1 className={styles.navTitle}>Product Brochures</h1>
+              <h1 className={styles.navTitle}>Trencher and Equipment Brochures</h1>
               <div className={styles.leftNav}>
                 <div className={styles.productList}>
                   {products.map((product) => (

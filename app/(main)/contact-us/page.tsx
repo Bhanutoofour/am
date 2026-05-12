@@ -4,22 +4,22 @@ import ContactUsClient from "./ContactUsClient";
 
 export const metadata: Metadata = {
   title:
-    "Contact Us - Trencher Manufacturer Equipment Suppliers - Autocracy Machinery",
+    "Contact Autocracy Machinery | Trencher & Equipment Manufacturer India",
   description:
-    "Get in touch with Autocracy Machinery for durable trenchers and utility equipment. Quick assistance, expert advice, and project-ready solutions.",
+    "Contact Autocracy Machinery for trencher machines, solar EPC equipment, aquatic weed harvesters, tractor attachments, forklifts, rentals, spares, and project support.",
   alternates: { canonical: "https://autocracymachinery.com/contact-us" },
   openGraph: {
-    title: "Contact Us – Autocracy Machinery",
+    title: "Contact Autocracy Machinery",
     description:
-      "Get in touch with Autocracy Machinery for durable trenchers and utility equipment. Quick assistance, expert advice, and project-ready solutions.",
+      "Get product guidance, quotes, rental support, brochures, and after-sales help for Autocracy Machinery equipment.",
     url: "https://autocracymachinery.com/contact-us",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Contact Us – Autocracy Machinery",
+    title: "Contact Autocracy Machinery",
     description:
-      "Get in touch with Autocracy Machinery for durable trenchers and utility equipment. Quick assistance, expert advice, and project-ready solutions.",
+      "Talk to Autocracy Machinery for trenchers, utility equipment, rentals, spares, and support.",
   },
 };
 

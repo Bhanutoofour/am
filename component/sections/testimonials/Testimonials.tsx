@@ -105,11 +105,11 @@ const Testimonials: React.FC<TestimonialProps> = ({
         <div className={styles.content}>
           <div className={styles.testimonialHeadingContainer}>
             <div style={{ width: "100%" }}>
-              <h2 className={styles.sectionTitle}>Customer Testimonial</h2>
+              <h2 className={styles.sectionTitle}>Customer Testimonials</h2>
               <p className={styles.sectionSubTitle}>
-                Autocracy Machinery is trusted by fastest growth companies the
-                focus on <br /> financial management Here`s what they have to
-                say about us.
+                Contractors, EPC teams, municipalities, and operators use
+                Autocracy machines for trenching, solar, water management,
+                agriculture, and utility projects.
               </p>
             </div>
             <div className={styles.navButtons}>

@@ -4,29 +4,29 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title:
-    "Download Autocracy Machinery Brochure – Industrial & Infrastructure Machines",
+    "Download Trencher Machine & Equipment Brochures | Autocracy Machinery",
   description:
-    "Get the latest brochure from Autocracy Machinery – India's manufacturer of trenchers, multi-utility machines & industrial solutions built for performance across construction, telecom, agriculture and infrastructure projects.",
+    "Download Autocracy Machinery brochures for trencher machines, solar EPC equipment, aquatic weed harvesters, tractor attachments, forklifts, sod machines, and utility equipment.",
   keywords: [
+    "trencher machine brochure",
+    "trenching machine catalogue",
+    "solar EPC equipment brochure",
+    "aquatic weed harvester brochure",
     "Autocracy Machinery brochure",
-    "industrial machinery brochure",
-    "trenchers catalogue",
-    "infrastructure equipment India",
-    "construction & agri machines PDF",
   ],
   alternates: { canonical: "https://autocracymachinery.com/brochure" },
   openGraph: {
-    title: "Download Brochure – Autocracy Machinery",
+    title: "Download Autocracy Machinery Brochures",
     description:
-      "Get the latest brochure from Autocracy Machinery – India's manufacturer of trenchers, multi-utility machines & industrial solutions.",
+      "Get brochures for trenchers, attachments, water management machines, forklifts, and utility equipment.",
     url: "https://autocracymachinery.com/brochure",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Download Brochure – Autocracy Machinery",
+    title: "Download Autocracy Machinery Brochures",
     description:
-      "Get the latest brochure from Autocracy Machinery – India's manufacturer of trenchers, multi-utility machines & industrial solutions.",
+      "Download brochures for trencher machines, attachments, and project-ready equipment.",
   },
 };
 

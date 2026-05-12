@@ -3,9 +3,9 @@ import type { Metadata } from "next";
 import { indiaCanonical, rootCanonical } from "@/utils/locale";
 
 export const metadata: Metadata = {
-  title: "FAQs - Autocracy Machinery India",
+  title: "FAQs - Trencher Machines & Utility Equipment | Autocracy India",
   description:
-    "Answers to common questions about Autocracy Machinery products, applications, support, and project enquiries in India.",
+    "Answers to common questions about Autocracy Machinery trenchers, solar EPC equipment, aquatic weed harvesters, rentals, dealers, support, and project enquiries in India.",
   alternates: {
     canonical: indiaCanonical("/faqs"),
     languages: {

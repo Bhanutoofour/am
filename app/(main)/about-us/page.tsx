@@ -4,22 +4,22 @@ import AboutUsClient from "./AboutUsClient";
 
 export const metadata: Metadata = {
   title:
-    "About Us - Trencher Digger Equipment Machines Manufacturer Company - Autocracy Machinery",
+    "About Autocracy Machinery | Trencher Machine Manufacturer in India",
   description:
-    "Autocracy Machinery is India's leading manufacturer of specialty construction, agricultural, and infrastructure machinery and attachments.",
+    "Learn about Autocracy Machinery, an ISO-certified manufacturer of trencher machines, tractor attachments, aquatic weed harvesters, solar EPC equipment, forklifts, and utility machinery in India.",
   alternates: { canonical: "https://autocracymachinery.com/about-us" },
   openGraph: {
-    title: "About Us – Autocracy Machinery",
+    title: "About Autocracy Machinery",
     description:
-      "Autocracy Machinery is India's leading manufacturer of specialty construction, agricultural, and infrastructure machinery and attachments.",
+      "Autocracy Machinery manufactures specialised trenchers, attachments, water management machines, and infrastructure equipment for India and global markets.",
     url: "https://autocracymachinery.com/about-us",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "About Us – Autocracy Machinery",
+    title: "About Autocracy Machinery",
     description:
-      "Autocracy Machinery is India's leading manufacturer of specialty construction, agricultural, and infrastructure machinery and attachments.",
+      "Meet the Hyderabad-based machinery manufacturer behind Autocracy trenchers, attachments, aquatic cleaning machines, and utility equipment.",
   },
 };
 

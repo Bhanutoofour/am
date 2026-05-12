@@ -102,12 +102,14 @@ const HireEquipmentClient: React.FC<HireEquipmentClientProps> = ({
   return (
     <div className={styles.hireContainer}>
       <div className={styles.headingContent}>
-        <h1 className={styles.contentHeading}>Hire Equipment on Rent</h1>
+        <h1 className={styles.contentHeading}>
+          Hire Trenchers and Utility Equipment on Rent
+        </h1>
         <p className={styles.contentPara}>
-          Get certified, high-performance machinery on rent directly from
-          Autocracy Machinery. Ideal for short-term or long-term projects, our
-          machines help reduce capital costs while maintaining operational
-          efficiency.
+          Rent project-ready machinery directly from Autocracy Machinery for
+          short-term and long-term work. Hire trenchers, pole erection machines,
+          floating trash collectors, and other utility equipment for telecom,
+          solar, water management, construction, and infrastructure projects.
         </p>
       </div>
       <div className={styles.itemLists}>
@@ -165,10 +167,10 @@ const HireEquipmentClient: React.FC<HireEquipmentClientProps> = ({
                 )}
                 {step === 1 && (
                   <p className={styles.hireDesc}>
-                    Get certified, high-performance machinery on rent directly
-                    from Autocracy Machinery. Ideal for short-term or long-term
-                    projects, our machines help reduce capital costs while
-                    maintaining operational efficiency.
+                    Get project-ready machinery on rent directly from Autocracy
+                    Machinery. Share your site requirement, duration, and
+                    application so our team can guide machine availability and
+                    next steps.
                   </p>
                 )}
               </div>

@@ -38,7 +38,7 @@ const Industries: React.FC<IndustriesProps> = ({ industries }) => {
         className={styles.sectionCorner}
       />
       <div className={styles.content}>
-        <h2 className={styles.sectionTitle}>Choose Your Industry</h2>
+        <h2 className={styles.sectionTitle}>Machinery by Industry Application</h2>
 
         <div className={styles.industryGrid}>
           {data && data.length > 0 ? (

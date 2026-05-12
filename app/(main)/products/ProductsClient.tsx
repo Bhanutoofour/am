@@ -20,8 +20,8 @@ const ProductsClient: React.FC<ProductsClientProps> = ({
   products,
   industries,
   basePath = "",
-  pageTitle = "All Our Products",
-  pageSubtitle = "Autocracy Machinery designs and manufactures heavy-duty machines for industrial, infrastructure, and environmental applications. Our products include trenchers, self-propelled machines, forklifts, dredgers, aquatic weed harvesters, and more. Built for high performance, durability, and ease of operation, they serve industries like telecommunications, water management, agriculture, construction, energy, and defence. With in-house R&D and reliable after-sales support, we deliver complete machinery solutions. Autocracy Machinery is your trusted partner for efficient and versatile project execution.",
+  pageTitle = "Trencher Machines, Attachments and Utility Equipment",
+  pageSubtitle = "Explore Autocracy Machinery products for telecom OFC trenching, solar EPC cable laying, irrigation pipelines, water management, agriculture, landscaping, construction, and defence projects. Our range includes chain trenchers, rock wheel trenchers, tractor-mounted attachments, forklifts, sand fillers, pole handling machines, aquatic weed harvesters, lake cleaning equipment, sod harvesters, and other project-ready machinery built for dependable field performance.",
 }) => {
   const [selectedIndustrie, setSelectedIndustrie] = useState<string>("");
 

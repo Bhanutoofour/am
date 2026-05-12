@@ -6,7 +6,7 @@ export default async function Home() {
     <HomeContent
       contentBuildTitle={
         <>
-          Engineered for Global Industries. <br /> Built for Performance.
+          Trencher Machines for Global Projects. <br /> Built for Performance.
         </>
       }
     />
@@ -16,34 +16,34 @@ export default async function Home() {
 // Default SEO metadata for home page
 export const metadata: Metadata = {
   title:
-    "Infrastructure & Environmental Machines Manufacturer India - Autocracy Machinery",
+    "Trencher Machine Manufacturer & Utility Equipment | Autocracy Machinery",
   description:
-    "Autocracy Machinery is India's global manufacturer of infrastructure & environmental machines like trenchers, lake cleaners, material handling for various industries.",
+    "Autocracy Machinery manufactures trencher machines, solar EPC equipment, aquatic weed harvesters, lake cleaning machines, tractor attachments, forklifts, and utility machinery for global infrastructure projects.",
   keywords:
-    "industrial machinery, construction equipment, agricultural equipment, landscaping equipment, autocracy machinery, trenching machines, excavators, bulldozers",
+    "trencher machine manufacturer, trenching machine, chain trencher, rock wheel trencher, solar EPC equipment, aquatic weed harvester, lake cleaning machine, tractor attachments, utility equipment",
   openGraph: {
     title:
-      "Trencher Machines Manufacturer & Supplier India | Autocracy Machinery",
+      "Trencher Machine Manufacturer & Utility Equipment | Autocracy Machinery",
     description:
-      "Autocracy Machinery is India's global manufacturer of equipment and attachments, trenchers, padding, pole stacking, forklift, lake cleaner, sod harvester, sprigger and infielder.",
+      "Explore Autocracy Machinery trenchers, attachments, solar EPC equipment, aquatic cleaning machines, forklifts, and utility equipment for infrastructure, agriculture, water, and construction work.",
     images: [
       {
         url: "https://d3du1kxieyd1np.cloudfront.net/assets/hero_section/trenching-machine-rudra-100xt.jpg",
         width: 1200,
         height: 630,
-        alt: "Industrial Equipment - Autocracy Machinery",
+        alt: "Autocracy Machinery trencher machine and utility equipment",
       },
     ],
-    siteName: "Autocracy Machinery - Industrial Equipment ",
+    siteName: "Autocracy Machinery",
     type: "website",
     locale: "en_US",
   },
   twitter: {
     card: "summary_large_image",
     title:
-      "Trencher Machines Manufacturer & Supplier India | Autocracy Machinery",
+      "Trencher Machine Manufacturer & Utility Equipment | Autocracy Machinery",
     description:
-      "Leading manufacturer of industrial machinery and equipment. Specializing in construction, agriculture, and landscaping solutions.",
+      "Manufacturer of trenchers, solar EPC equipment, aquatic weed harvesters, tractor attachments, and utility machines for field projects.",
     images: [
       "https://d3du1kxieyd1np.cloudfront.net/assets/autcracy_machinery_logo.png",
     ],

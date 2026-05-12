@@ -4,13 +4,13 @@ export default function HomeStructuredData() {
   const structuredData = {
     "@context": "https://schema.org",
     "@type": "Organization",
-    name: "Trencher Machines Manufacturer & Supplier India – Autocracy Machinery",
+    name: "Autocracy Machinery",
     description:
-      "Autocracy Machinery is India's global manufacturer of equipment and attachments, trenchers, padding, pole stacking, forklift, lake cleaner, sod harvester, sprigger and infielder.",
+      "Autocracy Machinery manufactures trencher machines, tractor attachments, solar EPC equipment, aquatic weed harvesters, floating trash collectors, forklifts, sod machines, and utility equipment for infrastructure, agriculture, water management, telecom, and construction projects.",
     url: "https://autocracymachinery.com",
     logo: "https://d3du1kxieyd1np.cloudfront.net/assets/autcracy_machinery_logo.png",
     sameAs: [
-      "https://www.facebook.com/people/Autocracy-Machinery/61554797280328/ ",
+      "https://www.facebook.com/people/Autocracy-Machinery/61554797280328/",
       "https://www.linkedin.com/company/autocracy-machinery",
       "https://x.com/aceautocracy",
       "https://www.youtube.com/@AutocracyMachinery",
@@ -25,48 +25,51 @@ export default function HomeStructuredData() {
     address: {
       "@type": "PostalAddress",
       address:
-        "I.D, Plot No.72/A, Lane-3, B N Reddy Nagar, Cherlapalli, Secunderabad, Hyderabad, Telangana 500051",
+        "Plot No.72/A, Lane-3, B N Reddy Nagar, Cherlapalli, Hyderabad, Telangana 500051",
       addressCountry: "IN",
-      addressLocality: "India",
+      addressLocality: "Hyderabad",
     },
     foundingDate: "2020",
-    industry: "Manufacturing",
+    industry: "Machinery Manufacturing",
     knowsAbout: [
-      "Industrial Machinery",
-      "Construction Equipment",
-      "Agricultural Equipment",
-      "Landscaping Equipment",
-      "Trenching Machines",
-      "Excavators",
-      "Bulldozers",
+      "Trencher Machines",
+      "Chain Trenchers",
+      "Rock Wheel Trenchers",
+      "Solar EPC Equipment",
+      "Aquatic Weed Harvesters",
+      "Lake Cleaning Machines",
+      "Tractor Attachments",
+      "Utility Equipment",
     ],
     hasOfferCatalog: {
       "@type": "OfferCatalog",
-      name: "Industrial Equipment Catalog",
+      name: "Autocracy Machinery Equipment Catalog",
       itemListElement: [
         {
           "@type": "Offer",
           itemOffered: {
             "@type": "Product",
-            name: "Trenching Machines",
+            name: "Trencher Machines",
             description:
-              "High-quality trenching machines for various industries",
+              "Chain trenchers, rock wheel trenchers, and compact trenching machines for OFC cable laying, irrigation pipelines, solar cable routes, and utility corridors.",
           },
         },
         {
           "@type": "Offer",
           itemOffered: {
             "@type": "Product",
-            name: "Excavators",
-            description: "Reliable excavators for construction projects",
+            name: "Solar EPC and Utility Attachments",
+            description:
+              "Sand fillers, pole stackers, forklifts, and tractor attachments for solar, construction, and infrastructure sites.",
           },
         },
         {
           "@type": "Offer",
           itemOffered: {
             "@type": "Product",
-            name: "Agricultural Equipment",
-            description: "Specialized equipment for agricultural applications",
+            name: "Water Body Cleaning Machines",
+            description:
+              "Aquatic weed harvesters, floating trash collectors, and pontoons for lake, canal, pond, and reservoir maintenance.",
           },
         },
       ],

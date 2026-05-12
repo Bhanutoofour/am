@@ -4,9 +4,9 @@ import { indiaCanonical, rootCanonical } from "@/utils/locale";
 
 export const metadata: Metadata = {
   title:
-    "About Autocracy Machinery India - Trencher & Infrastructure Machine Manufacturer",
+    "About Autocracy Machinery India | Trencher Machine Manufacturer",
   description:
-    "Learn about Autocracy Machinery, an India-based manufacturer of specialty construction, agricultural, environmental, and infrastructure machinery.",
+    "Learn about Autocracy Machinery, an India-based manufacturer of trencher machines, solar EPC equipment, aquatic weed harvesters, tractor attachments, forklifts, and infrastructure machinery.",
   alternates: {
     canonical: indiaCanonical("/about-us"),
     languages: {

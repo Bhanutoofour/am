@@ -10,17 +10,17 @@ const homeFaqs = [
   {
     question: "What does Autocracy Machinery manufacture?",
     answer:
-      "Autocracy Machinery manufactures trenchers, attachments, aquatic weed harvesters, pontoons, and infrastructure machines for field applications.",
+      "Autocracy Machinery manufactures trencher machines, tractor attachments, solar EPC equipment, aquatic weed harvesters, pontoons, forklifts, and utility machinery for infrastructure and field projects.",
   },
   {
     question: "Which Autocracy Machinery equipment is used for OFC cable laying?",
     answer:
-      "Trenchers and utility trenching machines support OFC cable laying, duct routes, pipelines, irrigation, and solar cable projects.",
+      "Chain trenchers, rock wheel trenchers, and compact trenching machines are used for OFC cable laying, telecom ducts, underground utilities, irrigation pipelines, and solar cable routes.",
   },
   {
     question: "Can Autocracy Machinery help select the right model?",
     answer:
-      "Yes. Share application, soil conditions, depth, route length, carrier fit, and output goals for model guidance.",
+      "Yes. Share your application, soil type, trench width, trench depth, route length, tractor or carrier details, and productivity target for model guidance.",
   },
   {
     question: "Where can I compare Autocracy Machinery products by industry?",
@@ -30,7 +30,7 @@ const homeFaqs = [
   {
     question: "Do you offer machines for water management?",
     answer:
-      "Yes. Autocracy offers aquatic weed harvesters, pontoons, lake cleaners, and related environmental equipment.",
+      "Yes. Autocracy offers aquatic weed harvesters, floating trash collectors, pontoons, lake cleaning machines, and related water body cleaning equipment.",
   },
   {
     question: "Can I request brochures before buying?",
@@ -40,7 +40,7 @@ const homeFaqs = [
   {
     question: "Are machines available for agriculture applications?",
     answer:
-      "Yes. Autocracy machines support trenching, landscaping, irrigation, sod harvesting, and other agriculture workflows.",
+      "Yes. Autocracy machines support farm trenching, drip irrigation pipelines, drainage work, landscaping, sod harvesting, sprigging, and other agriculture workflows.",
   },
   {
     question: "Can products be matched to project conditions?",
@@ -147,9 +147,9 @@ export default function HomeFaqCta() {
         <p className={styles.eyebrow}>FAQs</p>
         <h2>Autocracy Machinery Questions</h2>
         <p>
-          Quick answers for buyers comparing trenchers, infrastructure
-          machines, environmental equipment, and model options for real field
-          applications.
+          Quick answers for buyers comparing trencher machines, solar EPC
+          equipment, water body cleaning machines, agriculture attachments, and
+          model options for real field applications.
         </p>
       </div>
       <div className={styles.faqGrid}>
@@ -181,11 +181,11 @@ export default function HomeFaqCta() {
         </div>
         <div className={styles.ctaFormContainer}>
           <p className={styles.eyebrow}>Project Support</p>
-          <h2>Find the right machine for your application</h2>
+          <h2>Find the right machine for your project</h2>
           <p>
-            Share your project requirements with Autocracy Machinery to compare
-            trenchers, attachments, aquatic weed harvesters, and industry-ready
-            model options.
+            Share your project requirements to compare trenchers, attachments,
+            aquatic weed harvesters, forklifts, and industry-ready model options
+            for your site conditions.
           </p>
           {isSubmitted ? (
             <div className={styles.ctaSuccess}>

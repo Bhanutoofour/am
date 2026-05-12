@@ -4,9 +4,9 @@ import { indiaCanonical, rootCanonical } from "@/utils/locale";
 
 export const metadata: Metadata = {
   title:
-    "Industrial & Infrastructure Machines Manufacturer India - Autocracy Machinery",
+    "Trencher Machine Manufacturer in India | Autocracy Machinery",
   description:
-    "Autocracy Machinery builds trenchers, environmental machines, attachments, forklifts, and infrastructure equipment for Indian worksites and industries.",
+    "Autocracy Machinery manufactures trencher machines, solar EPC equipment, water body cleaning machines, tractor attachments, forklifts, and infrastructure equipment for Indian worksites.",
   alternates: {
     canonical: indiaCanonical(),
     languages: {
@@ -15,9 +15,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
-    title: "Autocracy Machinery India",
+    title: "Autocracy Machinery India - Trencher Machines & Utility Equipment",
     description:
-      "Infrastructure, telecom, agriculture, water management, and environmental machinery built for India.",
+      "Trenchers, solar EPC equipment, agriculture attachments, water management machines, and utility equipment built for India.",
     url: indiaCanonical(),
     siteName: "Autocracy Machinery India",
     type: "website",

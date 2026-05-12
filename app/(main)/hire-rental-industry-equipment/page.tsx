@@ -6,22 +6,25 @@ import { Suspense } from "react";
 import RentalPageLoading from "@/component/molecules/loading/RentalPageLoading";
 
 export const metadata: Metadata = {
-  title: "Hire Trencher & Utility Equipment on Rent – Autocracy Machinery",
+  title:
+    "Hire Trencher Machines & Utility Equipment on Rent | Autocracy Machinery",
   description:
-    "Autocracy Machinery offers durable trenchers and utility machines on rent. Affordable plans with expert support for hassle-free project execution.",
-  alternates: { canonical: "https://autocracymachinery.com/hire-rental-industry-equipment" },
+    "Hire trenchers, pole erection machines, floating trash collectors, and utility equipment on rent for telecom, solar, water management, construction, and infrastructure projects.",
+  alternates: {
+    canonical: "https://autocracymachinery.com/hire-rental-industry-equipment",
+  },
   openGraph: {
-    title: "Hire & Rental Equipment – Autocracy Machinery",
+    title: "Hire Trencher Machines & Utility Equipment",
     description:
-      "Autocracy Machinery offers durable trenchers and utility machines on rent. Affordable plans with expert support for hassle-free project execution.",
+      "Rent Autocracy Machinery equipment for short-term and long-term trenching, water management, solar EPC, and utility projects.",
     url: "https://autocracymachinery.com/hire-rental-industry-equipment",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Hire & Rental Equipment – Autocracy Machinery",
+    title: "Hire Trencher Machines & Utility Equipment",
     description:
-      "Autocracy Machinery offers durable trenchers and utility machines on rent. Affordable plans with expert support for hassle-free project execution.",
+      "Rent project-ready trenchers and utility equipment from Autocracy Machinery.",
   },
 };
 
