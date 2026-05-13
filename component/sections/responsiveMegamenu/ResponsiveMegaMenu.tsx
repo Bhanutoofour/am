@@ -12,7 +12,11 @@ type MegaMenuType = "industry" | "product" | "resources" | "";
 const MENU_LINKS = [
   { href: "/about-us", label: "About us" },
   { href: "/contact-us", label: "Contact us" },
+];
+
+const RESOURCE_LINKS = [
   { href: "/blog", label: "Blogs" },
+  { href: "/videos", label: "Videos" },
 ];
 
 interface megaMenuMobileProps {
@@ -102,6 +106,31 @@ const ProductItems: React.FC<megaMenuMobileProps> = ({
   );
 };
 
+const ResourceItems: React.FC<megaMenuMobileProps> = ({
+  setMobileMenu,
+  setSelected,
+}) => {
+  return (
+    <div className={styles.productWrapper}>
+      {RESOURCE_LINKS.map((item) => (
+        <LocalizedLink
+          key={item.href}
+          href={item.href}
+          style={{ width: "100%" }}
+          onClick={() => {
+            setMobileMenu?.((prev) => ({ ...prev, show: false }));
+            setSelected?.("");
+          }}
+        >
+          <div className={styles.menuItem}>
+            <p style={{ fontWeight: "500" }}>{item.label}</p>
+          </div>
+        </LocalizedLink>
+      ))}
+    </div>
+  );
+};
+
 const ResponsiveMegaMenu: React.FC<megaMenuMobileProps> = ({
   industries,
   products,
@@ -142,9 +171,14 @@ const ResponsiveMegaMenu: React.FC<megaMenuMobileProps> = ({
             setMobileMenu={setMobileMenu}
             setSelected={setSelected}
           />
+        ) : selected === "resources" ? (
+          <ResourceItems
+            setMobileMenu={setMobileMenu}
+            setSelected={setSelected}
+          />
         ) : (
           <>
-            {(["industry", "product"] as MegaMenuType[]).map(
+            {(["industry", "product", "resources"] as MegaMenuType[]).map(
               (item: MegaMenuType, i: number) => (
                 <div
                   className={styles.menuItem}

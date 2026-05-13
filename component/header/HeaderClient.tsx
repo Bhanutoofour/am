@@ -204,7 +204,7 @@ const HeaderClient: React.FC<HeaderClientProps> = ({
           </LocalizedLink>
         ))}
 
-        {megaMenu.show && (
+        {megaMenu.show && megaMenu.type !== "resources" && (
           <Megamenu
             menuFrom={megaMenu.type}
             industries={industries}
