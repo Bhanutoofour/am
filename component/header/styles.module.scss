@@ -327,12 +327,14 @@ $header-tablet-padding: $site-gutter-tablet;
 
     a {
       display: block;
-      padding: 0.75rem 1rem;
+      padding: 0.65rem 1.25rem;
       color: $text-primary;
       font-family: "Roboto", sans-serif;
-      font-size: 0.95rem;
+      font-size: 1rem;
       font-weight: 600;
-      line-height: 1.25rem;
+      font-stretch: 75%;
+      font-variation-settings: "wdth" 75;
+      line-height: 1.5rem;
       text-decoration: none;
       white-space: nowrap;
 
