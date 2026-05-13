@@ -3,8 +3,7 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import styles from "./breadcrumbs.module.scss";
-
-const SITE_URL = "https://autocracymachinery.com";
+import { SITE_URL } from "@/utils/locale";
 
 const LABELS: Record<string, string> = {
   "about-us": "About Us",

@@ -7,12 +7,12 @@ export const metadata: Metadata = {
     "Contact Autocracy Machinery | Trencher & Equipment Manufacturer India",
   description:
     "Contact Autocracy Machinery for trencher machines, solar EPC equipment, aquatic weed harvesters, tractor attachments, forklifts, rentals, spares, and project support.",
-  alternates: { canonical: "https://autocracymachinery.com/contact-us" },
+  alternates: { canonical: "https://www.autocracymachinery.com/contact-us" },
   openGraph: {
     title: "Contact Autocracy Machinery",
     description:
       "Get product guidance, quotes, rental support, brochures, and after-sales help for Autocracy Machinery equipment.",
-    url: "https://autocracymachinery.com/contact-us",
+    url: "https://www.autocracymachinery.com/contact-us",
     type: "website",
   },
   twitter: {

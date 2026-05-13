@@ -7,9 +7,10 @@ import {
 } from "@/actions/modelAction";
 import { getActiveBlogs } from "@/actions/blogAction";
 import { titleToSlug, modelNumberSlug } from "@/utils/slug";
+import { SITE_URL } from "@/utils/locale";
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = "https://autocracymachinery.com";
+  const baseUrl = SITE_URL;
 
   try {
     // Get all active industries, products, and models
@@ -32,7 +33,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       { url: `${baseUrl}/careers`,                          lastModified: new Date("2025-01-01"), changeFrequency: "monthly" as const, priority: 0.8 },
       { url: `${baseUrl}/brochure`,                         lastModified: new Date("2025-01-01"), changeFrequency: "monthly" as const, priority: 0.8 },
       { url: `${baseUrl}/faqs`,                             lastModified: new Date("2025-01-01"), changeFrequency: "monthly" as const, priority: 0.6 },
-      { url: `${baseUrl}/sitemap.html`,                     lastModified: new Date("2025-01-01"), changeFrequency: "monthly" as const, priority: 0.5 },
+      { url: `${baseUrl}/sitemap`,                          lastModified: new Date("2025-01-01"), changeFrequency: "monthly" as const, priority: 0.5 },
       { url: `${baseUrl}/privacy-policy`,                   lastModified: new Date("2024-01-01"), changeFrequency: "yearly"  as const, priority: 0.3 },
       { url: `${baseUrl}/terms-and-conditions`,             lastModified: new Date("2024-01-01"), changeFrequency: "yearly"  as const, priority: 0.3 },
     ];
@@ -50,7 +51,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       { url: `${baseUrl}/en-in/careers`,                      lastModified: new Date("2025-01-01"), changeFrequency: "monthly" as const, priority: 0.8 },
       { url: `${baseUrl}/en-in/brochure`,                     lastModified: new Date("2025-01-01"), changeFrequency: "monthly" as const, priority: 0.8 },
       { url: `${baseUrl}/en-in/faqs`,                         lastModified: new Date("2025-01-01"), changeFrequency: "monthly" as const, priority: 0.6 },
-      { url: `${baseUrl}/en-in/sitemap.html`,                 lastModified: new Date("2025-01-01"), changeFrequency: "monthly" as const, priority: 0.5 },
+      { url: `${baseUrl}/en-in/sitemap`,                      lastModified: new Date("2025-01-01"), changeFrequency: "monthly" as const, priority: 0.5 },
       { url: `${baseUrl}/en-in/privacy-policy`,               lastModified: new Date("2024-01-01"), changeFrequency: "yearly"  as const, priority: 0.3 },
       { url: `${baseUrl}/en-in/terms-and-conditions`,         lastModified: new Date("2024-01-01"), changeFrequency: "yearly"  as const, priority: 0.3 },
     ];
@@ -220,7 +221,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       { url: `${baseUrl}/careers`,                          lastModified: new Date("2025-01-01"), changeFrequency: "monthly" as const, priority: 0.8 },
       { url: `${baseUrl}/brochure`,                         lastModified: new Date("2025-01-01"), changeFrequency: "monthly" as const, priority: 0.8 },
       { url: `${baseUrl}/faqs`,                             lastModified: new Date("2025-01-01"), changeFrequency: "monthly" as const, priority: 0.6 },
-      { url: `${baseUrl}/sitemap.html`,                     lastModified: new Date("2025-01-01"), changeFrequency: "monthly" as const, priority: 0.5 },
+      { url: `${baseUrl}/sitemap`,                          lastModified: new Date("2025-01-01"), changeFrequency: "monthly" as const, priority: 0.5 },
       { url: `${baseUrl}/privacy-policy`,                   lastModified: new Date("2024-01-01"), changeFrequency: "yearly"  as const, priority: 0.3 },
       { url: `${baseUrl}/terms-and-conditions`,             lastModified: new Date("2024-01-01"), changeFrequency: "yearly"  as const, priority: 0.3 },
       { url: `${baseUrl}/en-in`,                            lastModified: new Date("2025-01-01"), changeFrequency: "daily"   as const, priority: 1.0 },
@@ -235,7 +236,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       { url: `${baseUrl}/en-in/careers`,                    lastModified: new Date("2025-01-01"), changeFrequency: "monthly" as const, priority: 0.8 },
       { url: `${baseUrl}/en-in/brochure`,                   lastModified: new Date("2025-01-01"), changeFrequency: "monthly" as const, priority: 0.8 },
       { url: `${baseUrl}/en-in/faqs`,                       lastModified: new Date("2025-01-01"), changeFrequency: "monthly" as const, priority: 0.6 },
-      { url: `${baseUrl}/en-in/sitemap.html`,               lastModified: new Date("2025-01-01"), changeFrequency: "monthly" as const, priority: 0.5 },
+      { url: `${baseUrl}/en-in/sitemap`,                    lastModified: new Date("2025-01-01"), changeFrequency: "monthly" as const, priority: 0.5 },
       { url: `${baseUrl}/en-in/privacy-policy`,             lastModified: new Date("2024-01-01"), changeFrequency: "yearly"  as const, priority: 0.3 },
       { url: `${baseUrl}/en-in/terms-and-conditions`,       lastModified: new Date("2024-01-01"), changeFrequency: "yearly"  as const, priority: 0.3 },
     ];

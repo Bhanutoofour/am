@@ -7,12 +7,12 @@ export const metadata: Metadata = {
     "Find Authorized Dealers for Trenchers & Utility Equipment - Autocracy Machinery",
   description:
     "Use our dealer locator to connect with certified sales and service partners for trenchers, utility, and infrastructure equipment. Get reliable support, genuine parts, and expert assistance near you.",
-  alternates: { canonical: "https://autocracymachinery.com/find-a-dealer" },
+  alternates: { canonical: "https://www.autocracymachinery.com/find-a-dealer" },
   openGraph: {
     title: "Find a Dealer – Autocracy Machinery",
     description:
       "Use our dealer locator to connect with certified sales and service partners for trenchers, utility, and infrastructure equipment.",
-    url: "https://autocracymachinery.com/find-a-dealer",
+    url: "https://www.autocracymachinery.com/find-a-dealer",
     type: "website",
   },
   twitter: {

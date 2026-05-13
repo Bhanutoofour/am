@@ -9,6 +9,7 @@ import StructuredData from "./StructuredData";
 import { Suspense } from "react";
 import IndustryPageLoading from "@/component/molecules/loading/IndustryPageLoading";
 import { notFound } from "next/navigation";
+import { rootCanonical } from "@/utils/locale";
 
 interface IndustryPageProps {
   params: Promise<{ slug: string }>;
@@ -120,7 +121,7 @@ export async function generateMetadata({
     },
     authors: [{ name: "Autocracy Machinery" }],
     alternates: {
-      canonical: `https://autocracymachinery.com/industries/${slug}`,
+      canonical: rootCanonical(`/industries/${slug}`),
     },
     other: {
       "twitter:site": "@autocracymachinery",

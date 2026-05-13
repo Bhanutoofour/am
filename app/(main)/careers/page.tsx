@@ -14,12 +14,12 @@ export const metadata: Metadata = {
     "industrial equipment careers",
     "manufacturing company jobs India",
   ],
-  alternates: { canonical: "https://autocracymachinery.com/careers" },
+  alternates: { canonical: "https://www.autocracymachinery.com/careers" },
   openGraph: {
     title: "Careers at Autocracy Machinery",
     description:
       "Build a career in machinery manufacturing, engineering, production, sales, service, and field-ready equipment innovation.",
-    url: "https://autocracymachinery.com/careers",
+    url: "https://www.autocracymachinery.com/careers",
     type: "website",
   },
   twitter: {

@@ -11,13 +11,13 @@ export const metadata: Metadata = {
   description:
     "Hire trenchers, pole erection machines, floating trash collectors, and utility equipment on rent for telecom, solar, water management, construction, and infrastructure projects.",
   alternates: {
-    canonical: "https://autocracymachinery.com/hire-rental-industry-equipment",
+    canonical: "https://www.autocracymachinery.com/hire-rental-industry-equipment",
   },
   openGraph: {
     title: "Hire Trencher Machines & Utility Equipment",
     description:
       "Rent Autocracy Machinery equipment for short-term and long-term trenching, water management, solar EPC, and utility projects.",
-    url: "https://autocracymachinery.com/hire-rental-industry-equipment",
+    url: "https://www.autocracymachinery.com/hire-rental-industry-equipment",
     type: "website",
   },
   twitter: {

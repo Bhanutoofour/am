@@ -6,12 +6,12 @@ export const metadata: Metadata = {
   title: "FAQs - Trencher Machines, Rentals & Equipment | Autocracy Machinery",
   description:
     "Find answers about Autocracy Machinery trenchers, solar EPC equipment, aquatic weed harvesters, tractor attachments, rentals, dealers, brochures, spares, and support.",
-  alternates: { canonical: "https://autocracymachinery.com/faqs" },
+  alternates: { canonical: "https://www.autocracymachinery.com/faqs" },
   openGraph: {
     title: "Autocracy Machinery FAQs",
     description:
       "Answers about trenching machines, utility equipment, water body cleaning machines, rentals, dealers, and support.",
-    url: "https://autocracymachinery.com/faqs",
+    url: "https://www.autocracymachinery.com/faqs",
     type: "website",
   },
   twitter: {

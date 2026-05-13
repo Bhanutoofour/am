@@ -7,12 +7,12 @@ export const metadata: Metadata = {
   title: "Privacy Policy | Autocracy Machinery Official Website",
   description:
     "Autocracy Machinery is committed to protecting your data. Read our Privacy Policy to know your rights, cookie use, and secure data-handling practices.",
-  alternates: { canonical: "https://autocracymachinery.com/privacy-policy" },
+  alternates: { canonical: "https://www.autocracymachinery.com/privacy-policy" },
   openGraph: {
     title: "Privacy Policy – Autocracy Machinery",
     description:
       "Autocracy Machinery is committed to protecting your data. Read our Privacy Policy to know your rights, cookie use, and secure data-handling practices.",
-    url: "https://autocracymachinery.com/privacy-policy",
+    url: "https://www.autocracymachinery.com/privacy-policy",
     type: "website",
   },
   twitter: {

@@ -9,12 +9,13 @@ import ProductStructuredData from "./ProductStructuredData";
 import { Suspense } from "react";
 import ProductPageLoading from "@/component/molecules/loading/ProductPageLoading";
 import { notFound } from "next/navigation";
+import { SITE_URL } from "@/utils/locale";
 
 interface ProductPageProps {
   params: Promise<{ slug: string }>;
 }
 
-const SITE = "https://autocracymachinery.com";
+const SITE = SITE_URL;
 
 /** Canonical for this listing: industry URL when slug is industry+product, else `/products/{slug}`. */
 async function productListingCanonical(

@@ -1,5 +1,7 @@
 export const INDIA_LOCALE_PREFIX = "/en-in";
-export const SITE_URL = "https://autocracymachinery.com";
+export const SITE_URL = (
+  process.env.NEXT_PUBLIC_SITE_URL || "https://www.autocracymachinery.com"
+).replace(/\/+$/, "");
 
 export function isIndiaPath(pathname?: string | null) {
   return pathname === INDIA_LOCALE_PREFIX || pathname?.startsWith(`${INDIA_LOCALE_PREFIX}/`);

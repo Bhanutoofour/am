@@ -2,9 +2,10 @@ import "../styles/globals.scss";
 import { Metadata } from "next";
 import Script from "next/script";
 import LocationSelector from "@/component/locationSelector/LocationSelector";
+import { SITE_URL } from "@/utils/locale";
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://autocracymachinery.com"),
+  metadataBase: new URL(SITE_URL),
   title: "Autocracy Machinery | Trenchers & Utility Machines",
   description:
     "Trencher machines, solar EPC equipment, aquatic weed harvesters, attachments, forklifts, and utility machines for field projects.",

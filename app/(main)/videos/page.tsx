@@ -11,12 +11,12 @@ export const metadata: Metadata = {
   title: "Watch Our Machines in Action – Proven Performance Across Industries",
   description:
     "Watch Autocracy Machinery in real-world operations delivering proven performance. Our machines ensure efficiency, durability, and reliable results across utilities, agriculture, and infrastructure projects.",
-  alternates: { canonical: "https://autocracymachinery.com/videos" },
+  alternates: { canonical: "https://www.autocracymachinery.com/videos" },
   openGraph: {
     title: "Videos – Autocracy Machinery",
     description:
       "Watch Autocracy Machinery in real-world operations delivering proven performance across utilities, agriculture, and infrastructure projects.",
-    url: "https://autocracymachinery.com/videos",
+    url: "https://www.autocracymachinery.com/videos",
     type: "website",
   },
   twitter: {

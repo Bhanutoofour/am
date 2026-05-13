@@ -40,12 +40,12 @@ export const metadata: Metadata = {
     "Equipment trends",
     "Latest industry articles",
   ],
-  alternates: { canonical: "https://autocracymachinery.com/blog" },
+  alternates: { canonical: "https://www.autocracymachinery.com/blog" },
   openGraph: {
     title: "Blog – Autocracy Machinery",
     description:
       "Autocracy Machinery global equipment suppliers provide industrial attachments techniques, articles, updates, and trends for the latest industry insights.",
-    url: "https://autocracymachinery.com/blog",
+    url: "https://www.autocracymachinery.com/blog",
     type: "website",
   },
   twitter: {

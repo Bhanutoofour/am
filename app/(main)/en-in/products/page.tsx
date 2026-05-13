@@ -10,10 +10,10 @@ export const metadata: Metadata = {
   description:
     "Explore Autocracy Machinery products in India, including chain trenchers, rock wheel trenchers, solar EPC equipment, aquatic weed harvesters, forklifts, attachments, and infrastructure equipment.",
   alternates: {
-    canonical: "https://autocracymachinery.com/en-in/products",
+    canonical: "https://www.autocracymachinery.com/en-in/products",
     languages: {
-      "en-IN": "https://autocracymachinery.com/en-in/products",
-      "x-default": "https://autocracymachinery.com/products",
+      "en-IN": "https://www.autocracymachinery.com/en-in/products",
+      "x-default": "https://www.autocracymachinery.com/products",
     },
   },
 };

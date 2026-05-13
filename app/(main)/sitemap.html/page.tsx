@@ -11,7 +11,7 @@ export const metadata: Metadata = {
   description:
     "Browse Autocracy Machinery website pages, products, industries, blogs, videos, brochures, and support links.",
   alternates: {
-    canonical: "https://autocracymachinery.com/sitemap.html",
+    canonical: "https://www.autocracymachinery.com/sitemap",
   },
   robots: {
     index: true,

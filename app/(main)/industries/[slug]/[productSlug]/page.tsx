@@ -8,6 +8,7 @@ import ProductPageLoading from "@/component/molecules/loading/ProductPageLoading
 import { Suspense } from "react";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { rootCanonical } from "@/utils/locale";
 
 interface IndustryProductPageProps {
   params: Promise<{ slug: string; productSlug: string }>;
@@ -32,6 +33,7 @@ export async function generateMetadata({
   if (!productData) return { title: "Product Not Found" };
 
   const seoData = productData.seoMetadata;
+  const canonical = rootCanonical(`/industries/${slug}/${productSlug}`);
 
   return {
     title: seoData?.pageTitle || `${productData.title} - Autocracy Machinery`,
@@ -42,7 +44,7 @@ export async function generateMetadata({
     authors: [{ name: "Autocracy Machinery" }],
     robots: { index: true, follow: true },
     alternates: {
-      canonical: `https://autocracymachinery.com/industries/${slug}/${productSlug}`,
+      canonical,
     },
     openGraph: {
       title:
@@ -105,6 +107,7 @@ export default async function IndustryProductPage({
   ]);
 
   if (!productData) notFound();
+  const canonicalPageUrl = rootCanonical(`/industries/${slug}/${productSlug}`);
 
   return (
     <>
@@ -115,7 +118,7 @@ export default async function IndustryProductPage({
       <ProductStructuredData
         productData={productData}
         slug={`${slug}/${productSlug}`}
-        pageUrl={`https://autocracymachinery.com/industries/${slug}/${productSlug}`}
+        pageUrl={canonicalPageUrl}
       />
       <Suspense fallback={<ProductPageLoading />}>
         <ProductClient

@@ -1,4 +1,5 @@
 import Script from "next/script";
+import { SITE_URL } from "@/utils/locale";
 
 interface ProductStructuredDataProps {
   productData: ProductDataType;
@@ -14,7 +15,7 @@ export default function ProductStructuredData({
 }: ProductStructuredDataProps) {
   const seoData = productData.seoMetadata;
   const productUrl =
-    pageUrl ?? `https://autocracymachinery.com/products/${slug}`;
+    pageUrl ?? `${SITE_URL}/products/${slug}`;
 
   const structuredData = {
     "@context": "https://schema.org",
@@ -33,7 +34,7 @@ export default function ProductStructuredData({
     manufacturer: {
       "@type": "Organization",
       name: "Autocracy Machinery",
-      url: "https://autocracymachinery.com",
+      url: SITE_URL,
     },
     offers: {
       "@type": "Offer",

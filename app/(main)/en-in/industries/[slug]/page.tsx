@@ -9,12 +9,13 @@ import {
 import { Metadata } from "next";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
+import { SITE_URL } from "@/utils/locale";
 
 interface IndiaIndustryPageProps {
   params: Promise<{ slug: string }>;
 }
 
-const SITE = "https://autocracymachinery.com";
+const SITE = SITE_URL;
 
 export async function generateMetadata({
   params,

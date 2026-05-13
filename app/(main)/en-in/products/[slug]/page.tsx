@@ -12,12 +12,13 @@ import {
   indiaProductKeywords,
   indiaProductTitle,
 } from "@/utils/indiaSeo";
+import { SITE_URL } from "@/utils/locale";
 
 interface IndiaProductPageProps {
   params: Promise<{ slug: string }>;
 }
 
-const SITE = "https://autocracymachinery.com";
+const SITE = SITE_URL;
 
 export async function generateMetadata({
   params,

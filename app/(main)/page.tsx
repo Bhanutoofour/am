@@ -15,14 +15,14 @@ export default async function Home() {
 
 // Default SEO metadata for home page
 export const metadata: Metadata = {
-  title: "Trencher Machines & Utility Equipment | Autocracy",
+  title: "Trencher Machines & Utility Equipment | Autocracy Mchinery",
   description:
     "Explore trenchers, solar EPC equipment, aquatic weed harvesters, attachments, forklifts, and utility machines for field projects.",
   keywords:
     "trencher machine manufacturer, trenching machine, chain trencher, rock wheel trencher, solar EPC equipment, aquatic weed harvester, lake cleaning machine, tractor attachments, utility equipment",
   openGraph: {
     title:
-      "Trencher Machines & Utility Equipment | Autocracy",
+      "Trencher Machines & Utility Equipment | Autocracy Mchinery",
     description:
       "Explore trenchers, solar EPC equipment, aquatic cleaning machines, attachments, forklifts, and utility machines for field projects.",
     images: [
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title:
-      "Trencher Machines & Utility Equipment | Autocracy",
+      "Trencher Machines & Utility Equipment | Autocracy Mchinery",
     description:
       "Trenchers, solar EPC equipment, aquatic weed harvesters, attachments, and utility machines for field projects.",
     images: [
@@ -55,10 +55,10 @@ export const metadata: Metadata = {
   },
   authors: [{ name: "Autocracy Machinery" }],
   alternates: {
-    canonical: "https://autocracymachinery.com/",
+    canonical: "https://www.autocracymachinery.com/",
     languages: {
-      "en-IN": "https://autocracymachinery.com/en-in",
-      "x-default": "https://autocracymachinery.com/",
+      "en-IN": "https://www.autocracymachinery.com/en-in",
+      "x-default": "https://www.autocracymachinery.com/",
     },
   },
   other: {

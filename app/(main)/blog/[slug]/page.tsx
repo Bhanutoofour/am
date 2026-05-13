@@ -4,12 +4,13 @@ import BlogClient from "./BlogClient";
 import { getBlogBySlug, getRelatedBlogs } from "@/actions/blogAction";
 import { Suspense } from "react";
 import Loading from "./loading";
+import { SITE_URL } from "@/utils/locale";
 
 interface BlogPageProps {
   params: Promise<{ slug: string }>;
 }
 
-const BASE_URL = "https://autocracymachinery.com";
+const BASE_URL = SITE_URL;
 
 export async function generateMetadata({
   params,
@@ -117,4 +118,3 @@ export default function BlogPage(props: BlogPageProps) {
     </Suspense>
   );
 }
-

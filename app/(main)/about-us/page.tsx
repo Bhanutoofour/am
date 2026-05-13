@@ -7,12 +7,12 @@ export const metadata: Metadata = {
     "About Autocracy Machinery | Trencher Machine Manufacturer in India",
   description:
     "Learn about Autocracy Machinery, an ISO-certified manufacturer of trencher machines, tractor attachments, aquatic weed harvesters, solar EPC equipment, forklifts, and utility machinery in India.",
-  alternates: { canonical: "https://autocracymachinery.com/about-us" },
+  alternates: { canonical: "https://www.autocracymachinery.com/about-us" },
   openGraph: {
     title: "About Autocracy Machinery",
     description:
       "Autocracy Machinery manufactures specialised trenchers, attachments, water management machines, and infrastructure equipment for India and global markets.",
-    url: "https://autocracymachinery.com/about-us",
+    url: "https://www.autocracymachinery.com/about-us",
     type: "website",
   },
   twitter: {

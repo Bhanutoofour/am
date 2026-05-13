@@ -1,4 +1,5 @@
 import Script from "next/script";
+import { rootCanonical } from "@/utils/locale";
 
 interface StructuredDataProps {
   industryData: IndustryDataType | null;
@@ -13,7 +14,7 @@ export default function StructuredData({
   pageUrl: pageUrlOverride,
 }: StructuredDataProps) {
   const pageUrl =
-    pageUrlOverride || `https://autocracymachinery.com/industries/${pathSlug}`;
+    pageUrlOverride || rootCanonical(`/industries/${pathSlug}`);
 
   // Structured Data (JSON-LD) - only if industry data exists
   const structuredData = industryData

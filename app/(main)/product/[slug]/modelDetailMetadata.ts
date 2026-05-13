@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { titleToSlug, modelNumberSlug } from "@/utils/slug";
+import { SITE_URL } from "@/utils/locale";
 
-export const SITE = "https://autocracymachinery.com";
+export const SITE = SITE_URL;
 
 /** Prefer `/products/{product}/{modelNumber}` when possible (matches primary sitemap URL). */
 export function preferredModelCanonicalUrl(

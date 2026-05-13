@@ -14,12 +14,12 @@ export const metadata: Metadata = {
     "aquatic weed harvester brochure",
     "Autocracy Machinery brochure",
   ],
-  alternates: { canonical: "https://autocracymachinery.com/brochure" },
+  alternates: { canonical: "https://www.autocracymachinery.com/brochure" },
   openGraph: {
     title: "Download Autocracy Machinery Brochures",
     description:
       "Get brochures for trenchers, attachments, water management machines, forklifts, and utility equipment.",
-    url: "https://autocracymachinery.com/brochure",
+    url: "https://www.autocracymachinery.com/brochure",
     type: "website",
   },
   twitter: {
