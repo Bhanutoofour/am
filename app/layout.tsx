@@ -3,6 +3,7 @@ import { Metadata } from "next";
 import Script from "next/script";
 import LocationSelector from "@/component/locationSelector/LocationSelector";
 import { SITE_URL } from "@/utils/locale";
+import TrackingEvents from "@/component/TrackingEvents";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -201,6 +202,7 @@ export default function RootLayout({
           />
         </noscript>
         <LocationSelector />
+        <TrackingEvents />
         {children}
       </body>
     </html>

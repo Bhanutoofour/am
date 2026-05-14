@@ -24,6 +24,7 @@ const MENU_LINKS = [
 const RESOURCE_LINKS = [
   { href: "/blog", label: "Blog" },
   { href: "/videos", label: "Videos" },
+  { href: "/media", label: "Media" },
 ];
 
 const HeaderClient: React.FC<HeaderClientProps> = ({

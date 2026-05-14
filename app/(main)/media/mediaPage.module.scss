@@ -1,0 +1,118 @@
+@use "../../../styles/mixins" as *;
+@use "../../../styles/varriables" as *;
+
+.mediaPage {
+  width: 100%;
+  padding: 4rem $site-gutter-desktop 5rem;
+  background: #fff;
+
+  @include lg-max {
+    padding-inline: $site-gutter-tablet;
+  }
+
+  @include md-max {
+    padding: 2.5rem $site-gutter-mobile 3.5rem;
+  }
+}
+
+.header {
+  max-width: 52rem;
+  margin-bottom: 2rem;
+
+  h1 {
+    color: $text-primary;
+    font-family: "Roboto", sans-serif;
+    font-size: clamp(2.25rem, 5vw, 4rem);
+    font-weight: 900;
+    line-height: 105%;
+    margin-bottom: 1rem;
+  }
+
+  p:not(.eyebrow) {
+    color: #3b3b3c;
+    font-family: "Roboto", sans-serif;
+    font-size: 1rem;
+    line-height: 150%;
+  }
+}
+
+.eyebrow {
+  color: $primary-color;
+  font-family: "Roboto", sans-serif;
+  font-size: 0.875rem;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  line-height: 120%;
+  margin-bottom: 0.875rem;
+  text-transform: uppercase;
+}
+
+.mediaGrid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+
+  @include lg-max {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  @include sm-max {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  min-height: 19rem;
+  border: 1px solid #d7d7d7;
+  background: #f5f5f5;
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+
+  a {
+    width: fit-content;
+    color: $text-primary;
+    font-family: "Roboto", sans-serif;
+    font-size: 0.9375rem;
+    font-weight: 800;
+    line-height: 120%;
+    margin-top: auto;
+    text-transform: uppercase;
+
+    &:hover {
+      color: $primary-color;
+    }
+  }
+}
+
+.logoBox {
+  min-height: 4rem;
+  display: flex;
+  align-items: center;
+
+  img {
+    width: auto;
+    max-width: 11rem;
+    height: auto;
+    object-fit: contain;
+  }
+}
+
+.cardContent {
+  h2 {
+    color: $text-primary;
+    font-family: "Roboto", sans-serif;
+    font-size: 1.35rem;
+    font-weight: 900;
+    line-height: 115%;
+    margin-bottom: 0.75rem;
+  }
+
+  p {
+    color: #3b3b3c;
+    font-family: "Roboto", sans-serif;
+    font-size: 0.9375rem;
+    line-height: 150%;
+  }
+}

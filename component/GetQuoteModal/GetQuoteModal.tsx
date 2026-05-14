@@ -6,6 +6,7 @@ import { IndustryWithProducts } from "@/types/api";
 import { ICONS } from "@/constants/Images/images";
 import Image from "next/image";
 import { submitQuoteForm } from "@/utils/zohoCRM";
+import { trackEvent } from "@/utils/tracking";
 
 interface GetQuoteProps {
   showModal: boolean;
@@ -175,6 +176,9 @@ const GetQuoteModal: React.FC<GetQuoteProps> = ({
   // Fetch industries with products when modal opens
   useEffect(() => {
     if (showModal) {
+      trackEvent("quote_modal_open", {
+        form_name: "Get Quote",
+      });
       fetchIndustriesWithProducts();
     }
   }, [showModal]);
@@ -216,6 +220,12 @@ const GetQuoteModal: React.FC<GetQuoteProps> = ({
     try {
       if (step === 1) {
         if (selectedValue.industry && selectedValue.product) {
+          trackEvent("quote_step_complete", {
+            form_name: "Get Quote",
+            step: 1,
+            industry: selectedValue.industry,
+            product: selectedValue.product,
+          });
           setStep(2);
         }
       } else if (step === 2) {

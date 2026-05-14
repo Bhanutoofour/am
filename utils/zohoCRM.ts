@@ -1,5 +1,9 @@
+"use client";
+
 // Zoho CRM Integration Utility
 // This can be used by all contact forms on the website
+
+import { trackLeadSubmission } from "@/utils/tracking";
 
 export interface ZohoFormData {
   name: string;
@@ -67,6 +71,16 @@ export const submitToZohoCRM = async (
     }
 
     if (response.ok && result.success) {
+      trackLeadSubmission({
+        form_name: formData.webLeadType || "Website Lead",
+        lead_type: formData.webLeadType || "Website Lead",
+        enquiry_type: formData.enquiryType,
+        industry: formData.industry,
+        product: formData.product,
+        model: formData.model,
+        country: formData.countryAm,
+        state: formData.state,
+      });
       return true;
     } else {
       console.error("API returned error:", result.error);

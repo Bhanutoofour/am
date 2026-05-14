@@ -6,6 +6,7 @@ import { FormInput } from "../molecules/quoteInputs/QuoteFormItem";
 import Image from "next/image";
 import { ICONS } from "@/constants/Images/images";
 import { submitBrochureForm } from "@/utils/zohoCRM";
+import { trackEvent } from "@/utils/tracking";
 
 interface BrochureDownloadModalProps {
   setShowModal: (value: boolean) => void;
@@ -111,6 +112,15 @@ const BrochureDownloadModal: React.FC<BrochureDownloadModalProps> = ({
     phone: "",
   });
 
+  React.useEffect(() => {
+    trackEvent("brochure_modal_open", {
+      form_name: "Brochure Download",
+      industry,
+      product: productName,
+      model: modelTitle,
+    });
+  }, [industry, modelTitle, productName]);
+
   // Check if current step is valid
   const isStepValid = () => {
     if (step === 1) {
@@ -141,12 +151,27 @@ const BrochureDownloadModal: React.FC<BrochureDownloadModalProps> = ({
             });
 
             // Open download in new tab
+            trackEvent("brochure_download_start", {
+              form_name: "Brochure Download",
+              industry,
+              product: productName,
+              model: modelTitle,
+              download_url: downloadUrl,
+            });
             window.open(downloadUrl, "_blank");
 
             setStep(2);
           } catch (error) {
             console.error("Error submitting brochure form:", error);
             // Still proceed with download even if CRM fails
+            trackEvent("brochure_download_start", {
+              form_name: "Brochure Download",
+              industry,
+              product: productName,
+              model: modelTitle,
+              download_url: downloadUrl,
+              crm_status: "failed",
+            });
             window.open(downloadUrl, "_blank");
             setStep(2);
           } finally {

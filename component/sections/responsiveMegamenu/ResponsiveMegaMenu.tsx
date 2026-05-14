@@ -17,6 +17,7 @@ const MENU_LINKS = [
 const RESOURCE_LINKS = [
   { href: "/blog", label: "Blogs" },
   { href: "/videos", label: "Videos" },
+  { href: "/media", label: "Media" },
 ];
 
 interface megaMenuMobileProps {
