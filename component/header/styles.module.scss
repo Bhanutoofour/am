@@ -305,8 +305,7 @@ $header-tablet-padding: $site-gutter-tablet;
   .resourceMenu {
     position: absolute;
     top: calc(100% + 1rem);
-    left: 50%;
-    transform: translateX(-50%);
+    left: 0;
     min-width: 12.5rem;
     padding: 0.5rem;
     background: #fff;

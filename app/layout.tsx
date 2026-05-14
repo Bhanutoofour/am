@@ -4,6 +4,7 @@ import Script from "next/script";
 import LocationSelector from "@/component/locationSelector/LocationSelector";
 import { SITE_URL } from "@/utils/locale";
 import TrackingEvents from "@/component/TrackingEvents";
+import RouteChangeIndicator from "@/component/RouteChangeIndicator";
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_URL),
@@ -201,6 +202,7 @@ export default function RootLayout({
             alt=""
           />
         </noscript>
+        <RouteChangeIndicator />
         <LocationSelector />
         <TrackingEvents />
         {children}

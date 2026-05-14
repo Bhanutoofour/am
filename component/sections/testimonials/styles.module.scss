@@ -198,19 +198,32 @@
     text-align: center;
   }
   .clientImageBox {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 2rem 3rem;
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: clamp(1.25rem, 2.5vw, 3rem);
     align-items: center;
     width: 100%;
   }
 
   .clientLogo {
-    width: auto;
-    max-width: 15rem;
+    justify-self: center;
+    width: 100%;
+    max-width: 12rem;
     height: 4.375rem;
     object-fit: contain;
+
+    &:nth-child(3) {
+      max-width: 13.5rem;
+    }
+
+    &:nth-child(2) {
+      max-width: 13rem;
+      height: 5rem;
+    }
+
+    &:nth-child(4),
+    &:nth-child(5) {
+      max-width: 14rem;
+    }
   }
 }

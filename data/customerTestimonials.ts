@@ -50,7 +50,7 @@ export const testimonials = [
 
 export const clients = [
   "/clients/hmda.webp",
-  "/clients/bluedrop-enviro.webp",
+  "/clients/bluedrop-enviro.png",
   "/clients/stl.webp",
   "/clients/larsen-toubro.webp",
   "/clients/meil.webp",
