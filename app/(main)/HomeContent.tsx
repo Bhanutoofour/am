@@ -22,8 +22,10 @@ import HomeRawContent from "./HomeRawContent";
 
 export default async function HomeContent({
   contentBuildTitle,
+  srOnlyHeading = "Built for India - Leading Heavy Machinery and Trencher Manufacturer",
 }: {
   contentBuildTitle?: React.ReactNode;
+  srOnlyHeading?: string;
 }) {
   const products = await getActiveProducts();
   const heroData = await getHeroSections();
@@ -31,9 +33,7 @@ export default async function HomeContent({
 
   return (
     <>
-      <h1 className="sr-only">
-        Built for India - Leading Heavy Machinery and Trencher Manufacturer
-      </h1>
+      <h1 className="sr-only">{srOnlyHeading}</h1>
       <HomeStructuredData />
       <HomeRawContent />
       <Caraousel heroData={heroData} />

@@ -4,8 +4,13 @@ import styles from "./responsiveStyles.module.scss";
 import { ICONS } from "@/constants/Images/images";
 import Image from "next/image";
 import GetQuoteModal from "@/component/GetQuoteModal/GetQuoteModal";
-import { titleToSlug, productSlug } from "@/utils/slug";
+import { titleToSlug } from "@/utils/slug";
 import LocalizedLink from "@/component/LocalizedLink";
+import {
+  getProductMenuHref,
+  getProductMenuItems,
+  getProductMenuLabel,
+} from "@/utils/productMenuPriority";
 
 type MegaMenuType = "industry" | "product" | "resources" | "";
 
@@ -70,12 +75,14 @@ const ProductItems: React.FC<megaMenuMobileProps> = ({
   setMobileMenu,
   setSelected,
 }) => {
+  const sortedProducts = getProductMenuItems(products);
+
   return (
     <div className={styles.productWrapper}>
-      {products?.map((product) => (
+      {sortedProducts.map((product) => (
         <LocalizedLink
           key={product.id}
-          href={`/products/${productSlug(product?.title ?? "")}`}
+          href={getProductMenuHref(product)}
           onClick={() => {
             setMobileMenu?.((prev) => ({ ...prev, show: false }));
             setSelected?.("");
@@ -91,7 +98,7 @@ const ProductItems: React.FC<megaMenuMobileProps> = ({
                 height={50}
                 className={styles.image}
               />
-              <p>{product?.title || "-"}</p>
+              <p>{getProductMenuLabel(product)}</p>
             </div>
             <Image
               src={ICONS.BLACK_DROPDOWN}

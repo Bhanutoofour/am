@@ -12,6 +12,8 @@
 
 # testing
 /coverage
+/reports/seo_audit_render/
+/reports/seo_audit_render_resolved/
 
 # next.js
 /.next/
@@ -24,6 +26,7 @@
 # misc
 .DS_Store
 *.pem
+~$*.docx
 
 # debug
 npm-debug.log*

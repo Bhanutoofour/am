@@ -91,7 +91,7 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
 
-    const { industryIds, ...productData } = body;
+    const { industryIds, createdAt, updatedAt, ...productData } = body;
     // Ensure DB auto-generates primary key
     delete (productData as any).id;
 
@@ -143,7 +143,7 @@ export async function PUT(req: NextRequest) {
   try {
     const body = await req.json();
 
-    const { id, industryIds, ...productData } = body;
+    const { id, industryIds, createdAt, updatedAt, ...productData } = body;
 
     if (!id) {
       return NextResponse.json(
@@ -155,7 +155,10 @@ export async function PUT(req: NextRequest) {
     // Update product
     const [product] = await db
       .update(products)
-      .set(productData)
+      .set({
+        ...productData,
+        updatedAt: new Date(),
+      })
       .where(eq(products.id, id))
       .returning();
 

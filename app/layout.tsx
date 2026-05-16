@@ -53,6 +53,9 @@ export default function RootLayout({
           content="qtNbHQTUzwDs0hGB2WCWh10mc6R-S6c4Cui05tNbo84"
         />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://www.googletagmanager.com" />
+        <link rel="preconnect" href="https://salesiq.zoho.in" />
+        <link rel="preconnect" href="https://connect.facebook.net" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
         <link rel="icon" type="image/png" href="/favicon.png" sizes="32x32" />
         <link rel="icon" type="image/png" href="/favicon.png" sizes="16x16" />
@@ -163,7 +166,7 @@ export default function RootLayout({
       {/* Facebook Meta Pixel */}
       <Script
         id="facebook-pixel"
-        strategy="afterInteractive"
+        strategy="lazyOnload"
         dangerouslySetInnerHTML={{
           __html: `
             !function(f,b,e,v,n,t,s)

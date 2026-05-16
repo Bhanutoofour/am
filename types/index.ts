@@ -11,6 +11,7 @@ type IndustryProduct = {
   title: string;
   thumbnail: string;
   thumbnailAltText: string;
+  updatedAt?: Date;
 };
 
 type ActiveIndustry = {
@@ -20,6 +21,7 @@ type ActiveIndustry = {
   thumbnail: string;
   thumbnailAltText: string;
   products: IndustryProduct[];
+  updatedAt?: Date;
 };
 
 type ActiveProduct = {
@@ -28,6 +30,7 @@ type ActiveProduct = {
   thumbnail: string;
   thumbnailAltText: string;
   active: boolean;
+  updatedAt?: Date;
 };
 
 type ProductWithIndustries = {
@@ -37,6 +40,7 @@ type ProductWithIndustries = {
   thumbnailAltText: string;
   active: boolean;
   industries: string[];
+  updatedAt?: Date;
 };
 
 type RecognitionsDataType = {
@@ -71,6 +75,7 @@ type IndustryDataType = {
   bannerImages: { imageUrl: string; altText: string }[];
   products: IndustryProduct[];
   brochure: string;
+  updatedAt?: Date;
   seoDescription?: string;
   seoMetadata?: {
     pageTitle?: string;
@@ -145,6 +150,7 @@ type Model = {
   series: string;
   keyFeatures: ModelFeature[];
   productName?: string;
+  updatedAt?: Date;
 };
 
 type ModelFeature = {

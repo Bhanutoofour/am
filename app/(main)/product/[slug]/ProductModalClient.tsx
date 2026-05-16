@@ -13,6 +13,7 @@ import BrochureDownloadModal from "@/component/GetQuoteModal/BrochureDownloadMod
 import GetQuoteModal from "@/component/GetQuoteModal/GetQuoteModal";
 import { titleToSlug } from "@/utils/slug";
 import IndustryApplicationSections from "./IndustryApplicationSections";
+import FaqAccordion from "@/component/sections/faqAccordion/FaqAccordion";
 
 const DEFAULT_SPECS_TABLE_HEADING = "Precision Machines. Project-Ready.";
 const DEFAULT_SPECS_TABLE_PARAGRAPH =
@@ -984,19 +985,9 @@ export default function ProductModalClient({
                       key={`faq-column-${columnIndex}`}
                       className={styles.productFaqModelColumn}
                     >
-                      {column.map((faq) => (
-                        <article
-                          key={faq.question}
-                          className={styles.productFaqModelCard}
-                        >
-                          <h3 className={styles.productFaqModelQuestion}>
-                            {faq.question}
-                          </h3>
-                          <p className={styles.productFaqModelAnswer}>
-                            {faq.answer}
-                          </p>
-                        </article>
-                      ))}
+                      <FaqAccordion
+                        items={column}
+                      />
                     </div>
                   )
                 )}

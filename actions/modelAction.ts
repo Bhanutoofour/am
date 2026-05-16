@@ -25,6 +25,7 @@ export const getActiveModels = async (): Promise<
     modelNumber: string;
     modelTitle: string;
     productName: string;
+    updatedAt: Date;
   }[]
 > => {
   try {
@@ -34,6 +35,7 @@ export const getActiveModels = async (): Promise<
         modelNumber: models.modelNumber,
         modelTitle: models.modelTitle,
         productName: products.title,
+        updatedAt: models.updatedAt,
       })
       .from(models)
       .innerJoin(products, eq(models.productId, products.id))
@@ -45,6 +47,7 @@ export const getActiveModels = async (): Promise<
       modelNumber: model.modelNumber,
       modelTitle: model.modelTitle,
       productName: model.productName,
+      updatedAt: model.updatedAt,
     }));
 
     return processedResult;
@@ -56,7 +59,12 @@ export const getActiveModels = async (): Promise<
 
 /** Active models under industry product pages (for sitemap URLs). */
 export const getIndustryNestedModelSitemapRows = async (): Promise<
-  { industryTitle: string; productTitle: string; modelNumber: string }[]
+  {
+    industryTitle: string;
+    productTitle: string;
+    modelNumber: string;
+    updatedAt: Date;
+  }[]
 > => {
   try {
     const result = await db
@@ -64,6 +72,7 @@ export const getIndustryNestedModelSitemapRows = async (): Promise<
         industryTitle: industries.title,
         productTitle: products.title,
         modelNumber: models.modelNumber,
+        updatedAt: models.updatedAt,
       })
       .from(modelIndustries)
       .innerJoin(models, eq(modelIndustries.modelId, models.id))
@@ -89,6 +98,7 @@ export const getIndustryNestedModelSitemapRows = async (): Promise<
       industryTitle: r.industryTitle ?? "",
       productTitle: r.productTitle ?? "",
       modelNumber: r.modelNumber ?? "",
+      updatedAt: r.updatedAt,
     }));
   } catch (error) {
     console.error("Error fetching industry nested model sitemap rows:", error);

@@ -22,6 +22,7 @@ export const getActiveProducts = async (): Promise<ActiveProduct[]> => {
         thumbnail: products.thumbnail,
         thumbnailAltText: products.thumbnailAltText,
         active: products.active,
+        updatedAt: products.updatedAt,
       })
       .from(products)
       .where(eq(products.active, true))
@@ -50,6 +51,7 @@ export const getProductsWithIndustries = async (): Promise<
         thumbnail: products.thumbnail,
         thumbnailAltText: products.thumbnailAltText,
         active: products.active,
+        updatedAt: products.updatedAt,
       })
       .from(products)
       .where(eq(products.active, true))

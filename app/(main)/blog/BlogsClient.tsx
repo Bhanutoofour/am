@@ -170,7 +170,9 @@ const BlogsClient: React.FC<BlogsClientProps> = ({
   return (
     <div className={styles.blogsPage}>
       <div className={styles.pageHeader}>
-        <h1 className={styles.pageTitle}>Blogs</h1>
+        <h1 className={styles.pageTitle}>
+          Machinery Blogs and Industry Insights
+        </h1>
         {!sidebarOpen && (
           <button
             className={styles.filterIconButton}

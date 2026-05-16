@@ -23,11 +23,14 @@ export default async function IndustryById({ params }: IndustryPageProps) {
 
   const industries = await getActiveIndustries();
   const { industryData, industryId } = resolved;
+  const seoHeading =
+    industryData.seoMetadata?.pageTitle ||
+    `${industryData.title} Machinery and Equipment Solutions`;
 
   return (
     <>
       <IndustryQueryCleanup />
-      <h1 className="sr-only">{industryData.title}</h1>
+      <h1 className="sr-only">{seoHeading}</h1>
       <h2 className="sr-only">{industryData.seoDescription || industryData.description}</h2>
       <StructuredData industryData={industryData} pathSlug={slug} />
       <Suspense fallback={<IndustryPageLoading />}>

@@ -63,9 +63,13 @@ export async function PUT(req: NextRequest) {
     if (!id) return NextResponse.json({ error: "Invalid ID" }, { status: 400 });
 
     const body = await req.json();
+    const { createdAt, updatedAt, ...industryData } = body;
     const data = await db
       .update(industries)
-      .set(body)
+      .set({
+        ...industryData,
+        updatedAt: new Date(),
+      })
       .where(eq(industries.id, id))
       .returning();
 

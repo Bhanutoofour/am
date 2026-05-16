@@ -1,4 +1,5 @@
 import Image from "next/image";
+import FaqAccordion from "@/component/sections/faqAccordion/FaqAccordion";
 import styles from "./modalStyles.module.scss";
 
 type ProjectFitContent = {
@@ -583,11 +584,14 @@ export default function IndustryApplicationSections({
           </p>
         </div>
         <div className={styles.productFaqGrid}>
-          {faqItems.map((faq) => (
-            <article key={faq.question} className={styles.productFaqCard}>
-              <h3 className={styles.productFaqQuestion}>{faq.question}</h3>
-              <p className={styles.productFaqAnswer}>{faq.answer}</p>
-            </article>
+          {[
+            faqItems.slice(0, Math.ceil(faqItems.length / 2)),
+            faqItems.slice(Math.ceil(faqItems.length / 2)),
+          ].map((column, columnIndex) => (
+            <FaqAccordion
+              key={`industry-application-faq-column-${columnIndex}`}
+              items={column}
+            />
           ))}
         </div>
       </section>

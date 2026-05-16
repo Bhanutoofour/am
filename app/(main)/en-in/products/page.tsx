@@ -4,6 +4,46 @@ import ProductsClient from "@/app/(main)/products/ProductsClient";
 import ProductsListingLoading from "@/component/molecules/loading/ProductsListingLoading";
 import { Suspense } from "react";
 import { Metadata } from "next";
+import { permanentRedirect } from "next/navigation";
+import { productSlug, titleToSlug } from "@/utils/slug";
+
+type IndiaProductsPageProps = {
+  searchParams?: Promise<{ [key: string]: string | string[] | undefined }>;
+};
+
+function getSingleQueryValue(value: string | string[] | undefined) {
+  return Array.isArray(value) ? value[0] : value;
+}
+
+async function redirectLegacyIndiaProductsQuery(
+  searchParams?: IndiaProductsPageProps["searchParams"]
+) {
+  const query: { [key: string]: string | string[] | undefined } = searchParams
+    ? await searchParams
+    : {};
+  const productId = getSingleQueryValue(query.productId);
+  const industryId = getSingleQueryValue(query.industryId);
+
+  if (!productId && !industryId) return;
+
+  if (productId) {
+    const products = await getProductsWithIndustries();
+    const product = products.find((item) => String(item.id) === productId);
+    permanentRedirect(
+      product ? `/en-in/products/${productSlug(product.title)}` : "/en-in/products"
+    );
+  }
+
+  if (industryId) {
+    const industries = await getActiveIndustries();
+    const industry = industries.find((item) => String(item.id) === industryId);
+    permanentRedirect(
+      industry
+        ? `/en-in/industries/${titleToSlug(industry.title ?? "")}`
+        : "/en-in/products"
+    );
+  }
+}
 
 export const metadata: Metadata = {
   title: "Trencher Machines & Utility Equipment in India | Autocracy Machinery",
@@ -35,7 +75,11 @@ async function ProductsContent() {
   );
 }
 
-export default function IndiaProductsPage() {
+export default async function IndiaProductsPage({
+  searchParams,
+}: IndiaProductsPageProps) {
+  await redirectLegacyIndiaProductsQuery(searchParams);
+
   return (
     <Suspense fallback={<ProductsListingLoading />}>
       <ProductsContent />

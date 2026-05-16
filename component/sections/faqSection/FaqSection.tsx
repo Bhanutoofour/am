@@ -2,37 +2,10 @@
 import React, { useState } from "react";
 import styles from "./faqSection.module.scss";
 import { FAQs } from "@/data/qnaForFaq";
-import Image from "next/image";
-import { ICONS } from "@/constants/Images/images";
-
-type Question = {
-  question: string;
-  answer: string;
-};
-
-type FAQCategory = {
-  title: string;
-  faqs: Question[];
-};
+import FaqAccordion from "@/component/sections/faqAccordion/FaqAccordion";
 
 const FaqSection = () => {
   const [activeSection, setActiveSection] = useState(FAQs[0]);
-  const [openMap, setOpenMap] = useState<Record<string, number[]>>(() =>
-    FAQs.reduce((acc, cat) => {
-      acc[cat.title] = [0]; // first question open by default
-      return acc;
-    }, {} as Record<string, number[]>)
-  );
-
-  const toggleQuestion = (catTitle: string, idx: number) => {
-    setOpenMap((prev) => {
-      const current = prev[catTitle] || [];
-      if (current.includes(idx)) {
-        return { ...prev, [catTitle]: current.filter((i) => i !== idx) };
-      }
-      return { ...prev, [catTitle]: [...current, idx] };
-    });
-  };
 
   return (
     <div className={styles.faqSectionHolder}>
@@ -66,34 +39,7 @@ const FaqSection = () => {
             className={styles.qnaCategory}
           >
             <h3 className={styles.qnaCategoryTitle}>{cat.title}</h3>
-            {cat.faqs.map((q, idx) => (
-              <div
-                key={q.question}
-                className={styles.qnaItem}
-                onClick={() => toggleQuestion(cat.title, idx)}
-              >
-                <div className={styles.qnaQuestion}>
-                  <span>{q.question}</span>
-                  <Image
-                    src={ICONS.BLACK_DROPDOWN}
-                    alt="up&down arrow"
-                    width={14}
-                    height={14}
-                    style={{
-                      transform: `${
-                        openMap[cat.title]?.includes(idx)
-                          ? "rotate(180deg)"
-                          : "rotate(0deg)"
-                      }`,
-                      transition: "transform 0.3s ease",
-                    }}
-                  />
-                </div>
-                {openMap[cat.title]?.includes(idx) && (
-                  <div className={styles.qnaAnswer}>{q.answer}</div>
-                )}
-              </div>
-            ))}
+            <FaqAccordion items={cat.faqs} />
           </div>
         ))}
       </div>

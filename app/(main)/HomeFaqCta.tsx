@@ -5,6 +5,7 @@ import Image from "next/image";
 import styles from "./homeFaqCta.module.scss";
 import { INDUSTRY } from "@/constants/Images/images";
 import { submitContactForm } from "@/utils/zohoCRM";
+import FaqAccordion from "@/component/sections/faqAccordion/FaqAccordion";
 
 const homeFaqs = [
   {
@@ -159,12 +160,7 @@ export default function HomeFaqCta() {
               key={`home-faq-column-${columnIndex}`}
               className={styles.faqColumn}
             >
-              {column.map((faq) => (
-                <article key={faq.question} className={styles.faqCard}>
-                  <h3>{faq.question}</h3>
-                  <p>{faq.answer}</p>
-                </article>
-              ))}
+              <FaqAccordion items={column} />
             </div>
           )
         )}

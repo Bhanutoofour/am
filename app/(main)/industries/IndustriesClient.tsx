@@ -1,5 +1,6 @@
 "use client";
 
+import FaqAccordion from "@/component/sections/faqAccordion/FaqAccordion";
 import IndustryCard from "@/component/molecules/industryCard/IndustryCard";
 import styles from "./industries.module.scss";
 
@@ -193,12 +194,14 @@ export default function IndustriesClient({
           <h2>Industry Equipment Questions</h2>
         </div>
         <div className={styles.faqGrid}>
-          {faqs.map((faq) => (
-            <article key={faq.question} className={styles.faqCard}>
-              <h3>{faq.question}</h3>
-              <p>{faq.answer}</p>
-            </article>
-          ))}
+          {[faqs.slice(0, Math.ceil(faqs.length / 2)), faqs.slice(Math.ceil(faqs.length / 2))].map(
+            (column, columnIndex) => (
+              <FaqAccordion
+                key={`industry-faq-column-${columnIndex}`}
+                items={column}
+              />
+            )
+          )}
         </div>
       </section>
     </main>

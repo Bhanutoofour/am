@@ -78,14 +78,14 @@ export async function PUT(req: NextRequest) {
     if (!id) return NextResponse.json({ error: "Invalid ID" }, { status: 400 });
 
     const body = await req.json();
-    const { industryIds, ...productData } = body;
+    const { industryIds, createdAt, updatedAt, ...productData } = body;
 
     // Update product
     const updated = await db
       .update(products)
       .set({
         ...productData,
-        updated_at: new Date(),
+        updatedAt: new Date(),
       })
       .where(eq(products.id, id))
       .returning();

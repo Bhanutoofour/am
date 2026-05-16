@@ -3,8 +3,12 @@ import styles from "./productStyles.module.scss";
 import { ICONS } from "@/constants/Images/images";
 import Image from "next/image";
 import { useState } from "react";
-import { productSlug } from "@/utils/slug";
 import LocalizedLink from "@/component/LocalizedLink";
+import {
+  getProductMenuHref,
+  getProductMenuItems,
+  getProductMenuLabel,
+} from "@/utils/productMenuPriority";
 
 interface ProductProps {
   ProductItems: ActiveProduct[];
@@ -15,14 +19,15 @@ const ProductMenu: React.FC<ProductProps> = ({ ProductItems, onHide }) => {
   const [eachProductId, setEachProductId] = useState<number | string | null>(
     null
   );
+  const sortedProducts = getProductMenuItems(ProductItems);
 
   return (
     <div className={`${styles.productMenu}`}>
-      {ProductItems.length > 0 ? (
-        ProductItems.map((product) => (
+      {sortedProducts.length > 0 ? (
+        sortedProducts.map((product) => (
           <LocalizedLink
             key={product.id}
-            href={`/products/${productSlug(product?.title ?? "")}`}
+            href={getProductMenuHref(product)}
           >
             <div
               className={`${styles.eachProduct} ${
@@ -40,7 +45,7 @@ const ProductMenu: React.FC<ProductProps> = ({ ProductItems, onHide }) => {
                   height={60}
                   className={styles.image}
                 />
-                <p>{product?.title || "-"}</p>
+                <p>{getProductMenuLabel(product)}</p>
               </div>
               <Image
                 src={

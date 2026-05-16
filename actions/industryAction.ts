@@ -15,11 +15,13 @@ export const getActiveIndustries = async (): Promise<ActiveIndustry[]> => {
         active: industries.active,
         thumbnail: industries.thumbnail,
         thumbnailAltText: industries.thumbnailAltText,
+        updatedAt: industries.updatedAt,
         products: {
           id: products.id,
           title: products.title,
           thumbnail: products.thumbnail,
           thumbnailAltText: products.thumbnailAltText,
+          updatedAt: products.updatedAt,
         },
       })
       .from(industries)
@@ -48,6 +50,7 @@ export const getActiveIndustries = async (): Promise<ActiveIndustry[]> => {
           active: row.active ?? true, // Ensure boolean type
           thumbnail: row.thumbnail,
           thumbnailAltText: row.thumbnailAltText,
+          updatedAt: row.updatedAt,
           products: [],
         });
       }
@@ -120,11 +123,13 @@ export const getIndustryById = async (
         brochure: industries.brochure,
         seoDescription: industries.seoDescription,
         seoMetadata: industries.seoMetadata,
+        updatedAt: industries.updatedAt,
         products: {
           id: products.id,
           title: products.title,
           thumbnail: products.thumbnail,
           thumbnailAltText: products.thumbnailAltText,
+          updatedAt: products.updatedAt,
         },
       })
       .from(industries)
@@ -158,6 +163,7 @@ export const getIndustryById = async (
           brochure: row.brochure,
           seoDescription: row.seoDescription || "",
           seoMetadata: row.seoMetadata || undefined,
+          updatedAt: row.updatedAt,
           products: [],
         });
       }

@@ -87,11 +87,14 @@ export default async function IndiaIndustryPage({
 
   const industries = await getActiveIndustries();
   const { industryData, industryId } = resolved;
+  const seoHeading =
+    industryData.seoMetadata?.pageTitle ||
+    `${industryData.title} Machinery and Equipment Solutions in India`;
 
   return (
     <>
       <IndustryQueryCleanup />
-      <h1 className="sr-only">{industryData.title} Machinery in India</h1>
+      <h1 className="sr-only">{seoHeading}</h1>
       <h2 className="sr-only">
         {industryData.seoDescription || industryData.description}
       </h2>

@@ -89,7 +89,7 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
-    const { industryIds, ...modelData } = body;
+    const { industryIds, createdAt, updatedAt, ...modelData } = body;
 
     // Remove id field if present to let database auto-generate
     delete modelData.id;
@@ -142,7 +142,7 @@ export async function POST(req: NextRequest) {
 export async function PUT(req: NextRequest) {
   try {
     const body = await req.json();
-    const { id, industryIds, ...modelData } = body;
+    const { id, industryIds, createdAt, updatedAt, ...modelData } = body;
 
     if (!id) {
       return NextResponse.json(
@@ -154,7 +154,10 @@ export async function PUT(req: NextRequest) {
     // Update model
     const [model] = await db
       .update(models)
-      .set(modelData)
+      .set({
+        ...modelData,
+        updatedAt: new Date(),
+      })
       .where(eq(models.id, id))
       .returning();
 

@@ -25,7 +25,7 @@
   .qnaWrapper {
     display: flex;
     flex-direction: column;
-    gap: 2rem;
+    gap: 1.5rem;
     align-items: flex-start;
     width: 100%;
     padding: 1.25rem;
@@ -40,33 +40,5 @@
     display: flex;
     gap: 0.625rem;
     align-items: center;
-  }
-
-  .qnaItem {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 1px solid #dddddd;
-    cursor: pointer;
-    width: 100%;
-  }
-  .qnaQuestion {
-    font-weight: 500;
-    font-style: Condensed Medium;
-    font-size: 16px;
-    line-height: 105%;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
-  }
-  .qnaAnswer {
-    font-weight: 400;
-    font-style: Regular;
-    font-size: 14px;
-    line-height: 140%;
-    color: #6c6c6d;
-    transition: "all 0.3s ease";
   }
 }

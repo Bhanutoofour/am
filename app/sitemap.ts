@@ -9,6 +9,20 @@ import { getActiveBlogs } from "@/actions/blogAction";
 import { titleToSlug, modelNumberSlug } from "@/utils/slug";
 import { SITE_URL } from "@/utils/locale";
 
+const CONTENT_DATE = new Date("2025-01-01");
+
+function sitemapDate(value?: Date | string | null) {
+  if (!value) return CONTENT_DATE;
+  const date = value instanceof Date ? value : new Date(value);
+  return Number.isNaN(date.getTime()) ? CONTENT_DATE : date;
+}
+
+function latestSitemapDate(...values: (Date | string | null | undefined)[]) {
+  return values
+    .map(sitemapDate)
+    .sort((a, b) => b.getTime() - a.getTime())[0] || CONTENT_DATE;
+}
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = SITE_URL;
 
@@ -58,19 +72,17 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       { url: `${baseUrl}/en-in/terms-and-conditions`,         lastModified: new Date("2024-01-01"), changeFrequency: "yearly"  as const, priority: 0.3 },
     ];
 
-    const CONTENT_DATE = new Date("2025-01-01");
-
     // Industry pages
     const industryPages = industries.map((industry) => ({
       url: `${baseUrl}/industries/${titleToSlug(industry.title ?? "")}`,
-      lastModified: CONTENT_DATE,
+      lastModified: sitemapDate(industry.updatedAt),
       changeFrequency: "weekly" as const,
       priority: 0.8,
     }));
 
     const indiaIndustryPages = industries.map((industry) => ({
       url: `${baseUrl}/en-in/industries/${titleToSlug(industry.title ?? "")}`,
-      lastModified: CONTENT_DATE,
+      lastModified: sitemapDate(industry.updatedAt),
       changeFrequency: "weekly" as const,
       priority: 0.8,
     }));
@@ -78,14 +90,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     // Product category pages (direct /products/[slug])
     const productCategoryPages = products.map((product) => ({
       url: `${baseUrl}/products/${titleToSlug(product.title ?? "")}`,
-      lastModified: CONTENT_DATE,
+      lastModified: sitemapDate(product.updatedAt),
       changeFrequency: "weekly" as const,
       priority: 0.8,
     }));
 
     const indiaProductCategoryPages = products.map((product) => ({
       url: `${baseUrl}/en-in/products/${titleToSlug(product.title ?? "")}`,
-      lastModified: CONTENT_DATE,
+      lastModified: sitemapDate(product.updatedAt),
       changeFrequency: "weekly" as const,
       priority: 0.8,
     }));
@@ -94,7 +106,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const industryProductPages = industries.flatMap((industry) =>
       industry.products.map((product) => ({
         url: `${baseUrl}/industries/${titleToSlug(industry.title ?? "")}/${titleToSlug(product.title ?? "")}`,
-        lastModified: CONTENT_DATE,
+        lastModified: latestSitemapDate(industry.updatedAt, product.updatedAt),
         changeFrequency: "weekly" as const,
         priority: 0.7,
       }))
@@ -103,7 +115,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const indiaIndustryProductPages = industries.flatMap((industry) =>
       industry.products.map((product) => ({
         url: `${baseUrl}/en-in/industries/${titleToSlug(industry.title ?? "")}/${titleToSlug(product.title ?? "")}`,
-        lastModified: CONTENT_DATE,
+        lastModified: latestSitemapDate(industry.updatedAt, product.updatedAt),
         changeFrequency: "weekly" as const,
         priority: 0.7,
       }))
@@ -117,7 +129,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         if (!productSeg || !modelSeg) return null;
         return {
           url: `${baseUrl}/products/${productSeg}/${modelSeg}`,
-          lastModified: CONTENT_DATE,
+          lastModified: sitemapDate(model.updatedAt),
           changeFrequency: "weekly" as const,
           priority: 0.8,
         };
@@ -133,7 +145,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         if (!productSeg || !modelSeg) return null;
         return {
           url: `${baseUrl}/en-in/products/${productSeg}/${modelSeg}`,
-          lastModified: CONTENT_DATE,
+          lastModified: sitemapDate(model.updatedAt),
           changeFrequency: "weekly" as const,
           priority: 0.8,
         };
@@ -150,7 +162,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         if (!ind || !prod || !modelSeg) return null;
         return {
           url: `${baseUrl}/industries/${ind}/${prod}/${modelSeg}`,
-          lastModified: CONTENT_DATE,
+          lastModified: sitemapDate(row.updatedAt),
           changeFrequency: "weekly" as const,
           priority: 0.75,
         };
@@ -167,7 +179,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         if (!ind || !prod || !modelSeg) return null;
         return {
           url: `${baseUrl}/en-in/industries/${ind}/${prod}/${modelSeg}`,
-          lastModified: CONTENT_DATE,
+          lastModified: sitemapDate(row.updatedAt),
           changeFrequency: "weekly" as const,
           priority: 0.75,
         };

@@ -72,9 +72,10 @@ export async function GET(req: NextRequest) {
 export async function POST(req: NextRequest) {
   try {
     const body = await req.json();
+    const { createdAt, updatedAt, ...industryData } = body;
     // Ensure DB auto-generates primary key
-    delete (body as any).id;
-    const data = await db.insert(industries).values(body).returning();
+    delete (industryData as any).id;
+    const data = await db.insert(industries).values(industryData).returning();
 
     return NextResponse.json(data[0]);
   } catch (err) {
@@ -90,10 +91,13 @@ export async function POST(req: NextRequest) {
 export async function PUT(req: NextRequest) {
   try {
     const body = await req.json();
-    const { id, ...data } = body;
+    const { id, createdAt, updatedAt, ...data } = body;
     const result = await db
       .update(industries)
-      .set(data)
+      .set({
+        ...data,
+        updatedAt: new Date(),
+      })
       .where(eq(industries.id, id))
       .returning();
     return NextResponse.json(result[0]);

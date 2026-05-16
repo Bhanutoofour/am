@@ -44,6 +44,8 @@ export const industries = pgTable("industries", {
       description?: string;
     };
   }>(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
 
 export const products = pgTable("products", {
@@ -84,6 +86,8 @@ export const products = pgTable("products", {
       };
     };
   }>(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
 
 export const productIndustries = pgTable(
@@ -163,6 +167,8 @@ export const models = pgTable("models", {
       warrantyDuration?: string;
     };
   }>(),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
 });
 
 export const modelIndustries = pgTable(

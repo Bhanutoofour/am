@@ -105,6 +105,8 @@ export async function PUT(req: NextRequest) {
       industryIds,
       specsIntroHeading,
       specsIntroParagraph,
+      createdAt,
+      updatedAt,
       ...modelData
     } = body;
 
@@ -129,7 +131,10 @@ export async function PUT(req: NextRequest) {
     // Update model
     const [model] = await db
       .update(models)
-      .set(modelData)
+      .set({
+        ...modelData,
+        updatedAt: new Date(),
+      })
       .where(eq(models.id, id))
       .returning();
 

@@ -13,11 +13,29 @@ const nextConfig: NextConfig = {
     ];
   },
   images: {
-    unoptimized: true, // <-- Disable Vercel Image Optimization
-    domains: [
-      "encrypted-tbn0.gstatic.com",
-      "d3ioy45kmhqkgq.cloudfront.net",
-      "d3du1kxieyd1np.cloudfront.net",
+    formats: ["image/avif", "image/webp"],
+    minimumCacheTTL: 86400,
+    remotePatterns: [
+      {
+        protocol: "https",
+        hostname: "encrypted-tbn0.gstatic.com",
+      },
+      {
+        protocol: "https",
+        hostname: "d3ioy45kmhqkgq.cloudfront.net",
+      },
+      {
+        protocol: "https",
+        hostname: "d3du1kxieyd1np.cloudfront.net",
+      },
+      {
+        protocol: "https",
+        hostname: "**.amazonaws.com",
+      },
+      {
+        protocol: "https",
+        hostname: "img.youtube.com",
+      },
     ],
   },
 };

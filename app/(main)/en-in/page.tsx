@@ -26,5 +26,7 @@ export const metadata: Metadata = {
 };
 
 export default function IndiaHomePage() {
-  return <HomeContent />;
+  return (
+    <HomeContent srOnlyHeading="Built for India - Leading Heavy Machinery and Trencher Manufacturer" />
+  );
 }
