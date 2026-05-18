@@ -63,13 +63,30 @@ const Caraousel: React.FC<CaraouselProps> = ({ heroData }) => {
     const allInOnePrefix = "All In One";
 
     if (!title.startsWith(allInOnePrefix)) {
-      const hyphenParts = title.split(/\s+-\s+/);
+      const hyphenParts = title.split(/\s+[–-]\s+/);
 
       if (hyphenParts.length === 2) {
+        const secondLine = hyphenParts[1].trim();
+
+        if (secondLine.toLowerCase() === "sand filler") {
+          return (
+            <>
+              <span className={styles.titleLine}>
+                {hyphenParts[0].trim()} -
+              </span>
+              <span className={`${styles.titleLine} ${styles.titleLineSecond}`}>
+                {secondLine}
+              </span>
+            </>
+          );
+        }
+
         return (
           <>
             <span className={styles.titleLine}>{hyphenParts[0].trim()}</span>
-            <span className={styles.titleLine}>- {hyphenParts[1].trim()}</span>
+            <span className={styles.titleLine}>
+              - {secondLine}
+            </span>
           </>
         );
       }
@@ -160,7 +177,7 @@ const Caraousel: React.FC<CaraouselProps> = ({ heroData }) => {
                       <p className={styles.description}>{src.description}</p>
                     )}
                     <Button
-                      title="Get a quote"
+                      title="GET A QUOTE"
                       bgColor="#F9C300"
                       buttonFontColor="#0A0A0B"
                       buttonBorder=".0625rem solid #F9C300"
