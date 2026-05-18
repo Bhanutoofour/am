@@ -78,6 +78,15 @@ export async function GET(req: NextRequest) {
         if (sd.warrantyDuration)
           flattenedModel.seoWarrantyDuration = sd.warrantyDuration;
       }
+
+      if (seo.pageTemplates?.productModel?.sections) {
+        flattenedModel.productTemplateSections =
+          seo.pageTemplates.productModel.sections;
+      }
+      if (seo.pageTemplates?.industryProductModel?.sections) {
+        flattenedModel.industryProductTemplateSections =
+          seo.pageTemplates.industryProductModel.sections;
+      }
     }
 
     return NextResponse.json({

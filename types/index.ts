@@ -171,6 +171,20 @@ type SpecsTableIntro = {
   paragraph?: string;
 };
 
+type CmsTemplateSection = {
+  key: string;
+  enabled?: boolean;
+  heading?: string;
+  eyebrow?: string;
+  intro?: string;
+  paragraphs?: string[];
+};
+
+type CmsPageTemplate = {
+  templateName?: string;
+  sections?: CmsTemplateSection[];
+};
+
 type ModelObjectTypes = {
   id: number;
   modelNumber: string;
@@ -211,6 +225,10 @@ type ModelObjectTypes = {
       };
       certifications?: string[];
       warrantyDuration?: string;
+    };
+    pageTemplates?: {
+      productModel?: CmsPageTemplate;
+      industryProductModel?: CmsPageTemplate;
     };
   } | null;
   generalImage: string;

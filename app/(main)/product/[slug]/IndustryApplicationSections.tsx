@@ -60,6 +60,7 @@ type IndustryApplicationSectionsProps = {
   mediaItems?: ModelDescription[];
   fallbackImage?: string;
   fallbackImageAltText?: string;
+  templateSection?: CmsTemplateSection;
   section?:
     | "projectFit"
     | "applicationFit"
@@ -371,6 +372,7 @@ export default function IndustryApplicationSections({
   mediaItems,
   fallbackImage,
   fallbackImageAltText,
+  templateSection,
   section,
 }: IndustryApplicationSectionsProps) {
   const projectFitContent = getProjectFitContent({
@@ -417,15 +419,23 @@ export default function IndustryApplicationSections({
   const imageSrc = imageMedia?.image || fallbackImage || "";
   const imageAlt =
     imageMedia?.imageAltText || fallbackImageAltText || "Machine at worksite";
+  const headingOverride = templateSection?.heading?.trim();
+  const eyebrowOverride = templateSection?.eyebrow?.trim();
+  const introOverride = templateSection?.intro?.trim();
+  const paragraphOverrides =
+    templateSection?.paragraphs?.filter((paragraph) => paragraph.trim()) || [];
 
   if (section === "projectFit") {
+    const paragraphs = paragraphOverrides.length
+      ? paragraphOverrides
+      : projectFitContent.paragraphs;
     return (
       <section className={styles.projectFitSection}>
         <div className={styles.projectFitCopy}>
           <h2 className={styles.projectFitHeading}>
-            {projectFitContent.heading}
+            {headingOverride || projectFitContent.heading}
           </h2>
-          {projectFitContent.paragraphs.map((paragraph) => (
+          {paragraphs.map((paragraph) => (
             <p key={paragraph} className={styles.projectFitParagraph}>
               {paragraph}
             </p>
@@ -450,9 +460,11 @@ export default function IndustryApplicationSections({
   if (section === "applicationFit") {
     return (
       <section className={styles.applicationFitSection}>
-        <p className={styles.applicationFitEyebrow}>APPLICATION FIT</p>
+        <p className={styles.applicationFitEyebrow}>
+          {eyebrowOverride || "APPLICATION FIT"}
+        </p>
         <h2 className={styles.applicationFitHeading}>
-          {applicationFitContent.heading}
+          {headingOverride || applicationFitContent.heading}
         </h2>
         <div className={styles.applicationFitGrid}>
           {applicationFitContent.cards.map((card, index) => (
@@ -470,12 +482,17 @@ export default function IndustryApplicationSections({
   }
 
   if (section === "projectExecution") {
+    const paragraphs = paragraphOverrides.length
+      ? paragraphOverrides
+      : projectExecutionContent.paragraphs;
     return (
       <section className={styles.projectExecutionSection}>
         <div className={styles.projectExecutionHeader}>
-          <p className={styles.projectExecutionEyebrow}>PROJECT EXECUTION</p>
+          <p className={styles.projectExecutionEyebrow}>
+            {eyebrowOverride || "PROJECT EXECUTION"}
+          </p>
           <h2 className={styles.projectExecutionHeading}>
-            {projectExecutionContent.heading}
+            {headingOverride || projectExecutionContent.heading}
           </h2>
         </div>
         <div className={styles.projectExecutionLayout}>
@@ -484,10 +501,10 @@ export default function IndustryApplicationSections({
               {industryTitle || "Industry"}
             </p>
             <h3 className={styles.projectExecutionSubheading}>
-              {projectExecutionContent.subheading}
+              {introOverride || projectExecutionContent.subheading}
             </h3>
             <div className={styles.projectExecutionParagraphs}>
-              {projectExecutionContent.paragraphs.map((paragraph) => (
+              {paragraphs.map((paragraph) => (
                 <p key={paragraph}>{paragraph}</p>
               ))}
             </div>
@@ -520,6 +537,9 @@ export default function IndustryApplicationSections({
   }
 
   if (section === "executionPriorities") {
+    const paragraphs = paragraphOverrides.length
+      ? paragraphOverrides
+      : executionPrioritiesContent.paragraphs;
     return (
       <section className={styles.executionPrioritiesSection}>
         <div className={styles.executionPrioritiesImageWrap}>
@@ -535,13 +555,13 @@ export default function IndustryApplicationSections({
         </div>
         <div className={styles.executionPrioritiesCopy}>
           <p className={styles.executionPrioritiesEyebrow}>
-            {industryTitle || "Industry"}
+            {eyebrowOverride || industryTitle || "Industry"}
           </p>
           <h2 className={styles.executionPrioritiesHeading}>
-            {executionPrioritiesContent.heading}
+            {headingOverride || executionPrioritiesContent.heading}
           </h2>
           <div className={styles.executionPrioritiesParagraphs}>
-            {executionPrioritiesContent.paragraphs.map((paragraph) => (
+            {paragraphs.map((paragraph) => (
               <p key={paragraph}>{paragraph}</p>
             ))}
           </div>
@@ -554,8 +574,12 @@ export default function IndustryApplicationSections({
     return (
       <section className={styles.workflowSection}>
         <div className={styles.workflowIntro}>
-          <p className={styles.workflowEyebrow}>WORKFLOW</p>
-          <h2 className={styles.workflowHeading}>{workflowContent.heading}</h2>
+          <p className={styles.workflowEyebrow}>
+            {eyebrowOverride || "WORKFLOW"}
+          </p>
+          <h2 className={styles.workflowHeading}>
+            {headingOverride || workflowContent.heading}
+          </h2>
         </div>
         <div className={styles.workflowGrid}>
           {workflowContent.steps.map((step, index) => (
@@ -577,10 +601,13 @@ export default function IndustryApplicationSections({
       <section className={styles.productFaqSection}>
         <div className={styles.productFaqHeader}>
           <h2 className={styles.productFaqHeading}>
-            {industryTitle || "Industry"} FAQs
+            {headingOverride || `${industryTitle || "Industry"} FAQs`}
           </h2>
           <p className={styles.productFaqIntro}>
-            Common questions about using {modelName || productTitle || "this equipment"} in this application.
+            {introOverride ||
+              `Common questions about using ${
+                modelName || productTitle || "this equipment"
+              } in this application.`}
           </p>
         </div>
         <div className={styles.productFaqGrid}>

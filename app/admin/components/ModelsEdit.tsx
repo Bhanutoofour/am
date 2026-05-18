@@ -261,7 +261,13 @@ export const ModelsEdit = () => {
   };
 
   const transform = (data: any) => {
-    const { specsIntroHeading, specsIntroParagraph, ...rest } = data;
+    const {
+      specsIntroHeading,
+      specsIntroParagraph,
+      productTemplateSections,
+      industryProductTemplateSections,
+      ...rest
+    } = data;
 
     const h =
       typeof specsIntroHeading === "string" ? specsIntroHeading.trim() : "";
@@ -350,6 +356,52 @@ export const ModelsEdit = () => {
           .map((cert: string) => cert.trim());
       if (rest.seoWarrantyDuration)
         seoMetadata.structuredData.warrantyDuration = rest.seoWarrantyDuration;
+    }
+
+    const cleanTemplateSections = (sections: any[] | undefined) =>
+      Array.isArray(sections)
+        ? sections
+            .filter((section) => section?.key)
+            .map((section) => ({
+              key: section.key,
+              enabled: section.enabled !== false,
+              ...(section.eyebrow ? { eyebrow: section.eyebrow } : {}),
+              ...(section.heading ? { heading: section.heading } : {}),
+              ...(section.intro ? { intro: section.intro } : {}),
+              ...(Array.isArray(section.paragraphs)
+                ? {
+                    paragraphs: section.paragraphs.filter((line: string) =>
+                      Boolean(line?.trim?.())
+                    ),
+                  }
+                : {}),
+            }))
+        : [];
+
+    const productSections = cleanTemplateSections(productTemplateSections);
+    const industrySections = cleanTemplateSections(
+      industryProductTemplateSections
+    );
+
+    if (productSections.length || industrySections.length) {
+      seoMetadata.pageTemplates = {
+        ...(productSections.length
+          ? {
+              productModel: {
+                templateName: "Product Template",
+                sections: productSections,
+              },
+            }
+          : {}),
+        ...(industrySections.length
+          ? {
+              industryProductModel: {
+                templateName: "Industry Product Template",
+                sections: industrySections,
+              },
+            }
+          : {}),
+      };
     }
 
     return {
@@ -572,6 +624,70 @@ export const ModelsEdit = () => {
                     label="Description Line"
                     validate={required()}
                   />
+                </SimpleFormIterator>
+              </ArrayInput>
+            </SimpleFormIterator>
+          </ArrayInput>
+
+          <h4 style={{ marginTop: "24px", marginBottom: "10px" }}>
+            Product Template Sections
+          </h4>
+          <ArrayInput
+            source="productTemplateSections"
+            label="Controls /products/{product-name}/{model-name}"
+            helperText="Leave empty to use the default template and existing model content."
+          >
+            <SimpleFormIterator>
+              <TextInput
+                source="key"
+                label="Section key"
+                helperText="Examples: hero, specs, keyFeatures, industryFit, applications, moreModels, faqs, contact"
+              />
+              <BooleanInput source="enabled" label="Show section" defaultValue />
+              <TextInput source="eyebrow" label="Eyebrow override" fullWidth />
+              <TextInput source="heading" label="Heading override" fullWidth />
+              <TextInput
+                source="intro"
+                label="Intro text override"
+                multiline
+                rows={2}
+                fullWidth
+              />
+              <ArrayInput source="paragraphs" label="Paragraph overrides">
+                <SimpleFormIterator>
+                  <TextInput source="" label="Paragraph" fullWidth />
+                </SimpleFormIterator>
+              </ArrayInput>
+            </SimpleFormIterator>
+          </ArrayInput>
+
+          <h4 style={{ marginTop: "24px", marginBottom: "10px" }}>
+            Industry Product Template Sections
+          </h4>
+          <ArrayInput
+            source="industryProductTemplateSections"
+            label="Controls /industries/{industry-name}/{product-name}/{model-name}"
+            helperText="Leave empty to use generated industry-specific copy from the existing model and industry content."
+          >
+            <SimpleFormIterator>
+              <TextInput
+                source="key"
+                label="Section key"
+                helperText="Examples: projectFit, applicationFit, projectExecution, executionPriorities, workflow, supportCta, faqs, contact"
+              />
+              <BooleanInput source="enabled" label="Show section" defaultValue />
+              <TextInput source="eyebrow" label="Eyebrow override" fullWidth />
+              <TextInput source="heading" label="Heading override" fullWidth />
+              <TextInput
+                source="intro"
+                label="Intro text override"
+                multiline
+                rows={2}
+                fullWidth
+              />
+              <ArrayInput source="paragraphs" label="Paragraph overrides">
+                <SimpleFormIterator>
+                  <TextInput source="" label="Paragraph" fullWidth />
                 </SimpleFormIterator>
               </ArrayInput>
             </SimpleFormIterator>

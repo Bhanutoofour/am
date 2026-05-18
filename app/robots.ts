@@ -1,7 +1,16 @@
 import { MetadataRoute } from "next";
 import { SITE_URL } from "@/utils/locale";
 
-const blockedPaths = ["/admin", "/admin/", "/api", "/api/"];
+const blockedPaths = [
+  "/admin",
+  "/admin/",
+  "/api",
+  "/api/",
+  "/blog",
+  "/blog/",
+  "/en-in/blog",
+  "/en-in/blog/",
+];
 
 const aiCrawlerUserAgents = [
   "Google-Extended",

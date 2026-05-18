@@ -166,6 +166,30 @@ export const models = pgTable("models", {
       certifications?: string[];
       warrantyDuration?: string;
     };
+    pageTemplates?: {
+      productModel?: {
+        templateName?: string;
+        sections?: {
+          key: string;
+          enabled?: boolean;
+          heading?: string;
+          eyebrow?: string;
+          intro?: string;
+          paragraphs?: string[];
+        }[];
+      };
+      industryProductModel?: {
+        templateName?: string;
+        sections?: {
+          key: string;
+          enabled?: boolean;
+          heading?: string;
+          eyebrow?: string;
+          intro?: string;
+          paragraphs?: string[];
+        }[];
+      };
+    };
   }>(),
   createdAt: timestamp("created_at").defaultNow().notNull(),
   updatedAt: timestamp("updated_at").defaultNow().notNull(),

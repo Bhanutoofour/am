@@ -322,6 +322,29 @@ function seriesModelBasePath(
   return segment ? `/products/${segment}` : undefined;
 }
 
+function findTemplateSection(
+  template: CmsPageTemplate | undefined,
+  key: string
+) {
+  return template?.sections?.find((section) => section.key === key);
+}
+
+function isTemplateSectionEnabled(
+  template: CmsPageTemplate | undefined,
+  key: string
+) {
+  return findTemplateSection(template, key)?.enabled !== false;
+}
+
+function templateText(
+  template: CmsPageTemplate | undefined,
+  key: string,
+  field: "eyebrow" | "heading" | "intro",
+  fallback: string
+) {
+  return findTemplateSection(template, key)?.[field]?.trim() || fallback;
+}
+
 export default function ProductModalClient({
   modelData,
   seriesData,
@@ -367,6 +390,9 @@ export default function ProductModalClient({
     modelData,
     isIndiaMarket
   );
+  const productTemplate = modelData?.seoMetadata?.pageTemplates?.productModel;
+  const industryTemplate =
+    modelData?.seoMetadata?.pageTemplates?.industryProductModel;
   const goToMedia = (direction: "previous" | "next") => {
     if (!productModelMedia.length) return;
 
@@ -385,7 +411,8 @@ export default function ProductModalClient({
 
   return (
     <div className={containerClassName}>
-      {pageVariant === "productModel" ? (
+      {pageVariant === "productModel" &&
+      isTemplateSectionEnabled(productTemplate, "hero") ? (
         <section className={styles.productHeroSection}>
           <div className={styles.productHeroMediaColumn}>
             <div className={styles.productHeroMediaFrame}>
@@ -679,17 +706,20 @@ export default function ProductModalClient({
         </>
       )}
 
-      {pageVariant === "industry" && (
+      {pageVariant === "industry" &&
+        isTemplateSectionEnabled(industryTemplate, "projectFit") && (
         <IndustryApplicationSections
           industryTitle={industryTitle}
           industrySlug={industrySlug}
           productTitle={modelData?.productName}
           modelName={modelData?.modelNumber}
+          templateSection={findTemplateSection(industryTemplate, "projectFit")}
           section="projectFit"
         />
       )}
 
-      {pageVariant === "industry" && (
+      {pageVariant === "industry" &&
+        isTemplateSectionEnabled(industryTemplate, "applicationFit") && (
         <IndustryApplicationSections
           industryTitle={industryTitle}
           industrySlug={industrySlug}
@@ -700,11 +730,16 @@ export default function ProductModalClient({
           fallbackImageAltText={
             modelData?.generalImageAltText || modelData?.coverImageAltText
           }
+          templateSection={findTemplateSection(
+            industryTemplate,
+            "applicationFit"
+          )}
           section="applicationFit"
         />
       )}
 
-      {pageVariant === "industry" && (
+      {pageVariant === "industry" &&
+        isTemplateSectionEnabled(industryTemplate, "projectExecution") && (
         <IndustryApplicationSections
           industryTitle={industryTitle}
           industrySlug={industrySlug}
@@ -715,11 +750,16 @@ export default function ProductModalClient({
           fallbackImageAltText={
             modelData?.generalImageAltText || modelData?.coverImageAltText
           }
+          templateSection={findTemplateSection(
+            industryTemplate,
+            "projectExecution"
+          )}
           section="projectExecution"
         />
       )}
 
-      {pageVariant === "industry" && (
+      {pageVariant === "industry" &&
+        isTemplateSectionEnabled(industryTemplate, "executionPriorities") && (
         <IndustryApplicationSections
           industryTitle={industryTitle}
           industrySlug={industrySlug}
@@ -730,35 +770,55 @@ export default function ProductModalClient({
           fallbackImageAltText={
             modelData?.generalImageAltText || modelData?.coverImageAltText
           }
+          templateSection={findTemplateSection(
+            industryTemplate,
+            "executionPriorities"
+          )}
           section="executionPriorities"
         />
       )}
 
-      {pageVariant === "industry" && (
+      {pageVariant === "industry" &&
+        isTemplateSectionEnabled(industryTemplate, "workflow") && (
         <IndustryApplicationSections
           industryTitle={industryTitle}
           industrySlug={industrySlug}
           productTitle={modelData?.productName}
           modelName={modelData?.modelNumber}
+          templateSection={findTemplateSection(industryTemplate, "workflow")}
           section="workflow"
         />
       )}
 
-      {pageVariant === "industry" && (
+      {pageVariant === "industry" &&
+        isTemplateSectionEnabled(industryTemplate, "supportCta") && (
         <section className={styles.applicationSupportSection}>
           <div className={styles.applicationSupportCopy}>
             <p className={styles.applicationSupportEyebrow}>
-              APPLICATION SUPPORT
+              {templateText(
+                industryTemplate,
+                "supportCta",
+                "eyebrow",
+                "APPLICATION SUPPORT"
+              )}
             </p>
             <h2 className={styles.applicationSupportHeading}>
-              {`Need ${modelData?.modelNumber || "this model"} for ${
-                industryTitle || "this application"
-              }?`}
+              {templateText(
+                industryTemplate,
+                "supportCta",
+                "heading",
+                `Need ${modelData?.modelNumber || "this model"} for ${
+                  industryTitle || "this application"
+                }?`
+              )}
             </h2>
             <p className={styles.applicationSupportText}>
-              Share your site conditions, output goals, and timeline so the
-              Autocracy team can guide model fit, brochure details, and next
-              steps for your project.
+              {templateText(
+                industryTemplate,
+                "supportCta",
+                "intro",
+                "Share your site conditions, output goals, and timeline so the Autocracy team can guide model fit, brochure details, and next steps for your project."
+              )}
             </p>
           </div>
           <div className={styles.applicationSupportActions}>
@@ -800,15 +860,26 @@ export default function ProductModalClient({
         modelData?.keyFeatures &&
         modelData?.keyFeatures?.length > 0 && (
           <>
-            <section className={styles.productSpecsSection}>
+            {isTemplateSectionEnabled(productTemplate, "specs") && (
+              <section className={styles.productSpecsSection}>
               <div className={styles.productSpecsHeader}>
                 <h2 className={styles.productSpecsHeading}>
-                  {modelData?.specsTableIntro?.heading?.trim() ||
-                    DEFAULT_SPECS_TABLE_HEADING}
+                  {templateText(
+                    productTemplate,
+                    "specs",
+                    "heading",
+                    modelData?.specsTableIntro?.heading?.trim() ||
+                      DEFAULT_SPECS_TABLE_HEADING
+                  )}
                 </h2>
                 <p className={styles.productSpecsIntro}>
-                  {modelData?.specsTableIntro?.paragraph?.trim() ||
-                    DEFAULT_SPECS_TABLE_PARAGRAPH}
+                  {templateText(
+                    productTemplate,
+                    "specs",
+                    "intro",
+                    modelData?.specsTableIntro?.paragraph?.trim() ||
+                      DEFAULT_SPECS_TABLE_PARAGRAPH
+                  )}
                 </p>
               </div>
               <div className={styles.productSpecsGrid}>
@@ -826,17 +897,29 @@ export default function ProductModalClient({
                   </article>
                 ))}
               </div>
-            </section>
+              </section>
+            )}
 
-            <section className={styles.productKeyFeaturesSection}>
+            {isTemplateSectionEnabled(productTemplate, "keyFeatures") && (
+              <section className={styles.productKeyFeaturesSection}>
               <div className={styles.productKeyFeaturesHeader}>
                 <h2 className={styles.productKeyFeaturesHeading}>
-                  Key Features
+                  {templateText(
+                    productTemplate,
+                    "keyFeatures",
+                    "heading",
+                    "Key Features"
+                  )}
                 </h2>
                 <p className={styles.productKeyFeaturesIntro}>
-                  {`Discover what makes the ${
-                    modelData.modelNumber || "model"
-                  } stand out from the competition`}
+                  {templateText(
+                    productTemplate,
+                    "keyFeatures",
+                    "intro",
+                    `Discover what makes the ${
+                      modelData.modelNumber || "model"
+                    } stand out from the competition`
+                  )}
                 </p>
               </div>
               <div className={styles.productKeyFeaturesGrid}>
@@ -866,22 +949,39 @@ export default function ProductModalClient({
                     </article>
                 ))}
               </div>
-            </section>
+              </section>
+            )}
 
-            <section className={styles.productIndustryFitSection}>
+            {isTemplateSectionEnabled(productTemplate, "industryFit") && (
+              <section className={styles.productIndustryFitSection}>
               <div className={styles.productIndustryFitHeader}>
                 <p className={styles.productIndustryFitEyebrow}>
-                  BEST SUITED FOR INDUSTRIES
+                  {templateText(
+                    productTemplate,
+                    "industryFit",
+                    "eyebrow",
+                    "BEST SUITED FOR INDUSTRIES"
+                  )}
                 </p>
                 <h2 className={styles.productIndustryFitHeading}>
-                  {`${modelData.modelNumber || "This model"} fits demanding ${
-                    modelData.productName?.toLowerCase() || "machine"
-                  } applications`}
+                  {templateText(
+                    productTemplate,
+                    "industryFit",
+                    "heading",
+                    `${modelData.modelNumber || "This model"} fits demanding ${
+                      modelData.productName?.toLowerCase() || "machine"
+                    } applications`
+                  )}
                 </h2>
                 <p className={styles.productIndustryFitIntro}>
-                  {`Match ${
-                    modelData.modelNumber || "this model"
-                  } with industry use cases where equipment reliability, field output, and site readiness matter most.`}
+                  {templateText(
+                    productTemplate,
+                    "industryFit",
+                    "intro",
+                    `Match ${
+                      modelData.modelNumber || "this model"
+                    } with industry use cases where equipment reliability, field output, and site readiness matter most.`
+                  )}
                 </p>
               </div>
               <div className={styles.productIndustryFitGrid}>
@@ -902,22 +1002,39 @@ export default function ProductModalClient({
                   </article>
                 ))}
               </div>
-            </section>
+              </section>
+            )}
 
-            <section className={styles.productApplicationsSection}>
+            {isTemplateSectionEnabled(productTemplate, "applications") && (
+              <section className={styles.productApplicationsSection}>
               <div className={styles.productApplicationsHeader}>
                 <p className={styles.productApplicationsEyebrow}>
-                  PRODUCT FIT
+                  {templateText(
+                    productTemplate,
+                    "applications",
+                    "eyebrow",
+                    "PRODUCT FIT"
+                  )}
                 </p>
                 <h2 className={styles.productApplicationsHeading}>
-                  {`${modelData.modelNumber || "This model"} for practical ${
-                    modelData.productName?.toLowerCase() || "product"
-                  } work`}
+                  {templateText(
+                    productTemplate,
+                    "applications",
+                    "heading",
+                    `${modelData.modelNumber || "This model"} for practical ${
+                      modelData.productName?.toLowerCase() || "product"
+                    } work`
+                  )}
                 </h2>
                 <p className={styles.productApplicationsIntro}>
-                  {`Understand how ${
-                    modelData.modelNumber || "this model"
-                  } fits project planning, field deployment, and daily operating priorities.`}
+                  {templateText(
+                    productTemplate,
+                    "applications",
+                    "intro",
+                    `Understand how ${
+                      modelData.modelNumber || "this model"
+                    } fits project planning, field deployment, and daily operating priorities.`
+                  )}
                 </p>
               </div>
               <div className={styles.productApplicationsGrid}>
@@ -935,9 +1052,12 @@ export default function ProductModalClient({
                   </article>
                 ))}
               </div>
-            </section>
+              </section>
+            )}
 
-            {seriesData && seriesData.length > 0 && (
+            {isTemplateSectionEnabled(productTemplate, "moreModels") &&
+              seriesData &&
+              seriesData.length > 0 && (
               <div className={styles.moreModels}>
                 <h2 className={styles.modelContainerHeading}>
                   {`More Models in ${modelData?.series} Series`}
@@ -967,15 +1087,26 @@ export default function ProductModalClient({
               </div>
             )}
 
-            <section className={styles.productFaqModelSection}>
+            {isTemplateSectionEnabled(productTemplate, "faqs") && (
+              <section className={styles.productFaqModelSection}>
               <div className={styles.productFaqModelHeader}>
                 <h2 className={styles.productFaqModelHeading}>
-                  Frequently Asked Questions
+                  {templateText(
+                    productTemplate,
+                    "faqs",
+                    "heading",
+                    "Frequently Asked Questions"
+                  )}
                 </h2>
                 <p className={styles.productFaqModelIntro}>
-                  {`Common questions about ${
-                    modelData.modelNumber || "this model"
-                  } specifications, applications, and project fit.`}
+                  {templateText(
+                    productTemplate,
+                    "faqs",
+                    "intro",
+                    `Common questions about ${
+                      modelData.modelNumber || "this model"
+                    } specifications, applications, and project fit.`
+                  )}
                 </p>
               </div>
               <div className={styles.productFaqModelGrid}>
@@ -992,11 +1123,13 @@ export default function ProductModalClient({
                   )
                 )}
               </div>
-            </section>
+              </section>
+            )}
           </>
         )}
 
-      {pageVariant === "productModel" && (
+      {pageVariant === "productModel" &&
+        isTemplateSectionEnabled(productTemplate, "contact") && (
         <ContactUs
           image={modelData?.generalImage || modelData?.coverImage || ""}
           altText={
@@ -1084,12 +1217,14 @@ export default function ProductModalClient({
         </div>
       )}
 
-      {pageVariant === "industry" && (
+      {pageVariant === "industry" &&
+        isTemplateSectionEnabled(industryTemplate, "faqs") && (
         <IndustryApplicationSections
           industryTitle={industryTitle}
           industrySlug={industrySlug}
           productTitle={modelData?.productName}
           modelName={modelData?.modelNumber}
+          templateSection={findTemplateSection(industryTemplate, "faqs")}
           section="faqs"
         />
       )}
@@ -1123,7 +1258,9 @@ export default function ProductModalClient({
           </div>
         </div>
       )}
-      {pageVariant !== "productModel" && (
+      {pageVariant !== "productModel" &&
+        (pageVariant !== "industry" ||
+          isTemplateSectionEnabled(industryTemplate, "contact")) && (
         <ContactUs
           image={modelData?.generalImage || ""}
           altText={

@@ -2,7 +2,6 @@ import { MetadataRoute } from "next";
 import { getActiveIndustries } from "@/actions/industryAction";
 import { getActiveProducts } from "@/actions/productAction";
 import { getActiveModels } from "@/actions/modelAction";
-import { getActiveBlogs } from "@/actions/blogAction";
 import { titleToSlug, modelNumberSlug } from "@/utils/slug";
 import { SITE_URL } from "@/utils/locale";
 
@@ -22,13 +21,10 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const industries = await getActiveIndustries();
     const products = await getActiveProducts();
     const models = await getActiveModels();
-    const blogs = await getActiveBlogs();
-
     // Static pages — real dates, not build time
     const staticPages = [
       { url: baseUrl,                                        lastModified: new Date("2025-01-01"), changeFrequency: "daily"   as const, priority: 1.0 },
       { url: `${baseUrl}/products`,                         lastModified: new Date("2025-01-01"), changeFrequency: "weekly"  as const, priority: 0.9 },
-      { url: `${baseUrl}/blog`,                             lastModified: new Date("2025-01-01"), changeFrequency: "weekly"  as const, priority: 0.8 },
       { url: `${baseUrl}/about-us`,                         lastModified: new Date("2025-01-01"), changeFrequency: "monthly" as const, priority: 0.8 },
       { url: `${baseUrl}/contact-us`,                       lastModified: new Date("2025-01-01"), changeFrequency: "monthly" as const, priority: 0.7 },
       { url: `${baseUrl}/find-a-dealer`,                    lastModified: new Date("2025-01-01"), changeFrequency: "weekly"  as const, priority: 0.8 },
@@ -47,7 +43,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       { url: `${baseUrl}/en-in`,                              lastModified: new Date("2025-01-01"), changeFrequency: "daily"   as const, priority: 1.0 },
       { url: `${baseUrl}/en-in/products`,                     lastModified: new Date("2025-01-01"), changeFrequency: "weekly"  as const, priority: 0.9 },
       { url: `${baseUrl}/en-in/industries`,                   lastModified: new Date("2025-01-01"), changeFrequency: "weekly"  as const, priority: 0.9 },
-      { url: `${baseUrl}/en-in/blog`,                         lastModified: new Date("2025-01-01"), changeFrequency: "weekly"  as const, priority: 0.8 },
       { url: `${baseUrl}/en-in/about-us`,                     lastModified: new Date("2025-01-01"), changeFrequency: "monthly" as const, priority: 0.8 },
       { url: `${baseUrl}/en-in/contact-us`,                   lastModified: new Date("2025-01-01"), changeFrequency: "monthly" as const, priority: 0.7 },
       { url: `${baseUrl}/en-in/find-a-dealer`,                lastModified: new Date("2025-01-01"), changeFrequency: "weekly"  as const, priority: 0.8 },
@@ -125,21 +120,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         (entry): entry is NonNullable<typeof entry> => entry !== null
       );
 
-    // Blog pages
-    const blogPages = blogs.map((blog) => ({
-      url: `${baseUrl}/blog/${blog.slug}`,
-      lastModified: new Date(blog.updatedAt || blog.createdAt),
-      changeFrequency: "weekly" as const,
-      priority: 0.6,
-    }));
-
-    const indiaBlogPages = blogs.map((blog) => ({
-      url: `${baseUrl}/en-in/blog/${blog.slug}`,
-      lastModified: new Date(blog.updatedAt || blog.createdAt),
-      changeFrequency: "weekly" as const,
-      priority: 0.6,
-    }));
-
     return [
       ...staticPages,
       ...staticIndiaPages,
@@ -149,8 +129,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       ...indiaProductCategoryPages,
       ...productNestedModelPages,
       ...indiaProductNestedModelPages,
-      ...blogPages,
-      ...indiaBlogPages,
     ];
   } catch (error) {
     console.error("Error generating sitemap:", error);
@@ -159,7 +137,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     return [
       { url: baseUrl,                                        lastModified: new Date("2025-01-01"), changeFrequency: "daily"   as const, priority: 1.0 },
       { url: `${baseUrl}/products`,                         lastModified: new Date("2025-01-01"), changeFrequency: "weekly"  as const, priority: 0.9 },
-      { url: `${baseUrl}/blog`,                             lastModified: new Date("2025-01-01"), changeFrequency: "weekly"  as const, priority: 0.8 },
       { url: `${baseUrl}/about-us`,                         lastModified: new Date("2025-01-01"), changeFrequency: "monthly" as const, priority: 0.8 },
       { url: `${baseUrl}/contact-us`,                       lastModified: new Date("2025-01-01"), changeFrequency: "monthly" as const, priority: 0.7 },
       { url: `${baseUrl}/find-a-dealer`,                    lastModified: new Date("2025-01-01"), changeFrequency: "weekly"  as const, priority: 0.8 },
@@ -175,7 +152,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       { url: `${baseUrl}/en-in`,                            lastModified: new Date("2025-01-01"), changeFrequency: "daily"   as const, priority: 1.0 },
       { url: `${baseUrl}/en-in/products`,                   lastModified: new Date("2025-01-01"), changeFrequency: "weekly"  as const, priority: 0.9 },
       { url: `${baseUrl}/en-in/industries`,                 lastModified: new Date("2025-01-01"), changeFrequency: "weekly"  as const, priority: 0.9 },
-      { url: `${baseUrl}/en-in/blog`,                       lastModified: new Date("2025-01-01"), changeFrequency: "weekly"  as const, priority: 0.8 },
       { url: `${baseUrl}/en-in/about-us`,                   lastModified: new Date("2025-01-01"), changeFrequency: "monthly" as const, priority: 0.8 },
       { url: `${baseUrl}/en-in/contact-us`,                 lastModified: new Date("2025-01-01"), changeFrequency: "monthly" as const, priority: 0.7 },
       { url: `${baseUrl}/en-in/find-a-dealer`,              lastModified: new Date("2025-01-01"), changeFrequency: "weekly"  as const, priority: 0.8 },
