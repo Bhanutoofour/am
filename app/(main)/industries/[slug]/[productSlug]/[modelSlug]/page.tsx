@@ -9,6 +9,7 @@ import ModelQueryCleanup from "@/app/(main)/product/[slug]/ModelQueryCleanup";
 import {
   buildModelDetailMetadata,
   modelDetailNotFoundMetadata,
+  productsModelPathFromModelData,
   SITE,
 } from "@/app/(main)/product/[slug]/modelDetailMetadata";
 import { Metadata } from "next";
@@ -31,8 +32,10 @@ export async function generateMetadata({
   if (!resolved) return modelDetailNotFoundMetadata;
 
   const { modelData } = resolved;
-  const canonical = `${SITE}/industries/${slug}/${productSlug}/${modelNumberSegment}`;
-  return buildModelDetailMetadata(modelData, canonical);
+  const canonicalPath =
+    productsModelPathFromModelData(modelData) ||
+    `/products/${productSlug}/${modelNumberSegment}`;
+  return buildModelDetailMetadata(modelData, `${SITE}${canonicalPath}`);
 }
 
 export default async function IndustryProductModelPage({
@@ -55,7 +58,9 @@ export default async function IndustryProductModelPage({
     seriesData = await getModelsBySeries(modelData.series);
   }
 
-  const pageUrl = `${SITE}/industries/${slug}/${productSlug}/${modelNumberSegment}`;
+  const pagePath =
+    productsModelPathFromModelData(modelData) ||
+    `/products/${productSlug}/${modelNumberSegment}`;
 
   return (
     <>
@@ -64,7 +69,7 @@ export default async function IndustryProductModelPage({
       <h2 className="sr-only">
         {modelData?.seoDescription || modelData.modelTitle}
       </h2>
-      <ModelStructuredData modelData={modelData} pageUrl={pageUrl} />
+      <ModelStructuredData modelData={modelData} pageUrl={`${SITE}${pagePath}`} />
       <ProductModalClient
         modelData={modelData}
         seriesData={seriesData}

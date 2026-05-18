@@ -4,6 +4,7 @@ import ProductStructuredData from "@/app/(main)/products/[slug]/ProductStructure
 import ProductPageLoading from "@/component/molecules/loading/ProductPageLoading";
 import { getProductBySlug, getActiveProducts } from "@/actions/productAction";
 import { getActiveIndustries } from "@/actions/industryAction";
+import { titleToSlug } from "@/utils/slug";
 import { Metadata } from "next";
 import { Suspense } from "react";
 import { notFound } from "next/navigation";
@@ -35,7 +36,8 @@ export async function generateMetadata({
 
   const { productData } = resolved;
   const seoData = productData.seoMetadata;
-  const canonical = `${SITE}/en-in/products/${slug}`;
+  const productSegment = titleToSlug(productData.title ?? "");
+  const canonical = `${SITE}/en-in/products/${productSegment || slug}`;
   const title = indiaProductTitle(productData.title);
   const description = indiaProductDescription(
     productData.title,
@@ -53,7 +55,7 @@ export async function generateMetadata({
       canonical,
       languages: {
         "en-IN": canonical,
-        "x-default": `${SITE}/products/${slug}`,
+        "x-default": `${SITE}/products/${productSegment || slug}`,
       },
     },
     openGraph: {
@@ -94,7 +96,8 @@ export default async function IndiaProductPage({
     getActiveProducts(),
     getActiveIndustries(),
   ]);
-  const pageUrl = `${SITE}/en-in/products/${slug}`;
+  const productSegment = titleToSlug(productObj.title ?? "");
+  const pageUrl = `${SITE}/en-in/products/${productSegment || slug}`;
 
   return (
     <>
@@ -105,7 +108,7 @@ export default async function IndiaProductPage({
       </h2>
       <ProductStructuredData
         productData={productObj}
-        slug={slug}
+        slug={productSegment || slug}
         pageUrl={pageUrl}
       />
       <Suspense fallback={<ProductPageLoading />}>

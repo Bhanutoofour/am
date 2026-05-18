@@ -9,6 +9,7 @@ import ModelQueryCleanup from "@/app/(main)/product/[slug]/ModelQueryCleanup";
 import {
   buildModelDetailMetadata,
   modelDetailNotFoundMetadata,
+  productsModelPathFromModelData,
 } from "@/app/(main)/product/[slug]/modelDetailMetadata";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
@@ -39,7 +40,10 @@ export async function generateMetadata({
 
   const industryResolved = await getIndustryBySlug(slug);
   const industryTitle = industryResolved?.industryData.title;
-  const canonical = `${SITE}/en-in/industries/${slug}/${productSlug}/${modelSlug}`;
+  const productPath =
+    productsModelPathFromModelData(resolved.modelData) ||
+    `/products/${productSlug}/${modelSlug}`;
+  const canonical = `${SITE}/en-in${productPath}`;
   const metadata = buildModelDetailMetadata(resolved.modelData, canonical);
   const title = industryTitle
     ? `${resolved.modelData.modelNumber} for ${industryTitle} in India | Autocracy Machinery`
@@ -71,7 +75,7 @@ export async function generateMetadata({
       canonical,
       languages: {
         "en-IN": canonical,
-        "x-default": `${SITE}/industries/${slug}/${productSlug}/${modelSlug}`,
+        "x-default": `${SITE}${productPath}`,
       },
     },
   };
@@ -94,7 +98,10 @@ export default async function IndiaIndustryProductModelPage({
   const seriesData = modelData.series
     ? await getModelsBySeries(modelData.series)
     : null;
-  const pageUrl = `${SITE}/en-in/industries/${slug}/${productSlug}/${modelSlug}`;
+  const productPath =
+    productsModelPathFromModelData(modelData) ||
+    `/products/${productSlug}/${modelSlug}`;
+  const pageUrl = `${SITE}/en-in${productPath}`;
 
   return (
     <>

@@ -1,6 +1,5 @@
 import ProductClient from "./ProductClient";
 import ProductQueryCleanup from "./ProductQueryCleanup";
-import ProductIndustrySoftRedirect from "./ProductIndustrySoftRedirect";
 import { getProductBySlug, getActiveProducts } from "@/actions/productAction";
 import { getActiveIndustries } from "@/actions/industryAction";
 import { titleToSlug } from "@/utils/slug";
@@ -17,16 +16,13 @@ interface ProductPageProps {
 
 const SITE = SITE_URL;
 
-/** Canonical for this listing: industry URL when slug is industry+product, else `/products/{slug}`. */
-async function productListingCanonical(
+/** Canonical for product listings: always the primary `/products/{product}` URL. */
+function productListingCanonical(
   slug: string,
   resolved: NonNullable<Awaited<ReturnType<typeof getProductBySlug>>>
-): Promise<string> {
-  if (!resolved.industryId) return `${SITE}/products/${slug}`;
-  const industries = await getActiveIndustries();
-  const industry = industries.find((ind) => ind.id === resolved.industryId);
-  if (!industry) return `${SITE}/products/${slug}`;
-  return `${SITE}/industries/${titleToSlug(industry.title ?? "")}/${titleToSlug(resolved.productData.title ?? "")}`;
+): string {
+  const productSegment = titleToSlug(resolved.productData.title ?? "");
+  return `${SITE}/products/${productSegment || slug}`;
 }
 
 export async function generateMetadata({
@@ -44,7 +40,7 @@ export async function generateMetadata({
 
   const { productData: productObj } = resolved;
   const seoData = productObj.seoMetadata;
-  const canonical = await productListingCanonical(slug, resolved);
+  const canonical = productListingCanonical(slug, resolved);
 
   return {
     title: seoData?.pageTitle || `${productObj.title} - Autocracy Machinery`,
@@ -112,20 +108,11 @@ export default async function ProductPage({ params }: ProductPageProps) {
     getActiveIndustries(),
   ]);
 
-  let industryClientRedirectHref: string | null = null;
-  if (industryId) {
-    const industry = industries.find((ind) => ind.id === industryId);
-    if (industry) {
-      industryClientRedirectHref = `/industries/${titleToSlug(industry.title ?? "")}/${titleToSlug(productObj.title ?? "")}`;
-    }
-  }
-
-  const canonicalPageUrl = await productListingCanonical(slug, resolved);
+  const canonicalPageUrl = productListingCanonical(slug, resolved);
 
   return (
     <>
       <ProductQueryCleanup />
-      <ProductIndustrySoftRedirect href={industryClientRedirectHref} />
       <h1 className="sr-only">{productObj.title}</h1>
       <h2 className="sr-only">
         {productObj.seoDescription || productObj.description}

@@ -1,10 +1,7 @@
 import { MetadataRoute } from "next";
 import { getActiveIndustries } from "@/actions/industryAction";
 import { getActiveProducts } from "@/actions/productAction";
-import {
-  getActiveModels,
-  getIndustryNestedModelSitemapRows,
-} from "@/actions/modelAction";
+import { getActiveModels } from "@/actions/modelAction";
 import { getActiveBlogs } from "@/actions/blogAction";
 import { titleToSlug, modelNumberSlug } from "@/utils/slug";
 import { SITE_URL } from "@/utils/locale";
@@ -17,12 +14,6 @@ function sitemapDate(value?: Date | string | null) {
   return Number.isNaN(date.getTime()) ? CONTENT_DATE : date;
 }
 
-function latestSitemapDate(...values: (Date | string | null | undefined)[]) {
-  return values
-    .map(sitemapDate)
-    .sort((a, b) => b.getTime() - a.getTime())[0] || CONTENT_DATE;
-}
-
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const baseUrl = SITE_URL;
 
@@ -31,7 +22,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     const industries = await getActiveIndustries();
     const products = await getActiveProducts();
     const models = await getActiveModels();
-    const industryNestedModels = await getIndustryNestedModelSitemapRows();
     const blogs = await getActiveBlogs();
 
     // Static pages — real dates, not build time
@@ -102,25 +92,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 0.8,
     }));
 
-    // Industry-specific product pages (/industries/[slug]/[productSlug])
-    const industryProductPages = industries.flatMap((industry) =>
-      industry.products.map((product) => ({
-        url: `${baseUrl}/industries/${titleToSlug(industry.title ?? "")}/${titleToSlug(product.title ?? "")}`,
-        lastModified: latestSitemapDate(industry.updatedAt, product.updatedAt),
-        changeFrequency: "weekly" as const,
-        priority: 0.7,
-      }))
-    );
-
-    const indiaIndustryProductPages = industries.flatMap((industry) =>
-      industry.products.map((product) => ({
-        url: `${baseUrl}/en-in/industries/${titleToSlug(industry.title ?? "")}/${titleToSlug(product.title ?? "")}`,
-        lastModified: latestSitemapDate(industry.updatedAt, product.updatedAt),
-        changeFrequency: "weekly" as const,
-        priority: 0.7,
-      }))
-    );
-
     // Model pages — canonical nested URLs (same as app routes + metadata canonicals)
     const productNestedModelPages = models
       .map((model) => {
@@ -154,40 +125,6 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         (entry): entry is NonNullable<typeof entry> => entry !== null
       );
 
-    const industryNestedModelPages = industryNestedModels
-      .map((row) => {
-        const ind = titleToSlug(row.industryTitle);
-        const prod = titleToSlug(row.productTitle);
-        const modelSeg = modelNumberSlug(row.modelNumber);
-        if (!ind || !prod || !modelSeg) return null;
-        return {
-          url: `${baseUrl}/industries/${ind}/${prod}/${modelSeg}`,
-          lastModified: sitemapDate(row.updatedAt),
-          changeFrequency: "weekly" as const,
-          priority: 0.75,
-        };
-      })
-      .filter(
-        (entry): entry is NonNullable<typeof entry> => entry !== null
-      );
-
-    const indiaIndustryNestedModelPages = industryNestedModels
-      .map((row) => {
-        const ind = titleToSlug(row.industryTitle);
-        const prod = titleToSlug(row.productTitle);
-        const modelSeg = modelNumberSlug(row.modelNumber);
-        if (!ind || !prod || !modelSeg) return null;
-        return {
-          url: `${baseUrl}/en-in/industries/${ind}/${prod}/${modelSeg}`,
-          lastModified: sitemapDate(row.updatedAt),
-          changeFrequency: "weekly" as const,
-          priority: 0.75,
-        };
-      })
-      .filter(
-        (entry): entry is NonNullable<typeof entry> => entry !== null
-      );
-
     // Blog pages
     const blogPages = blogs.map((blog) => ({
       url: `${baseUrl}/blog/${blog.slug}`,
@@ -210,12 +147,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       ...indiaIndustryPages,
       ...productCategoryPages,
       ...indiaProductCategoryPages,
-      ...industryProductPages,
-      ...indiaIndustryProductPages,
       ...productNestedModelPages,
       ...indiaProductNestedModelPages,
-      ...industryNestedModelPages,
-      ...indiaIndustryNestedModelPages,
       ...blogPages,
       ...indiaBlogPages,
     ];

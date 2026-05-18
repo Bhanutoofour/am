@@ -33,7 +33,7 @@ export async function generateMetadata({
   if (!productData) return { title: "Product Not Found" };
 
   const seoData = productData.seoMetadata;
-  const canonical = rootCanonical(`/industries/${slug}/${productSlug}`);
+  const canonical = rootCanonical(`/products/${titleToSlug(productData.title ?? "")}`);
 
   return {
     title: seoData?.pageTitle || `${productData.title} - Autocracy Machinery`,
@@ -107,7 +107,7 @@ export default async function IndustryProductPage({
   ]);
 
   if (!productData) notFound();
-  const canonicalPageUrl = rootCanonical(`/industries/${slug}/${productSlug}`);
+  const canonicalPageUrl = rootCanonical(`/products/${titleToSlug(productData.title ?? "")}`);
 
   return (
     <>

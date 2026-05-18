@@ -37,7 +37,8 @@ export async function generateMetadata({
   if (!productData) return { title: "Product Not Found" };
 
   const seoData = productData.seoMetadata;
-  const canonical = `${SITE}/en-in/industries/${slug}/${productSlug}`;
+  const productPath = `/products/${titleToSlug(productData.title ?? "")}`;
+  const canonical = `${SITE}/en-in${productPath}`;
   const title = indiaProductTitle(productData.title, industryData.title);
   const description = indiaProductDescription(
     productData.title,
@@ -55,7 +56,7 @@ export async function generateMetadata({
       canonical,
       languages: {
         "en-IN": canonical,
-        "x-default": `${SITE}/industries/${slug}/${productSlug}`,
+        "x-default": `${SITE}${productPath}`,
       },
     },
     openGraph: {
@@ -103,7 +104,8 @@ export default async function IndiaIndustryProductPage({
   ]);
   if (!productData) notFound();
 
-  const pageUrl = `${SITE}/en-in/industries/${slug}/${productSlug}`;
+  const productPath = `/products/${titleToSlug(productData.title ?? "")}`;
+  const pageUrl = `${SITE}/en-in${productPath}`;
 
   return (
     <>
@@ -113,7 +115,7 @@ export default async function IndiaIndustryProductPage({
       </h2>
       <ProductStructuredData
         productData={productData}
-        slug={`en-in/industries/${slug}/${productSlug}`}
+        slug={`en-in${productPath}`}
         pageUrl={pageUrl}
       />
       <Suspense fallback={<ProductPageLoading />}>
