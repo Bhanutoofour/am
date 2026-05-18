@@ -4,7 +4,7 @@ import HomeContent from "./HomeContent";
 export default async function Home() {
   return (
     <HomeContent
-      srOnlyHeading="Global Trencher Machines and Utility Equipment Manufacturer"
+      srOnlyHeading="Industrial Machinery Manufacturer and Utility Equipment Manufacturer"
       contentBuildTitle={
         <>
           Trencher Machines for Global Projects. <br /> Built for Performance.
@@ -22,8 +22,7 @@ export const metadata: Metadata = {
   keywords:
     "trencher machine manufacturer, trenching machine, chain trencher, rock wheel trencher, solar EPC equipment, aquatic weed harvester, lake cleaning machine, tractor attachments, utility equipment",
   openGraph: {
-    title:
-      "Trencher Machines & Utility Equipment | Autocracy Machinery",
+    title: "Trencher Machines & Utility Equipment | Autocracy Machinery",
     description:
       "Explore trenchers, solar EPC equipment, aquatic cleaning machines, attachments, forklifts, and utility machines for field projects.",
     images: [
@@ -40,8 +39,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title:
-      "Trencher Machines & Utility Equipment | Autocracy Machinery",
+    title: "Trencher Machines & Utility Equipment | Autocracy Machinery",
     description:
       "Trenchers, solar EPC equipment, aquatic weed harvesters, attachments, and utility machines for field projects.",
     images: [
