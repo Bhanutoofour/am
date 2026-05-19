@@ -1,10 +1,21 @@
 "use client";
 
 import Link from "next/link";
-import { useEffect, useMemo, useRef, useState, type RefObject } from "react";
+import { EditorContent, useEditor } from "@tiptap/react";
+import StarterKit from "@tiptap/starter-kit";
+import TipTapLink from "@tiptap/extension-link";
+import {
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+  type ReactNode,
+  type RefObject,
+} from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { isAdminAuthenticated, logoutAdmin } from "@/utils/auth";
 import { modelSlug, titleToSlug } from "@/utils/slug";
+import { ResizableImage } from "../blog-cms/components/ResizableImage";
 import styles from "./dashboard.module.scss";
 
 type CountState = {
@@ -283,6 +294,26 @@ type IndustryOption = {
   title: string;
 };
 
+type BlogFormState = {
+  id?: number | string;
+  title: string;
+  slug: string;
+  description: string;
+  banner: string;
+  bannerAltText: string;
+  content: string;
+  published: boolean;
+  industryIds: number[];
+  productIds: number[];
+  modelIds: number[];
+  seoPageTitle: string;
+  seoPageDescription: string;
+  seoPageKeywords: string;
+  seoSocialTitle: string;
+  seoSocialDescription: string;
+  seoSocialImage: string;
+};
+
 const resourceConfig: Record<
   Exclude<SectionKey, "home" | "media">,
   {
@@ -349,14 +380,15 @@ const resourceConfig: Record<
   blogs: {
     endpoint: "blogs",
     titleField: "title",
-    subtitleField: "excerpt",
+    subtitleField: "description",
     emptyRecord: {
       title: "",
       slug: "",
-      excerpt: "",
+      description: "",
+      banner: "",
+      bannerAltText: "",
       content: "",
-      featuredImage: "",
-      active: true,
+      published: true,
     },
   },
 };
@@ -661,44 +693,52 @@ function SectionPanel({
     setCreateNonce((value) => value + 1);
     window.setTimeout(openEditor, 0);
   };
+  const showIntroPanel = !["products", "blogs"].includes(sectionKey);
 
   return (
     <section className={styles.singlePanelGrid}>
-      <article className={styles.panel}>
-        <div className={styles.sectionHero}>
-          <div>
-            <h2>{section.title}</h2>
-            <p>{section.intro}</p>
+      {showIntroPanel && (
+        <article className={styles.panel}>
+          <div className={styles.sectionHero}>
+            <div>
+              <h2>{section.title}</h2>
+              <p>{section.intro}</p>
+            </div>
+            <button className={styles.buttonDark} type="button" onClick={startCreate}>
+              {section.primaryAction}
+            </button>
           </div>
-          <button className={styles.buttonDark} type="button" onClick={startCreate}>
-            {section.primaryAction}
-          </button>
-        </div>
-        <div className={styles.panelBody}>
-          <div className={styles.quickGrid}>
-            {section.cards.map((card) => (
-              <button
-                key={card.title}
-                className={styles.quickCard}
-                type="button"
-                onClick={
-                  card.action.toLowerCase().includes("upload")
-                    ? openMedia
-                    : openEditor
-                }
-              >
-                <p className={styles.quickTitle}>{card.title}</p>
-                <p className={styles.quickText}>{card.text}</p>
-                <span className={styles.inlineAction}>{card.action}</span>
-              </button>
-            ))}
+          <div className={styles.panelBody}>
+            <div className={styles.quickGrid}>
+              {section.cards.map((card) => (
+                <button
+                  key={card.title}
+                  className={styles.quickCard}
+                  type="button"
+                  onClick={
+                    card.action.toLowerCase().includes("upload")
+                      ? openMedia
+                      : openEditor
+                  }
+                >
+                  <p className={styles.quickTitle}>{card.title}</p>
+                  <p className={styles.quickText}>{card.text}</p>
+                  <span className={styles.inlineAction}>{card.action}</span>
+                </button>
+              ))}
+            </div>
           </div>
-        </div>
-      </article>
+        </article>
+      )}
       {sectionKey === "products" ? (
         <ProductModelManager createNonce={createNonce} />
       ) : sectionKey === "industries" ? (
         <IndustryProductModelManager createNonce={createNonce} />
+      ) : sectionKey === "blogs" ? (
+        <BlogManager
+          config={resourceConfig.blogs}
+          createNonce={createNonce}
+        />
       ) : (
         <ResourceManager
           config={resourceConfig[sectionKey]}
@@ -1097,6 +1137,10 @@ function ProductModelManager({ createNonce }: { createNonce: number }) {
   const [isSaving, setIsSaving] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
+  const [modelSearch, setModelSearch] = useState("");
+  const [statusFilter, setStatusFilter] = useState<"all" | "active" | "inactive">(
+    "all"
+  );
 
   const selectedProduct = products.find(
     (product) => String(product.id) === modelForm.productId
@@ -1205,8 +1249,90 @@ function ProductModelManager({ createNonce }: { createNonce: number }) {
     setModelForm((current) => ({ ...current, [field]: url }));
   };
 
+  const startNewModel = () => {
+    setModelForm({ ...emptyModelForm });
+    setMessage("");
+    setError("");
+    window.setTimeout(() => {
+      document.getElementById("product-model-editor")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }, 0);
+  };
+
+  const editModel = async (model: ResourceRecord) => {
+    await openModel(model);
+    window.setTimeout(() => {
+      document.getElementById("product-model-editor")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }, 0);
+  };
+
+  const deleteModel = async (model: ResourceRecord) => {
+    const modelName = String(model.modelNumber || model.modelTitle || "this model");
+    if (!window.confirm(`Delete ${modelName}?`)) return;
+
+    setMessage("");
+    setError("");
+    try {
+      const response = await fetch(`/api/models?id=${model.id}`, {
+        method: "DELETE",
+      });
+      const result = await response.json();
+      if (!response.ok) {
+        throw new Error(result?.details || result?.error || "Delete failed");
+      }
+      if (modelForm.id === model.id) {
+        setModelForm({ ...emptyModelForm });
+      }
+      setMessage("Model deleted.");
+      await loadAll();
+    } catch (deleteError) {
+      setError(deleteError instanceof Error ? deleteError.message : "Delete failed");
+    }
+  };
+
+  const filteredModels = useMemo(() => {
+    const search = modelSearch.trim().toLowerCase();
+    return models.filter((model) => {
+      const product = products.find(
+        (item) => String(item.id) === String(model.productId)
+      );
+      const active = model.active !== false;
+      const matchesStatus =
+        statusFilter === "all" ||
+        (statusFilter === "active" && active) ||
+        (statusFilter === "inactive" && !active);
+      if (!matchesStatus) return false;
+      if (!search) return true;
+      return [
+        model.modelNumber,
+        model.modelTitle,
+        model.machineType,
+        model.series,
+        product?.title,
+      ]
+        .map((value) => String(value || "").toLowerCase())
+        .some((value) => value.includes(search));
+    });
+  }, [modelSearch, models, products, statusFilter]);
+
+  const selectedIndustryCount = modelForm.industryIds.length;
+  const completedMediaCount = [
+    modelForm.thumbnail,
+    modelForm.coverImage,
+    modelForm.brochure,
+  ].filter(Boolean).length;
+  const productModelStatus = modelForm.id ? "Editing existing model" : "Draft model";
+
   return (
-    <article className={styles.panel} id="products-content-editor">
+    <article
+      className={`${styles.panel} ${styles.productModelPanel}`}
+      id="products-content-editor"
+    >
       <div className={styles.panelHeader}>
         <h2 className={styles.panelTitle}>Product Models</h2>
         <div className={styles.panelActions}>
@@ -1216,46 +1342,162 @@ function ProductModelManager({ createNonce }: { createNonce: number }) {
           <button
             className={styles.buttonDark}
             type="button"
-            onClick={() => {
-              setModelForm({ ...emptyModelForm });
-              setMessage("");
-              setError("");
-            }}
+            onClick={startNewModel}
           >
-            New Model
+            Add New Model
           </button>
         </div>
       </div>
 
-      <div className={styles.resourceLayout}>
-        <div className={styles.recordList}>
+      <div className={styles.productModelWorkspace}>
+        <div className={styles.productModelTablePanel}>
+          <div className={styles.modelTableToolbar}>
+            <div className={styles.filterCluster}>
+              <label className={styles.compactSelectLabel}>
+                <span>Status</span>
+                <select
+                  value={statusFilter}
+                  onChange={(event) =>
+                    setStatusFilter(event.target.value as typeof statusFilter)
+                  }
+                >
+                  <option value="all">All</option>
+                  <option value="active">Active</option>
+                  <option value="inactive">Inactive</option>
+                </select>
+              </label>
+              <label className={styles.searchField}>
+                <span>Search and filter</span>
+                <input
+                  value={modelSearch}
+                  onChange={(event) => setModelSearch(event.target.value)}
+                  placeholder="Search model, product, series"
+                />
+              </label>
+            </div>
+          </div>
+
           {isLoading && <p className={styles.statusText}>Loading content...</p>}
-          <p className={styles.listHeading}>Existing product models</p>
-          {models.map((model) => (
-            <button
-              key={`model-${model.id}`}
-              className={`${styles.recordItem} ${
-                modelForm.id === model.id
-                  ? styles.recordItemActive
-                  : ""
-              }`}
-              type="button"
-              onClick={() => openModel(model)}
-            >
-              <span className={styles.recordTitle}>
-                {String(model.modelNumber || "")}
-              </span>
-              <span className={styles.recordSubtitle}>
-                {String(model.modelTitle || "")}
-              </span>
-            </button>
-          ))}
+          <div className={styles.modelTableWrap}>
+            <table className={styles.modelTable}>
+              <thead>
+                <tr>
+                  <th aria-label="Select" />
+                  <th>Product model</th>
+                  <th>Status</th>
+                  <th>Product family</th>
+                  <th>Machine type</th>
+                  <th>Series</th>
+                  <th aria-label="Actions" />
+                </tr>
+              </thead>
+              <tbody>
+                {filteredModels.map((model) => {
+                  const product = products.find(
+                    (item) => String(item.id) === String(model.productId)
+                  );
+                  const active = model.active !== false;
+                  return (
+                    <tr
+                      key={`model-row-${model.id}`}
+                      className={modelForm.id === model.id ? styles.modelRowActive : ""}
+                    >
+                      <td>
+                        <input
+                          type="checkbox"
+                          checked={modelForm.id === model.id}
+                          onChange={() => editModel(model)}
+                          aria-label={`Select ${String(
+                            model.modelNumber || model.modelTitle || "model"
+                          )}`}
+                        />
+                      </td>
+                      <td>
+                        <button
+                          className={styles.modelIdentityButton}
+                          type="button"
+                          onClick={() => editModel(model)}
+                        >
+                          <span className={styles.modelThumb}>
+                            {model.thumbnail ? (
+                              <img
+                                src={String(model.thumbnail)}
+                                alt={String(
+                                  model.thumbnailAltText ||
+                                    model.modelNumber ||
+                                    "Model thumbnail"
+                                )}
+                              />
+                            ) : (
+                              <span>{String(model.modelNumber || "?").slice(0, 1)}</span>
+                            )}
+                          </span>
+                          <span>
+                            <strong>{String(model.modelNumber || "Untitled model")}</strong>
+                            <small>{String(model.modelTitle || "No title added")}</small>
+                          </span>
+                        </button>
+                      </td>
+                      <td>
+                        <span
+                          className={`${styles.statusPill} ${
+                            active ? styles.statusPillActive : styles.statusPillInactive
+                          }`}
+                        >
+                          {active ? "Active" : "Inactive"}
+                        </span>
+                      </td>
+                      <td>{String(product?.title || "Unassigned")}</td>
+                      <td>{String(model.machineType || "-")}</td>
+                      <td>{String(model.series || "-")}</td>
+                      <td>
+                        <div className={styles.tableActions}>
+                          <button
+                            className={styles.tableEditButton}
+                            type="button"
+                            onClick={() => editModel(model)}
+                          >
+                            Edit
+                          </button>
+                          <button
+                            className={styles.tableDeleteButton}
+                            type="button"
+                            onClick={() => deleteModel(model)}
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })}
+                {!filteredModels.length && (
+                  <tr>
+                    <td colSpan={7}>
+                      <p className={styles.statusText}>No matching models found.</p>
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
 
-        <div className={styles.editorPanel}>
+        <div
+          className={`${styles.editorPanel} ${styles.productModelEditor}`}
+          id="product-model-editor"
+        >
             <div className={styles.cmsForm}>
-              <div className={styles.editorHeader}>
-                <h3>{modelForm.id ? "Edit product model" : "Create product model"}</h3>
+              <div className={`${styles.editorHeader} ${styles.stickyEditorHeader}`}>
+                <div>
+                  <p className={styles.editorEyebrow}>{productModelStatus}</p>
+                  <h3>{modelForm.id ? "Edit product model" : "Create product model"}</h3>
+                </div>
+                <div className={styles.editorSummary}>
+                  <span>{selectedProductTitle || "No product"}</span>
+                  <span>{selectedIndustryCount} industries</span>
+                  <span>{completedMediaCount}/3 media</span>
+                </div>
                 <button
                   className={styles.buttonDark}
                   type="button"
@@ -1265,10 +1507,14 @@ function ProductModelManager({ createNonce }: { createNonce: number }) {
                   {isSaving ? "Saving..." : modelForm.id ? "Update" : "Create"}
                 </button>
               </div>
-              <div>
+              <div className={styles.slugCard}>
                 <p className={styles.listHeading}>Slug</p>
                 <p className={styles.slugPreview}>{modelUrl}</p>
               </div>
+              <FormSection
+                title="Model Identity"
+                text="Core information used across product pages and catalog cards."
+              >
               <div className={styles.formGrid}>
                 <CmsInput
                   label="Model name / number"
@@ -1348,14 +1594,16 @@ function ProductModelManager({ createNonce }: { createNonce: number }) {
                   setModelForm((current) => ({ ...current, shortDescription }))
                 }
               />
+              </FormSection>
+              <FormSection
+                title="Media Assets"
+                text="Upload the images and brochure attached to this model."
+              >
               <div className={styles.formGrid}>
                 <FileUploadField
-                  label="Thumbnail URL"
+                  label="Thumbnail"
                   folder="models/thumbnails"
-                  value={modelForm.thumbnail}
-                  onChange={(thumbnail) =>
-                    setModelForm((current) => ({ ...current, thumbnail }))
-                  }
+                  currentValue={modelForm.thumbnail}
                   onUploaded={(url) => setUploadedField("thumbnail", url)}
                 />
                 <CmsInput
@@ -1369,12 +1617,9 @@ function ProductModelManager({ createNonce }: { createNonce: number }) {
                   }
                 />
                 <FileUploadField
-                  label="Cover image URL"
+                  label="Cover image"
                   folder="models/covers"
-                  value={modelForm.coverImage}
-                  onChange={(coverImage) =>
-                    setModelForm((current) => ({ ...current, coverImage }))
-                  }
+                  currentValue={modelForm.coverImage}
                   onUploaded={(url) => setUploadedField("coverImage", url)}
                 />
                 <CmsInput
@@ -1388,16 +1633,18 @@ function ProductModelManager({ createNonce }: { createNonce: number }) {
                   }
                 />
                 <FileUploadField
-                  label="Brochure URL"
+                  label="Brochure"
                   folder="models/brochures"
-                  value={modelForm.brochure}
-                  onChange={(brochure) =>
-                    setModelForm((current) => ({ ...current, brochure }))
-                  }
+                  currentValue={modelForm.brochure}
                   onUploaded={(url) => setUploadedField("brochure", url)}
                   accept="application/pdf,image/*"
                 />
               </div>
+              </FormSection>
+              <FormSection
+                title="Specifications"
+                text="Key features and supporting copy shown in the model detail page."
+              >
               <DynamicKeyValueList
                 label="Specs / key features"
                 values={modelForm.keyFeatures}
@@ -1425,6 +1672,11 @@ function ProductModelManager({ createNonce }: { createNonce: number }) {
                   }))
                 }
               />
+              </FormSection>
+              <FormSection
+                title="Detail Content"
+                text="Build the deeper page sections with images, titles, and copy."
+              >
               <ModelDescriptionEditor
                 values={modelForm.modelDescription}
                 setUploadedUrl={(sectionIndex, field, url) => {
@@ -1445,6 +1697,11 @@ function ProductModelManager({ createNonce }: { createNonce: number }) {
                   }))
                 }
               />
+              </FormSection>
+              <FormSection
+                title="Relationships"
+                text="Choose the industries where this model should appear."
+              >
               <IndustryPicker
                 industries={industries}
                 selected={modelForm.industryIds}
@@ -1457,6 +1714,11 @@ function ProductModelManager({ createNonce }: { createNonce: number }) {
                   )
                 }
               />
+              </FormSection>
+              <FormSection
+                title="SEO"
+                text="Control metadata and social previews for this model page."
+              >
               <SeoFields
                 pageTitle={modelForm.seoPageTitle}
                 pageDescription={modelForm.seoPageDescription}
@@ -1468,6 +1730,7 @@ function ProductModelManager({ createNonce }: { createNonce: number }) {
                   setModelForm((current) => ({ ...current, [field]: value }))
                 }
               />
+              </FormSection>
             </div>
 
           {message && <p className={styles.statusText}>{message}</p>}
@@ -1841,12 +2104,8 @@ function IndustryProductModelManager({
 
             <div className={styles.formGrid}>
               <FileUploadField
-                label="Thumbnail URL"
+                label="Thumbnail"
                 folder="models/thumbnails"
-                value={modelForm.thumbnail}
-                onChange={(thumbnail) =>
-                  setModelForm((current) => ({ ...current, thumbnail }))
-                }
                 onUploaded={(url) => setUploadedField("thumbnail", url)}
               />
               <CmsInput
@@ -1857,12 +2116,8 @@ function IndustryProductModelManager({
                 }
               />
               <FileUploadField
-                label="Cover image URL"
+                label="Cover image"
                 folder="models/covers"
-                value={modelForm.coverImage}
-                onChange={(coverImage) =>
-                  setModelForm((current) => ({ ...current, coverImage }))
-                }
                 onUploaded={(url) => setUploadedField("coverImage", url)}
               />
               <CmsInput
@@ -1933,18 +2188,40 @@ function CmsInput({
   );
 }
 
+function FormSection({
+  title,
+  text,
+  children,
+}: {
+  title?: string;
+  text: string;
+  children: ReactNode;
+}) {
+  return (
+    <section className={styles.formSection}>
+      {(title || text) && (
+        <div className={styles.formSectionHeader}>
+          <div>
+            {title && <h4>{title}</h4>}
+            {text && <p>{text}</p>}
+          </div>
+        </div>
+      )}
+      <div className={styles.formSectionBody}>{children}</div>
+    </section>
+  );
+}
+
 function FileUploadField({
   label,
   folder,
-  value,
-  onChange,
+  currentValue = "",
   onUploaded,
   accept = "image/*",
 }: {
   label: string;
   folder: string;
-  value: string;
-  onChange: (value: string) => void;
+  currentValue?: string;
   onUploaded: (url: string) => void;
   accept?: string;
 }) {
@@ -1980,7 +2257,10 @@ function FileUploadField({
 
   return (
     <div className={styles.uploadField}>
-      <CmsInput label={label} value={value} onChange={onChange} />
+      <div className={styles.uploadFieldHeader}>
+        <span className={styles.uploadLabel}>{label}</span>
+        {currentValue && <span className={styles.uploadStatus}>Uploaded</span>}
+      </div>
       <label className={styles.fileButton}>
         <span>{isUploading ? "Uploading..." : "Upload file"}</span>
         <input
@@ -2168,10 +2448,9 @@ function ModelDescriptionEditor({
           <p className={styles.listHeading}>Section {index + 1}</p>
           <div className={styles.formGrid}>
             <FileUploadField
-              label="Detail image URL"
+              label="Detail image"
               folder="models/details"
-              value={item.image}
-              onChange={(value) => update(index, "image", value)}
+              currentValue={item.image}
               onUploaded={(url) => setUploadedUrl(index, "image", url)}
             />
             <CmsInput
@@ -2350,6 +2629,7 @@ function SeoFields({
   socialDescription,
   socialImage,
   setField,
+  includeSocial = true,
 }: {
   pageTitle: string;
   pageDescription: string;
@@ -2357,6 +2637,7 @@ function SeoFields({
   socialTitle: string;
   socialDescription: string;
   socialImage: string;
+  includeSocial?: boolean;
   setField: (
     field:
       | "seoPageTitle"
@@ -2388,21 +2669,968 @@ function SeoFields({
         value={pageKeywords}
         onChange={(value) => setField("seoPageKeywords", value)}
       />
-      <CmsInput
-        label="Social title"
-        value={socialTitle}
-        onChange={(value) => setField("seoSocialTitle", value)}
-      />
-      <CmsTextarea
-        label="Social description"
-        value={socialDescription}
-        onChange={(value) => setField("seoSocialDescription", value)}
-      />
-      <CmsInput
-        label="Social image URL"
-        value={socialImage}
-        onChange={(value) => setField("seoSocialImage", value)}
-      />
+      {includeSocial && (
+        <>
+          <CmsInput
+            label="Social title"
+            value={socialTitle}
+            onChange={(value) => setField("seoSocialTitle", value)}
+          />
+          <CmsTextarea
+            label="Social description"
+            value={socialDescription}
+            onChange={(value) => setField("seoSocialDescription", value)}
+          />
+          <CmsInput
+            label="Social image URL"
+            value={socialImage}
+            onChange={(value) => setField("seoSocialImage", value)}
+          />
+        </>
+      )}
+    </div>
+  );
+}
+
+function formatCmsDate(value: unknown) {
+  if (!value) return "-";
+  const date = new Date(String(value));
+  if (Number.isNaN(date.getTime())) return "-";
+  return new Intl.DateTimeFormat("en-IN", {
+    day: "numeric",
+    month: "short",
+    year: "numeric",
+  }).format(date);
+}
+
+const emptyBlogForm: BlogFormState = {
+  title: "",
+  slug: "",
+  description: "",
+  banner: "",
+  bannerAltText: "",
+  content: "",
+  published: true,
+  industryIds: [],
+  productIds: [],
+  modelIds: [],
+  seoPageTitle: "",
+  seoPageDescription: "",
+  seoPageKeywords: "",
+  seoSocialTitle: "",
+  seoSocialDescription: "",
+  seoSocialImage: "",
+};
+
+function slugifyBlog(value: string) {
+  return value
+    .toLowerCase()
+    .trim()
+    .replace(/\s+/g, "-")
+    .replace(/[^\w-]/g, "");
+}
+
+function plainTextFromHtml(value: string) {
+  return value
+    .replace(/<[^>]*>/g, " ")
+    .replace(/&nbsp;/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+function blogToForm(record: ResourceRecord): BlogFormState {
+  const seo = (record.seoMetadata || {}) as Record<string, string>;
+  return {
+    id: record.id,
+    title: String(record.title || ""),
+    slug: String(record.slug || ""),
+    description: String(record.description || ""),
+    banner: String(record.banner || ""),
+    bannerAltText: String(record.bannerAltText || ""),
+    content: String(record.content || ""),
+    published: record.published !== false,
+    industryIds: toNumberIds(record.industryIds),
+    productIds: toNumberIds(record.productIds),
+    modelIds: toNumberIds(record.modelIds),
+    seoPageTitle: String(record.seoPageTitle || seo.pageTitle || ""),
+    seoPageDescription: String(
+      record.seoPageDescription || seo.pageDescription || ""
+    ),
+    seoPageKeywords: String(record.seoPageKeywords || seo.pageKeywords || ""),
+    seoSocialTitle: String(record.seoSocialTitle || seo.socialTitle || ""),
+    seoSocialDescription: String(
+      record.seoSocialDescription || seo.socialDescription || ""
+    ),
+    seoSocialImage: String(record.seoSocialImage || seo.socialImage || ""),
+  };
+}
+
+function buildBlogPayload(form: BlogFormState) {
+  const fallbackDescription =
+    form.description.trim() ||
+    form.seoPageDescription.trim() ||
+    plainTextFromHtml(form.content).slice(0, 180) ||
+    form.title;
+  const seoMetadata = {
+    pageTitle: form.seoPageTitle || form.title,
+    pageDescription: form.seoPageDescription || fallbackDescription,
+    pageKeywords: form.seoPageKeywords,
+  };
+
+  return {
+    ...(form.id ? { id: form.id } : {}),
+    title: form.title,
+    slug: slugifyBlog(form.slug || form.title),
+    description: fallbackDescription,
+    banner: form.banner,
+    bannerAltText: form.bannerAltText,
+    content: form.content,
+    published: form.published,
+    industryIds: form.industryIds,
+    productIds: form.productIds,
+    modelIds: form.modelIds,
+    seoMetadata,
+  };
+}
+
+function BlogManager({
+  config,
+  createNonce,
+}: {
+  config: (typeof resourceConfig)["blogs"];
+  createNonce: number;
+}) {
+  const [records, setRecords] = useState<ResourceRecord[]>([]);
+  const [selected, setSelected] = useState<ResourceRecord | null>(null);
+  const [blogForm, setBlogForm] = useState<BlogFormState>(emptyBlogForm);
+  const [industries, setIndustries] = useState<ResourceRecord[]>([]);
+  const [products, setProducts] = useState<ResourceRecord[]>([]);
+  const [models, setModels] = useState<ResourceRecord[]>([]);
+  const [isCreating, setIsCreating] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [isOpening, setIsOpening] = useState(false);
+  const [isLoadingRelations, setIsLoadingRelations] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  const [blogMode, setBlogMode] = useState<"list" | "editor">("list");
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+  const blogContentDraftRef = useRef(emptyBlogForm.content);
+  const [blogSearch, setBlogSearch] = useState("");
+  const [visibilityFilter, setVisibilityFilter] = useState<
+    "all" | "visible" | "hidden"
+  >("all");
+
+  const loadRecords = async () => {
+    setIsLoading(true);
+    setError("");
+    try {
+      const blogResponse = await fetch(`/api/${config.endpoint}?page=1&perPage=200`);
+      const blogPayload = await blogResponse.json();
+      if (!blogResponse.ok) {
+        throw new Error(blogPayload?.error || "Could not load blogs");
+      }
+      setRecords(Array.isArray(blogPayload) ? blogPayload : []);
+    } catch (loadError) {
+      setError(loadError instanceof Error ? loadError.message : "Could not load blogs");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const loadRelationOptions = async () => {
+    if (industries.length || products.length || models.length || isLoadingRelations) {
+      return;
+    }
+
+    setIsLoadingRelations(true);
+    try {
+      const [industryResponse, productResponse, modelResponse] = await Promise.all([
+        fetch("/api/industries?page=1&perPage=100"),
+        fetch("/api/products?page=1&perPage=100"),
+        fetch("/api/models?page=1&perPage=250"),
+      ]);
+      const [industryPayload, productPayload, modelPayload] = await Promise.all([
+        industryResponse.json(),
+        productResponse.json(),
+        modelResponse.json(),
+      ]);
+
+      if (industryResponse.ok && Array.isArray(industryPayload)) {
+        setIndustries(industryPayload);
+      }
+      if (productResponse.ok && Array.isArray(productPayload)) {
+        setProducts(productPayload);
+      }
+      if (modelResponse.ok && Array.isArray(modelPayload)) {
+        setModels(modelPayload);
+      }
+    } catch (relationError) {
+      setError(
+        relationError instanceof Error
+          ? relationError.message
+          : "Could not load relationship options"
+      );
+    } finally {
+      setIsLoadingRelations(false);
+    }
+  };
+
+  useEffect(() => {
+    setSelected(null);
+    setBlogForm({ ...emptyBlogForm });
+    setIsCreating(false);
+    setBlogMode("list");
+    setMessage("");
+    setError("");
+    loadRecords();
+  }, [config.endpoint]);
+
+  useEffect(() => {
+    if (createNonce > 0) startCreate();
+  }, [createNonce]);
+
+  const titleFor = (record: ResourceRecord) =>
+    String(record.title || `Untitled #${record.id || ""}`);
+
+  const startCreate = () => {
+    setIsCreating(true);
+    setSelected(null);
+    setMessage("");
+    setError("");
+    setBlogForm({ ...emptyBlogForm });
+    blogContentDraftRef.current = emptyBlogForm.content;
+    setBlogMode("editor");
+    void loadRelationOptions();
+  };
+
+  const startEdit = async (record: ResourceRecord) => {
+    setIsCreating(false);
+    setMessage("");
+    setError("");
+    setIsOpening(true);
+    setBlogMode("editor");
+
+    try {
+      const relationOptionsPromise = loadRelationOptions();
+      if (!record.id) {
+        setSelected(record);
+        const nextForm = blogToForm(record);
+        setBlogForm(nextForm);
+        blogContentDraftRef.current = nextForm.content;
+        await relationOptionsPromise;
+        return;
+      }
+
+      const response = await fetch(`/api/${config.endpoint}/${record.id}`);
+      const payload = await response.json();
+      if (!response.ok) {
+        throw new Error(payload?.error || "Could not open blog");
+      }
+
+      setSelected(payload);
+      const nextForm = blogToForm(payload);
+      setBlogForm(nextForm);
+      blogContentDraftRef.current = nextForm.content;
+      await relationOptionsPromise;
+    } catch (openError) {
+      setSelected(record);
+      const nextForm = blogToForm(record);
+      setBlogForm(nextForm);
+      blogContentDraftRef.current = nextForm.content;
+      setError(openError instanceof Error ? openError.message : "Could not open blog");
+    } finally {
+      setIsOpening(false);
+    }
+  };
+
+  const closeEditor = () => {
+    setBlogMode("list");
+    setIsCreating(false);
+    setSelected(null);
+    setBlogForm({ ...emptyBlogForm });
+    blogContentDraftRef.current = emptyBlogForm.content;
+    setError("");
+  };
+
+  const saveRecord = async (publishState = blogForm.published) => {
+    setIsSaving(true);
+    setMessage("");
+    setError("");
+
+    try {
+      const formToSave = {
+        ...blogForm,
+        content: blogContentDraftRef.current,
+        published: publishState,
+      };
+      if (!isCreating && !selected?.id) {
+        throw new Error("Select a blog before updating.");
+      }
+      if (!formToSave.title.trim()) throw new Error("Title is required.");
+      if (!formToSave.banner.trim()) throw new Error("Banner image is required.");
+      if (!formToSave.bannerAltText.trim()) {
+        throw new Error("Banner alt text is required.");
+      }
+      if (!formToSave.content.trim()) throw new Error("Content is required.");
+
+      const endpoint = isCreating
+        ? `/api/${config.endpoint}`
+        : `/api/${config.endpoint}/${selected?.id}`;
+      const response = await fetch(endpoint, {
+        method: isCreating ? "POST" : "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(buildBlogPayload(formToSave)),
+      });
+      const payload = await response.json();
+
+      if (!response.ok) {
+        throw new Error(payload?.details || payload?.error || "Save failed");
+      }
+
+      setMessage(
+        publishState
+          ? isCreating
+            ? "Blog published."
+            : "Blog updated and published."
+          : isCreating
+            ? "Draft saved."
+            : "Draft updated."
+      );
+      setSelected(payload);
+      setIsCreating(false);
+      const nextForm = blogToForm(payload);
+      setBlogForm(nextForm);
+      blogContentDraftRef.current = nextForm.content;
+      setBlogMode("list");
+      await loadRecords();
+    } catch (saveError) {
+      setError(saveError instanceof Error ? saveError.message : "Save failed");
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  const deleteRecord = async (record: ResourceRecord) => {
+    if (!window.confirm(`Delete ${titleFor(record)}?`)) return;
+
+    setMessage("");
+    setError("");
+    try {
+      const response = await fetch(`/api/${config.endpoint}?id=${record.id}`, {
+        method: "DELETE",
+      });
+      const payload = await response.json();
+      if (!response.ok) {
+        throw new Error(payload?.details || payload?.error || "Delete failed");
+      }
+      if (selected?.id === record.id) {
+        setSelected(null);
+        setBlogForm({ ...emptyBlogForm });
+        blogContentDraftRef.current = emptyBlogForm.content;
+        setIsCreating(false);
+        setBlogMode("list");
+      }
+      setMessage("Blog deleted.");
+      await loadRecords();
+    } catch (deleteError) {
+      setError(deleteError instanceof Error ? deleteError.message : "Delete failed");
+    }
+  };
+
+  const filteredRecords = useMemo(() => {
+    const search = blogSearch.trim().toLowerCase();
+    return records.filter((record) => {
+      const visible = record.published !== false;
+      const matchesVisibility =
+        visibilityFilter === "all" ||
+        (visibilityFilter === "visible" && visible) ||
+        (visibilityFilter === "hidden" && !visible);
+      if (!matchesVisibility) return false;
+      if (!search) return true;
+      return [record.title, record.description, record.slug]
+        .map((value) => String(value || "").toLowerCase())
+        .some((value) => value.includes(search));
+    });
+  }, [blogSearch, records, visibilityFilter]);
+
+  const updateBlogField = <K extends keyof BlogFormState>(
+    field: K,
+    value: BlogFormState[K]
+  ) => {
+    setBlogForm((current) => ({ ...current, [field]: value }));
+  };
+
+  const updateBlogContent = (content: string) => {
+    blogContentDraftRef.current = content;
+    updateBlogField("content", content);
+  };
+
+  const toggleBlogRelation = (
+    field: "industryIds" | "productIds" | "modelIds",
+    id: number
+  ) => {
+    setBlogForm((current) => {
+      const selectedIds = current[field];
+      return {
+        ...current,
+        [field]: selectedIds.includes(id)
+          ? selectedIds.filter((item) => item !== id)
+          : [...selectedIds, id],
+      };
+    });
+  };
+
+  return (
+    <article
+      className={`${styles.panel} ${styles.productModelPanel}`}
+      id="blogs-content-editor"
+    >
+      <div className={styles.panelHeader}>
+        <h2 className={styles.panelTitle}>Blog posts</h2>
+        <div className={styles.panelActions}>
+          <button className={styles.button} type="button" onClick={loadRecords}>
+            Refresh
+          </button>
+          <button className={styles.buttonDark} type="button" onClick={startCreate}>
+            Add blog post
+          </button>
+        </div>
+      </div>
+
+      <div
+        className={`${styles.productModelWorkspace} ${
+          blogMode === "editor" ? styles.blogEditorWorkspace : ""
+        }`}
+      >
+        {blogMode === "list" && (
+        <div className={styles.productModelTablePanel}>
+          <div className={styles.modelTableToolbar}>
+            <div className={styles.filterCluster}>
+              <label className={styles.compactSelectLabel}>
+                <span>Visibility</span>
+                <select
+                  value={visibilityFilter}
+                  onChange={(event) =>
+                    setVisibilityFilter(event.target.value as typeof visibilityFilter)
+                  }
+                >
+                  <option value="all">All</option>
+                  <option value="visible">Visible</option>
+                  <option value="hidden">Hidden</option>
+                </select>
+              </label>
+              <label className={styles.searchField}>
+                <span>Search and filter</span>
+                <input
+                  value={blogSearch}
+                  onChange={(event) => setBlogSearch(event.target.value)}
+                  placeholder="Search title, slug, description"
+                />
+              </label>
+            </div>
+          </div>
+
+          {isLoading && <p className={styles.statusText}>Loading blogs...</p>}
+          <div className={styles.modelTableWrap}>
+            <table className={styles.modelTable}>
+              <thead>
+                <tr>
+                  <th aria-label="Select" />
+                  <th>Title</th>
+                  <th>Visibility</th>
+                  <th>Blog</th>
+                  <th>Updated</th>
+                  <th>Published</th>
+                  <th aria-label="Actions" />
+                </tr>
+              </thead>
+              <tbody>
+                {filteredRecords.map((record) => {
+                  const visible = record.published !== false;
+                  return (
+                    <tr
+                      key={`blog-row-${record.id}`}
+                      className={selected?.id === record.id ? styles.modelRowActive : ""}
+                    >
+                      <td>
+                        <input
+                          type="checkbox"
+                          checked={selected?.id === record.id}
+                          onChange={() => startEdit(record)}
+                          aria-label={`Select ${titleFor(record)}`}
+                        />
+                      </td>
+                      <td>
+                        <button
+                          className={styles.modelIdentityButton}
+                          type="button"
+                          onClick={() => startEdit(record)}
+                        >
+                          <span className={styles.modelThumb}>
+                            {record.banner ? (
+                              <img
+                                src={String(record.banner)}
+                                alt={String(record.bannerAltText || titleFor(record))}
+                              />
+                            ) : (
+                              <span>{titleFor(record).slice(0, 1)}</span>
+                            )}
+                          </span>
+                          <span>
+                            <strong>{titleFor(record)}</strong>
+                            <small>{String(record.slug || "No slug")}</small>
+                          </span>
+                        </button>
+                      </td>
+                      <td>
+                        <span
+                          className={`${styles.statusPill} ${
+                            visible
+                              ? styles.statusPillActive
+                              : styles.statusPillInactive
+                          }`}
+                        >
+                          {visible ? "Visible" : "Hidden"}
+                        </span>
+                      </td>
+                      <td>News</td>
+                      <td>{formatCmsDate(record.updatedAt)}</td>
+                      <td>{formatCmsDate(record.createdAt)}</td>
+                      <td>
+                        <div className={styles.tableActions}>
+                          <button
+                            className={styles.tableEditButton}
+                            type="button"
+                            onClick={() => startEdit(record)}
+                          >
+                            Edit
+                          </button>
+                          <button
+                            className={styles.tableDeleteButton}
+                            type="button"
+                            onClick={() => deleteRecord(record)}
+                          >
+                            Delete
+                          </button>
+                        </div>
+                      </td>
+                    </tr>
+                  );
+                })}
+                {!filteredRecords.length && (
+                  <tr>
+                    <td colSpan={7}>
+                      <p className={styles.statusText}>No matching blog posts found.</p>
+                    </td>
+                  </tr>
+                )}
+              </tbody>
+            </table>
+          </div>
+        </div>
+        )}
+
+        {blogMode === "editor" && (
+        <div className={`${styles.editorPanel} ${styles.blogEditorPanel}`} id="blog-editor">
+          <div
+            className={`${styles.editorHeader} ${styles.stickyEditorHeader} ${styles.blogEditorHeader}`}
+          >
+            <div>
+              <p className={styles.editorEyebrow}>
+                {isCreating ? "New blog post" : selected ? "Editing blog post" : "Blog editor"}
+              </p>
+              <h3>
+                {isCreating
+                  ? "Create blog post"
+                  : selected
+                    ? `Edit ${titleFor(selected)}`
+                    : "Select a blog post"}
+              </h3>
+            </div>
+            {(isCreating || selected) && (
+              <div className={styles.editorActions}>
+                <button className={styles.button} type="button" onClick={closeEditor}>
+                  Back to blogs
+                </button>
+                <button
+                  className={styles.button}
+                  type="button"
+                  onClick={() => saveRecord(false)}
+                  disabled={isSaving}
+                >
+                  {isSaving ? "Saving..." : "Save draft"}
+                </button>
+                <button
+                  className={styles.buttonDark}
+                  type="button"
+                  onClick={() => saveRecord(true)}
+                  disabled={isSaving}
+                >
+                  {isSaving ? "Publishing..." : isCreating ? "Publish" : "Save & Publish"}
+                </button>
+              </div>
+            )}
+          </div>
+          {isOpening ? (
+            <p className={styles.statusText}>Opening blog post...</p>
+          ) : isCreating || selected ? (
+            <div className={styles.cmsForm}>
+              <FormSection
+                title=""
+                text=""
+              >
+                <div className={styles.formGrid}>
+                  <CmsInput
+                    label="Title"
+                    value={blogForm.title}
+                    onChange={(title) =>
+                      setBlogForm((current) => ({
+                        ...current,
+                        title,
+                        slug: current.slug ? current.slug : slugifyBlog(title),
+                      }))
+                    }
+                  />
+                  <CmsInput
+                    label="Slug"
+                    value={blogForm.slug}
+                    onChange={(slug) => updateBlogField("slug", slugifyBlog(slug))}
+                  />
+                </div>
+                <label className={styles.checkboxItem}>
+                  <input
+                    type="checkbox"
+                    checked={blogForm.published}
+                    onChange={(event) =>
+                      updateBlogField("published", event.target.checked)
+                    }
+                  />
+                  <span>Visible on website</span>
+                </label>
+              </FormSection>
+
+              <FormSection
+                title="Banner"
+                text="Upload the main image used in blog cards and the blog detail page."
+              >
+                <div className={styles.formGrid}>
+                  <FileUploadField
+                    label="Banner image"
+                    folder="blogs/banners"
+                    currentValue={blogForm.banner}
+                    onUploaded={(url) => updateBlogField("banner", url)}
+                  />
+                  <CmsInput
+                    label="Banner alt text"
+                    value={blogForm.bannerAltText}
+                    onChange={(bannerAltText) =>
+                      updateBlogField("bannerAltText", bannerAltText)
+                    }
+                  />
+                </div>
+              </FormSection>
+
+              <FormSection
+                title="Content"
+                text="Write and format the blog body without touching HTML."
+              >
+                <label className={styles.fieldControl}>
+                  <span>Blog content</span>
+                  <RichBlogEditor
+                    value={blogForm.content}
+                    onDraftChange={(content) => {
+                      blogContentDraftRef.current = content;
+                    }}
+                    onChange={updateBlogContent}
+                  />
+                </label>
+              </FormSection>
+
+              <FormSection
+                title="Relationships"
+                text="Connect this post to relevant industries, products, and models."
+              >
+                {isLoadingRelations ? (
+                  <p className={styles.statusText}>Loading relationships...</p>
+                ) : (
+                  <div className={styles.relationshipGrid}>
+                    <RelationPicker
+                      title="Industries"
+                      records={industries}
+                      selected={blogForm.industryIds}
+                      labelField="title"
+                      onToggle={(id) => toggleBlogRelation("industryIds", id)}
+                    />
+                    <RelationPicker
+                      title="Products"
+                      records={products}
+                      selected={blogForm.productIds}
+                      labelField="title"
+                      onToggle={(id) => toggleBlogRelation("productIds", id)}
+                    />
+                    <RelationPicker
+                      title="Models"
+                      records={models}
+                      selected={blogForm.modelIds}
+                      labelField="modelTitle"
+                      fallbackField="modelNumber"
+                      onToggle={(id) => toggleBlogRelation("modelIds", id)}
+                    />
+                  </div>
+                )}
+              </FormSection>
+
+              <FormSection
+                title="SEO"
+                text="Control search result metadata."
+              >
+                <SeoFields
+                  pageTitle={blogForm.seoPageTitle}
+                  pageDescription={blogForm.seoPageDescription}
+                  pageKeywords={blogForm.seoPageKeywords}
+                  socialTitle={blogForm.seoSocialTitle}
+                  socialDescription={blogForm.seoSocialDescription}
+                  socialImage={blogForm.seoSocialImage}
+                  setField={(field, value) => updateBlogField(field, value)}
+                  includeSocial={false}
+                />
+              </FormSection>
+            </div>
+          ) : (
+            <p className={styles.statusText}>
+              Pick a blog post from the table, or create a new one.
+            </p>
+          )}
+          {message && <p className={styles.statusText}>{message}</p>}
+          {error && <p className={styles.errorText}>{error}</p>}
+        </div>
+        )}
+      </div>
+    </article>
+  );
+}
+
+function RelationPicker({
+  title,
+  records,
+  selected,
+  labelField,
+  fallbackField,
+  onToggle,
+}: {
+  title: string;
+  records: ResourceRecord[];
+  selected: number[];
+  labelField: string;
+  fallbackField?: string;
+  onToggle: (id: number) => void;
+}) {
+  return (
+    <div className={styles.relatedBox}>
+      <div className={styles.repeatHeader}>
+        <p>{title}</p>
+        <span className={styles.countPill}>{selected.length}</span>
+      </div>
+      <div className={styles.relationList}>
+        {records.map((record) => {
+          const id = Number(record.id);
+          const label = String(
+            record[labelField] || (fallbackField ? record[fallbackField] : "") || id
+          );
+          return (
+            <label key={`${title}-${id}`} className={styles.checkboxItem}>
+              <input
+                type="checkbox"
+                checked={selected.includes(id)}
+                onChange={() => onToggle(id)}
+              />
+              <span>{label}</span>
+            </label>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function RichBlogEditor({
+  value,
+  onChange,
+  onDraftChange,
+}: {
+  value: string;
+  onChange: (value: string) => void;
+  onDraftChange?: (value: string) => void;
+}) {
+  const commitTimerRef = useRef<number | null>(null);
+  const latestHtmlRef = useRef(value || "");
+
+  const commitContent = () => {
+    if (commitTimerRef.current) {
+      window.clearTimeout(commitTimerRef.current);
+      commitTimerRef.current = null;
+    }
+    onChange(latestHtmlRef.current);
+  };
+
+  const editor = useEditor(
+    {
+      extensions: [
+        StarterKit,
+        ResizableImage.configure({
+          inline: true,
+          allowBase64: true,
+        }),
+        TipTapLink.configure({
+          openOnClick: false,
+        }),
+      ],
+      content: value || "",
+      immediatelyRender: false,
+      onUpdate: ({ editor }) => {
+        const html = editor.getHTML();
+        latestHtmlRef.current = html;
+        onDraftChange?.(html);
+        if (commitTimerRef.current) {
+          window.clearTimeout(commitTimerRef.current);
+        }
+        commitTimerRef.current = window.setTimeout(() => {
+          commitTimerRef.current = null;
+          onChange(latestHtmlRef.current);
+        }, 400);
+      },
+      editorProps: {
+        attributes: {
+          class: styles.richEditorContent,
+        },
+        handleDOMEvents: {
+          blur: () => {
+            commitContent();
+            return false;
+          },
+        },
+      },
+    },
+    []
+  );
+
+  useEffect(() => {
+    if (!editor) return;
+    if ((value || "") !== editor.getHTML()) {
+      latestHtmlRef.current = value || "";
+      editor.commands.setContent(value || "");
+    }
+  }, [editor, value]);
+
+  useEffect(() => {
+    return () => {
+      if (commitTimerRef.current) {
+        window.clearTimeout(commitTimerRef.current);
+      }
+    };
+  }, []);
+
+  if (!editor) {
+    return <div className={styles.richEditorShell}>Loading editor...</div>;
+  }
+
+  const setLink = () => {
+    const previousUrl = editor.getAttributes("link").href || "";
+    const url = window.prompt("Link URL", previousUrl);
+    if (url === null) return;
+    if (!url.trim()) {
+      editor.chain().focus().extendMarkRange("link").unsetLink().run();
+      return;
+    }
+    editor.chain().focus().extendMarkRange("link").setLink({ href: url }).run();
+  };
+
+  const addImage = () => {
+    const url = window.prompt("Image URL");
+    if (url?.trim()) {
+      editor.chain().focus().setImage({ src: url.trim() }).run();
+    }
+  };
+
+  return (
+    <div className={styles.richEditorShell}>
+      <div className={styles.richEditorToolbar}>
+        <select
+          value={
+            editor.isActive("heading", { level: 2 })
+              ? "h2"
+              : editor.isActive("heading", { level: 3 })
+                ? "h3"
+                : "paragraph"
+          }
+          onChange={(event) => {
+            const value = event.target.value;
+            if (value === "h2") {
+              editor.chain().focus().toggleHeading({ level: 2 }).run();
+            } else if (value === "h3") {
+              editor.chain().focus().toggleHeading({ level: 3 }).run();
+            } else {
+              editor.chain().focus().setParagraph().run();
+            }
+          }}
+        >
+          <option value="paragraph">Paragraph</option>
+          <option value="h2">Heading 2</option>
+          <option value="h3">Heading 3</option>
+        </select>
+        <button
+          type="button"
+          className={editor.isActive("bold") ? styles.richButtonActive : ""}
+          onClick={() => editor.chain().focus().toggleBold().run()}
+        >
+          B
+        </button>
+        <button
+          type="button"
+          className={editor.isActive("italic") ? styles.richButtonActive : ""}
+          onClick={() => editor.chain().focus().toggleItalic().run()}
+        >
+          I
+        </button>
+        <button
+          type="button"
+          className={editor.isActive("bulletList") ? styles.richButtonActive : ""}
+          onClick={() => editor.chain().focus().toggleBulletList().run()}
+        >
+          List
+        </button>
+        <button
+          type="button"
+          className={editor.isActive("orderedList") ? styles.richButtonActive : ""}
+          onClick={() => editor.chain().focus().toggleOrderedList().run()}
+        >
+          1. List
+        </button>
+        <button
+          type="button"
+          className={editor.isActive("blockquote") ? styles.richButtonActive : ""}
+          onClick={() => editor.chain().focus().toggleBlockquote().run()}
+        >
+          Quote
+        </button>
+        <button
+          type="button"
+          className={editor.isActive("link") ? styles.richButtonActive : ""}
+          onClick={setLink}
+        >
+          Link
+        </button>
+        <button type="button" onClick={addImage}>
+          Image
+        </button>
+        <button type="button" onClick={() => editor.chain().focus().undo().run()}>
+          Undo
+        </button>
+        <button type="button" onClick={() => editor.chain().focus().redo().run()}>
+          Redo
+        </button>
+      </div>
+      <EditorContent editor={editor} />
     </div>
   );
 }

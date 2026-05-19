@@ -3,9 +3,5 @@ export default function AdminLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
-    <>
-      <main className="main">{children}</main>
-    </>
-  );
+  return <main>{children}</main>;
 }

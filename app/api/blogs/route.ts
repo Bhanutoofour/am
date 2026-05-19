@@ -33,17 +33,29 @@ export async function GET(req: NextRequest) {
       } catch (e) {}
     }
 
+    const listColumns = {
+      id: blogs.id,
+      title: blogs.title,
+      slug: blogs.slug,
+      description: blogs.description,
+      banner: blogs.banner,
+      bannerAltText: blogs.bannerAltText,
+      published: blogs.published,
+      createdAt: blogs.createdAt,
+      updatedAt: blogs.updatedAt,
+    };
+
     const query =
       orderBy && Object.prototype.hasOwnProperty.call(blogs, orderBy.field)
         ? db
-            .select()
+            .select(listColumns)
             .from(blogs)
             .orderBy(
               orderBy.order === "desc"
                 ? desc((blogs as any)[orderBy.field])
                 : asc((blogs as any)[orderBy.field])
             )
-        : db.select().from(blogs).orderBy(desc(blogs.createdAt));
+        : db.select(listColumns).from(blogs).orderBy(desc(blogs.createdAt));
     const data = await query.limit(limit).offset(offset);
     
     // ✅ Optimized: Use COUNT query instead of fetching all records
@@ -52,50 +64,7 @@ export async function GET(req: NextRequest) {
       .from(blogs);
     const totalCount = Number(totalCountResult[0]?.count || 0);
 
-    // Get related data for each blog (optional - for future use)
-    const blogsWithRelations = await Promise.all(
-      data.map(async (blog) => {
-        // Get industry IDs
-        const blogIndustryIds = await db
-          .select({ industryId: blogIndustries.industryId })
-          .from(blogIndustries)
-          .where(eq(blogIndustries.blogId, blog.id));
-
-        // Get product IDs (multiple)
-        const blogProductIds = await db
-          .select({ productId: blogProducts.productId })
-          .from(blogProducts)
-          .where(eq(blogProducts.blogId, blog.id));
-
-        // Get model IDs (multiple)
-        const blogModelIds = await db
-          .select({ modelId: blogModels.modelId })
-          .from(blogModels)
-          .where(eq(blogModels.blogId, blog.id));
-
-        // Flatten SEO metadata for form editing
-        const blogWithSEO: any = {
-          ...blog,
-          industryIds: blogIndustryIds.map((bi) => bi.industryId),
-          productIds: blogProductIds.map((bp) => bp.productId),
-          modelIds: blogModelIds.map((bm) => bm.modelId),
-        };
-
-        // Extract SEO metadata to individual fields for editing
-        if (blog.seoMetadata) {
-          blogWithSEO.seoPageTitle = blog.seoMetadata.pageTitle || "";
-          blogWithSEO.seoPageDescription = blog.seoMetadata.pageDescription || "";
-          blogWithSEO.seoPageKeywords = blog.seoMetadata.pageKeywords || "";
-          blogWithSEO.seoSocialTitle = blog.seoMetadata.socialTitle || "";
-          blogWithSEO.seoSocialDescription = blog.seoMetadata.socialDescription || "";
-          blogWithSEO.seoSocialImage = blog.seoMetadata.socialImage || "";
-        }
-
-        return blogWithSEO;
-      })
-    );
-
-    return new NextResponse(JSON.stringify(blogsWithRelations), {
+    return new NextResponse(JSON.stringify(data), {
       headers: {
         "Content-Type": "application/json",
         "Content-Range": `items ${offset}-${
@@ -365,4 +334,3 @@ export async function DELETE(req: NextRequest) {
     );
   }
 }
-
