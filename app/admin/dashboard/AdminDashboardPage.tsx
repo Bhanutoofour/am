@@ -78,6 +78,74 @@ const sectionPaths: Record<SectionKey, string> = {
   media: "/admin/media-upload",
 };
 
+function EditorToolbarIcon({
+  name,
+}: {
+  name: "bulletList" | "orderedList" | "quote" | "link" | "image";
+}) {
+  const iconProps = {
+    width: 18,
+    height: 18,
+    viewBox: "0 0 24 24",
+    fill: "none",
+    stroke: "currentColor",
+    strokeWidth: 2,
+    strokeLinecap: "round" as const,
+    strokeLinejoin: "round" as const,
+    "aria-hidden": true,
+    focusable: false,
+  };
+
+  switch (name) {
+    case "bulletList":
+      return (
+        <svg {...iconProps}>
+          <path d="M8 6h13" />
+          <path d="M8 12h13" />
+          <path d="M8 18h13" />
+          <path d="M3 6h.01" />
+          <path d="M3 12h.01" />
+          <path d="M3 18h.01" />
+        </svg>
+      );
+    case "orderedList":
+      return (
+        <svg {...iconProps}>
+          <path d="M10 6h11" />
+          <path d="M10 12h11" />
+          <path d="M10 18h11" />
+          <path d="M4 6h1v4" />
+          <path d="M4 10h2" />
+          <path d="M3.5 14h2.5l-2.5 4h2.5" />
+        </svg>
+      );
+    case "quote":
+      return (
+        <svg {...iconProps}>
+          <path d="M8 12H5a3 3 0 0 1 3-3V7a5 5 0 0 0-5 5v5h5z" />
+          <path d="M18 12h-3a3 3 0 0 1 3-3V7a5 5 0 0 0-5 5v5h5z" />
+        </svg>
+      );
+    case "link":
+      return (
+        <svg {...iconProps}>
+          <path d="M10 13a5 5 0 0 0 7.07 0l2-2a5 5 0 0 0-7.07-7.07l-1.15 1.15" />
+          <path d="M14 11a5 5 0 0 0-7.07 0l-2 2A5 5 0 0 0 12 20.07l1.15-1.15" />
+        </svg>
+      );
+    case "image":
+      return (
+        <svg {...iconProps}>
+          <rect x="3" y="5" width="18" height="14" rx="2" />
+          <circle cx="8.5" cy="10.5" r="1.5" />
+          <path d="m21 15-5-5L5 19" />
+        </svg>
+      );
+    default:
+      return null;
+  }
+}
+
 const sectionByPath: Record<string, SectionKey> = {
   "/admin": "home",
   "/admin/dashboard": "home",
@@ -3464,6 +3532,14 @@ function RichBlogEditor({
 }) {
   const commitTimerRef = useRef<number | null>(null);
   const latestHtmlRef = useRef(value || "");
+  const imageInputRef = useRef<HTMLInputElement | null>(null);
+  const linkSelectionRef = useRef<{ from: number; to: number } | null>(null);
+  const [isLinkModalOpen, setIsLinkModalOpen] = useState(false);
+  const [linkUrl, setLinkUrl] = useState("");
+  const [isImageModalOpen, setIsImageModalOpen] = useState(false);
+  const [imageUrl, setImageUrl] = useState("");
+  const [isImageUploading, setIsImageUploading] = useState(false);
+  const [imageUploadError, setImageUploadError] = useState("");
 
   const commitContent = () => {
     if (commitTimerRef.current) {
@@ -3534,21 +3610,72 @@ function RichBlogEditor({
     return <div className={styles.richEditorShell}>Loading editor...</div>;
   }
 
-  const setLink = () => {
-    const previousUrl = editor.getAttributes("link").href || "";
-    const url = window.prompt("Link URL", previousUrl);
-    if (url === null) return;
-    if (!url.trim()) {
+  const openLinkModal = () => {
+    const { from, to } = editor.state.selection;
+    linkSelectionRef.current = { from, to };
+    setLinkUrl(editor.getAttributes("link").href || "");
+    setIsLinkModalOpen(true);
+  };
+
+  const applyLink = () => {
+    if (linkSelectionRef.current) {
+      editor.commands.setTextSelection(linkSelectionRef.current);
+    }
+
+    if (!linkUrl.trim()) {
       editor.chain().focus().extendMarkRange("link").unsetLink().run();
+      setIsLinkModalOpen(false);
       return;
     }
-    editor.chain().focus().extendMarkRange("link").setLink({ href: url }).run();
+
+    editor
+      .chain()
+      .focus()
+      .extendMarkRange("link")
+      .setLink({ href: linkUrl.trim() })
+      .run();
+    setIsLinkModalOpen(false);
+  };
+
+  const openImageModal = () => {
+    setImageUrl("");
+    setImageUploadError("");
+    setIsImageModalOpen(true);
+  };
+
+  const uploadEditorImage = async (file?: File) => {
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append("file", file);
+    formData.append("folder", "cms/blogs");
+
+    setIsImageUploading(true);
+    setImageUploadError("");
+    try {
+      const response = await fetch("/api/admin/uploads", {
+        method: "POST",
+        body: formData,
+      });
+      const payload = await response.json();
+
+      if (!response.ok) {
+        throw new Error(payload?.details || payload?.error || "Upload failed");
+      }
+
+      setImageUrl(payload.url || "");
+    } catch (error) {
+      setImageUploadError(error instanceof Error ? error.message : "Upload failed");
+    } finally {
+      setIsImageUploading(false);
+      if (imageInputRef.current) imageInputRef.current.value = "";
+    }
   };
 
   const addImage = () => {
-    const url = window.prompt("Image URL");
-    if (url?.trim()) {
-      editor.chain().focus().setImage({ src: url.trim() }).run();
+    if (imageUrl.trim()) {
+      editor.chain().focus().setImage({ src: imageUrl.trim() }).run();
+      setIsImageModalOpen(false);
     }
   };
 
@@ -3594,34 +3721,42 @@ function RichBlogEditor({
         </button>
         <button
           type="button"
+          aria-label="Bullet list"
+          title="Bullet list"
           className={editor.isActive("bulletList") ? styles.richButtonActive : ""}
           onClick={() => editor.chain().focus().toggleBulletList().run()}
         >
-          List
+          <EditorToolbarIcon name="bulletList" />
         </button>
         <button
           type="button"
+          aria-label="Numbered list"
+          title="Numbered list"
           className={editor.isActive("orderedList") ? styles.richButtonActive : ""}
           onClick={() => editor.chain().focus().toggleOrderedList().run()}
         >
-          1. List
+          <EditorToolbarIcon name="orderedList" />
         </button>
         <button
           type="button"
+          aria-label="Quote"
+          title="Quote"
           className={editor.isActive("blockquote") ? styles.richButtonActive : ""}
           onClick={() => editor.chain().focus().toggleBlockquote().run()}
         >
-          Quote
+          <EditorToolbarIcon name="quote" />
         </button>
         <button
           type="button"
+          aria-label="Link"
+          title="Link"
           className={editor.isActive("link") ? styles.richButtonActive : ""}
-          onClick={setLink}
+          onClick={openLinkModal}
         >
-          Link
+          <EditorToolbarIcon name="link" />
         </button>
-        <button type="button" onClick={addImage}>
-          Image
+        <button type="button" aria-label="Image" title="Image" onClick={openImageModal}>
+          <EditorToolbarIcon name="image" />
         </button>
         <button type="button" onClick={() => editor.chain().focus().undo().run()}>
           Undo
@@ -3631,6 +3766,113 @@ function RichBlogEditor({
         </button>
       </div>
       <EditorContent editor={editor} />
+      {isLinkModalOpen && (
+        <div className={styles.editorModalBackdrop} role="presentation">
+          <div
+            className={styles.editorModal}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="editor-link-title"
+          >
+            <div className={styles.editorModalHeader}>
+              <h3 id="editor-link-title">Add link</h3>
+              <button
+                type="button"
+                aria-label="Close link modal"
+                onClick={() => setIsLinkModalOpen(false)}
+              >
+                &times;
+              </button>
+            </div>
+            <label className={styles.editorModalField}>
+              <span>Link URL</span>
+              <input
+                type="url"
+                value={linkUrl}
+                placeholder="https://example.com"
+                onChange={(event) => setLinkUrl(event.target.value)}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter") applyLink();
+                  if (event.key === "Escape") setIsLinkModalOpen(false);
+                }}
+                autoFocus
+              />
+            </label>
+            <div className={styles.editorModalActions}>
+              <button type="button" onClick={() => setIsLinkModalOpen(false)}>
+                Cancel
+              </button>
+              <button type="button" onClick={applyLink}>
+                {linkUrl.trim() ? "Apply link" : "Remove link"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+      {isImageModalOpen && (
+        <div className={styles.editorModalBackdrop} role="presentation">
+          <div
+            className={styles.editorModal}
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="editor-image-title"
+          >
+            <div className={styles.editorModalHeader}>
+              <h3 id="editor-image-title">Add image</h3>
+              <button
+                type="button"
+                aria-label="Close image modal"
+                onClick={() => setIsImageModalOpen(false)}
+              >
+                &times;
+              </button>
+            </div>
+            <label className={styles.editorModalField}>
+              <span>Image URL</span>
+              <input
+                type="url"
+                value={imageUrl}
+                placeholder="https://example.com/image.jpg"
+                onChange={(event) => setImageUrl(event.target.value)}
+                onKeyDown={(event) => {
+                  if (event.key === "Enter") addImage();
+                  if (event.key === "Escape") setIsImageModalOpen(false);
+                }}
+                autoFocus
+              />
+            </label>
+            <input
+              ref={imageInputRef}
+              type="file"
+              accept="image/*"
+              className={styles.editorModalFileInput}
+              onChange={(event) => uploadEditorImage(event.target.files?.[0])}
+            />
+            <button
+              type="button"
+              className={styles.editorModalUpload}
+              disabled={isImageUploading}
+              onClick={() => imageInputRef.current?.click()}
+            >
+              {isImageUploading ? "Uploading..." : "Upload file"}
+            </button>
+            {imageUrl && (
+              <img className={styles.editorModalPreview} src={imageUrl} alt="" />
+            )}
+            {imageUploadError && (
+              <p className={styles.errorText}>{imageUploadError}</p>
+            )}
+            <div className={styles.editorModalActions}>
+              <button type="button" onClick={() => setIsImageModalOpen(false)}>
+                Cancel
+              </button>
+              <button type="button" disabled={!imageUrl.trim()} onClick={addImage}>
+                Insert image
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

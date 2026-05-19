@@ -1059,7 +1059,11 @@
 
 .richEditorToolbar select,
 .richEditorToolbar button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   min-height: 2rem;
+  min-width: 2rem;
   border: 1px solid var(--cms-border);
   border-radius: 0.3rem;
   background: #ffffff;
@@ -1069,6 +1073,10 @@
   font-size: 0.8rem;
   font-weight: 700;
   cursor: pointer;
+}
+
+.richEditorToolbar button svg {
+  flex: 0 0 auto;
 }
 
 .richEditorToolbar select {
@@ -1129,6 +1137,128 @@
 .richEditorContent img {
   max-width: 100%;
   height: auto;
+}
+
+.editorModalBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  padding: 1rem;
+  background: rgba(1, 6, 10, 0.48);
+}
+
+.editorModal {
+  width: min(30rem, 100%);
+  display: grid;
+  gap: 0.85rem;
+  padding: 1rem;
+  border: 1px solid var(--cms-border-strong);
+  border-radius: 0.5rem;
+  background: #ffffff;
+  box-shadow: 0 1.25rem 3rem rgba(1, 6, 10, 0.18);
+}
+
+.editorModalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.editorModalHeader h3 {
+  margin: 0;
+  color: var(--cms-text);
+  font-size: 1rem;
+}
+
+.editorModalHeader button,
+.editorModalActions button,
+.editorModalUpload {
+  min-height: 2.15rem;
+  border: 1px solid var(--cms-border);
+  border-radius: 0.35rem;
+  background: #ffffff;
+  color: var(--cms-text);
+  padding: 0 0.75rem;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.editorModalHeader button {
+  width: 2.15rem;
+  padding: 0;
+  font-size: 1.25rem;
+  line-height: 1;
+}
+
+.editorModalField {
+  display: grid;
+  gap: 0.4rem;
+  color: var(--cms-text);
+  font-size: 0.78rem;
+  font-weight: 700;
+}
+
+.editorModalField input {
+  width: 100%;
+  min-height: 2.45rem;
+  border: 1px solid var(--cms-border);
+  border-radius: 0.35rem;
+  padding: 0 0.7rem;
+  font: inherit;
+  font-weight: 500;
+}
+
+.editorModalField input:focus {
+  border-color: #01060a;
+  outline: 2px solid rgba(249, 195, 0, 0.32);
+  outline-offset: 1px;
+}
+
+.editorModalFileInput {
+  display: none;
+}
+
+.editorModalUpload {
+  justify-self: start;
+}
+
+.editorModalHeader button:hover,
+.editorModalActions button:hover,
+.editorModalUpload:hover {
+  border-color: #01060a;
+}
+
+.editorModalActions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 0.5rem;
+}
+
+.editorModalActions button:last-child {
+  border-color: #01060a;
+  background: #01060a;
+  color: #f9c300;
+}
+
+.editorModalActions button:disabled,
+.editorModalUpload:disabled {
+  cursor: not-allowed;
+  opacity: 0.62;
+}
+
+.editorModalPreview {
+  width: 100%;
+  max-height: 14rem;
+  object-fit: contain;
+  border: 1px solid var(--cms-border);
+  border-radius: 0.35rem;
+  background: var(--cms-surface-muted);
 }
 
 .uploadField {
