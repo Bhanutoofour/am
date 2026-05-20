@@ -37,12 +37,21 @@ export default function MediaPage() {
         {MediaData.map((item) => (
           <article key={`${item.title}-${item.link}`} className={styles.card}>
             <div className={styles.logoBox}>
-              <Image
-                src={item.imageSrc}
-                alt={`${item.title} media logo`}
-                width={item.width || 160}
-                height={item.height || 40}
-              />
+              {item.imageSrc ? (
+                <Image
+                  src={item.imageSrc}
+                  alt={`${item.title} media logo`}
+                  width={item.width || 160}
+                  height={item.height || 40}
+                />
+              ) : (
+                <span
+                  className={item.logoVariant ? styles[item.logoVariant] : ""}
+                >
+                  <strong>{item.publication}</strong>
+                  {item.logoSubtitle && <small>{item.logoSubtitle}</small>}
+                </span>
+              )}
             </div>
             <div className={styles.cardContent}>
               <h2>{item.title}</h2>

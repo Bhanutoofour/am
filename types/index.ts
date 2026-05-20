@@ -244,10 +244,13 @@ type RecognitionData = {
 type MediaDataType = {
   title: string;
   desc: string;
-  imageSrc: string;
+  publication: string;
+  logoVariant?: string;
+  logoSubtitle?: string;
+  imageSrc?: string;
   link: string;
-  width: number;
-  height: number;
+  width?: number;
+  height?: number;
 };
 
 type BuildForIndiaContentType = {
