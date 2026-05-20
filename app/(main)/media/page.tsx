@@ -1,6 +1,6 @@
 import { Metadata } from "next";
 import Image from "next/image";
-import { MediaData } from "@/data/recognitionsData";
+import { MediaPageData } from "@/data/recognitionsData";
 import { SITE_URL } from "@/utils/locale";
 import styles from "./mediaPage.module.scss";
 
@@ -34,7 +34,7 @@ export default function MediaPage() {
       </div>
 
       <div className={styles.mediaGrid}>
-        {MediaData.map((item) => (
+        {MediaPageData.map((item) => (
           <article key={`${item.title}-${item.link}`} className={styles.card}>
             <div className={styles.logoBox}>
               {item.imageSrc ? (

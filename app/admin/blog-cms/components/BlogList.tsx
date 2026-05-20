@@ -6,7 +6,7 @@ import {
   ImageField,
   BooleanField,
   DateField,
-  DeleteButton,
+  DeleteWithConfirmButton,
   BulkDeleteButton,
   EditButton,
   useNotify,
@@ -69,7 +69,10 @@ export const BlogList = () => {
         <DateField source="createdAt" />
         <DateField source="updatedAt" />
         <EditButton />
-        <DeleteButton
+        <DeleteWithConfirmButton
+          confirmTitle="Are you sure you want to delete this blog?"
+          confirmContent="This will permanently delete the blog. You cannot undo this action."
+          confirmColor="warning"
           mutationOptions={{
             onSuccess: handleSuccess,
             onError: handleError,
@@ -80,4 +83,3 @@ export const BlogList = () => {
     </List>
   );
 };
-

@@ -3178,15 +3178,23 @@ function FileUploadField({
   currentValue = "",
   onUploaded,
   accept = "image/*",
+  uploadSuccessMessage = "Image has been uploaded.",
+  replacementSuccessMessage = "A new image has been replaced.",
 }: {
   label: string;
   folder: string;
   currentValue?: string;
   onUploaded: (url: string) => void;
   accept?: string;
+  uploadSuccessMessage?: string;
+  replacementSuccessMessage?: string;
 }) {
   const [isUploading, setIsUploading] = useState(false);
   const [uploadError, setUploadError] = useState("");
+  const [uploadMessage, setUploadMessage] = useState("");
+  const isImage =
+    typeof currentValue === "string" &&
+    /\.(png|jpe?g|webp|gif|avif|svg)(\?.*)?$/i.test(currentValue);
 
   const uploadFile = async (file?: File) => {
     if (!file) return;
@@ -3197,8 +3205,10 @@ function FileUploadField({
 
     setIsUploading(true);
     setUploadError("");
+    setUploadMessage("");
 
     try {
+      const wasReplacing = Boolean(currentValue);
       const response = await fetch("/api/admin/uploads", {
         method: "POST",
         body: formData,
@@ -3208,6 +3218,12 @@ function FileUploadField({
         throw new Error(payload?.details || payload?.error || "Upload failed");
       }
       onUploaded(payload.url || "");
+      setUploadMessage(
+        wasReplacing ? replacementSuccessMessage : uploadSuccessMessage
+      );
+      window.setTimeout(() => {
+        setUploadMessage("");
+      }, 4000);
     } catch (error) {
       setUploadError(error instanceof Error ? error.message : "Upload failed");
     } finally {
@@ -3230,7 +3246,18 @@ function FileUploadField({
           onChange={(event) => uploadFile(event.target.files?.[0])}
         />
       </label>
+      {uploadMessage && <p className={styles.statusText}>{uploadMessage}</p>}
       {uploadError && <p className={styles.errorText}>{uploadError}</p>}
+      {isImage && (
+        <a
+          className={styles.uploadPreviewLink}
+          href={currentValue}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          View uploaded image
+        </a>
+      )}
     </div>
   );
 }
@@ -4249,6 +4276,8 @@ function BlogManager({
                     folder="blogs/banners"
                     currentValue={blogForm.banner}
                     onUploaded={(url) => updateBlogField("banner", url)}
+                    uploadSuccessMessage="Image has been uploaded."
+                    replacementSuccessMessage="A new image has been replaced."
                   />
                   <CmsInput
                     label="Banner alt text"

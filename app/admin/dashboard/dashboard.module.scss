@@ -1345,6 +1345,19 @@
   display: none;
 }
 
+.uploadPreviewLink {
+  width: fit-content;
+  color: var(--cms-accent-dark);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-decoration: none;
+
+  &:hover,
+  &:focus-visible {
+    text-decoration: underline;
+  }
+}
+
 .slugPreview {
   margin: 0;
   padding: 0.65rem 0.75rem;
