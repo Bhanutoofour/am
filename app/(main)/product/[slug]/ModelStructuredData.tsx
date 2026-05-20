@@ -26,113 +26,96 @@ export default function ModelStructuredData({
       ? `${SITE}/products/${productSeg}/${modelSeg}`
       : null;
 
-  // Extract technical specifications from keyFeatures
-  const technicalSpecs =
-    modelData.keyFeatures?.map((feature) => ({
+  const technicalSpecs = [
+    modelData.machineType
+      ? {
+          "@type": "PropertyValue",
+          name: "Machine type",
+          value: modelData.machineType,
+        }
+      : undefined,
+    modelData.series
+      ? {
+          "@type": "PropertyValue",
+          name: "Series",
+          value: modelData.series,
+        }
+      : undefined,
+    ...(modelData.keyFeatures?.map((feature) => ({
       "@type": "PropertyValue",
       name: feature.name,
       value: feature.value,
-    })) || [];
+    })) || []),
+  ].filter(Boolean);
+  const modelUrl =
+    pageUrl ??
+    defaultProductsUrl ??
+    `${SITE}/product/${modelSlug(
+      modelData.productName ?? "",
+      modelData.modelTitle ?? "",
+      modelData.modelNumber ?? ""
+    )}`;
+  const images = [
+    modelData.coverImage,
+    ...(modelData.modelDescription || []).map((item) => item.image),
+    modelData.generalImage,
+  ].filter(Boolean);
+  const description =
+    modelData.seoDescription ||
+    seoData?.pageDescription ||
+    seoData?.structuredData?.description ||
+    modelData.modelDescription?.[0]?.description?.join(" ") ||
+    `${modelData.modelNumber} ${modelData.modelTitle}`.trim();
 
   const structuredData = {
     "@context": "https://schema.org",
-    "@type": seoData?.structuredData?.type || "Product",
+    "@type": "Product",
+    "@id": `${modelUrl}#product`,
     name:
-      seoData?.structuredData?.name ||
-      `${modelData.modelNumber} - ${modelData.modelTitle}`,
-    description:
-      seoData?.structuredData?.description ||
-      `Fuel-efficient and durable ${modelData.machineType.toLowerCase()} designed for high-performance telecom infrastructure, irrigation systems, and utility projects. Engineered for tough soil conditions, ensuring reliable trenching results and optimal performance.`,
-    sku: seoData?.structuredData?.sku || "RUD100",
+      `${modelData.modelNumber} ${modelData.modelTitle}`.trim() ||
+      seoData?.structuredData?.name,
+    description,
+    sku: modelData.modelNumber,
+    model: modelData.modelNumber,
     brand: {
       "@type": "Brand",
-      name: seoData?.structuredData?.brand || "Autocracy Machinery",
+      name: "Autocracy Machinery",
     },
     manufacturer: {
       "@type": "Organization",
       name: "Autocracy Machinery",
-      description: "Leaders in trenching equipment",
+      url: SITE,
     },
-    category:
-      seoData?.structuredData?.category ||
-      "Trenching Machines, Telecom Equipment, Agricultural Equipment, Construction",
-    material: seoData?.structuredData?.material || "High tensile steel",
-    color: "#F9C300", // Specific color for all products
-    condition: seoData?.structuredData?.condition || "New",
-    image: modelData.coverImage,
-    imageAlt: modelData.coverImageAltText || modelData.modelNumber,
-    url:
-      pageUrl ??
-      defaultProductsUrl ??
-      `${SITE}/product/${modelSlug(
-        modelData.productName ?? "",
-        modelData.modelTitle ?? "",
-        modelData.modelNumber ?? ""
-      )}`,
-    offers: {
-      "@type": "Offer",
-      availability:
-        seoData?.structuredData?.offers?.availability ||
-        "https://schema.org/InStock",
-      seller: {
-        "@type": "Organization",
-        name: "Autocracy Machinery",
-      },
-      warranty: {
-        "@type": "WarrantyPromise",
-        duration: seoData?.structuredData?.warrantyDuration || "P2Y",
-        scope: "Global warranty for up to 2 years of product protection",
-      },
-    },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue:
-        seoData?.structuredData?.aggregateRating?.ratingValue?.toString() ||
-        "4.9",
-      reviewCount:
-        seoData?.structuredData?.aggregateRating?.reviewCount?.toString() ||
-        "15",
-      bestRating: "5",
-      worstRating: "1",
-    },
-    review: [
-      {
-        "@type": "Review",
-        reviewRating: {
-          "@type": "Rating",
-          ratingValue: "5",
-          bestRating: "5",
-        },
-        author: {
-          "@type": "Person",
-          name: "John D.",
-        },
-        reviewBody:
-          "Exceptional performance in agricultural applications. The Rudra 100 provides strong performance and excellent fuel efficiency, making it a perfect choice for large-scale irrigation and utility trenching projects.",
-        reviewTitle: "Excellent Agricultural Performance",
-      },
-    ],
+    category: modelData.productName || modelData.machineType,
+    ...(seoData?.structuredData?.material
+      ? { material: seoData.structuredData.material }
+      : {}),
+    ...(seoData?.structuredData?.condition
+      ? { condition: seoData.structuredData.condition }
+      : {}),
+    image: images,
+    url: modelUrl,
     additionalProperty: technicalSpecs,
-    specialFeatures: [
-      {
-        "@type": "TechArticle",
-        name: "Sustainable Construction Materials",
-        description:
-          "Crafted using eco-conscious materials to minimize environmental impact, ensuring a greener, more sustainable approach to trenching equipment manufacturing.",
-      },
-      {
-        "@type": "TechArticle",
-        name: "Quality Certifications",
-        description:
-          "ISO 9001 Certified, adhering to international standards for quality management systems, ensuring exceptional performance and reliability across industries.",
-      },
-    ],
-    certifications: seoData?.structuredData?.certifications || ["ISO 9001"],
-    isAccessoryOrSparePartFor: {
-      "@type": "Product",
+    ...(seoData?.structuredData?.certifications?.length
+      ? { certifications: seoData.structuredData.certifications }
+      : {}),
+    isVariantOf: {
+      "@type": "ProductGroup",
+      ...(productSeg
+        ? { "@id": `${SITE}/products/${productSeg}#product-group` }
+        : {}),
       name: modelData.productName,
-      category: "Trenching Equipment",
+      productGroupID: `autocracy-${productSeg || modelData.productName}`,
     },
+    ...(modelData.industries?.length
+      ? {
+          audience: modelData.industries.map((industry) => ({
+            "@type": "Audience",
+            audienceType: industry,
+          })),
+        }
+      : {}),
+    mainEntityOfPage: modelUrl,
   };
 
   return (

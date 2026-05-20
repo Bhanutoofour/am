@@ -89,20 +89,7 @@ const validate = (values: any) => {
   if (!values.seoPageKeywords || values.seoPageKeywords.trim() === "") {
     errors.seoPageKeywords = "SEO Page Keywords is required";
   }
-  if (!values.seoSocialTitle || values.seoSocialTitle.trim() === "") {
-    errors.seoSocialTitle = "SEO Social Title is required";
-  }
-  if (
-    !values.seoSocialDescription ||
-    values.seoSocialDescription.trim() === ""
-  ) {
-    errors.seoSocialDescription = "SEO Social Description is required";
-  }
-  if (!values.seoSocialImage || values.seoSocialImage.trim() === "") {
-    errors.seoSocialImage = "SEO Social Image is required";
-  }
-
-  return errors;
+return errors;
 };
 
 export const ProductsEdit = () => {
@@ -132,9 +119,6 @@ export const ProductsEdit = () => {
       pageTitle: data.seoPageTitle,
       pageDescription: data.seoPageDescription,
       pageKeywords: data.seoPageKeywords,
-      socialTitle: data.seoSocialTitle,
-      socialDescription: data.seoSocialDescription,
-      socialImage: data.seoSocialImage,
       structuredData: {
         type: data.seoStructuredDataType || "Product",
         title: data.seoStructuredDataTitle,
@@ -296,34 +280,7 @@ export const ProductsEdit = () => {
               placeholder="Keywords separated by commas"
             />
           </div>
-
-          {/* Social Media SEO */}
-          <div style={{ marginBottom: "20px" }}>
-            <h4>Social Media</h4>
-            <TextInput
-              source="seoSocialTitle"
-              validate={required()}
-              fullWidth
-              placeholder="Title for social media sharing"
-            />
-            <TextInput
-              source="seoSocialDescription"
-              multiline
-              rows={3}
-              validate={required()}
-              fullWidth
-              placeholder="Description for social media sharing"
-            />
-            <S3FileInput
-              source="seoSocialImage"
-              label="Social Image"
-              folder="products/social"
-              validate={required()}
-              placeholder="Image URL for social media sharing"
-            />
-          </div>
-
-          {/* Structured Data */}
+{/* Structured Data */}
           <div style={{ marginBottom: "20px" }}>
             <h4>Structured Data</h4>
             <TextInput
@@ -399,3 +356,5 @@ export const ProductsEdit = () => {
     </Edit>
   );
 };
+
+

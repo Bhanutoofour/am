@@ -29,8 +29,10 @@ type SectionKey =
   | "home"
   | "hero"
   | "products"
-  | "models"
+  | "productModels"
   | "industries"
+  | "industryProducts"
+  | "models"
   | "blogs"
   | "media";
 
@@ -54,8 +56,10 @@ const navGroups: NavGroup[] = [
     title: "Content",
     items: [
       { label: "Hero Sliders", section: "hero" },
-      { label: "Product-Models", section: "products" },
-      { label: "Industries", section: "industries" },
+      { label: "Product", section: "products" },
+      { label: "Product Models", section: "productModels" },
+      { label: "Industry", section: "industries" },
+      { label: "Industry Products", section: "industryProducts" },
       { label: "Blogs", section: "blogs" },
     ],
   },
@@ -71,9 +75,11 @@ const navGroups: NavGroup[] = [
 const sectionPaths: Record<SectionKey, string> = {
   home: "/admin",
   hero: "/admin/hero-sliders",
-  products: "/admin/prodcut-models",
+  products: "/admin/products",
+  productModels: "/admin/prodcut-models",
   models: "/admin/models",
   industries: "/admin/industries",
+  industryProducts: "/admin/industry-products",
   blogs: "/admin/blogs",
   media: "/admin/media-upload",
 };
@@ -150,24 +156,31 @@ const sectionByPath: Record<string, SectionKey> = {
   "/admin": "home",
   "/admin/dashboard": "home",
   "/admin/hero-sliders": "hero",
-  "/admin/prodcut-models": "products",
-  "/admin/product-models": "products",
+  "/admin/products": "products",
+  "/admin/prodcut-models": "productModels",
+  "/admin/product-models": "productModels",
   "/admin/models": "models",
   "/admin/industries": "industries",
+  "/admin/industry-products": "industryProducts",
   "/admin/blogs": "blogs",
   "/admin/media-upload": "media",
 };
 
 const quickActions = [
   {
-    title: "Add Product Model",
-    text: "Create a model and assign it to an existing product.",
+    title: "Add Product",
+    text: "Create a product family before adding its model variants.",
     section: "products" as const,
   },
   {
-    title: "Add Model",
+    title: "Add Product Model",
     text: "Upload model content and template section controls.",
-    section: "products" as const,
+    section: "productModels" as const,
+  },
+  {
+    title: "Add Industry",
+    text: "Create an industry page and connect products to it.",
+    section: "industries" as const,
   },
   {
     title: "Edit Templates",
@@ -209,10 +222,23 @@ const sectionContent: Record<
     ],
   },
   products: {
-    title: "Product-Models",
+    title: "Products",
     intro:
-      "Create and update product model pages used by the product template.",
-    primaryAction: "Add Model",
+      "Create and update product families before adding model variants.",
+    primaryAction: "Add Product",
+    cards: [
+      {
+        title: "Product families",
+        text: "Add or update products, series, images, SEO, and linked industries.",
+        action: "Edit Products",
+      },
+    ],
+  },
+  productModels: {
+    title: "Product Models",
+    intro:
+      "Create and update product model pages used under each product family.",
+    primaryAction: "Add Product Model",
     cards: [
       {
         title: "Model details",
@@ -250,20 +276,38 @@ const sectionContent: Record<
     ],
   },
   industries: {
-    title: "Industries",
+    title: "Industry",
     intro:
-      "Manage industry landing pages and the product/model relationships under each industry.",
+      "Create and update industry landing pages.",
     primaryAction: "Add Industry",
     cards: [
       {
         title: "Industry details",
-        text: "Edit title, description, images, SEO, and linked products.",
-        action: "Edit Industries",
+        text: "Edit title, description, images, banners, brochure, and SEO.",
+        action: "Edit Industry",
       },
       {
         title: "Industry image",
         text: "Upload thumbnails and detail images for industry pages.",
         action: "Upload Image",
+      },
+    ],
+  },
+  industryProducts: {
+    title: "Industry Products",
+    intro:
+      "Assign products to industries, then add or edit product models for those industry pages.",
+    primaryAction: "Add Industry Product Model",
+    cards: [
+      {
+        title: "Industry products",
+        text: "Choose an industry and product, then edit or add the product models under it.",
+        action: "Edit Industry Products",
+      },
+      {
+        title: "Product setup",
+        text: "Create products from the Industry Products editor when one is missing.",
+        action: "Add Product",
       },
     ],
   },
@@ -300,6 +344,29 @@ type ProductFormState = {
   generalImageAltText: string;
   series: string[];
   industryIds: number[];
+  active: boolean;
+  seoPageTitle: string;
+  seoPageDescription: string;
+  seoPageKeywords: string;
+  seoSocialTitle: string;
+  seoSocialDescription: string;
+  seoSocialImage: string;
+};
+
+type IndustryBannerForm = {
+  imageUrl: string;
+  altText: string;
+};
+
+type IndustryFormState = {
+  id?: number | string;
+  title: string;
+  description: string;
+  seoDescription: string;
+  thumbnail: string;
+  thumbnailAltText: string;
+  bannerImages: IndustryBannerForm[];
+  brochure: string;
   active: boolean;
   seoPageTitle: string;
   seoPageDescription: string;
@@ -383,7 +450,7 @@ type BlogFormState = {
 };
 
 const resourceConfig: Record<
-  Exclude<SectionKey, "home" | "media">,
+  Exclude<SectionKey, "home" | "media" | "productModels" | "industryProducts">,
   {
     endpoint: string;
     titleField: string;
@@ -761,7 +828,13 @@ function SectionPanel({
     setCreateNonce((value) => value + 1);
     window.setTimeout(openEditor, 0);
   };
-  const showIntroPanel = !["products", "blogs"].includes(sectionKey);
+  const showIntroPanel = ![
+    "products",
+    "productModels",
+    "industries",
+    "industryProducts",
+    "blogs",
+  ].includes(sectionKey);
 
   return (
     <section className={styles.singlePanelGrid}>
@@ -799,20 +872,26 @@ function SectionPanel({
         </article>
       )}
       {sectionKey === "products" ? (
+        <ProductCatalogManager createNonce={createNonce} />
+      ) : sectionKey === "productModels" ? (
         <ProductModelManager createNonce={createNonce} />
       ) : sectionKey === "industries" ? (
+        <IndustryCatalogManager createNonce={createNonce} />
+      ) : sectionKey === "industryProducts" ? (
         <IndustryProductModelManager createNonce={createNonce} />
       ) : sectionKey === "blogs" ? (
         <BlogManager
           config={resourceConfig.blogs}
           createNonce={createNonce}
         />
-      ) : (
+      ) : sectionKey === "hero" || sectionKey === "models" ? (
         <ResourceManager
           config={resourceConfig[sectionKey]}
           sectionKey={sectionKey}
           createNonce={createNonce}
         />
+      ) : (
+        null
       )}
     </section>
   );
@@ -828,6 +907,23 @@ const emptyProductForm: ProductFormState = {
   generalImageAltText: "",
   series: [""],
   industryIds: [],
+  active: true,
+  seoPageTitle: "",
+  seoPageDescription: "",
+  seoPageKeywords: "",
+  seoSocialTitle: "",
+  seoSocialDescription: "",
+  seoSocialImage: "",
+};
+
+const emptyIndustryForm: IndustryFormState = {
+  title: "",
+  description: "",
+  seoDescription: "",
+  thumbnail: "",
+  thumbnailAltText: "",
+  bannerImages: [{ imageUrl: "", altText: "" }],
+  brochure: "",
   active: true,
   seoPageTitle: "",
   seoPageDescription: "",
@@ -954,6 +1050,41 @@ function productToForm(record: ResourceRecord): ProductFormState {
     generalImageAltText: String(record.generalImageAltText || ""),
     series: Array.isArray(record.series) ? (record.series as string[]) : [""],
     industryIds: toNumberIds(record.industryIds),
+    active: record.active !== false,
+    seoPageTitle: String(record.seoPageTitle || seo.pageTitle || ""),
+    seoPageDescription: String(
+      record.seoPageDescription || seo.pageDescription || ""
+    ),
+    seoPageKeywords: String(record.seoPageKeywords || seo.pageKeywords || ""),
+    seoSocialTitle: String(record.seoSocialTitle || seo.socialTitle || ""),
+    seoSocialDescription: String(
+      record.seoSocialDescription || seo.socialDescription || ""
+    ),
+    seoSocialImage: String(record.seoSocialImage || seo.socialImage || ""),
+  };
+}
+
+function industryToForm(record: ResourceRecord): IndustryFormState {
+  const seo = (record.seoMetadata || {}) as Record<string, unknown>;
+  const banners = Array.isArray(record.bannerImages)
+    ? (record.bannerImages as IndustryBannerForm[])
+    : [];
+
+  return {
+    ...emptyIndustryForm,
+    id: record.id,
+    title: String(record.title || ""),
+    description: String(record.description || ""),
+    seoDescription: String(record.seoDescription || ""),
+    thumbnail: String(record.thumbnail || ""),
+    thumbnailAltText: String(record.thumbnailAltText || ""),
+    bannerImages: banners.length
+      ? banners.map((banner) => ({
+          imageUrl: String(banner.imageUrl || ""),
+          altText: String(banner.altText || ""),
+        }))
+      : [{ imageUrl: "", altText: "" }],
+    brochure: String(record.brochure || ""),
     active: record.active !== false,
     seoPageTitle: String(record.seoPageTitle || seo.pageTitle || ""),
     seoPageDescription: String(
@@ -1097,7 +1228,42 @@ function buildProductPayload(form: ProductFormState) {
   };
 }
 
-function buildModelPayload(form: ModelFormState) {
+function buildIndustryPayload(form: IndustryFormState) {
+  const bannerImages = form.bannerImages.filter(
+    (banner) => banner.imageUrl.trim() || banner.altText.trim()
+  );
+  const seoMetadata = {
+    pageTitle: form.seoPageTitle || form.title,
+    pageDescription: form.seoPageDescription || form.description,
+    pageKeywords: form.seoPageKeywords,
+    socialTitle: form.seoSocialTitle || form.title,
+    socialDescription: form.seoSocialDescription || form.description,
+    socialImage: form.seoSocialImage || form.thumbnail,
+    structuredData: {
+      type: "organization",
+      title: form.title,
+      description: form.description,
+    },
+  };
+
+  return {
+    ...(form.id ? { id: form.id } : {}),
+    title: form.title,
+    description: form.description,
+    seoDescription: form.seoDescription,
+    thumbnail: form.thumbnail,
+    thumbnailAltText: form.thumbnailAltText,
+    bannerImages,
+    brochure: form.brochure,
+    active: form.active,
+    seoMetadata,
+  };
+}
+
+function buildModelPayload(
+  form: ModelFormState,
+  options: { industryOnly?: boolean } = {}
+) {
   const cleanFeatures = form.keyFeatures.filter(
     (feature) => feature.name.trim() || feature.value.trim()
   );
@@ -1185,6 +1351,7 @@ function buildModelPayload(form: ModelFormState) {
                 ? {
                     industryProductModel: {
                       templateName: "Industry Product Template",
+                      ...(options.industryOnly ? { industryOnly: true } : {}),
                       sections: cleanIndustrySections,
                     },
                   }
@@ -1194,6 +1361,292 @@ function buildModelPayload(form: ModelFormState) {
         : {}),
     },
   };
+}
+
+function ProductCatalogManager({ createNonce }: { createNonce: number }) {
+  const [products, setProducts] = useState<ResourceRecord[]>([]);
+  const [industries, setIndustries] = useState<IndustryOption[]>([]);
+  const [productForm, setProductForm] = useState<ProductFormState>({
+    ...emptyProductForm,
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+
+  const loadAll = async () => {
+    setIsLoading(true);
+    setError("");
+    try {
+      const [productResponse, industryResponse] = await Promise.all([
+        fetch("/api/products?page=1&perPage=100"),
+        fetch("/api/industries?page=1&perPage=100"),
+      ]);
+      const [productPayload, industryPayload] = await Promise.all([
+        productResponse.json(),
+        industryResponse.json(),
+      ]);
+      setProducts(Array.isArray(productPayload) ? productPayload : []);
+      setIndustries(Array.isArray(industryPayload) ? industryPayload : []);
+    } catch (loadError) {
+      setError(loadError instanceof Error ? loadError.message : "Load failed");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadAll();
+  }, []);
+
+  useEffect(() => {
+    if (createNonce > 0) startNewProduct();
+  }, [createNonce]);
+
+  const startNewProduct = () => {
+    setProductForm({ ...emptyProductForm });
+    setMessage("");
+    setError("");
+    window.setTimeout(() => {
+      document.getElementById("product-family-editor")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }, 0);
+  };
+
+  const openProduct = async (product: ResourceRecord) => {
+    setMessage("");
+    setError("");
+    try {
+      const response = await fetch(`/api/products/${product.id}`);
+      const payload = await response.json();
+      if (!response.ok) throw new Error(payload?.error || "Product open failed");
+      setProductForm(productToForm(payload));
+    } catch (openError) {
+      setProductForm(productToForm(product));
+      setError(openError instanceof Error ? openError.message : "Open failed");
+    }
+  };
+
+  const saveProduct = async () => {
+    setIsSaving(true);
+    setMessage("");
+    setError("");
+    try {
+      const payload = buildProductPayload(productForm);
+      const response = await fetch(
+        productForm.id ? `/api/products/${productForm.id}` : "/api/products",
+        {
+          method: productForm.id ? "PUT" : "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }
+      );
+      const result = await response.json();
+      if (!response.ok) throw new Error(result?.details || result?.error || "Save failed");
+      setProductForm(productToForm(result));
+      setMessage(productForm.id ? "Product updated." : "Product created.");
+      await loadAll();
+    } catch (saveError) {
+      setError(saveError instanceof Error ? saveError.message : "Save failed");
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  const deleteProduct = async (product: ResourceRecord) => {
+    const title = String(product.title || "this product");
+    if (!window.confirm(`Delete ${title}?`)) return;
+    setMessage("");
+    setError("");
+    try {
+      const response = await fetch(`/api/products/${product.id}`, {
+        method: "DELETE",
+      });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result?.details || result?.error || "Delete failed");
+      if (productForm.id === product.id) setProductForm({ ...emptyProductForm });
+      setMessage("Product deleted.");
+      await loadAll();
+    } catch (deleteError) {
+      setError(deleteError instanceof Error ? deleteError.message : "Delete failed");
+    }
+  };
+
+  const toggleIndustry = (industryId: number) => {
+    setProductForm((current) => ({
+      ...current,
+      industryIds: current.industryIds.includes(industryId)
+        ? current.industryIds.filter((item) => item !== industryId)
+        : [...current.industryIds, industryId],
+    }));
+  };
+
+  return (
+    <article className={`${styles.panel} ${styles.catalogPanel}`} id="products-content-editor">
+      <div className={styles.panelHeader}>
+        <h2 className={styles.panelTitle}>Products</h2>
+        <div className={styles.panelActions}>
+          <button className={styles.button} type="button" onClick={loadAll}>
+            Refresh
+          </button>
+          <button className={styles.buttonDark} type="button" onClick={startNewProduct}>
+            Add New Product
+          </button>
+        </div>
+      </div>
+      <div className={styles.catalogLayout}>
+        <div className={styles.recordList}>
+          {isLoading && <p className={styles.statusText}>Loading products...</p>}
+          {products.map((product) => (
+            <button
+              key={`product-${product.id}`}
+              className={`${styles.recordItem} ${
+                productForm.id === product.id ? styles.recordItemActive : ""
+              }`}
+              type="button"
+              onClick={() => openProduct(product)}
+            >
+              <span className={styles.recordTitle}>{String(product.title || "")}</span>
+              <span className={styles.recordSubtitle}>{String(product.description || "")}</span>
+              <span className={styles.recordMeta}>
+                {product.active === false ? "Inactive" : "Active"}
+              </span>
+            </button>
+          ))}
+        </div>
+        <div className={styles.editorPanel} id="product-family-editor">
+          <div className={styles.cmsForm}>
+            <div className={styles.editorHeader}>
+              <h3>{productForm.id ? "Edit product" : "Create product"}</h3>
+              <div className={styles.editorActions}>
+                {productForm.id && (
+                  <button
+                    className={styles.tableDeleteButton}
+                    type="button"
+                    onClick={() => deleteProduct(productForm)}
+                  >
+                    Delete
+                  </button>
+                )}
+                <button
+                  className={styles.buttonDark}
+                  type="button"
+                  onClick={saveProduct}
+                  disabled={isSaving}
+                >
+                  {isSaving ? "Saving..." : productForm.id ? "Update" : "Create"}
+                </button>
+              </div>
+            </div>
+            <div className={styles.slugCard}>
+              <p className={styles.listHeading}>Slug</p>
+              <p className={styles.slugPreview}>
+                {productForm.title
+                  ? `/products/${titleToSlug(productForm.title)}`
+                  : "/products/{product-name}"}
+              </p>
+            </div>
+            <FormSection title="Product Details" text="Create the parent product family shown on product listing pages.">
+              <div className={styles.formGrid}>
+                <CmsInput
+                  label="Product title"
+                  value={productForm.title}
+                  onChange={(title) => setProductForm((current) => ({ ...current, title }))}
+                />
+                <CmsTextarea
+                  label="Description"
+                  value={productForm.description}
+                  onChange={(description) =>
+                    setProductForm((current) => ({ ...current, description }))
+                  }
+                />
+                <CmsTextarea
+                  label="SEO description"
+                  value={productForm.seoDescription}
+                  onChange={(seoDescription) =>
+                    setProductForm((current) => ({ ...current, seoDescription }))
+                  }
+                />
+                <label className={styles.checkboxItem}>
+                  <input
+                    type="checkbox"
+                    checked={productForm.active}
+                    onChange={(event) =>
+                      setProductForm((current) => ({
+                        ...current,
+                        active: event.target.checked,
+                      }))
+                    }
+                  />
+                  <span>Active</span>
+                </label>
+              </div>
+              <DynamicStringList
+                label="Series"
+                values={productForm.series}
+                onChange={(series) => setProductForm((current) => ({ ...current, series }))}
+              />
+            </FormSection>
+            <FormSection title="Media" text="Upload product thumbnail and general product image.">
+              <div className={styles.formGrid}>
+                <FileUploadField
+                  label="Thumbnail"
+                  folder="products/thumbnails"
+                  currentValue={productForm.thumbnail}
+                  onUploaded={(thumbnail) =>
+                    setProductForm((current) => ({ ...current, thumbnail }))
+                  }
+                />
+                <CmsInput
+                  label="Thumbnail alt text"
+                  value={productForm.thumbnailAltText}
+                  onChange={(thumbnailAltText) =>
+                    setProductForm((current) => ({ ...current, thumbnailAltText }))
+                  }
+                />
+                <FileUploadField
+                  label="General image"
+                  folder="products/general"
+                  currentValue={productForm.generalImage}
+                  onUploaded={(generalImage) =>
+                    setProductForm((current) => ({ ...current, generalImage }))
+                  }
+                />
+                <CmsInput
+                  label="General image alt text"
+                  value={productForm.generalImageAltText}
+                  onChange={(generalImageAltText) =>
+                    setProductForm((current) => ({ ...current, generalImageAltText }))
+                  }
+                />
+              </div>
+            </FormSection>
+            <FormSection title="Industries" text="Choose where this product should appear.">
+              <IndustryPicker
+                industries={industries}
+                selected={productForm.industryIds}
+                toggle={toggleIndustry}
+              />
+            </FormSection>
+            <FormSection title="SEO" text="Control metadata and social previews for this product page.">
+              <SeoFields
+                pageTitle={productForm.seoPageTitle}
+                pageDescription={productForm.seoPageDescription}
+                pageKeywords={productForm.seoPageKeywords}
+                setField={(field, value) =>
+                  setProductForm((current) => ({ ...current, [field]: value }))
+                }
+              />
+            </FormSection>
+          </div>
+          {message && <p className={styles.statusText}>{message}</p>}
+          {error && <p className={styles.errorText}>{error}</p>}
+        </div>
+      </div>
+    </article>
+  );
 }
 
 function ProductModelManager({ createNonce }: { createNonce: number }) {
@@ -1214,6 +1667,12 @@ function ProductModelManager({ createNonce }: { createNonce: number }) {
     (product) => String(product.id) === modelForm.productId
   );
   const selectedProductTitle = String(selectedProduct?.title || "");
+  const selectedProductIndustryIds = toNumberIds(selectedProduct?.industryIds);
+  const productIndustries = selectedProduct
+    ? industries.filter((industry) =>
+        selectedProductIndustryIds.includes(Number(industry.id))
+      )
+    : [];
   const modelUrl =
     selectedProductTitle && modelForm.modelNumber
       ? `/products/${titleToSlug(selectedProductTitle)}/${modelSlug(
@@ -1268,9 +1727,29 @@ function ProductModelManager({ createNonce }: { createNonce: number }) {
       const response = await fetch(`/api/models/${model.id}`);
       const payload = await response.json();
       if (!response.ok) throw new Error(payload?.error || "Model open failed");
-      setModelForm(modelToForm(payload));
+      const form = modelToForm(payload);
+      const product = products.find(
+        (item) => String(item.id) === String(form.productId)
+      );
+      const productIndustryIds = toNumberIds(product?.industryIds);
+      setModelForm({
+        ...form,
+        industryIds: productIndustryIds.length
+          ? form.industryIds.filter((id) => productIndustryIds.includes(id))
+          : [],
+      });
     } catch (openError) {
-      setModelForm(modelToForm(model));
+      const form = modelToForm(model);
+      const product = products.find(
+        (item) => String(item.id) === String(form.productId)
+      );
+      const productIndustryIds = toNumberIds(product?.industryIds);
+      setModelForm({
+        ...form,
+        industryIds: productIndustryIds.length
+          ? form.industryIds.filter((id) => productIndustryIds.includes(id))
+          : [],
+      });
       setError(openError instanceof Error ? openError.message : "Open failed");
     }
   };
@@ -1280,7 +1759,18 @@ function ProductModelManager({ createNonce }: { createNonce: number }) {
     setMessage("");
     setError("");
     try {
-      const payload = buildModelPayload(modelForm);
+      if (!modelForm.productId) {
+        throw new Error("Select a product before saving this model.");
+      }
+      const allowedIndustryIds = selectedProductIndustryIds.length
+        ? modelForm.industryIds.filter((id) =>
+            selectedProductIndustryIds.includes(id)
+          )
+        : [];
+      const payload = buildModelPayload({
+        ...modelForm,
+        industryIds: allowedIndustryIds,
+      });
       const response = await fetch(
         modelForm.id ? `/api/models/${modelForm.id}` : "/api/models",
         {
@@ -1399,7 +1889,7 @@ function ProductModelManager({ createNonce }: { createNonce: number }) {
   return (
     <article
       className={`${styles.panel} ${styles.productModelPanel}`}
-      id="products-content-editor"
+      id="product-models-content-editor"
     >
       <div className={styles.panelHeader}>
         <h2 className={styles.panelTitle}>Product Models</h2>
@@ -1602,13 +2092,20 @@ function ProductModelManager({ createNonce }: { createNonce: number }) {
                   <span>Assign to product</span>
                   <select
                     value={modelForm.productId}
-                    onChange={(event) =>
+                    onChange={(event) => {
+                      const nextProduct = products.find(
+                        (product) => String(product.id) === event.target.value
+                      );
+                      const nextIndustryIds = toNumberIds(nextProduct?.industryIds);
                       setModelForm((current) => ({
                         ...current,
                         productId: event.target.value,
                         series: "",
-                      }))
-                    }
+                        industryIds: current.industryIds.filter((industryId) =>
+                          nextIndustryIds.includes(industryId)
+                        ),
+                      }));
+                    }}
                   >
                     <option value="">Select product</option>
                     {products.map((product) => (
@@ -1768,20 +2265,38 @@ function ProductModelManager({ createNonce }: { createNonce: number }) {
               </FormSection>
               <FormSection
                 title="Relationships"
-                text="Choose the industries where this model should appear."
+                text="Choose from the industries connected to this product."
               >
-              <IndustryPicker
-                industries={industries}
-                selected={modelForm.industryIds}
-                toggle={(industryId) =>
-                  toggleIndustry(
-                    industryId,
-                    modelForm.industryIds,
-                    (industryIds) =>
-                      setModelForm((current) => ({ ...current, industryIds }))
-                  )
-                }
-              />
+              {selectedProduct ? (
+                productIndustries.length ? (
+                  <IndustryPicker
+                    industries={productIndustries}
+                    selected={modelForm.industryIds}
+                    toggle={(industryId) =>
+                      toggleIndustry(
+                        industryId,
+                        modelForm.industryIds,
+                        (industryIds) =>
+                          setModelForm((current) => ({
+                            ...current,
+                            industryIds: industryIds.filter((id) =>
+                              selectedProductIndustryIds.includes(id)
+                            ),
+                          }))
+                      )
+                    }
+                  />
+                ) : (
+                  <p className={styles.statusText}>
+                    This product is not linked to any industries yet. Add industry
+                    links in the Product section first.
+                  </p>
+                )
+              ) : (
+                <p className={styles.statusText}>
+                  Select a product to see its related industries.
+                </p>
+              )}
               </FormSection>
               <FormSection
                 title="SEO"
@@ -1791,9 +2306,6 @@ function ProductModelManager({ createNonce }: { createNonce: number }) {
                 pageTitle={modelForm.seoPageTitle}
                 pageDescription={modelForm.seoPageDescription}
                 pageKeywords={modelForm.seoPageKeywords}
-                socialTitle={modelForm.seoSocialTitle}
-                socialDescription={modelForm.seoSocialDescription}
-                socialImage={modelForm.seoSocialImage}
                 setField={(field, value) =>
                   setModelForm((current) => ({ ...current, [field]: value }))
                 }
@@ -1801,6 +2313,320 @@ function ProductModelManager({ createNonce }: { createNonce: number }) {
               </FormSection>
             </div>
 
+          {message && <p className={styles.statusText}>{message}</p>}
+          {error && <p className={styles.errorText}>{error}</p>}
+        </div>
+      </div>
+    </article>
+  );
+}
+
+function IndustryCatalogManager({ createNonce }: { createNonce: number }) {
+  const [industries, setIndustries] = useState<ResourceRecord[]>([]);
+  const [industryForm, setIndustryForm] = useState<IndustryFormState>({
+    ...emptyIndustryForm,
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  const [message, setMessage] = useState("");
+  const [error, setError] = useState("");
+
+  const loadIndustries = async () => {
+    setIsLoading(true);
+    setError("");
+    try {
+      const response = await fetch("/api/industries?page=1&perPage=100");
+      const payload = await response.json();
+      if (!response.ok) throw new Error(payload?.error || "Load failed");
+      setIndustries(Array.isArray(payload) ? payload : []);
+    } catch (loadError) {
+      setError(loadError instanceof Error ? loadError.message : "Load failed");
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    loadIndustries();
+  }, []);
+
+  useEffect(() => {
+    if (createNonce > 0) startNewIndustry();
+  }, [createNonce]);
+
+  const startNewIndustry = () => {
+    setIndustryForm({ ...emptyIndustryForm });
+    setMessage("");
+    setError("");
+    window.setTimeout(() => {
+      document.getElementById("industry-page-editor")?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    }, 0);
+  };
+
+  const openIndustry = async (industry: ResourceRecord) => {
+    setMessage("");
+    setError("");
+    try {
+      const response = await fetch(`/api/industries/${industry.id}`);
+      const payload = await response.json();
+      if (!response.ok) throw new Error(payload?.error || "Industry open failed");
+      setIndustryForm(industryToForm(payload));
+    } catch (openError) {
+      setIndustryForm(industryToForm(industry));
+      setError(openError instanceof Error ? openError.message : "Open failed");
+    }
+  };
+
+  const saveIndustry = async () => {
+    setIsSaving(true);
+    setMessage("");
+    setError("");
+    try {
+      const payload = buildIndustryPayload(industryForm);
+      const response = await fetch(
+        industryForm.id ? `/api/industries/${industryForm.id}` : "/api/industries",
+        {
+          method: industryForm.id ? "PUT" : "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }
+      );
+      const result = await response.json();
+      if (!response.ok) throw new Error(result?.details || result?.error || "Save failed");
+      setIndustryForm(industryToForm(result));
+      setMessage(industryForm.id ? "Industry updated." : "Industry created.");
+      await loadIndustries();
+    } catch (saveError) {
+      setError(saveError instanceof Error ? saveError.message : "Save failed");
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  const deleteIndustry = async (industry: ResourceRecord) => {
+    const title = String(industry.title || "this industry");
+    if (!window.confirm(`Delete ${title}?`)) return;
+    setMessage("");
+    setError("");
+    try {
+      const response = await fetch(`/api/industries/${industry.id}`, {
+        method: "DELETE",
+      });
+      const result = await response.json();
+      if (!response.ok) throw new Error(result?.details || result?.error || "Delete failed");
+      if (industryForm.id === industry.id) setIndustryForm({ ...emptyIndustryForm });
+      setMessage("Industry deleted.");
+      await loadIndustries();
+    } catch (deleteError) {
+      setError(deleteError instanceof Error ? deleteError.message : "Delete failed");
+    }
+  };
+
+  const updateBanner = (
+    index: number,
+    field: keyof IndustryBannerForm,
+    value: string
+  ) => {
+    setIndustryForm((current) => ({
+      ...current,
+      bannerImages: current.bannerImages.map((banner, bannerIndex) =>
+        bannerIndex === index ? { ...banner, [field]: value } : banner
+      ),
+    }));
+  };
+
+  return (
+    <article className={`${styles.panel} ${styles.catalogPanel}`} id="industries-content-editor">
+      <div className={styles.panelHeader}>
+        <h2 className={styles.panelTitle}>Industries</h2>
+        <div className={styles.panelActions}>
+          <button className={styles.button} type="button" onClick={loadIndustries}>
+            Refresh
+          </button>
+          <button className={styles.buttonDark} type="button" onClick={startNewIndustry}>
+            Add New Industry
+          </button>
+        </div>
+      </div>
+      <div className={styles.catalogLayout}>
+        <div className={styles.recordList}>
+          {isLoading && <p className={styles.statusText}>Loading industries...</p>}
+          {industries.map((industry) => (
+            <button
+              key={`industry-page-${industry.id}`}
+              className={`${styles.recordItem} ${
+                industryForm.id === industry.id ? styles.recordItemActive : ""
+              }`}
+              type="button"
+              onClick={() => openIndustry(industry)}
+            >
+              <span className={styles.recordTitle}>{String(industry.title || "")}</span>
+              <span className={styles.recordSubtitle}>{String(industry.description || "")}</span>
+              <span className={styles.recordMeta}>
+                {industry.active === false ? "Inactive" : "Active"}
+              </span>
+            </button>
+          ))}
+        </div>
+        <div className={styles.editorPanel} id="industry-page-editor">
+          <div className={styles.cmsForm}>
+            <div className={styles.editorHeader}>
+              <h3>{industryForm.id ? "Edit industry" : "Create industry"}</h3>
+              <div className={styles.editorActions}>
+                {industryForm.id && (
+                  <button
+                    className={styles.tableDeleteButton}
+                    type="button"
+                    onClick={() => deleteIndustry(industryForm)}
+                  >
+                    Delete
+                  </button>
+                )}
+                <button
+                  className={styles.buttonDark}
+                  type="button"
+                  onClick={saveIndustry}
+                  disabled={isSaving}
+                >
+                  {isSaving ? "Saving..." : industryForm.id ? "Update" : "Create"}
+                </button>
+              </div>
+            </div>
+            <div className={styles.slugCard}>
+              <p className={styles.listHeading}>Slug</p>
+              <p className={styles.slugPreview}>
+                {industryForm.title
+                  ? `/industries/${titleToSlug(industryForm.title)}`
+                  : "/industries/{industry-name}"}
+              </p>
+            </div>
+            <FormSection title="Industry Details" text="Create the industry landing page shown on the website.">
+              <div className={styles.formGrid}>
+                <CmsInput
+                  label="Industry title"
+                  value={industryForm.title}
+                  onChange={(title) => setIndustryForm((current) => ({ ...current, title }))}
+                />
+                <CmsTextarea
+                  label="Description"
+                  value={industryForm.description}
+                  onChange={(description) =>
+                    setIndustryForm((current) => ({ ...current, description }))
+                  }
+                />
+                <CmsTextarea
+                  label="SEO description"
+                  value={industryForm.seoDescription}
+                  onChange={(seoDescription) =>
+                    setIndustryForm((current) => ({ ...current, seoDescription }))
+                  }
+                />
+                <label className={styles.checkboxItem}>
+                  <input
+                    type="checkbox"
+                    checked={industryForm.active}
+                    onChange={(event) =>
+                      setIndustryForm((current) => ({
+                        ...current,
+                        active: event.target.checked,
+                      }))
+                    }
+                  />
+                  <span>Active</span>
+                </label>
+              </div>
+            </FormSection>
+            <FormSection title="Media" text="Upload thumbnail, banner images, and brochure assets.">
+              <div className={styles.formGrid}>
+                <FileUploadField
+                  label="Thumbnail"
+                  folder="industries/thumbnails"
+                  currentValue={industryForm.thumbnail}
+                  onUploaded={(thumbnail) =>
+                    setIndustryForm((current) => ({ ...current, thumbnail }))
+                  }
+                />
+                <CmsInput
+                  label="Thumbnail alt text"
+                  value={industryForm.thumbnailAltText}
+                  onChange={(thumbnailAltText) =>
+                    setIndustryForm((current) => ({ ...current, thumbnailAltText }))
+                  }
+                />
+                <FileUploadField
+                  label="Brochure"
+                  folder="industries/brochures"
+                  currentValue={industryForm.brochure}
+                  accept="application/pdf,image/*"
+                  onUploaded={(brochure) =>
+                    setIndustryForm((current) => ({ ...current, brochure }))
+                  }
+                />
+              </div>
+              <div className={styles.repeatGroup}>
+                <div className={styles.repeatHeader}>
+                  <p>Banner images</p>
+                  <button
+                    className={styles.button}
+                    type="button"
+                    onClick={() =>
+                      setIndustryForm((current) => ({
+                        ...current,
+                        bannerImages: [
+                          ...current.bannerImages,
+                          { imageUrl: "", altText: "" },
+                        ],
+                      }))
+                    }
+                  >
+                    Add banner
+                  </button>
+                </div>
+                {industryForm.bannerImages.map((banner, index) => (
+                  <div key={`industry-banner-${index}`} className={styles.repeatRowTwo}>
+                    <FileUploadField
+                      label={`Banner ${index + 1}`}
+                      folder="industries/banners"
+                      currentValue={banner.imageUrl}
+                      onUploaded={(url) => updateBanner(index, "imageUrl", url)}
+                    />
+                    <CmsInput
+                      label="Alt text"
+                      value={banner.altText}
+                      onChange={(altText) => updateBanner(index, "altText", altText)}
+                    />
+                    <button
+                      className={styles.button}
+                      type="button"
+                      onClick={() =>
+                        setIndustryForm((current) => ({
+                          ...current,
+                          bannerImages: current.bannerImages.filter(
+                            (_, bannerIndex) => bannerIndex !== index
+                          ),
+                        }))
+                      }
+                    >
+                      Remove
+                    </button>
+                  </div>
+                ))}
+              </div>
+            </FormSection>
+            <FormSection title="SEO" text="Control metadata and social previews for this industry page.">
+              <SeoFields
+                pageTitle={industryForm.seoPageTitle}
+                pageDescription={industryForm.seoPageDescription}
+                pageKeywords={industryForm.seoPageKeywords}
+                setField={(field, value) =>
+                  setIndustryForm((current) => ({ ...current, [field]: value }))
+                }
+              />
+            </FormSection>
+          </div>
           {message && <p className={styles.statusText}>{message}</p>}
           {error && <p className={styles.errorText}>{error}</p>}
         </div>
@@ -1819,6 +2645,7 @@ function IndustryProductModelManager({
   const [models, setModels] = useState<ResourceRecord[]>([]);
   const [selectedIndustryId, setSelectedIndustryId] = useState<string>("");
   const [selectedProductId, setSelectedProductId] = useState<string>("");
+  const [productToAddId, setProductToAddId] = useState<string>("");
   const [modelForm, setModelForm] = useState<ModelFormState>({
     ...emptyModelForm,
     industryProductTemplateSections: defaultIndustryTemplateSections,
@@ -1836,6 +2663,9 @@ function IndustryProductModelManager({
   );
   const productsForIndustry = products.filter((product) =>
     toNumberIds(product.industryIds).includes(Number(selectedIndustryId))
+  );
+  const productsNotInIndustry = products.filter(
+    (product) => !toNumberIds(product.industryIds).includes(Number(selectedIndustryId))
   );
   const modelsForSelection = models.filter(
     (model) =>
@@ -1932,7 +2762,7 @@ function IndustryProductModelManager({
         ...modelForm,
         productId: modelForm.productId || selectedProductId,
         industryIds,
-      });
+      }, { industryOnly: true });
       const response = await fetch(
         modelForm.id ? `/api/models/${modelForm.id}` : "/api/models",
         {
@@ -1959,12 +2789,47 @@ function IndustryProductModelManager({
     }
   };
 
+  const addProductToIndustry = async () => {
+    if (!selectedIndustryId || !productToAddId) return;
+    setMessage("");
+    setError("");
+    try {
+      const response = await fetch(`/api/products/${productToAddId}`);
+      const payload = await response.json();
+      if (!response.ok) throw new Error(payload?.error || "Product open failed");
+
+      const form = productToForm(payload);
+      const industryId = Number(selectedIndustryId);
+      const nextIndustryIds = form.industryIds.includes(industryId)
+        ? form.industryIds
+        : [...form.industryIds, industryId];
+      const updateResponse = await fetch(`/api/products/${productToAddId}`, {
+        method: "PUT",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(
+          buildProductPayload({ ...form, industryIds: nextIndustryIds })
+        ),
+      });
+      const result = await updateResponse.json();
+      if (!updateResponse.ok) {
+        throw new Error(result?.details || result?.error || "Product add failed");
+      }
+
+      setSelectedProductId(productToAddId);
+      setProductToAddId("");
+      setMessage("Product added to industry.");
+      await loadAll();
+    } catch (addError) {
+      setError(addError instanceof Error ? addError.message : "Product add failed");
+    }
+  };
+
   const setUploadedField = (field: keyof ModelFormState, url: string) => {
     setModelForm((current) => ({ ...current, [field]: url }));
   };
 
   return (
-    <article className={styles.panel} id="industries-content-editor">
+    <article className={styles.panel} id="industry-models-content-editor">
       <div className={styles.panelHeader}>
         <h2 className={styles.panelTitle}>Industry Product Models</h2>
         <div className={styles.panelActions}>
@@ -1997,6 +2862,7 @@ function IndustryProductModelManager({
               onClick={() => {
                 setSelectedIndustryId(String(industry.id));
                 setSelectedProductId("");
+                setProductToAddId("");
                 setModelForm({
                   ...emptyModelForm,
                   industryIds: [Number(industry.id)],
@@ -2017,6 +2883,35 @@ function IndustryProductModelManager({
 
         <div className={styles.recordList}>
           <p className={styles.listHeading}>Products in industry</p>
+          {selectedIndustryId && (
+            <div className={styles.inlineAddBox}>
+              <label className={styles.compactSelectLabel}>
+                <span>Add product</span>
+                <select
+                  value={productToAddId}
+                  onChange={(event) => setProductToAddId(event.target.value)}
+                >
+                  <option value="">Select existing product</option>
+                  {productsNotInIndustry.map((product) => (
+                    <option key={`add-product-${product.id}`} value={String(product.id)}>
+                      {String(product.title || "")}
+                    </option>
+                  ))}
+                </select>
+              </label>
+              <button
+                className={styles.buttonDark}
+                type="button"
+                disabled={!productToAddId}
+                onClick={addProductToIndustry}
+              >
+                Add Product
+              </button>
+              <Link className={styles.button} href="/admin/products">
+                Create New Product
+              </Link>
+            </div>
+          )}
           {selectedIndustryId && productsForIndustry.length === 0 && (
             <p className={styles.statusText}>No products assigned.</p>
           )}
@@ -2071,11 +2966,11 @@ function IndustryProductModelManager({
                 </button>
               ))}
               <button
-                className={styles.buttonDark}
+                className={`${styles.buttonDark} ${styles.industryModelCreateButton}`}
                 type="button"
                 onClick={() => startNewModel(selectedProductId)}
               >
-                New model for this product
+                Add new model for this industry product
               </button>
             </>
           )}
@@ -2222,9 +3117,6 @@ function IndustryProductModelManager({
               pageTitle={modelForm.seoPageTitle}
               pageDescription={modelForm.seoPageDescription}
               pageKeywords={modelForm.seoPageKeywords}
-              socialTitle={modelForm.seoSocialTitle}
-              socialDescription={modelForm.seoSocialDescription}
-              socialImage={modelForm.seoSocialImage}
               setField={(field, value) =>
                 setModelForm((current) => ({ ...current, [field]: value }))
               }
@@ -2693,27 +3585,16 @@ function SeoFields({
   pageTitle,
   pageDescription,
   pageKeywords,
-  socialTitle,
-  socialDescription,
-  socialImage,
   setField,
-  includeSocial = true,
 }: {
   pageTitle: string;
   pageDescription: string;
   pageKeywords: string;
-  socialTitle: string;
-  socialDescription: string;
-  socialImage: string;
-  includeSocial?: boolean;
   setField: (
     field:
       | "seoPageTitle"
       | "seoPageDescription"
-      | "seoPageKeywords"
-      | "seoSocialTitle"
-      | "seoSocialDescription"
-      | "seoSocialImage",
+      | "seoPageKeywords",
     value: string
   ) => void;
 }) {
@@ -2737,25 +3618,6 @@ function SeoFields({
         value={pageKeywords}
         onChange={(value) => setField("seoPageKeywords", value)}
       />
-      {includeSocial && (
-        <>
-          <CmsInput
-            label="Social title"
-            value={socialTitle}
-            onChange={(value) => setField("seoSocialTitle", value)}
-          />
-          <CmsTextarea
-            label="Social description"
-            value={socialDescription}
-            onChange={(value) => setField("seoSocialDescription", value)}
-          />
-          <CmsInput
-            label="Social image URL"
-            value={socialImage}
-            onChange={(value) => setField("seoSocialImage", value)}
-          />
-        </>
-      )}
     </div>
   );
 }
@@ -3456,11 +4318,7 @@ function BlogManager({
                   pageTitle={blogForm.seoPageTitle}
                   pageDescription={blogForm.seoPageDescription}
                   pageKeywords={blogForm.seoPageKeywords}
-                  socialTitle={blogForm.seoSocialTitle}
-                  socialDescription={blogForm.seoSocialDescription}
-                  socialImage={blogForm.seoSocialImage}
                   setField={(field, value) => updateBlogField(field, value)}
-                  includeSocial={false}
                 />
               </FormSection>
             </div>
@@ -3883,7 +4741,7 @@ function ResourceManager({
   createNonce,
 }: {
   config: (typeof resourceConfig)[keyof typeof resourceConfig];
-  sectionKey: Exclude<SectionKey, "home" | "media">;
+  sectionKey: "hero" | "models";
   createNonce: number;
 }) {
   const [records, setRecords] = useState<ResourceRecord[]>([]);

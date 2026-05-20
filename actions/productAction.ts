@@ -217,6 +217,11 @@ export const getProductById = async (
       modelRows = modelRows.filter((model) =>
         allowedModelIds.includes(model.id),
       );
+    } else {
+      modelRows = modelRows.filter((model) => {
+        const pageTemplates = (model.seoMetadata as any)?.pageTemplates;
+        return pageTemplates?.industryProductModel?.industryOnly !== true;
+      });
     }
 
     // Only return required fields for each model

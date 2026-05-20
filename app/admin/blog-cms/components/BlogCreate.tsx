@@ -198,32 +198,10 @@ export const BlogCreate = () => {
               fullWidth
             />
           </div>
-
-          <div style={{ marginBottom: "20px" }}>
-            <h4>Social Media</h4>
-            <TextInput
-              source="seoSocialTitle"
-              label="Social Media Title"
-              placeholder="Blog Title - Autocracy"
-              fullWidth
-            />
-            <TextInput
-              source="seoSocialDescription"
-              label="Social Media Description"
-              multiline
-              rows={3}
-              placeholder="Description for social media sharing"
-              fullWidth
-            />
-            <TextInput
-              source="seoSocialImage"
-              label="Social Media Image URL"
-              placeholder="URL for social media preview image"
-              fullWidth
-            />
-          </div>
         </div>
       </SimpleForm>
     </Create>
   );
 };
+
+

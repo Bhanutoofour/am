@@ -100,20 +100,7 @@ const validate = (values: any) => {
   if (!values.seoPageKeywords || values.seoPageKeywords.trim() === "") {
     errors.seoPageKeywords = "Page Keywords is required";
   }
-  if (!values.seoSocialTitle || values.seoSocialTitle.trim() === "") {
-    errors.seoSocialTitle = "Social Title is required";
-  }
-  if (
-    !values.seoSocialDescription ||
-    values.seoSocialDescription.trim() === ""
-  ) {
-    errors.seoSocialDescription = "Social Description is required";
-  }
-  if (!values.seoSocialImage || values.seoSocialImage.trim() === "") {
-    errors.seoSocialImage = "Social Image URL is required";
-  }
-
-  if (!values.keyFeatures || values.keyFeatures.length === 0) {
+if (!values.keyFeatures || values.keyFeatures.length === 0) {
     errors.keyFeatures = "At least one key feature is required";
   } else {
     const keyFeatureErrors = values.keyFeatures.map((feature: any) => {
@@ -286,14 +273,7 @@ export const ModelsEdit = () => {
     if (rest.seoPageDescription)
       seoMetadata.pageDescription = rest.seoPageDescription;
     if (rest.seoPageKeywords) seoMetadata.pageKeywords = rest.seoPageKeywords;
-
-    // Social SEO
-    if (rest.seoSocialTitle) seoMetadata.socialTitle = rest.seoSocialTitle;
-    if (rest.seoSocialDescription)
-      seoMetadata.socialDescription = rest.seoSocialDescription;
-    if (rest.seoSocialImage) seoMetadata.socialImage = rest.seoSocialImage;
-
-    // Structured Data
+// Structured Data
     if (
       rest.seoStructuredDataType ||
       rest.seoStructuredDataName ||
@@ -753,40 +733,6 @@ export const ModelsEdit = () => {
               marginTop: "20px",
             }}
           >
-            Social Media SEO
-          </h4>
-          <TextInput
-            source="seoSocialTitle"
-            label="Social Title"
-            fullWidth
-            placeholder="Model Name - Features and Benefits"
-            validate={required()}
-          />
-          <TextInput
-            source="seoSocialDescription"
-            label="Social Description"
-            fullWidth
-            multiline
-            rows={3}
-            placeholder="Description for social media sharing"
-            validate={required()}
-          />
-          <TextInput
-            source="seoSocialImage"
-            label="Social Image URL"
-            fullWidth
-            placeholder="URL for social media image"
-            validate={required()}
-          />
-
-          <h4
-            style={{
-              marginBottom: "10px",
-              color: "#666",
-              fontSize: "14px",
-              marginTop: "20px",
-            }}
-          >
             Structured Data
           </h4>
           <TextInput
@@ -884,3 +830,5 @@ export const ModelsEdit = () => {
     </Edit>
   );
 };
+
+

@@ -119,17 +119,7 @@ export const IndustriesEdit = () => {
     if (!values.seoPageDescription || values.seoPageDescription.trim() === "") {
       errors.seoPageDescription = "Page description is required";
     }
-    if (!values.seoSocialTitle || values.seoSocialTitle.trim() === "") {
-      errors.seoSocialTitle = "Social title is required";
-    }
-    if (
-      !values.seoSocialDescription ||
-      values.seoSocialDescription.trim() === ""
-    ) {
-      errors.seoSocialDescription = "Social description is required";
-    }
-
-    return errors;
+return errors;
   };
 
   const transform = (data: any) => {
@@ -155,9 +145,6 @@ export const IndustriesEdit = () => {
       pageKeywords:
         data.seoPageKeywords ||
         `${data.title}, ${data.title} equipment, construction equipment, industrial machinery`,
-      socialTitle: data.seoSocialTitle || `${data.title} Solutions - Autocracy`,
-      socialDescription: data.seoSocialDescription || data.description,
-      socialImage: data.seoSocialImage || data.thumbnail,
       structuredData: {
         type: data.seoStructuredDataType || "organization",
         title: data.seoStructuredDataTitle || `${data.title} Solutions`,
@@ -295,34 +282,6 @@ export const IndustriesEdit = () => {
 
           <div style={{ marginBottom: "20px" }}>
             <h4 style={{ marginBottom: "10px", color: "#666" }}>
-              Social Media
-            </h4>
-            <TextInput
-              source="seoSocialTitle"
-              label="Social Media Title"
-              validate={required()}
-              placeholder="Industry Solutions - Autocracy"
-              fullWidth
-            />
-            <TextInput
-              source="seoSocialDescription"
-              label="Social Media Description"
-              validate={required()}
-              multiline
-              rows={3}
-              placeholder="Description for social media sharing"
-              fullWidth
-            />
-            <TextInput
-              source="seoSocialImage"
-              label="Social Media Image URL"
-              placeholder="URL for social media preview image"
-              fullWidth
-            />
-          </div>
-
-          <div style={{ marginBottom: "20px" }}>
-            <h4 style={{ marginBottom: "10px", color: "#666" }}>
               Structured Data
             </h4>
             <TextInput
@@ -352,3 +311,5 @@ export const IndustriesEdit = () => {
     </Edit>
   );
 };
+
+

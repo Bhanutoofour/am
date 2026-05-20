@@ -182,6 +182,7 @@ type CmsTemplateSection = {
 
 type CmsPageTemplate = {
   templateName?: string;
+  industryOnly?: boolean;
   sections?: CmsTemplateSection[];
 };
 

@@ -1,5 +1,6 @@
 import Script from "next/script";
 import { SITE_URL } from "@/utils/locale";
+import { modelNumberSlug, titleToSlug } from "@/utils/slug";
 
 interface ProductStructuredDataProps {
   productData: ProductDataType;
@@ -13,81 +14,90 @@ export default function ProductStructuredData({
   slug,
   pageUrl,
 }: ProductStructuredDataProps) {
-  const seoData = productData.seoMetadata;
-  const productUrl =
-    pageUrl ?? `${SITE_URL}/products/${slug}`;
+  const productUrl = pageUrl ?? `${SITE_URL}/products/${slug}`;
+  const productSlug = titleToSlug(productData.title || slug);
+  const variants =
+    productData.models?.map((model) => {
+      const modelUrl = `${SITE_URL}/products/${productSlug}/${modelNumberSlug(
+        model.modelNumber
+      )}`;
+      const additionalProperty = [
+        model.series
+          ? {
+              "@type": "PropertyValue",
+              name: "Series",
+              value: model.series,
+            }
+          : undefined,
+        model.machineType
+          ? {
+              "@type": "PropertyValue",
+              name: "Machine type",
+              value: model.machineType,
+            }
+          : undefined,
+        ...(model.keyFeatures || []).map((feature) => ({
+          "@type": "PropertyValue",
+          name: feature.name,
+          value: feature.value,
+        })),
+      ].filter(Boolean);
+
+      return {
+        "@type": "Product",
+        "@id": `${modelUrl}#product`,
+        name: [model.modelNumber, model.modelTitle].filter(Boolean).join(" - "),
+        model: model.modelNumber,
+        sku: model.modelNumber,
+        category: model.machineType || productData.title,
+        image: model.thumbnail || productData.thumbnail,
+        url: modelUrl,
+        brand: {
+          "@type": "Brand",
+          name: "Autocracy Machinery",
+        },
+        manufacturer: {
+          "@type": "Organization",
+          name: "Autocracy Machinery",
+          url: SITE_URL,
+        },
+        isVariantOf: {
+          "@id": `${productUrl}#product-group`,
+        },
+        ...(additionalProperty.length ? { additionalProperty } : {}),
+      };
+    }) || [];
 
   const structuredData = {
     "@context": "https://schema.org",
-    "@type": seoData?.structuredData?.type || "Product",
-    name: seoData?.structuredData?.title || productData.title,
-    description:
-      seoData?.structuredData?.description || productData.description,
+    "@type": "ProductGroup",
+    "@id": `${productUrl}#product-group`,
+    name: productData.title,
+    description: productData.seoDescription || productData.description,
+    url: productUrl,
+    image: [productData.thumbnail, productData.generalImage].filter(Boolean),
     brand: {
       "@type": "Brand",
-      name: seoData?.structuredData?.brand || "Autocracy Machinery",
+      name: "Autocracy Machinery",
     },
-    category: seoData?.structuredData?.category || "Construction Equipment",
-    image: productData.thumbnail,
-    imageAlt: productData.thumbnailAltText || productData.title,
-    url: productUrl,
     manufacturer: {
       "@type": "Organization",
       name: "Autocracy Machinery",
       url: SITE_URL,
     },
-    offers: {
-      "@type": "Offer",
-      availability: "https://schema.org/InStock",
-      seller: {
-        "@type": "Organization",
-        name: "Autocracy Machinery",
-      },
-    },
-    aggregateRating: {
-      "@type": "AggregateRating",
-      ratingValue: "4.8",
-      reviewCount: "150",
-    },
-    review: [
-      {
-        "@type": "Review",
-        reviewRating: {
-          "@type": "Rating",
-          ratingValue: "5",
-          bestRating: "5",
-        },
-        author: {
-          "@type": "Person",
-          name: "Construction Professional",
-        },
-        reviewBody:
-          "Excellent quality and performance. Highly recommended for construction projects.",
-      },
-    ],
-    hasOfferCatalog: seoData?.structuredData?.hasOfferCatalog
+    category: productData.title,
+    productGroupID: `autocracy-${productSlug || productData.id}`,
+    variesBy: ["https://schema.org/model", "https://schema.org/category"],
+    hasVariant: variants,
+    mainEntityOfPage: productUrl,
+    ...(productData.industries?.length
       ? {
-          "@type": "OfferCatalog",
-          name: seoData.structuredData.hasOfferCatalog.name || "Product Models",
-          description:
-            seoData.structuredData.hasOfferCatalog.description ||
-            `Complete range of ${productData.title} models`,
-          itemListElement:
-            productData.models?.map((model, index) => ({
-              "@type": "Offer",
-              itemOffered: {
-                "@type": "Product",
-                name: model.modelNumber,
-                description: model.modelTitle,
-                category: model.machineType,
-                brand: {
-                  "@type": "Brand",
-                  name: "Autocracy Machinery",
-                },
-              },
-            })) || [],
+          audience: productData.industries.map((industry) => ({
+            "@type": "Audience",
+            audienceType: industry,
+          })),
         }
-      : undefined,
+      : {}),
   };
 
   return (

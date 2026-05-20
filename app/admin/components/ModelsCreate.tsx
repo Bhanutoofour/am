@@ -71,20 +71,7 @@ const validate = (values: any) => {
   if (!values.seoPageKeywords || values.seoPageKeywords.trim() === "") {
     errors.seoPageKeywords = "Page Keywords is required";
   }
-  if (!values.seoSocialTitle || values.seoSocialTitle.trim() === "") {
-    errors.seoSocialTitle = "Social Title is required";
-  }
-  if (
-    !values.seoSocialDescription ||
-    values.seoSocialDescription.trim() === ""
-  ) {
-    errors.seoSocialDescription = "Social Description is required";
-  }
-  if (!values.seoSocialImage || values.seoSocialImage.trim() === "") {
-    errors.seoSocialImage = "Social Image URL is required";
-  }
-
-  // Key Features
+// Key Features
   if (!values.keyFeatures || values.keyFeatures.length === 0) {
     errors.keyFeatures = "At least one key feature is required";
   } else {
@@ -192,14 +179,7 @@ export const ModelsCreate = () => {
     if (rest.seoPageDescription)
       seoMetadata.pageDescription = rest.seoPageDescription;
     if (rest.seoPageKeywords) seoMetadata.pageKeywords = rest.seoPageKeywords;
-
-    // Social SEO
-    if (rest.seoSocialTitle) seoMetadata.socialTitle = rest.seoSocialTitle;
-    if (rest.seoSocialDescription)
-      seoMetadata.socialDescription = rest.seoSocialDescription;
-    if (rest.seoSocialImage) seoMetadata.socialImage = rest.seoSocialImage;
-
-    // Structured Data
+// Structured Data
     if (
       rest.seoStructuredDataType ||
       rest.seoStructuredDataName ||
@@ -623,33 +603,7 @@ export const ModelsCreate = () => {
             placeholder="trencher, construction, equipment, autocracy"
             validate={required()}
           />
-
-          <h4>Social Media SEO</h4>
-          <TextInput
-            source="seoSocialTitle"
-            label="Social Title"
-            fullWidth
-            placeholder="Model Name - Features and Benefits"
-            validate={required()}
-          />
-          <TextInput
-            source="seoSocialDescription"
-            label="Social Description"
-            fullWidth
-            multiline
-            rows={3}
-            placeholder="Description for social media sharing"
-            validate={required()}
-          />
-          <TextInput
-            source="seoSocialImage"
-            label="Social Image URL"
-            fullWidth
-            placeholder="URL for social media image"
-            validate={required()}
-          />
-
-          <h4>Structured Data</h4>
+<h4>Structured Data</h4>
           <TextInput
             source="seoStructuredDataType"
             label="Product Type"
@@ -745,3 +699,5 @@ export const ModelsCreate = () => {
     </Create>
   );
 };
+
+
