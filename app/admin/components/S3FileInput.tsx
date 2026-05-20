@@ -3,6 +3,7 @@
 import { useRef, useState } from "react";
 import { Button, LinearProgress, TextField } from "@mui/material";
 import { useInput, useNotify } from "react-admin";
+import { useFormContext } from "react-hook-form";
 
 type S3FileInputProps = {
   source: string;
@@ -14,6 +15,8 @@ type S3FileInputProps = {
   defaultValue?: string;
   validate?: any;
   fullWidth?: boolean;
+  uploadSuccessMessage?: string;
+  replacementSuccessMessage?: string;
 };
 
 export const S3FileInput = ({
@@ -26,8 +29,11 @@ export const S3FileInput = ({
   defaultValue,
   validate,
   fullWidth = true,
+  uploadSuccessMessage = "File uploaded successfully",
+  replacementSuccessMessage,
 }: S3FileInputProps) => {
   const notify = useNotify();
+  const { setValue } = useFormContext();
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [isUploading, setIsUploading] = useState(false);
   const {
@@ -58,8 +64,20 @@ export const S3FileInput = ({
         throw new Error(payload?.details || payload?.error || "Upload failed");
       }
 
+      const wasReplacing = Boolean(currentValue);
+      setValue(source, payload.url, {
+        shouldDirty: true,
+        shouldTouch: true,
+        shouldValidate: true,
+      });
       field.onChange(payload.url);
-      notify("File uploaded successfully", { type: "success" });
+      field.onBlur();
+      notify(
+        wasReplacing && replacementSuccessMessage
+          ? replacementSuccessMessage
+          : uploadSuccessMessage,
+        { type: "success" }
+      );
     } catch (error) {
       notify(error instanceof Error ? error.message : "Upload failed", {
         type: "error",

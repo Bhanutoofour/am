@@ -11,23 +11,28 @@
 
 .faqQuestion {
   width: 100%;
-  min-height: 4.25rem;
+  min-height: 4.5rem;
   border: 1px solid #dfe5ea;
   border-radius: 0.5rem;
   background-color: #fff;
   color: #01060a;
-  display: flex;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 1.25rem;
   align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  padding: 1.125rem 1.25rem;
+  gap: 1.25rem;
+  padding: 1.25rem 1.5rem;
   text-align: left;
   font-family: "Roboto", sans-serif;
-  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  font-size: clamp(1rem, 1.35vw, 1.2rem);
   font-weight: 800;
-  line-height: 125%;
+  line-height: 130%;
   cursor: pointer;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
+
+  span:first-child {
+    min-width: 0;
+    overflow-wrap: anywhere;
+  }
 
   &:hover,
   &:focus-visible {
@@ -37,7 +42,7 @@
 }
 
 .faqIcon {
-  flex: 0 0 auto;
+  justify-self: end;
   width: 0.75rem;
   height: 0.75rem;
   border-right: 0.1875rem solid #01060a;
@@ -71,15 +76,41 @@
   padding: 1.25rem 1.5rem;
 }
 
-@media (max-width: 640px) {
+@media (max-width: 900px) {
   .faqAccordion {
     gap: 0.875rem;
   }
 
   .faqQuestion {
-    min-height: 3.75rem;
-    padding: 1rem;
-    font-size: 1rem;
+    min-height: 4rem;
+    padding: 1.1rem 1.25rem;
+    font-size: 1.05rem;
+  }
+
+  .faqAnswer {
+    padding: 1.1rem 1.25rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .faqAccordion {
+    gap: 0.75rem;
+  }
+
+  .faqQuestion {
+    grid-template-columns: minmax(0, 1fr) 1rem;
+    min-height: 3.5rem;
+    gap: 0.875rem;
+    padding: 0.95rem 1rem;
+    font-size: 0.98rem;
+    line-height: 135%;
+  }
+
+  .faqIcon {
+    width: 0.65rem;
+    height: 0.65rem;
+    border-right-width: 0.15rem;
+    border-bottom-width: 0.15rem;
   }
 
   .faqAnswer {

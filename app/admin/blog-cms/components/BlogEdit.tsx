@@ -193,6 +193,8 @@ export const BlogEdit = () => {
             label="Banner"
             folder="blogs/banners"
             validate={required()}
+            uploadSuccessMessage="Banner image uploaded successfully"
+            replacementSuccessMessage="Banner image has been successfully replaced"
           />
           <TextInput
             source="bannerAltText"
