@@ -314,7 +314,7 @@ const sectionContent: Record<
   blogs: {
     title: "Blogs",
     intro:
-      "Create articles and media posts for the site. Blog crawling is currently blocked in robots.",
+      "Create articles and media posts for the site. Published blogs are available for search engine crawling.",
     primaryAction: "Add Blog",
     cards: [
       {

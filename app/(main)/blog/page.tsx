@@ -40,6 +40,16 @@ export const metadata: Metadata = {
     "Equipment trends",
     "Latest industry articles",
   ],
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-snippet": -1,
+      "max-image-preview": "large",
+    },
+  },
   alternates: { canonical: "https://www.autocracymachinery.com/blog" },
   openGraph: {
     title: "Blog – Autocracy Machinery",
@@ -98,4 +108,3 @@ export default function BlogsPage() {
     </Suspense>
   );
 }
-

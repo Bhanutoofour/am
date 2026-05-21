@@ -6,10 +6,6 @@ const blockedPaths = [
   "/admin/",
   "/api",
   "/api/",
-  "/blog",
-  "/blog/",
-  "/en-in/blog",
-  "/en-in/blog/",
 ];
 
 const aiCrawlerUserAgents = [

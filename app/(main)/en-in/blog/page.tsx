@@ -32,6 +32,16 @@ export const metadata: Metadata = {
   title: "Autocracy Machinery India Blog",
   description:
     "Read Autocracy Machinery India updates, machinery articles, equipment techniques, and infrastructure industry insights.",
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-snippet": -1,
+      "max-image-preview": "large",
+    },
+  },
   alternates: {
     canonical: indiaCanonical("/blog"),
     languages: {
