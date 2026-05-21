@@ -76,7 +76,8 @@ const MediaCard: React.FC<MediaCardProp> = ({
         target="_blank"
         rel="noopener noreferrer"
       >
-        Read More
+        <span aria-hidden="true">Read More</span>
+        <span className={styles.visuallyHidden}> about {title}</span>
       </a>
     </div>
   );

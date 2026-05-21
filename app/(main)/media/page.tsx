@@ -58,7 +58,11 @@ export default function MediaPage() {
               <p>{item.desc}</p>
             </div>
             <a href={item.link} target="_blank" rel="noopener noreferrer">
-              Read More
+              <span aria-hidden="true">Read More</span>
+              <span className={styles.visuallyHidden}>
+                {" "}
+                about {item.title}
+              </span>
             </a>
           </article>
         ))}
