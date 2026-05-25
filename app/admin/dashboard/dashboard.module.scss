@@ -874,6 +874,18 @@
   padding: 0.85rem;
 }
 
+.heroUploadPanel {
+  display: grid;
+  grid-template-columns: minmax(16rem, 1fr) minmax(14rem, 1fr);
+  gap: 0.8rem;
+  align-items: start;
+  margin-bottom: 0.85rem;
+  padding: 0.85rem;
+  border: 1px solid var(--cms-border);
+  border-radius: 0.55rem;
+  background: #ffffff;
+}
+
 .productModelEditor {
   background:
     linear-gradient(180deg, rgba(249, 195, 0, 0.05), transparent 14rem),
@@ -1459,6 +1471,10 @@
 
 @media (max-width: 900px) {
   .dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  .heroUploadPanel {
     grid-template-columns: 1fr;
   }
 

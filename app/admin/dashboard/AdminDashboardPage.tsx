@@ -4821,6 +4821,39 @@ function ResourceManager({
   const subtitleFor = (record: ResourceRecord) =>
     config.subtitleField ? String(record[config.subtitleField] || "") : "";
 
+  const editorRecord = useMemo(() => {
+    if (!editorValue.trim()) return null;
+
+    try {
+      return JSON.parse(editorValue) as ResourceRecord;
+    } catch {
+      return null;
+    }
+  }, [editorValue]);
+
+  const updateEditorField = (field: string, value: unknown) => {
+    let currentRecord: ResourceRecord = { ...config.emptyRecord };
+
+    if (editorValue.trim()) {
+      try {
+        currentRecord = JSON.parse(editorValue) as ResourceRecord;
+      } catch {
+        currentRecord = { ...config.emptyRecord };
+      }
+    }
+
+    setEditorValue(
+      JSON.stringify(
+        {
+          ...currentRecord,
+          [field]: value,
+        },
+        null,
+        2
+      )
+    );
+  };
+
   const startCreate = () => {
     setIsCreating(true);
     setSelected(null);
@@ -4972,12 +5005,37 @@ function ResourceManager({
           {isOpening ? (
             <p className={styles.statusText}>Opening content...</p>
           ) : isCreating || selected ? (
-            <textarea
-              className={styles.jsonEditor}
-              value={editorValue}
-              onChange={(event) => setEditorValue(event.target.value)}
-              spellCheck={false}
-            />
+            <>
+              {sectionKey === "hero" && (
+                <div className={styles.heroUploadPanel}>
+                  <FileUploadField
+                    label="Hero image"
+                    folder="hero"
+                    currentValue={String(editorRecord?.image || "")}
+                    onUploaded={(url) => updateEditorField("image", url)}
+                    uploadSuccessMessage="Hero image uploaded successfully."
+                    replacementSuccessMessage="Hero image has been replaced."
+                  />
+                  <label className={styles.fieldControl}>
+                    <span>Hero image alt text</span>
+                    <input
+                      type="text"
+                      value={String(editorRecord?.altText || "")}
+                      placeholder="Describe the hero image"
+                      onChange={(event) =>
+                        updateEditorField("altText", event.target.value)
+                      }
+                    />
+                  </label>
+                </div>
+              )}
+              <textarea
+                className={styles.jsonEditor}
+                value={editorValue}
+                onChange={(event) => setEditorValue(event.target.value)}
+                spellCheck={false}
+              />
+            </>
           ) : (
             <p className={styles.statusText}>
               Pick an item from the list, or create new content.
