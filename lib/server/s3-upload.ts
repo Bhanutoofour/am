@@ -3,7 +3,7 @@ import { PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 const region = process.env.AWS_S3_REGION || process.env.AWS_REGION || "";
 const bucket = process.env.AWS_S3_BUCKET || "";
 const publicBaseUrl =
-  process.env.AWS_S3_PUBLIC_URL || process.env.NEXT_PUBLIC_CDN_URL || "";
+  process.env.NEXT_PUBLIC_CDN_URL || process.env.AWS_S3_PUBLIC_URL || "";
 
 export function assertS3UploadConfig() {
   const missing = [

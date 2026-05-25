@@ -798,6 +798,16 @@ export const RichTextInput = (props: InputProps) => {
                 onClick={(e) => {
                   e.preventDefault();
                   e.stopPropagation();
+                  const scrollPosition = { x: window.scrollX, y: window.scrollY };
+                  const restoreScrollPosition = () => {
+                    requestAnimationFrame(() => {
+                      window.scrollTo(scrollPosition.x, scrollPosition.y);
+                      requestAnimationFrame(() =>
+                        window.scrollTo(scrollPosition.x, scrollPosition.y)
+                      );
+                    });
+                  };
+
                   if (editor && currentLinkRef.current) {
                     const link = currentLinkRef.current;
                     
@@ -811,6 +821,7 @@ export const RichTextInput = (props: InputProps) => {
                         .setTextSelection({ from: startPos, to: endPos })
                         .unsetLink()
                         .run();
+                      restoreScrollPosition();
                     } catch (err) {
                       // Fallback: select link via DOM and unset
                       const range = document.createRange();
@@ -824,10 +835,11 @@ export const RichTextInput = (props: InputProps) => {
                       // Use requestAnimationFrame to ensure selection is processed
                       requestAnimationFrame(() => {
                         editor.chain()
-                          .focus()
+                          .focus(undefined, { scrollIntoView: false })
                           .extendMarkRange('link')
                           .unsetLink()
                           .run();
+                        restoreScrollPosition();
                       });
                     }
                   }
@@ -849,4 +861,3 @@ export const RichTextInput = (props: InputProps) => {
     </div>
   );
 };
-

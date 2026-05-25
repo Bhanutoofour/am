@@ -4504,24 +4504,40 @@ function RichBlogEditor({
     setIsLinkModalOpen(true);
   };
 
+  const restoreScrollPosition = (position: { x: number; y: number }) => {
+    requestAnimationFrame(() => {
+      window.scrollTo(position.x, position.y);
+      requestAnimationFrame(() => window.scrollTo(position.x, position.y));
+    });
+  };
+
   const applyLink = () => {
+    const scrollPosition = { x: window.scrollX, y: window.scrollY };
+
     if (linkSelectionRef.current) {
       editor.commands.setTextSelection(linkSelectionRef.current);
     }
 
     if (!linkUrl.trim()) {
-      editor.chain().focus().extendMarkRange("link").unsetLink().run();
+      editor
+        .chain()
+        .focus(undefined, { scrollIntoView: false })
+        .extendMarkRange("link")
+        .unsetLink()
+        .run();
       setIsLinkModalOpen(false);
+      restoreScrollPosition(scrollPosition);
       return;
     }
 
     editor
       .chain()
-      .focus()
+      .focus(undefined, { scrollIntoView: false })
       .extendMarkRange("link")
       .setLink({ href: linkUrl.trim() })
       .run();
     setIsLinkModalOpen(false);
+    restoreScrollPosition(scrollPosition);
   };
 
   const openImageModal = () => {
@@ -4679,7 +4695,10 @@ function RichBlogEditor({
                 placeholder="https://example.com"
                 onChange={(event) => setLinkUrl(event.target.value)}
                 onKeyDown={(event) => {
-                  if (event.key === "Enter") applyLink();
+                  if (event.key === "Enter") {
+                    event.preventDefault();
+                    applyLink();
+                  }
                   if (event.key === "Escape") setIsLinkModalOpen(false);
                 }}
                 autoFocus
