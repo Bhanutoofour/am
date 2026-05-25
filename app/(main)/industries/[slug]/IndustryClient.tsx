@@ -10,6 +10,7 @@ import BrochureDownloadModal from "@/component/GetQuoteModal/BrochureDownloadMod
 import GetQuoteModal from "@/component/GetQuoteModal/GetQuoteModal";
 import IndustryCard from "@/component/molecules/industryCard/IndustryCard";
 import ProductCard from "@/component/molecules/productCard/ProductCard";
+import FaqAccordion from "@/component/sections/faqAccordion/FaqAccordion";
 import { SCREENS } from "@/constants";
 import { ICONS } from "@/constants/Images/images";
 import useWindowSize from "@/hooks/useWindowSize";
@@ -23,6 +24,43 @@ type IndustryTheme = {
   outcomes: string[];
   selectionNotes: string[];
 };
+
+function getIndustryFaqs(title: string, isIndiaLocale: boolean) {
+  const locationPhrase = isIndiaLocale ? " in India" : "";
+  const normalizedTitle = title || "your industry";
+
+  return [
+    {
+      question: `Which machines are suitable for ${normalizedTitle} projects?`,
+      answer: `The recommended machines depend on the site condition, required output, carrier power, access space, and application. This page lists Autocracy Machinery product families commonly used for ${normalizedTitle} projects${locationPhrase}.`,
+    },
+    {
+      question: `How do I choose the right equipment for ${normalizedTitle}?`,
+      answer:
+        "Start with the work requirement, soil or water condition, operating area, output target, and available tractor or carrier. Autocracy Machinery can help compare product families and models before you request a quote.",
+    },
+    {
+      question: "Can I get brochures and specifications for these products?",
+      answer:
+        "Yes. Open the recommended product or model pages to review specifications, images, key features, and brochure options where available.",
+    },
+    {
+      question: "Can these machines be used across multiple industries?",
+      answer:
+        "Yes. Many products are useful across telecom, water management, solar, agriculture, construction, landscaping, environmental, and defence projects depending on the model and attachment configuration.",
+    },
+    {
+      question: "Can I request a quote for an industry-specific requirement?",
+      answer:
+        "Yes. Share your project location, application, working conditions, preferred output, and any tractor or carrier details so the team can suggest a suitable product or model.",
+    },
+    {
+      question: "Do you support custom or application-specific machinery?",
+      answer:
+        "Autocracy Machinery builds and recommends purpose-fit machines for specific field applications. If a standard model does not fully match your requirement, the team can review the project details and guide you on the closest fit.",
+    },
+  ];
+}
 
 const fallbackImage = "/images/default-industry.jpg";
 
@@ -266,6 +304,25 @@ export default function IndustryClient({
     () => getIndustryTheme(title, isIndiaLocale),
     [title, isIndiaLocale]
   );
+  const industryFaqs = useMemo(
+    () => getIndustryFaqs(title, isIndiaLocale),
+    [title, isIndiaLocale]
+  );
+  const faqStructuredData = useMemo(
+    () => ({
+      "@context": "https://schema.org",
+      "@type": "FAQPage",
+      mainEntity: industryFaqs.map((faq) => ({
+        "@type": "Question",
+        name: faq.question,
+        acceptedAnswer: {
+          "@type": "Answer",
+          text: faq.answer,
+        },
+      })),
+    }),
+    [industryFaqs]
+  );
 
   const products = industryData?.products || [];
   const heroImages = useMemo(() => {
@@ -368,6 +425,10 @@ export default function IndustryClient({
 
   return (
     <section className={styles.industryHome}>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqStructuredData) }}
+      />
       <section className={styles.heroSection}>
         <div className={styles.heroContent}>
           <p className={styles.eyebrow}>Industry Solutions</p>
@@ -564,6 +625,29 @@ export default function IndustryClient({
             />
             BROCHURE
           </button>
+        </div>
+      </section>
+
+      <section className={styles.industryFaqSection}>
+        <div className={styles.industryFaqHeader}>
+          <p className={styles.eyebrow}>FAQs</p>
+          <h2>{title} FAQs</h2>
+          <p>
+            Quick answers about selecting products, checking specifications,
+            downloading brochures, and requesting quotes for {title.toLowerCase()}
+            {" "}projects.
+          </p>
+        </div>
+        <div className={styles.industryFaqGrid}>
+          {[
+            industryFaqs.slice(0, 3),
+            industryFaqs.slice(3),
+          ].map((faqColumn, index) => (
+            <FaqAccordion
+              key={`industry-faq-column-${index}`}
+              items={faqColumn}
+            />
+          ))}
         </div>
       </section>
 
