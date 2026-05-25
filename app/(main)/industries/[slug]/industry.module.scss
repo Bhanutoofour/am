@@ -53,12 +53,35 @@
   flex-direction: column;
   justify-content: center;
   gap: 1.25rem;
+  min-width: 0;
 
   h2 {
-    font-size: clamp(2.5rem, 4.8vw, 5rem);
-    line-height: 0.98;
+    font-size: clamp(2.35rem, 4vw, 4.5rem);
+    line-height: 1;
     font-weight: 800;
-    max-width: 12ch;
+    max-width: min(100%, 14ch);
+    overflow-wrap: normal;
+    word-break: normal;
+    hyphens: none;
+
+    @include lg-max {
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      max-width: 16ch;
+    }
+
+    @include md-max {
+      font-size: clamp(2rem, 8vw, 3.5rem);
+      max-width: 100%;
+    }
+
+    @include sm-max {
+      font-size: clamp(2rem, 12vw, 3rem);
+      line-height: 1.05;
+    }
+
+    @include xsm-max {
+      font-size: clamp(1.8rem, 11vw, 2.55rem);
+    }
   }
 }
 
