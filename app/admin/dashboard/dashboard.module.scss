@@ -1097,9 +1097,13 @@
   border-radius: 0.5rem;
   background: #ffffff;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  max-height: min(78vh, 48rem);
 }
 
 .richEditorToolbar {
+  flex: 0 0 auto;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -1107,6 +1111,9 @@
   padding: 0.55rem;
   border-bottom: 1px solid var(--cms-border);
   background: #f7f8fa;
+  position: sticky;
+  top: 0;
+  z-index: 5;
 }
 
 .richEditorToolbar select,
@@ -1143,8 +1150,20 @@
   color: #f9c300 !important;
 }
 
-.richEditorContent {
+.richEditorToolbar button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.richEditorScrollArea {
+  flex: 1 1 auto;
   min-height: 24rem;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.richEditorContent {
+  min-height: 32rem;
   padding: 1rem;
   color: var(--cms-text);
   font-size: 0.95rem;
@@ -1184,6 +1203,11 @@
 .richEditorContent a {
   color: var(--cms-link);
   text-decoration: underline;
+}
+
+.richEditorContent u {
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 .richEditorContent img {

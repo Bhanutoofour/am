@@ -7,6 +7,7 @@ import Link from "@tiptap/extension-link";
 import { useInput } from "ra-core";
 import { InputProps } from "react-admin";
 import { ResizableImage } from "./ResizableImage";
+import { UnderlineMark } from "./UnderlineMark";
 
 const MenuBar = ({ editor }: { editor: any }) => {
   if (!editor) {
@@ -57,6 +58,21 @@ const MenuBar = ({ editor }: { editor: any }) => {
         }}
       >
         Italic
+      </button>
+      <button
+        type="button"
+        onClick={() => editor.chain().focus().toggleMark("underline").run()}
+        className={editor.isActive("underline") ? "is-active" : ""}
+        style={{
+          padding: "4px 8px",
+          border: "1px solid #ccc",
+          borderRadius: "4px",
+          backgroundColor: editor.isActive("underline") ? "#e0e0e0" : "white",
+          cursor: "pointer",
+          textDecoration: "underline",
+        }}
+      >
+        Underline
       </button>
       <button
         type="button"
@@ -301,6 +317,23 @@ const MenuBar = ({ editor }: { editor: any }) => {
       >
         Add Link
       </button>
+      <button
+        type="button"
+        disabled={!editor.isActive("link")}
+        onClick={() =>
+          editor.chain().focus().extendMarkRange("link").unsetLink().run()
+        }
+        style={{
+          padding: "4px 8px",
+          border: "1px solid #ccc",
+          borderRadius: "4px",
+          backgroundColor: "white",
+          cursor: editor.isActive("link") ? "pointer" : "not-allowed",
+          opacity: editor.isActive("link") ? 1 : 0.55,
+        }}
+      >
+        Remove Link
+      </button>
     </div>
   );
 };
@@ -353,6 +386,7 @@ export const RichTextInput = (props: InputProps) => {
           inline: true,
           allowBase64: true,
         }),
+        UnderlineMark,
         Link.configure({
           openOnClick: false,
         }),
@@ -363,7 +397,7 @@ export const RichTextInput = (props: InputProps) => {
       },
       editorProps: {
         attributes: {
-          style: "min-height: 300px; padding: 16px; outline: none;",
+          style: "min-height: 420px; padding: 16px; outline: none;",
         },
       },
       immediatelyRender: false,
@@ -390,12 +424,14 @@ export const RichTextInput = (props: InputProps) => {
           color: black !important;
           display: flex;
           justify-content: center;
+          min-height: 0;
         }
         .blog-rich-text-editor .ProseMirror {
           background-color: white !important;
           color: black !important;
           max-width: 827px;
           width: 100%;
+          min-height: 420px;
           margin: 0 auto;
           font-size: 1rem;
           line-height: 160%;
@@ -478,6 +514,10 @@ export const RichTextInput = (props: InputProps) => {
         .blog-rich-text-editor .ProseMirror i {
           font-style: italic;
         }
+        .blog-rich-text-editor .ProseMirror u {
+          text-decoration: underline;
+          text-underline-offset: 2px;
+        }
         .blog-rich-text-editor .ProseMirror hr {
           border: none;
           border-top: 1px solid #e5e7eb;
@@ -509,6 +549,7 @@ export const RichTextInput = (props: InputProps) => {
           top: 0 !important;
           z-index: 100 !important;
           background-color: #f9f9f9 !important;
+          box-shadow: 0 1px 0 #e5e7eb;
         }
         .resizable-image-wrapper {
           position: relative;
@@ -739,7 +780,8 @@ export const RichTextInput = (props: InputProps) => {
           backgroundColor: "white",
           colorScheme: "light",
           // Make this the scroll container so MenuBar sticks within it
-          maxHeight: "80vh",
+          height: "min(72vh, 720px)",
+          minHeight: "480px",
           overflowY: "auto",
           overflowX: "hidden",
           position: "relative",

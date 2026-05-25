@@ -16,6 +16,7 @@ import { usePathname, useRouter } from "next/navigation";
 import { isAdminAuthenticated, logoutAdmin } from "@/utils/auth";
 import { modelSlug, titleToSlug } from "@/utils/slug";
 import { ResizableImage } from "../blog-cms/components/ResizableImage";
+import { UnderlineMark } from "../blog-cms/components/UnderlineMark";
 import styles from "./dashboard.module.scss";
 
 type CountState = {
@@ -4444,6 +4445,7 @@ function RichBlogEditor({
           inline: true,
           allowBase64: true,
         }),
+        UnderlineMark,
         TipTapLink.configure({
           openOnClick: false,
         }),
@@ -4624,6 +4626,15 @@ function RichBlogEditor({
         </button>
         <button
           type="button"
+          aria-label="Underline"
+          title="Underline"
+          className={editor.isActive("underline") ? styles.richButtonActive : ""}
+          onClick={() => editor.chain().focus().toggleMark("underline").run()}
+        >
+          U
+        </button>
+        <button
+          type="button"
           aria-label="Bullet list"
           title="Bullet list"
           className={editor.isActive("bulletList") ? styles.richButtonActive : ""}
@@ -4658,6 +4669,17 @@ function RichBlogEditor({
         >
           <EditorToolbarIcon name="link" />
         </button>
+        <button
+          type="button"
+          aria-label="Remove link"
+          title="Remove link"
+          disabled={!editor.isActive("link")}
+          onClick={() =>
+            editor.chain().focus().extendMarkRange("link").unsetLink().run()
+          }
+        >
+          Unlink
+        </button>
         <button type="button" aria-label="Image" title="Image" onClick={openImageModal}>
           <EditorToolbarIcon name="image" />
         </button>
@@ -4668,7 +4690,9 @@ function RichBlogEditor({
           Redo
         </button>
       </div>
-      <EditorContent editor={editor} />
+      <div className={styles.richEditorScrollArea}>
+        <EditorContent editor={editor} />
+      </div>
       {isLinkModalOpen && (
         <div className={styles.editorModalBackdrop} role="presentation">
           <div
