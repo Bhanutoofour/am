@@ -326,14 +326,17 @@ function findTemplateSection(
   template: CmsPageTemplate | undefined,
   key: string
 ) {
-  return template?.sections?.find((section) => section.key === key);
+  if (!Array.isArray(template?.sections)) return undefined;
+  return template.sections.find((section) => section?.key === key);
 }
 
 function isTemplateSectionEnabled(
   template: CmsPageTemplate | undefined,
   key: string
 ) {
-  if (!template?.sections?.length) return true;
+  if (!Array.isArray(template?.sections) || !template.sections.length) {
+    return true;
+  }
 
   const section = findTemplateSection(template, key);
   return Boolean(section) && section?.enabled !== false;
@@ -345,18 +348,22 @@ function templateText(
   field: "eyebrow" | "heading" | "intro",
   fallback: string
 ) {
-  return findTemplateSection(template, key)?.[field]?.trim() || fallback;
+  const value = findTemplateSection(template, key)?.[field];
+  return typeof value === "string" && value.trim() ? value.trim() : fallback;
 }
 
 function templateParagraphs(
   template: CmsPageTemplate | undefined,
   key: string
 ): string[] {
-  return (
-    findTemplateSection(template, key)
-      ?.paragraphs?.map((paragraph) => paragraph.trim())
-      .filter(Boolean) || []
-  );
+  const paragraphs = findTemplateSection(template, key)?.paragraphs;
+  if (!Array.isArray(paragraphs)) return [];
+
+  return paragraphs
+    .map((paragraph) =>
+      typeof paragraph === "string" ? paragraph.trim() : ""
+    )
+    .filter(Boolean);
 }
 
 function overrideCardText<T extends { text: string }>(
