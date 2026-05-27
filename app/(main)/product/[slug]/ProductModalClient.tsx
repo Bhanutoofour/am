@@ -442,6 +442,33 @@ function overrideCardContent<T extends { title: string; text: string }>(
   });
 }
 
+function templateCards<T extends { title: string; text: string }>(
+  template: CmsPageTemplate | undefined,
+  key: string,
+  fallbackCards: T[]
+): T[] {
+  const paragraphs = templateParagraphs(template, key);
+  if (!paragraphs.length) return fallbackCards;
+
+  const cards = paragraphs
+    .map((paragraph, index) => {
+      const [title = "", ...textParts] = paragraph
+        .split(/\s*(?:\|\||\|)\s*/)
+        .map((part) => part.trim());
+      const text = textParts.join(" ").trim();
+
+      if (!title && !text) return null;
+
+      return {
+        title: title || `Point ${index + 1}`,
+        text: text || title,
+      } as T;
+    })
+    .filter((card): card is T => Boolean(card));
+
+  return cards.length ? cards : fallbackCards;
+}
+
 function appendTemplateCards(
   cards: ProductApplicationCard[],
   template: CmsPageTemplate | undefined,
@@ -547,10 +574,10 @@ export default function ProductModalClient({
     productTemplate,
     "applications"
   );
-  const bestSuitedIndustryCards = overrideCardContent(
-    buildBestSuitedIndustryCards(modelData, isIndiaMarket),
+  const bestSuitedIndustryCards = templateCards(
     productTemplate,
-    "industryFit"
+    "industryFit",
+    buildBestSuitedIndustryCards(modelData, isIndiaMarket)
   );
   const overviewExtraParagraphs =
     templateParagraphs(productTemplate, "hero").length > 0
