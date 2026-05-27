@@ -333,7 +333,10 @@ function isTemplateSectionEnabled(
   template: CmsPageTemplate | undefined,
   key: string
 ) {
-  return findTemplateSection(template, key)?.enabled !== false;
+  if (!template?.sections?.length) return true;
+
+  const section = findTemplateSection(template, key);
+  return Boolean(section) && section?.enabled !== false;
 }
 
 function templateText(
