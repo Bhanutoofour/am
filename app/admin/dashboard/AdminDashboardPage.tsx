@@ -496,7 +496,6 @@ const resourceConfig: Record<
       description: "",
       image: "",
       altText: "",
-      active: true,
     },
   },
   products: {
@@ -5529,6 +5528,42 @@ function ResourceManager({
     }
   };
 
+  const deleteRecord = async () => {
+    if (!selected?.id) return;
+
+    const confirmed = window.confirm(
+      `Delete ${titleFor(selected)}? This cannot be undone.`
+    );
+    if (!confirmed) return;
+
+    setIsSaving(true);
+    setMessage("");
+    setError("");
+
+    try {
+      const response = await fetch(`/api/${config.endpoint}/${selected.id}`, {
+        method: "DELETE",
+      });
+      const payload = await response.json();
+
+      if (!response.ok) {
+        throw new Error(payload?.details || payload?.error || "Delete failed");
+      }
+
+      setSelected(null);
+      setIsCreating(false);
+      setEditorValue("");
+      setMessage("Content deleted.");
+      await loadRecords();
+    } catch (deleteError) {
+      setError(
+        deleteError instanceof Error ? deleteError.message : "Delete failed"
+      );
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
   return (
     <article className={styles.panel} id={`${sectionKey}-content-editor`}>
       <div className={styles.panelHeader}>
@@ -5585,6 +5620,16 @@ function ResourceManager({
                 >
                   New
                 </button>
+                {!isCreating && selected?.id && (
+                  <button
+                    className={styles.button}
+                    type="button"
+                    onClick={deleteRecord}
+                    disabled={isSaving}
+                  >
+                    Delete
+                  </button>
+                )}
                 <button
                   className={styles.buttonDark}
                   type="button"
@@ -5602,6 +5647,18 @@ function ResourceManager({
             <>
               {sectionKey === "hero" && (
                 <div className={styles.heroUploadPanel}>
+                  <CmsInput
+                    label="Slide heading"
+                    value={String(editorRecord?.title || "")}
+                    onChange={(title) => updateEditorField("title", title)}
+                  />
+                  <CmsTextarea
+                    label="Slide description"
+                    value={String(editorRecord?.description || "")}
+                    onChange={(description) =>
+                      updateEditorField("description", description)
+                    }
+                  />
                   <FileUploadField
                     label="Hero image"
                     folder="hero"
@@ -5623,12 +5680,14 @@ function ResourceManager({
                   </label>
                 </div>
               )}
-              <textarea
-                className={styles.jsonEditor}
-                value={editorValue}
-                onChange={(event) => setEditorValue(event.target.value)}
-                spellCheck={false}
-              />
+              {sectionKey === "hero" ? null : (
+                <textarea
+                  className={styles.jsonEditor}
+                  value={editorValue}
+                  onChange={(event) => setEditorValue(event.target.value)}
+                  spellCheck={false}
+                />
+              )}
             </>
           ) : (
             <p className={styles.statusText}>
