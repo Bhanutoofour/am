@@ -17,6 +17,16 @@ export const heroSection = pgTable("hero-section", {
   altText: text("alt_text").notNull().default(""),
 });
 
+export const homepageSections = pgTable("homepage_sections", {
+  id: serial("id").primaryKey(),
+  sectionKey: text("section_key").notNull(),
+  title: text("title").notNull().default("Homepage"),
+  content: json("content").$type<Record<string, unknown>>().notNull().default({}),
+  active: boolean("active").default(true),
+  createdAt: timestamp("created_at").defaultNow().notNull(),
+  updatedAt: timestamp("updated_at").defaultNow().notNull(),
+});
+
 export const industries = pgTable("industries", {
   id: serial("id").primaryKey(),
   title: text("title").notNull(),

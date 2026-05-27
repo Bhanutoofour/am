@@ -345,6 +345,52 @@ function templateText(
   return findTemplateSection(template, key)?.[field]?.trim() || fallback;
 }
 
+function templateParagraphs(
+  template: CmsPageTemplate | undefined,
+  key: string
+): string[] {
+  return (
+    findTemplateSection(template, key)
+      ?.paragraphs?.map((paragraph) => paragraph.trim())
+      .filter(Boolean) || []
+  );
+}
+
+function overrideCardText<T extends { text: string }>(
+  cards: T[],
+  template: CmsPageTemplate | undefined,
+  key: string
+): T[] {
+  const paragraphs = templateParagraphs(template, key);
+  if (!paragraphs.length) return cards;
+
+  return cards.map((card, index) => ({
+    ...card,
+    text: paragraphs[index] || card.text,
+  }));
+}
+
+function productFaqsFromTemplate(
+  template: CmsPageTemplate | undefined,
+  fallbackFaqs: ProductModelFaq[]
+): ProductModelFaq[] {
+  const paragraphs = templateParagraphs(template, "faqs");
+  if (!paragraphs.length) return fallbackFaqs;
+
+  const faqs = paragraphs
+    .map((paragraph) => {
+      const [question, ...answerParts] = paragraph
+        .split(/\s*(?:\|\||\|)\s*/)
+        .map((part) => part.trim());
+      const answer = answerParts.join(" ").trim();
+      if (!question || !answer) return null;
+      return { question, answer };
+    })
+    .filter((item): item is ProductModelFaq => Boolean(item));
+
+  return faqs.length ? faqs : fallbackFaqs;
+}
+
 export default function ProductModalClient({
   modelData,
   seriesData,
@@ -377,22 +423,31 @@ export default function ProductModalClient({
       ? modelData?.modelDescription?.slice(1)
       : modelData?.modelDescription;
   const visibleSpecs = modelData?.keyFeatures?.slice(0, 3) || [];
-  const productModelFaqs = buildProductModelFaqs(modelData, isIndiaMarket);
-  const productApplicationCards = buildProductApplicationCards(
-    modelData,
-    isIndiaMarket
-  );
-  const bestSuitedIndustryCards = buildBestSuitedIndustryCards(
-    modelData,
-    isIndiaMarket
-  );
-  const overviewExtraParagraphs = buildOverviewExtraParagraphs(
-    modelData,
-    isIndiaMarket
-  );
   const productTemplate = modelData?.seoMetadata?.pageTemplates?.productModel;
   const industryTemplate =
     modelData?.seoMetadata?.pageTemplates?.industryProductModel;
+  const productModelFaqs = productFaqsFromTemplate(
+    productTemplate,
+    buildProductModelFaqs(modelData, isIndiaMarket)
+  );
+  const productApplicationCards = overrideCardText(
+    buildProductApplicationCards(modelData, isIndiaMarket),
+    productTemplate,
+    "applications"
+  );
+  const bestSuitedIndustryCards = overrideCardText(
+    buildBestSuitedIndustryCards(modelData, isIndiaMarket),
+    productTemplate,
+    "industryFit"
+  );
+  const overviewExtraParagraphs =
+    templateParagraphs(productTemplate, "hero").length > 0
+      ? templateParagraphs(productTemplate, "hero")
+      : buildOverviewExtraParagraphs(modelData, isIndiaMarket);
+  const keyFeatureParagraphs = templateParagraphs(
+    productTemplate,
+    "keyFeatures"
+  );
   const goToMedia = (direction: "previous" | "next") => {
     if (!productModelMedia.length) return;
 
@@ -939,11 +994,12 @@ export default function ProductModalClient({
                           {feature.name || "-"}
                         </h3>
                         <p className={styles.productKeyFeatureText}>
-                          {buildFeatureDescription(
-                            modelData,
-                            feature,
-                            isIndiaMarket
-                          )}
+                          {keyFeatureParagraphs[index] ||
+                            buildFeatureDescription(
+                              modelData,
+                              feature,
+                              isIndiaMarket
+                            )}
                         </p>
                       </div>
                     </article>

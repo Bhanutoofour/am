@@ -2,16 +2,7 @@ import { Metadata } from "next";
 import HomeContent from "./HomeContent";
 
 export default async function Home() {
-  return (
-    <HomeContent
-      srOnlyHeading="Industrial Machinery Manufacturer and Utility Equipment Manufacturer"
-      contentBuildTitle={
-        <>
-          Trencher Machines for Global Projects. <br /> Built for Performance.
-        </>
-      }
-    />
-  );
+  return <HomeContent />;
 }
 
 // Default SEO metadata for home page

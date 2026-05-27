@@ -17,6 +17,7 @@ import { isAdminAuthenticated, logoutAdmin } from "@/utils/auth";
 import { modelSlug, titleToSlug } from "@/utils/slug";
 import { ResizableImage } from "../blog-cms/components/ResizableImage";
 import { UnderlineMark } from "../blog-cms/components/UnderlineMark";
+import HomepageContentManager from "../components/HomepageContentManager";
 import styles from "./dashboard.module.scss";
 
 type CountState = {
@@ -28,6 +29,7 @@ type CountState = {
 
 type SectionKey =
   | "home"
+  | "homepageContent"
   | "hero"
   | "products"
   | "productModels"
@@ -57,6 +59,7 @@ const navGroups: NavGroup[] = [
     title: "Content",
     items: [
       { label: "Hero Sliders", section: "hero" },
+      { label: "Homepage Content", section: "homepageContent" },
       { label: "Product", section: "products" },
       { label: "Product Models", section: "productModels" },
       { label: "Industry", section: "industries" },
@@ -76,6 +79,7 @@ const navGroups: NavGroup[] = [
 const sectionPaths: Record<SectionKey, string> = {
   home: "/admin",
   hero: "/admin/hero-sliders",
+  homepageContent: "/admin/homepage-content",
   products: "/admin/products",
   productModels: "/admin/prodcut-models",
   models: "/admin/models",
@@ -157,6 +161,7 @@ const sectionByPath: Record<string, SectionKey> = {
   "/admin": "home",
   "/admin/dashboard": "home",
   "/admin/hero-sliders": "hero",
+  "/admin/homepage-content": "homepageContent",
   "/admin/products": "products",
   "/admin/prodcut-models": "productModels",
   "/admin/product-models": "productModels",
@@ -218,6 +223,24 @@ const sectionContent: Record<
       {
         title: "Upload slide image",
         text: "Add a fresh banner image before assigning it to a slide.",
+        action: "Upload Image",
+      },
+    ],
+  },
+  homepageContent: {
+    title: "Homepage Content",
+    intro:
+      "Edit homepage-only sections including built cards, awards, certifications, media, testimonials, clients, FAQs, and CTA images.",
+    primaryAction: "Edit Homepage",
+    cards: [
+      {
+        title: "Homepage sections",
+        text: "Update text, repeatable rows, image URLs, and uploaded assets without changing code.",
+        action: "Edit Content",
+      },
+      {
+        title: "Upload homepage image",
+        text: "Upload awards, certificate, media, client, and CTA images directly from this editor.",
         action: "Upload Image",
       },
     ],
@@ -451,7 +474,10 @@ type BlogFormState = {
 };
 
 const resourceConfig: Record<
-  Exclude<SectionKey, "home" | "media" | "productModels" | "industryProducts">,
+  Exclude<
+    SectionKey,
+    "home" | "media" | "homepageContent" | "productModels" | "industryProducts"
+  >,
   {
     endpoint: string;
     titleField: string;
@@ -831,6 +857,7 @@ function SectionPanel({
   };
   const showIntroPanel = ![
     "products",
+    "homepageContent",
     "productModels",
     "industries",
     "industryProducts",
@@ -874,6 +901,8 @@ function SectionPanel({
       )}
       {sectionKey === "products" ? (
         <ProductCatalogManager createNonce={createNonce} />
+      ) : sectionKey === "homepageContent" ? (
+        <HomepageContentManager />
       ) : sectionKey === "productModels" ? (
         <ProductModelManager createNonce={createNonce} />
       ) : sectionKey === "industries" ? (
@@ -934,6 +963,73 @@ const emptyIndustryForm: IndustryFormState = {
   seoSocialImage: "",
 };
 
+const defaultProductTemplateSections: TemplateSectionForm[] = [
+  {
+    key: "hero",
+    enabled: true,
+    eyebrow: "",
+    heading: "",
+    intro: "",
+    paragraphs: [""],
+  },
+  {
+    key: "specs",
+    enabled: true,
+    eyebrow: "",
+    heading: "",
+    intro: "",
+    paragraphs: [""],
+  },
+  {
+    key: "keyFeatures",
+    enabled: true,
+    eyebrow: "",
+    heading: "",
+    intro: "",
+    paragraphs: [""],
+  },
+  {
+    key: "industryFit",
+    enabled: true,
+    eyebrow: "",
+    heading: "",
+    intro: "",
+    paragraphs: [""],
+  },
+  {
+    key: "applications",
+    enabled: true,
+    eyebrow: "",
+    heading: "",
+    intro: "",
+    paragraphs: [""],
+  },
+  {
+    key: "moreModels",
+    enabled: true,
+    eyebrow: "",
+    heading: "",
+    intro: "",
+    paragraphs: [""],
+  },
+  {
+    key: "faqs",
+    enabled: true,
+    eyebrow: "",
+    heading: "",
+    intro: "",
+    paragraphs: [""],
+  },
+  {
+    key: "contact",
+    enabled: true,
+    eyebrow: "",
+    heading: "",
+    intro: "",
+    paragraphs: [""],
+  },
+];
+
 const emptyModelForm: ModelFormState = {
   modelNumber: "",
   modelTitle: "",
@@ -968,7 +1064,7 @@ const emptyModelForm: ModelFormState = {
   seoSocialTitle: "",
   seoSocialDescription: "",
   seoSocialImage: "",
-  productTemplateSections: [],
+  productTemplateSections: defaultProductTemplateSections,
   industryProductTemplateSections: [],
 };
 
@@ -1167,7 +1263,7 @@ function modelToForm(record: ResourceRecord): ModelFormState {
                 ? section.paragraphs
                 : [""],
             }))
-          : [],
+          : defaultProductTemplateSections,
     industryProductTemplateSections:
       Array.isArray(record.industryProductTemplateSections) &&
       record.industryProductTemplateSections.length
@@ -2265,6 +2361,22 @@ function ProductModelManager({ createNonce }: { createNonce: number }) {
               />
               </FormSection>
               <FormSection
+                title="Product Page Sections"
+                text="Control /products/{product-name}/{model-name}: show or hide sections, edit headings, and override generated section copy."
+              >
+              <TemplateSectionsEditor
+                title="Product template sections"
+                helperText="Section keys: hero, specs, keyFeatures, industryFit, applications, moreModels, faqs, contact. Paragraphs override hero read-more copy, key feature descriptions, industry/application card text, and FAQs. For FAQs use: Question || Answer."
+                values={modelForm.productTemplateSections}
+                onChange={(productTemplateSections) =>
+                  setModelForm((current) => ({
+                    ...current,
+                    productTemplateSections,
+                  }))
+                }
+              />
+              </FormSection>
+              <FormSection
                 title="Relationships"
                 text="Choose from the industries connected to this product."
               >
@@ -3104,7 +3216,9 @@ function IndustryProductModelManager({
               }
             />
 
-            <IndustryTemplateSectionsEditor
+            <TemplateSectionsEditor
+              title="Industry template sections"
+              helperText="Section keys: projectFit, applicationFit, projectExecution, executionPriorities, workflow, supportCta, faqs."
               values={modelForm.industryProductTemplateSections}
               onChange={(industryProductTemplateSections) =>
                 setModelForm((current) => ({
@@ -3507,10 +3621,14 @@ function IndustryPicker({
   );
 }
 
-function IndustryTemplateSectionsEditor({
+function TemplateSectionsEditor({
+  title,
+  helperText,
   values,
   onChange,
 }: {
+  title: string;
+  helperText: string;
   values: TemplateSectionForm[];
   onChange: (values: TemplateSectionForm[]) => void;
 }) {
@@ -3529,7 +3647,10 @@ function IndustryTemplateSectionsEditor({
   return (
     <div className={styles.repeatGroup}>
       <div className={styles.repeatHeader}>
-        <p>Industry template sections</p>
+        <div>
+          <p>{title}</p>
+          <p className={styles.workflowText}>{helperText}</p>
+        </div>
         <button
           className={styles.button}
           type="button"

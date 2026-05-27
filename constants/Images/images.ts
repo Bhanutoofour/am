@@ -1,4 +1,7 @@
-const baseURl = process.env.NEXT_PUBLIC_CDN_URL;
+const baseURl =
+  process.env.NEXT_PUBLIC_CDN_URL ||
+  process.env.AWS_S3_PUBLIC_URL ||
+  "https://d3du1kxieyd1np.cloudfront.net";
 export const IMAGES = {
   LOGO: `${baseURl}/assets/icons/logo.svg`,
   ARROW_BLACK_RIGHT: `${baseURl}/assets/icons/arrow_black_right.svg`,
