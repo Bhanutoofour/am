@@ -556,6 +556,19 @@ export default function ProductModalClient({
     templateParagraphs(productTemplate, "hero").length > 0
       ? templateParagraphs(productTemplate, "hero")
       : buildOverviewExtraParagraphs(modelData, isIndiaMarket);
+  const overviewDescriptionLines = Array.isArray(overviewContent?.description)
+    ? overviewContent.description.filter((paragraph) =>
+        String(paragraph || "").trim()
+      )
+    : [];
+  const shouldClampOverview =
+    overviewExtraParagraphs.length > 0 ||
+    overviewDescriptionLines.length > 1 ||
+    overviewDescriptionLines.join(" ").length > 520;
+  const overviewTextClassName =
+    shouldClampOverview && !isOverviewExpanded
+      ? `${styles.productHeroOverviewText} ${styles.productHeroOverviewTextCollapsed}`
+      : styles.productHeroOverviewText;
   const keyFeatureCards = appendTemplateCards(
     overrideCardContent(
       modelKeyFeatures.map((feature) => ({
@@ -718,22 +731,20 @@ export default function ProductModalClient({
               {modelData?.modelNumber || "-"}
             </h1>
             <p className={styles.productHeroSubtitle}>
-              {modelData?.modelTitle || "-"}
-              <span aria-hidden>|</span>
               <strong>{modelData?.machineType || "-"}</strong>
             </p>
             <div className={styles.productHeroDivider} />
             <div className={styles.productHeroOverview}>
               <h2>Overview</h2>
               {overviewContent?.title && <h3>{overviewContent.title}</h3>}
-              <div className={styles.productHeroOverviewText}>
+              <div className={overviewTextClassName}>
                 <RichDescription paragraphs={overviewContent?.description} />
                 {isOverviewExpanded &&
                   overviewExtraParagraphs.map((paragraph, index) => (
                     <p key={`overview-extra-${index}`}>{paragraph}</p>
                   ))}
               </div>
-              {overviewExtraParagraphs.length > 0 && (
+              {shouldClampOverview && (
                 <button
                   type="button"
                   className={styles.productHeroReadMore}

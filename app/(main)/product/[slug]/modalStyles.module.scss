@@ -1549,6 +1549,11 @@
     }
   }
 
+  .productHeroOverviewTextCollapsed {
+    max-height: 7.875rem;
+    overflow: hidden;
+  }
+
   .productHeroReadMore {
     color: #01060a;
     font-size: 1rem;

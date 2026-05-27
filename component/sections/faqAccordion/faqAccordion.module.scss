@@ -11,27 +11,34 @@
 
 .faqQuestion {
   width: 100%;
-  min-height: 4.5rem;
+  height: 4.875rem;
   border: 1px solid #dfe5ea;
   border-radius: 0.5rem;
   background-color: #fff;
   color: #01060a;
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 1.25rem;
+  grid-template-columns: minmax(0, 1fr) 1rem;
   align-items: center;
-  gap: 1.25rem;
-  padding: 1.25rem 1.5rem;
+  gap: 1.5rem;
+  padding: 1rem 2rem;
   text-align: left;
   font-family: "Roboto", sans-serif;
-  font-size: clamp(1rem, 1.35vw, 1.2rem);
-  font-weight: 800;
-  line-height: 130%;
+  font-size: clamp(1rem, 1.28vw, 1.125rem);
+  font-weight: 600;
+  line-height: 125%;
+  font-stretch: 75%;
+  font-variation-settings: "wdth" 75;
   cursor: pointer;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 
   span:first-child {
     min-width: 0;
-    overflow-wrap: anywhere;
+    display: -webkit-box;
+    line-clamp: 2;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    overflow-wrap: break-word;
   }
 
   &:hover,
@@ -43,6 +50,7 @@
 
 .faqIcon {
   justify-self: end;
+  align-self: center;
   width: 0.75rem;
   height: 0.75rem;
   border-right: 0.1875rem solid #01060a;
@@ -93,9 +101,9 @@
   }
 
   .faqQuestion {
-    min-height: 4rem;
+    height: 4.5rem;
     padding: 1.1rem 1.25rem;
-    font-size: 1.05rem;
+    font-size: 1rem;
   }
 
   .faqAnswer {
@@ -110,11 +118,11 @@
 
   .faqQuestion {
     grid-template-columns: minmax(0, 1fr) 1rem;
-    min-height: 3.5rem;
+    height: 4.25rem;
     gap: 0.875rem;
     padding: 0.95rem 1rem;
-    font-size: 0.98rem;
-    line-height: 135%;
+    font-size: 0.95rem;
+    line-height: 130%;
   }
 
   .faqIcon {
