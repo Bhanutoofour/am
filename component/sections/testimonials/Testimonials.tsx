@@ -57,6 +57,8 @@ const Testimonials: React.FC<TestimonialProps> = ({
   testimonials,
   clients,
 }) => {
+  const testimonialItems = Array.isArray(testimonials) ? testimonials : [];
+  const clientItems = Array.isArray(clients) ? clients : [];
   const { width } = useWindowSize();
   const [currentSlide, setCurrentSlide] = useState(1);
   const [sliderRef, instanceRef] = useKeenSlider({
@@ -149,7 +151,7 @@ const Testimonials: React.FC<TestimonialProps> = ({
             ref={sliderRef}
             className={`${styles.testimonialCarousel} keen-slider`}
           >
-            {testimonials.map((item, index) => (
+            {testimonialItems.map((item, index) => (
               <TestimonialCard key={index} {...item} />
             ))}
           </div>
@@ -164,9 +166,8 @@ const Testimonials: React.FC<TestimonialProps> = ({
             </div>
           ) : (
             <div className={styles.dots}>
-              {testimonials &&
-                testimonials.length > 0 &&
-                testimonials.map((_, idx) => (
+              {testimonialItems.length > 0 &&
+                testimonialItems.map((_, idx) => (
                   <button
                     key={idx}
                     onClick={() => instanceRef.current?.moveToIdx(idx)}
@@ -189,7 +190,7 @@ const Testimonials: React.FC<TestimonialProps> = ({
       <div className={styles.happyClient}>
         <p className={styles.happyHeader}>Happy Clients</p>
         <div className={styles.clientImageBox}>
-          {clients.map((img, idx) => (
+          {clientItems.map((img, idx) => (
             <Image
               key={idx}
               src={img}

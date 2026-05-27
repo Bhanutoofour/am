@@ -30,6 +30,9 @@ const StepOne = ({
   selectedValue: selectedQuoteValue;
   setSelectedValue: (value: selectedQuoteValue) => void;
 }) => {
+  const industryItems = Array.isArray(industriesWithProducts)
+    ? industriesWithProducts
+    : [];
   const [availableProducts, setAvailableProducts] = useState<
     { productId: number; productName: string }[]
   >([]);
@@ -37,21 +40,25 @@ const StepOne = ({
   // Update available products when industry changes
   useEffect(() => {
     if (selectedValue.industry) {
-      const selectedIndustry = industriesWithProducts.find(
+      const selectedIndustry = industryItems.find(
         (industry) => industry.industryName === selectedValue.industry
       );
-      setAvailableProducts(selectedIndustry?.productsList || []);
+      setAvailableProducts(
+        Array.isArray(selectedIndustry?.productsList)
+          ? selectedIndustry.productsList
+          : []
+      );
     } else {
       setAvailableProducts([]);
     }
-  }, [selectedValue.industry, industriesWithProducts]);
+  }, [selectedValue.industry, industryItems]);
 
   return (
     <div className={styles.stepContainer}>
       <FormSelect
         label="Choose Industry"
         required
-        options={industriesWithProducts.map(
+        options={industryItems.map(
           (industry) => industry.industryName
         )}
         selectedValue={selectedValue.industry}
@@ -66,7 +73,7 @@ const StepOne = ({
       <FormSelect
         label="Choose Product"
         required
-        options={availableProducts.map((product) => product.productName)}
+        options={(Array.isArray(availableProducts) ? availableProducts : []).map((product) => product.productName)}
         selectedValue={selectedValue.product}
         onChange={(val) => {
           setSelectedValue({
@@ -190,7 +197,7 @@ const GetQuoteModal: React.FC<GetQuoteProps> = ({
       const data = await response.json();
 
       if (data.success) {
-        setIndustriesWithProducts(data.data);
+        setIndustriesWithProducts(Array.isArray(data.data) ? data.data : []);
       } else {
         console.error("Failed to fetch industries with products:", data.error);
       }

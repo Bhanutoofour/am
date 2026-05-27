@@ -19,6 +19,7 @@ export default function FaqAccordion({
   defaultOpenIndex = null,
   className = "",
 }: FaqAccordionProps) {
+  const faqItems = Array.isArray(items) ? items : [];
   const baseId = useId();
   const [openIndexes, setOpenIndexes] = useState<number[]>(
     typeof defaultOpenIndex === "number" ? [defaultOpenIndex] : []
@@ -34,7 +35,7 @@ export default function FaqAccordion({
 
   return (
     <div className={`${styles.faqAccordion} ${className}`.trim()}>
-      {items.map((item, index) => {
+      {faqItems.map((item, index) => {
         const isOpen = openIndexes.includes(index);
         const answerId = `${baseId}-answer-${index}`;
 

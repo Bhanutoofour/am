@@ -16,6 +16,9 @@ const ModelResponsiveCard: React.FC<ModelState> = ({
   productName,
   basePath,
 }) => {
+  const keyFeatures = Array.isArray(model?.keyFeatures)
+    ? model.keyFeatures
+    : [];
   const slug = modelSlug(
     (productName || model?.productName) ?? "",
     model?.modelTitle ?? "",
@@ -50,8 +53,8 @@ const ModelResponsiveCard: React.FC<ModelState> = ({
       </div>
 
       <div className={styles.trenchWidths}>
-        {model?.keyFeatures?.length > 0 &&
-          model?.keyFeatures.map((feat, index) => (
+        {keyFeatures.length > 0 &&
+          keyFeatures.map((feat, index) => (
             <div key={index} className={styles.trenchWidth}>
               <span className={styles.label}>{feat?.name}</span>
               <span className={styles.value}>{feat?.value}</span>

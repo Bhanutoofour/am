@@ -14,12 +14,13 @@ interface CaraouselProps {
 }
 
 const Caraousel: React.FC<CaraouselProps> = ({ heroData }) => {
+  const heroItems = Array.isArray(heroData) ? heroData : [];
   const [opacities, setOpacities] = useState<number[]>([]);
   const [currentSlide, setCurrentSlide] = useState(0);
   const [showModal, setShowModal] = useState<boolean>(false);
 
   const [sliderRef, instanceRef] = useKeenSlider<HTMLDivElement>(
-    heroData.length
+    heroItems.length
       ? {
           loop: true,
           detailsChanged(s) {
@@ -38,24 +39,24 @@ const Caraousel: React.FC<CaraouselProps> = ({ heroData }) => {
   );
 
   useEffect(() => {
-    if (heroData.length > 0) {
+    if (heroItems.length > 0) {
       setCurrentSlide(0);
-      setOpacities(Array(heroData.length).fill(1));
+      setOpacities(Array(heroItems.length).fill(1));
       instanceRef.current?.moveToIdx?.(0);
     }
-  }, [heroData.length]);
+  }, [heroItems.length]);
 
   // Auto-slide every 5 seconds
   useEffect(() => {
-    if (!heroData.length) return;
+    if (!heroItems.length) return;
     const interval = setInterval(() => {
-      const nextIdx = (currentSlide + 1) % heroData.length;
+      const nextIdx = (currentSlide + 1) % heroItems.length;
       instanceRef.current?.moveToIdx?.(nextIdx);
     }, 5000);
     return () => clearInterval(interval);
-  }, [heroData.length, currentSlide]);
+  }, [heroItems.length, currentSlide]);
 
-  if (!heroData || heroData.length === 0) {
+  if (heroItems.length === 0) {
     return null;
   }
 
@@ -134,7 +135,7 @@ const Caraousel: React.FC<CaraouselProps> = ({ heroData }) => {
         className="keen-slider fader"
         style={{ width: "100%", height: "100%" }}
       >
-        {heroData.map((src, idx) => (
+        {heroItems.map((src, idx) => (
           <div
             key={idx}
             className={`keen-slider__slide fader__slide ${styles.caraouselContainer}`}
@@ -208,9 +209,8 @@ const Caraousel: React.FC<CaraouselProps> = ({ heroData }) => {
       </button>
       {/* Dots */}
       <div className={styles.dots}>
-        {heroData &&
-          heroData.length > 0 &&
-          heroData.map((_, idx) => (
+        {heroItems.length > 0 &&
+          heroItems.map((_, idx) => (
             <button
               key={idx}
               onClick={() => instanceRef.current?.moveToIdx(idx)}

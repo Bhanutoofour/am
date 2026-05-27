@@ -17,6 +17,7 @@ interface ProductsProps {
 }
 
 const Products: React.FC<ProductsProps> = ({ products }) => {
+  const productItems = Array.isArray(products) ? products : [];
   const [currentSlide, setCurrentSlide] = useState(0);
   const { width } = useWindowSize();
   const router = useRouter();
@@ -116,13 +117,13 @@ const Products: React.FC<ProductsProps> = ({ products }) => {
         </div>
 
         <div className={styles.productGrid}>
-          {products && products.length > 0 ? (
+          {productItems.length > 0 ? (
             <>
               <div
                 ref={sliderRef}
                 className={`${styles.productAllCarousel} keen-slider`}
               >
-                {products.map((data) => (
+                {productItems.map((data) => (
                   <LocalizedLink
                     key={data.id}
                     href={`/products/${productSlug(data?.title ?? "")}`}

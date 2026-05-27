@@ -27,6 +27,7 @@ const Recognitions: React.FC<RecognitionsProps> = ({
   data,
   conatinerClassName,
 }) => {
+  const recognitionItems = Array.isArray(data) ? data : [];
   const { width } = useWindowSize();
   const [currentSlide, setCurrentSlide] = useState(0);
   const [currentSlide2, setCurrentSlide2] = useState(0);
@@ -65,14 +66,14 @@ const Recognitions: React.FC<RecognitionsProps> = ({
   });
 
   useEffect(() => {
-    if (!data.length || !instanceRef2.current) return;
+    if (!recognitionItems.length || !instanceRef2.current) return;
 
     const interval = setInterval(() => {
       instanceRef2.current?.next();
     }, 2000);
 
     return () => clearInterval(interval);
-  }, [data.length, instanceRef2.current]);
+  }, [recognitionItems.length, instanceRef2.current]);
 
   if (title !== "Awards") return null;
 
@@ -144,7 +145,7 @@ const Recognitions: React.FC<RecognitionsProps> = ({
             ref={sliderRef2}
             className={`keen-slider ${styles.carousel} ${styles.awardCardsCarousel}`}
           >
-            {data.map((recognition, idx) => (
+            {recognitionItems.map((recognition, idx) => (
               <div
                 key={idx}
                 className={`keen-slider__slide ${styles.cardWrapper}`}

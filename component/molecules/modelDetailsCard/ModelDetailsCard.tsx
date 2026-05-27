@@ -29,10 +29,11 @@ const ModelOverview: React.FC<ModelOverviewProps> = ({ data }) => {
   const {
     title = "-",
     image = "",
-    description = [],
+    description,
     imageAltText = "",
     youtubeLink = "",
   } = data;
+  const paragraphs = Array.isArray(description) ? description : [];
 
   const embedUrl = getYouTubeEmbedUrl(youtubeLink);
   return (
@@ -40,9 +41,8 @@ const ModelOverview: React.FC<ModelOverviewProps> = ({ data }) => {
       <div className={styles.contentBox}>
         <h2>{title || "-"}</h2>
         <div className={styles.paragraphHolder}>
-          {description &&
-            description.length > 0 &&
-            description.map((paragraph: string, ind: number) => (
+          {paragraphs.length > 0 &&
+            paragraphs.map((paragraph: string, ind: number) => (
               <p key={`paragraph -- ${ind}`}>{paragraph || "-"}</p>
             ))}
         </div>

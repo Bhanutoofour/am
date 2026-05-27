@@ -52,6 +52,10 @@ type ProductIndustryFitCard = {
   text: string;
 };
 
+function asArray<T>(value: T[] | null | undefined): T[] {
+  return Array.isArray(value) ? value : [];
+}
+
 function getYouTubeEmbedUrl(url?: string): string {
   if (!url) return "";
   if (url.includes("youtube.com/embed/")) return url;
@@ -81,7 +85,7 @@ function buildProductModelMedia(
     });
   }
 
-  modelData.modelDescription?.forEach((item) => {
+  asArray(modelData.modelDescription).forEach((item) => {
     if (item.image) {
       imageMedia.push({
         type: "image",
@@ -260,7 +264,7 @@ function buildBestSuitedIndustryCards(
   const productName = modelData?.productName || "machine";
   const productLower = productName.toLowerCase();
   const industryNames = [
-    ...(modelData?.industries || []),
+    ...asArray(modelData?.industries),
     "OFC Telecommunications",
     "Water Management",
     "Agriculture",
@@ -290,8 +294,8 @@ function buildOverviewExtraParagraphs(
   const modelName = modelData.modelNumber || "This model";
   const productName = modelData.productName || "project work";
   const machineType = modelData.machineType || "machine";
-  const featureSummary = modelData.keyFeatures
-    ?.filter((feature) => feature.name && feature.value)
+  const featureSummary = asArray(modelData.keyFeatures)
+    .filter((feature) => feature.name && feature.value)
     .slice(0, 4)
     .map((feature) => `${feature.name}: ${feature.value}`)
     .join(", ");
@@ -427,12 +431,19 @@ export default function ProductModalClient({
   const productModelMedia = buildProductModelMedia(modelData);
   const selectedMedia =
     productModelMedia[selectedMediaIndex] || productModelMedia[0];
-  const overviewContent = modelData?.modelDescription?.[0];
+  const modelDescriptions = Array.isArray(modelData?.modelDescription)
+    ? modelData.modelDescription
+    : [];
+  const modelKeyFeatures = Array.isArray(modelData?.keyFeatures)
+    ? modelData.keyFeatures
+    : [];
+  const seriesItems = Array.isArray(seriesData) ? seriesData : [];
+  const overviewContent = modelDescriptions[0];
   const productModelDetails =
     pageVariant === "productModel"
-      ? modelData?.modelDescription?.slice(1)
-      : modelData?.modelDescription;
-  const visibleSpecs = modelData?.keyFeatures?.slice(0, 3) || [];
+      ? modelDescriptions.slice(1)
+      : modelDescriptions;
+  const visibleSpecs = modelKeyFeatures.slice(0, 3);
   const productTemplate = modelData?.seoMetadata?.pageTemplates?.productModel;
   const industryTemplate =
     modelData?.seoMetadata?.pageTemplates?.industryProductModel;
@@ -617,9 +628,10 @@ export default function ProductModalClient({
               <h2>Overview</h2>
               {overviewContent?.title && <h3>{overviewContent.title}</h3>}
               <div className={styles.productHeroOverviewText}>
-                {overviewContent?.description?.map((paragraph, index) => (
-                  <p key={`${paragraph}-${index}`}>{paragraph}</p>
-                ))}
+                {Array.isArray(overviewContent?.description) &&
+                  overviewContent.description.map((paragraph, index) => (
+                    <p key={`${paragraph}-${index}`}>{paragraph}</p>
+                  ))}
                 {isOverviewExpanded &&
                   overviewExtraParagraphs.map((paragraph, index) => (
                     <p key={`overview-extra-${index}`}>{paragraph}</p>
@@ -922,8 +934,7 @@ export default function ProductModalClient({
       )}
 
       {pageVariant === "productModel" &&
-        modelData?.keyFeatures &&
-        modelData?.keyFeatures?.length > 0 && (
+        modelKeyFeatures.length > 0 && (
           <>
             {isTemplateSectionEnabled(productTemplate, "specs") && (
               <section className={styles.productSpecsSection}>
@@ -948,7 +959,7 @@ export default function ProductModalClient({
                 </p>
               </div>
               <div className={styles.productSpecsGrid}>
-                {modelData.keyFeatures.map((spec, index) => (
+                {modelKeyFeatures.map((spec, index) => (
                   <article
                     key={`${spec.name}-${index}`}
                     className={styles.productSpecsCard}
@@ -982,13 +993,13 @@ export default function ProductModalClient({
                     "keyFeatures",
                     "intro",
                     `Discover what makes the ${
-                      modelData.modelNumber || "model"
+                      modelData?.modelNumber || "model"
                     } stand out from the competition`
                   )}
                 </p>
               </div>
               <div className={styles.productKeyFeaturesGrid}>
-                {modelData.keyFeatures
+                {modelKeyFeatures
                   .slice(0, KEY_FEATURE_DESCRIPTION_LIMIT)
                   .map((feature, index) => (
                     <article
@@ -1034,8 +1045,8 @@ export default function ProductModalClient({
                     productTemplate,
                     "industryFit",
                     "heading",
-                    `${modelData.modelNumber || "This model"} fits demanding ${
-                      modelData.productName?.toLowerCase() || "machine"
+                    `${modelData?.modelNumber || "This model"} fits demanding ${
+                      modelData?.productName?.toLowerCase() || "machine"
                     } applications`
                   )}
                 </h2>
@@ -1045,7 +1056,7 @@ export default function ProductModalClient({
                     "industryFit",
                     "intro",
                     `Match ${
-                      modelData.modelNumber || "this model"
+                      modelData?.modelNumber || "this model"
                     } with industry use cases where equipment reliability, field output, and site readiness matter most.`
                   )}
                 </p>
@@ -1087,8 +1098,8 @@ export default function ProductModalClient({
                     productTemplate,
                     "applications",
                     "heading",
-                    `${modelData.modelNumber || "This model"} for practical ${
-                      modelData.productName?.toLowerCase() || "product"
+                    `${modelData?.modelNumber || "This model"} for practical ${
+                      modelData?.productName?.toLowerCase() || "product"
                     } work`
                   )}
                 </h2>
@@ -1098,7 +1109,7 @@ export default function ProductModalClient({
                     "applications",
                     "intro",
                     `Understand how ${
-                      modelData.modelNumber || "this model"
+                      modelData?.modelNumber || "this model"
                     } fits project planning, field deployment, and daily operating priorities.`
                   )}
                 </p>
@@ -1122,14 +1133,13 @@ export default function ProductModalClient({
             )}
 
             {isTemplateSectionEnabled(productTemplate, "moreModels") &&
-              seriesData &&
-              seriesData.length > 0 && (
+              seriesItems.length > 0 && (
               <div className={styles.moreModels}>
                 <h2 className={styles.modelContainerHeading}>
                   {`More Models in ${modelData?.series} Series`}
                 </h2>
                 <div className={styles.modelCardContainer}>
-                  {seriesData.map((eachModel: any, ids: number) => {
+                  {seriesItems.map((eachModel: any, ids: number) => {
                     const basePath = seriesModelBasePath(
                       eachModel,
                       modelData?.productName,
@@ -1170,7 +1180,7 @@ export default function ProductModalClient({
                     "faqs",
                     "intro",
                     `Common questions about ${
-                      modelData.modelNumber || "this model"
+                      modelData?.modelNumber || "this model"
                     } specifications, applications, and project fit.`
                   )}
                 </p>
@@ -1209,8 +1219,7 @@ export default function ProductModalClient({
       )}
 
       {pageVariant !== "productModel" &&
-        modelData?.keyFeatures &&
-        modelData?.keyFeatures?.length > 7 && (
+        modelKeyFeatures.length > 7 && (
         <div className={styles.tableDetails}>
           <div className={styles.tableDesc}>
             <h2 className={styles.tableDescHeading}>
@@ -1230,10 +1239,9 @@ export default function ProductModalClient({
               </tr>
             </thead>
             <tbody>
-              {modelData?.keyFeatures &&
-                modelData?.keyFeatures?.length > 0 &&
-                modelData?.keyFeatures
-                  ?.slice(7, modelData?.keyFeatures?.length)
+              {modelKeyFeatures.length > 0 &&
+                modelKeyFeatures
+                  .slice(7, modelKeyFeatures.length)
                   .map((spec: any, index: number) => (
                     <tr key={index}>
                       <td>{spec.name}</td>
@@ -1295,13 +1303,13 @@ export default function ProductModalClient({
         />
       )}
 
-      {pageVariant !== "productModel" && seriesData && seriesData.length > 0 && (
+      {pageVariant !== "productModel" && seriesItems.length > 0 && (
         <div className={styles.moreModels}>
           <h2 className={styles.modelContainerHeading}>
             {`More Models in ${modelData?.series} Series`}
           </h2>
           <div className={styles.modelCardContainer}>
-            {seriesData.map((eachModel: any, ids: number) => {
+            {seriesItems.map((eachModel: any, ids: number) => {
               const basePath = seriesModelBasePath(
                 eachModel,
                 modelData?.productName,

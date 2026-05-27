@@ -13,18 +13,19 @@ interface IndustriesProps {
 }
 
 const Industries: React.FC<IndustriesProps> = ({ industries }) => {
+  const industryItems = Array.isArray(industries) ? industries : [];
   const { width } = useWindowSize();
   const [viewAll, setViewAll] = useState<boolean>(false);
 
   let data: ActiveIndustry[] = [];
-  if (width && industries.length) {
+  if (width && industryItems.length) {
     if (viewAll) {
-      data = industries;
+      data = industryItems;
     } else {
       data =
         width > SCREENS.MOBILE_PORTRAIT
-          ? industries.slice(0, 8)
-          : industries.slice(0, 6);
+          ? industryItems.slice(0, 8)
+          : industryItems.slice(0, 6);
     }
   }
 
@@ -56,7 +57,7 @@ const Industries: React.FC<IndustriesProps> = ({ industries }) => {
           )}
         </div>
 
-        {width && width > SCREENS.MOBILE_PORTRAIT ? industries.length > 8 : industries.length > 6 && <Button
+        {width && width > SCREENS.MOBILE_PORTRAIT ? industryItems.length > 8 : industryItems.length > 6 && <Button
           title={`VIEW ${viewAll ? "LESS" : "ALL"} INDUSTRIES`}
           bgColor="#01060A"
           buttonFontColor="#F9C300"

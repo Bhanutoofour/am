@@ -12,6 +12,7 @@ export interface CertificatesProps {
 }
 
 const Certificates: React.FC<CertificatesProps> = ({ data }) => {
+  const certificateItems = Array.isArray(data) ? data : [];
   //   const [marqueeItems, setMarqueeItems] = useState<RecognitionData[]>([]);
   const [isScrollable, setIsScrollable] = useState<boolean>(false);
   const { width } = useWindowSize();
@@ -29,12 +30,12 @@ const Certificates: React.FC<CertificatesProps> = ({ data }) => {
 
       <div className={styles.certificateMarquee}>
         <div className={styles.certificateMarqueeContent}>
-          {data.map((recognition, idx) => (
+          {certificateItems.map((recognition, idx) => (
             <div key={idx} className={styles.cardWrapper}>
               <RecognitionCard
                 imageSrc={recognition.imageSrc}
                 title={recognition.title}
-                isLastItem={idx === data.length - 1}
+                isLastItem={idx === certificateItems.length - 1}
                 isResponsive={
                   (width && width < SCREENS.MOBILE_LANDSCAPE) || false
                 }
