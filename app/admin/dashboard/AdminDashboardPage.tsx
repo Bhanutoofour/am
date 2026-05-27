@@ -3790,9 +3790,16 @@ function DynamicKeyFeatureDescriptionList({
         <div>
           <p>Key feature descriptions</p>
           <p className={styles.workflowText}>
-            These descriptions appear under the key feature cards in order.
+            These headings and descriptions appear under the key feature cards in order.
           </p>
         </div>
+        <button
+          className={styles.button}
+          type="button"
+          onClick={() => onChange([...listValues, ""])}
+        >
+          Add feature
+        </button>
       </div>
       {listValues.map((item, index) => {
         const feature = featureRows[index];
@@ -3815,6 +3822,15 @@ function DynamicKeyFeatureDescriptionList({
               value={card.text}
               onChange={(value) => update(index, "text", value)}
             />
+            <button
+              className={styles.button}
+              type="button"
+              onClick={() =>
+                onChange(listValues.filter((_, itemIndex) => itemIndex !== index))
+              }
+            >
+              Remove feature
+            </button>
           </div>
         );
       })}

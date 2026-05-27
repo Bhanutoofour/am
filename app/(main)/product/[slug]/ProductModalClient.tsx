@@ -442,6 +442,39 @@ function overrideCardContent<T extends { title: string; text: string }>(
   });
 }
 
+function appendTemplateCards(
+  cards: ProductApplicationCard[],
+  template: CmsPageTemplate | undefined,
+  key: string
+): ProductApplicationCard[] {
+  const paragraphs = templateParagraphs(template, key).slice(cards.length);
+  if (!paragraphs.length) return cards;
+
+  const extraCards = paragraphs
+    .map((paragraph, index) => {
+      if (!/\|\|?/.test(paragraph)) {
+        return {
+          title: `Feature ${cards.length + index + 1}`,
+          text: paragraph,
+        };
+      }
+
+      const [title = "", ...textParts] = paragraph
+        .split(/\s*(?:\|\||\|)\s*/)
+        .map((part) => part.trim());
+      const text = textParts.join(" ").trim();
+      if (!title && !text) return null;
+
+      return {
+        title: title || `Feature ${cards.length + index + 1}`,
+        text,
+      };
+    })
+    .filter((card): card is ProductApplicationCard => Boolean(card));
+
+  return [...cards, ...extraCards];
+}
+
 function productFaqsFromTemplate(
   template: CmsPageTemplate | undefined,
   fallbackFaqs: ProductModelFaq[]
@@ -523,11 +556,15 @@ export default function ProductModalClient({
     templateParagraphs(productTemplate, "hero").length > 0
       ? templateParagraphs(productTemplate, "hero")
       : buildOverviewExtraParagraphs(modelData, isIndiaMarket);
-  const keyFeatureCards = overrideCardContent(
-    modelKeyFeatures.map((feature) => ({
-      title: feature.name || "-",
-      text: buildFeatureDescription(modelData, feature, isIndiaMarket),
-    })),
+  const keyFeatureCards = appendTemplateCards(
+    overrideCardContent(
+      modelKeyFeatures.map((feature) => ({
+        title: feature.name || "-",
+        text: buildFeatureDescription(modelData, feature, isIndiaMarket),
+      })),
+      productTemplate,
+      "keyFeatures"
+    ),
     productTemplate,
     "keyFeatures"
   );
