@@ -311,35 +311,6 @@ function buildBestSuitedIndustryCards(
   }));
 }
 
-function buildOverviewExtraParagraphs(
-  modelData: ModelObjectTypes | null,
-  isIndiaMarket = false
-): string[] {
-  if (!modelData) return [];
-
-  const modelName = modelData.modelNumber || "This model";
-  const productName = modelData.productName || "project work";
-  const machineType = modelData.machineType || "machine";
-  const featureSummary = asArray(modelData.keyFeatures)
-    .filter((feature) => feature.name && feature.value)
-    .slice(0, 4)
-    .map((feature) => `${feature.name}: ${feature.value}`)
-    .join(", ");
-
-  return [
-    featureSummary
-      ? isIndiaMarket
-        ? `${modelName} brings together key working specifications such as ${featureSummary}, helping Indian contractors compare machine fit before OFC, irrigation, utility, agriculture, construction, or water management deployment.`
-        : `${modelName} brings together key working specifications such as ${featureSummary}, giving teams a clearer way to compare fit before deployment.`
-      : isIndiaMarket
-        ? `${modelName} is built to support practical ${productName.toLowerCase()} work in India where route access, soil conditions, output goals, and operating reliability matter.`
-        : `${modelName} is built to support practical ${productName.toLowerCase()} work where site access, output goals, and operating reliability matter.`,
-    isIndiaMarket
-      ? `As a ${machineType.toLowerCase()}, ${modelName} helps Indian contractors, farmers, municipalities, and infrastructure teams plan daily work with better control over field execution, machine fit, and project handoff.`
-      : `As a ${machineType.toLowerCase()}, ${modelName} helps contractors and operators plan daily work with better control over field execution, machine fit, and project handoff.`,
-  ];
-}
-
 function seriesModelBasePath(
   seriesModel: Model,
   fallbackProductName: string | undefined,
@@ -579,10 +550,7 @@ export default function ProductModalClient({
     "industryFit",
     buildBestSuitedIndustryCards(modelData, isIndiaMarket)
   );
-  const overviewExtraParagraphs =
-    templateParagraphs(productTemplate, "hero").length > 0
-      ? templateParagraphs(productTemplate, "hero")
-      : buildOverviewExtraParagraphs(modelData, isIndiaMarket);
+  const overviewExtraParagraphs = templateParagraphs(productTemplate, "hero");
   const overviewDescriptionLines = Array.isArray(overviewContent?.description)
     ? overviewContent.description.filter((paragraph) =>
         String(paragraph || "").trim()
@@ -789,7 +757,9 @@ export default function ProductModalClient({
                 onClick={() => setShowQuoteModal(true)}
               >
                 GET A QUOTE
-                <span aria-hidden>-&gt;</span>
+                <span className={styles.buttonArrow} aria-hidden="true">
+                  →
+                </span>
               </button>
               <button
                 className={styles.productHeroBrochure}
@@ -1038,7 +1008,9 @@ export default function ProductModalClient({
               onClick={() => setShowQuoteModal(true)}
             >
               GET A QUOTE
-              <span aria-hidden>-&gt;</span>
+              <span className={styles.buttonArrow} aria-hidden="true">
+                →
+              </span>
             </button>
             <button
               className={styles.applicationSupportBrochure}

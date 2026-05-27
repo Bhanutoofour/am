@@ -919,6 +919,17 @@
     }
   }
 
+  .buttonArrow {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Roboto", sans-serif;
+    font-size: 1.25rem;
+    font-weight: 800;
+    line-height: 1;
+    transform: translateY(-0.05rem);
+  }
+
   .modelDetails {
     margin-top: clamp(2rem, 4vw, 3rem);
     width: 100%;

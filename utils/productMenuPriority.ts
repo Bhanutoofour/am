@@ -2,10 +2,11 @@ import { titleToSlug } from "@/utils/slug";
 
 const PRODUCT_PRIORITY_GROUPS = [
   ["trenchers", "trencher"],
-  ["amphibious-excavator"],
   ["aquatic-weed-harvester", "aquatic-weed-harvesters"],
+  ["amphibious-excavator"],
+  ["sand-filler"],
+  ["pole-stacker", "solar-equipments", "solar-equipment"],
   ["dredgers", "dredger"],
-  ["tractor-attachments", "attachments"],
   ["walk-behind-trenchers", "walk-behind-trencher"],
   [
     "self-propelled-multi-attachments-machine",
@@ -14,11 +15,10 @@ const PRODUCT_PRIORITY_GROUPS = [
     "agricultural-attachments",
   ],
   ["post-hole-digger", "post-hole-diggers"],
+  ["tractor-attachments", "attachments"],
+  ["landscaping-equipment"],
   ["amphibious-work-boats", "amphibious-work-boat"],
   ["barges-floating-pontoon", "barges", "floating-pontoon"],
-  ["landscaping-equipment"],
-  ["sand-filler"],
-  ["pole-stacker"],
 ];
 
 const productPriority = new Map<string, number>();
