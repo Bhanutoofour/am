@@ -1196,6 +1196,19 @@ function industryToForm(record: ResourceRecord): IndustryFormState {
   };
 }
 
+function normalizeTemplateSection(section: Partial<TemplateSectionForm>) {
+  return {
+    key: String(section.key || ""),
+    enabled: section.enabled !== false,
+    eyebrow: String(section.eyebrow || ""),
+    heading: String(section.heading || ""),
+    intro: String(section.intro || ""),
+    paragraphs: Array.isArray(section.paragraphs)
+      ? section.paragraphs.map((paragraph) => String(paragraph || ""))
+      : [""],
+  };
+}
+
 function modelToForm(record: ResourceRecord): ModelFormState {
   const seo = (record.seoMetadata || {}) as Record<string, unknown>;
   const intro = (record.specsTableIntro || {}) as Record<string, unknown>;
@@ -1250,36 +1263,22 @@ function modelToForm(record: ResourceRecord): ModelFormState {
     productTemplateSections:
       Array.isArray(record.productTemplateSections) &&
       record.productTemplateSections.length
-        ? (record.productTemplateSections as TemplateSectionForm[])
+        ? (record.productTemplateSections as TemplateSectionForm[]).map(
+            normalizeTemplateSection
+          )
         : Array.isArray(productTemplate?.sections) &&
             productTemplate.sections.length
-          ? productTemplate.sections.map((section) => ({
-              key: section.key || "",
-              enabled: section.enabled !== false,
-              eyebrow: section.eyebrow || "",
-              heading: section.heading || "",
-              intro: section.intro || "",
-              paragraphs: Array.isArray(section.paragraphs)
-                ? section.paragraphs
-                : [""],
-            }))
+          ? productTemplate.sections.map(normalizeTemplateSection)
           : defaultProductTemplateSections,
     industryProductTemplateSections:
       Array.isArray(record.industryProductTemplateSections) &&
       record.industryProductTemplateSections.length
-        ? (record.industryProductTemplateSections as TemplateSectionForm[])
+        ? (record.industryProductTemplateSections as TemplateSectionForm[]).map(
+            normalizeTemplateSection
+          )
         : Array.isArray(industryTemplate?.sections) &&
             industryTemplate.sections.length
-          ? industryTemplate.sections.map((section) => ({
-              key: section.key || "",
-              enabled: section.enabled !== false,
-              eyebrow: section.eyebrow || "",
-              heading: section.heading || "",
-              intro: section.intro || "",
-              paragraphs: Array.isArray(section.paragraphs)
-                ? section.paragraphs
-                : [""],
-            }))
+          ? industryTemplate.sections.map(normalizeTemplateSection)
           : defaultIndustryTemplateSections,
   };
 }
@@ -3404,11 +3403,17 @@ function DynamicStringList({
   onChange,
 }: {
   label: string;
-  values: string[];
+  values?: string[];
   onChange: (values: string[]) => void;
 }) {
+  const listValues = Array.isArray(values) ? values : [""];
+
   const update = (index: number, value: string) => {
-    onChange(values.map((item, itemIndex) => (itemIndex === index ? value : item)));
+    onChange(
+      listValues.map((item, itemIndex) =>
+        itemIndex === index ? value : item
+      )
+    );
   };
 
   return (
@@ -3418,19 +3423,19 @@ function DynamicStringList({
         <button
           className={styles.button}
           type="button"
-          onClick={() => onChange([...values, ""])}
+          onClick={() => onChange([...listValues, ""])}
         >
           Add
         </button>
       </div>
-      {values.map((item, index) => (
+      {listValues.map((item, index) => (
         <div key={`${label}-${index}`} className={styles.repeatRow}>
           <input value={item} onChange={(event) => update(index, event.target.value)} />
           <button
             className={styles.button}
             type="button"
             onClick={() =>
-              onChange(values.filter((_, itemIndex) => itemIndex !== index))
+              onChange(listValues.filter((_, itemIndex) => itemIndex !== index))
             }
           >
             Remove
@@ -3629,16 +3634,18 @@ function TemplateSectionsEditor({
 }: {
   title: string;
   helperText: string;
-  values: TemplateSectionForm[];
+  values?: TemplateSectionForm[];
   onChange: (values: TemplateSectionForm[]) => void;
 }) {
+  const sectionValues = Array.isArray(values) ? values : [];
+
   const update = (
     index: number,
     field: keyof TemplateSectionForm,
     value: string | boolean | string[]
   ) => {
     onChange(
-      values.map((section, sectionIndex) =>
+      sectionValues.map((section, sectionIndex) =>
         sectionIndex === index ? { ...section, [field]: value } : section
       )
     );
@@ -3656,7 +3663,7 @@ function TemplateSectionsEditor({
           type="button"
           onClick={() =>
             onChange([
-              ...values,
+              ...sectionValues,
               {
                 key: "",
                 enabled: true,
@@ -3671,7 +3678,7 @@ function TemplateSectionsEditor({
           Add section
         </button>
       </div>
-      {values.map((section, index) => (
+      {sectionValues.map((section, index) => (
         <div key={`${section.key}-${index}`} className={styles.detailEditor}>
           <div className={styles.editorHeader}>
             <p className={styles.listHeading}>
@@ -3719,7 +3726,9 @@ function TemplateSectionsEditor({
             className={styles.button}
             type="button"
             onClick={() =>
-              onChange(values.filter((_, sectionIndex) => sectionIndex !== index))
+              onChange(
+                sectionValues.filter((_, sectionIndex) => sectionIndex !== index)
+              )
             }
           >
             Remove section
