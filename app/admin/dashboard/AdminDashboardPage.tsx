@@ -2332,33 +2332,13 @@ function ProductModelManager({ createNonce }: { createNonce: number }) {
               </FormSection>
               <FormSection
                 title="Specifications"
-                text="Key features and supporting copy shown in the model detail page."
+                text="Key feature specs shown in the model detail page. Edit the specs heading and intro in Product Page Sections."
               >
               <DynamicKeyValueList
                 label="Specs / key features"
                 values={modelForm.keyFeatures}
                 onChange={(keyFeatures) =>
                   setModelForm((current) => ({ ...current, keyFeatures }))
-                }
-              />
-              <CmsInput
-                label="Specs intro heading"
-                value={modelForm.specsIntroHeading}
-                onChange={(specsIntroHeading) =>
-                  setModelForm((current) => ({
-                    ...current,
-                    specsIntroHeading,
-                  }))
-                }
-              />
-              <CmsTextarea
-                label="Specs intro paragraph"
-                value={modelForm.specsIntroParagraph}
-                onChange={(specsIntroParagraph) =>
-                  setModelForm((current) => ({
-                    ...current,
-                    specsIntroParagraph,
-                  }))
                 }
               />
               </FormSection>
