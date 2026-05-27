@@ -523,7 +523,11 @@ export default function ProductModalClient({
     templateParagraphs(productTemplate, "hero").length > 0
       ? templateParagraphs(productTemplate, "hero")
       : buildOverviewExtraParagraphs(modelData, isIndiaMarket);
-  const keyFeatureParagraphs = templateParagraphs(
+  const keyFeatureCards = overrideCardContent(
+    modelKeyFeatures.map((feature) => ({
+      title: feature.name || "-",
+      text: buildFeatureDescription(modelData, feature, isIndiaMarket),
+    })),
     productTemplate,
     "keyFeatures"
   );
@@ -1054,11 +1058,11 @@ export default function ProductModalClient({
                 </p>
               </div>
               <div className={styles.productKeyFeaturesGrid}>
-                {modelKeyFeatures
+                {keyFeatureCards
                   .slice(0, KEY_FEATURE_DESCRIPTION_LIMIT)
                   .map((feature, index) => (
                     <article
-                      key={`${feature.name}-${index}`}
+                      key={`${feature.title}-${index}`}
                       className={styles.productKeyFeatureItem}
                     >
                       <span
@@ -1067,15 +1071,10 @@ export default function ProductModalClient({
                       />
                       <div className={styles.productKeyFeatureCopy}>
                         <h3 className={styles.productKeyFeatureTitle}>
-                          {feature.name || "-"}
+                          {feature.title || "-"}
                         </h3>
                         <p className={styles.productKeyFeatureText}>
-                          {keyFeatureParagraphs[index] ||
-                            buildFeatureDescription(
-                              modelData,
-                              feature,
-                              isIndiaMarket
-                            )}
+                          {feature.text}
                         </p>
                       </div>
                     </article>

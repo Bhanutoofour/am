@@ -3790,11 +3790,17 @@ function DynamicKeyFeatureDescriptionList({
     Array.isArray(values) ? values[index] || "" : ""
   );
 
-  const update = (index: number, value: string) => {
+  const update = (index: number, field: "title" | "text", value: string) => {
     onChange(
-      listValues.map((item, itemIndex) =>
-        itemIndex === index ? value : item
-      )
+      listValues.map((item, itemIndex) => {
+        if (itemIndex !== index) return item;
+
+        const card = parseCardParagraph(item);
+        return formatCardParagraph(
+          field === "title" ? value : card.title,
+          field === "text" ? value : card.text
+        );
+      })
     );
   };
 
@@ -3810,23 +3816,26 @@ function DynamicKeyFeatureDescriptionList({
       </div>
       {listValues.map((item, index) => {
         const feature = featureRows[index];
-        const label =
-          feature?.name ||
-          feature?.value ||
-          `Feature ${index + 1}`;
+        const card = parseCardParagraph(item);
+        const fallbackTitle =
+          feature?.name || feature?.value || `Feature ${index + 1}`;
 
         return (
-          <label
+          <div
             key={`key-feature-description-${index}`}
-            className={styles.fieldControl}
+            className={styles.detailEditor}
           >
-            <span>{label}</span>
-            <textarea
-              value={item}
-              rows={3}
-              onChange={(event) => update(index, event.target.value)}
+            <CmsInput
+              label="Feature heading"
+              value={card.title}
+              onChange={(value) => update(index, "title", value)}
             />
-          </label>
+            <CmsTextarea
+              label={`Description for ${card.title || fallbackTitle}`}
+              value={card.text}
+              onChange={(value) => update(index, "text", value)}
+            />
+          </div>
         );
       })}
     </div>
