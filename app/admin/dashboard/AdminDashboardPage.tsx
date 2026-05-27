@@ -3478,6 +3478,13 @@ function formatFaqParagraph(question: string, answer: string) {
   return `${cleanQuestion} || ${cleanAnswer}`.trim();
 }
 
+function faqAnswerToEditorValue(answer: string) {
+  const cleanAnswer = answer.trim();
+  if (!cleanAnswer) return "";
+  if (/<\/?[a-z][\s\S]*>/i.test(cleanAnswer)) return cleanAnswer;
+  return `<p>${escapeHtml(cleanAnswer)}</p>`;
+}
+
 function DynamicFaqList({
   label,
   values,
@@ -3534,11 +3541,13 @@ function DynamicFaqList({
               value={faq.question}
               onChange={(value) => update(index, "question", value)}
             />
-            <CmsTextarea
-              label="Answer"
-              value={faq.answer}
-              onChange={(value) => update(index, "answer", value)}
-            />
+            <div className={styles.fieldControl}>
+              <span>Answer</span>
+              <RichBlogEditor
+                value={faqAnswerToEditorValue(faq.answer)}
+                onChange={(value) => update(index, "answer", value)}
+              />
+            </div>
             <button
               className={styles.button}
               type="button"

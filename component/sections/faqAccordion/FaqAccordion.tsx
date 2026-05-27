@@ -14,6 +14,16 @@ type FaqAccordionProps = {
   className?: string;
 };
 
+const HTML_PATTERN = /<\/?[a-z][\s\S]*>/i;
+
+function FaqAnswer({ answer }: { answer: string }) {
+  if (HTML_PATTERN.test(answer)) {
+    return <div dangerouslySetInnerHTML={{ __html: answer }} />;
+  }
+
+  return <>{answer}</>;
+}
+
 export default function FaqAccordion({
   items,
   defaultOpenIndex = null,
@@ -57,7 +67,7 @@ export default function FaqAccordion({
             </button>
             {isOpen && (
               <div id={answerId} className={styles.faqAnswer}>
-                {item.answer}
+                <FaqAnswer answer={item.answer} />
               </div>
             )}
           </article>

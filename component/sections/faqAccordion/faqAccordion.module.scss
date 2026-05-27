@@ -74,6 +74,17 @@
   font-weight: 400;
   line-height: 150%;
   padding: 1.25rem 1.5rem;
+
+  p {
+    margin: 0;
+  }
+
+  a {
+    color: #01060a;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 0.15rem;
+  }
 }
 
 @media (max-width: 900px) {
