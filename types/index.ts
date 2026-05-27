@@ -188,6 +188,7 @@ type CmsPageTemplate = {
 
 type ModelObjectTypes = {
   id: number;
+  productId?: number;
   modelNumber: string;
   modelTitle: string;
   machineType: string;

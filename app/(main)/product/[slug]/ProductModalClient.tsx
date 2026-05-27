@@ -19,6 +19,7 @@ const DEFAULT_SPECS_TABLE_HEADING = "Precision Machines. Project-Ready.";
 const DEFAULT_SPECS_TABLE_PARAGRAPH =
   "Built for performance. Trusted by contractors, municipalities, and EPC teams across sectors.";
 const KEY_FEATURE_DESCRIPTION_LIMIT = 6;
+const HTML_PATTERN = /<\/?[a-z][\s\S]*>/i;
 
 type ProductModalClientProps = {
   modelData: ModelObjectTypes | null;
@@ -41,6 +42,39 @@ type ProductModelFaq = {
   question: string;
   answer: string;
 };
+
+function RichDescription({
+  paragraphs,
+  className,
+}: {
+  paragraphs?: string[];
+  className?: string;
+}) {
+  const lines = Array.isArray(paragraphs)
+    ? paragraphs.filter((paragraph) => String(paragraph || "").trim())
+    : [];
+
+  if (!lines.length) return null;
+
+  const richHtml = lines.length === 1 && HTML_PATTERN.test(lines[0]);
+
+  if (richHtml) {
+    return (
+      <div
+        className={className}
+        dangerouslySetInnerHTML={{ __html: lines[0] }}
+      />
+    );
+  }
+
+  return (
+    <div className={className}>
+      {lines.map((paragraph, index) => (
+        <p key={`${paragraph}-${index}`}>{paragraph}</p>
+      ))}
+    </div>
+  );
+}
 
 type ProductApplicationCard = {
   title: string;
@@ -263,15 +297,7 @@ function buildBestSuitedIndustryCards(
   const modelName = modelData?.modelNumber || "This model";
   const productName = modelData?.productName || "machine";
   const productLower = productName.toLowerCase();
-  const industryNames = [
-    ...asArray(modelData?.industries),
-    "OFC Telecommunications",
-    "Water Management",
-    "Agriculture",
-    "Construction",
-    "Solar Energy",
-    "Defence",
-  ]
+  const industryNames = asArray(modelData?.industries)
     .map((industry) => industry.trim())
     .filter(Boolean)
     .filter((industry, index, list) => list.indexOf(industry) === index)
@@ -384,6 +410,38 @@ function overrideCardText<T extends { text: string }>(
   }));
 }
 
+function overrideCardContent<T extends { title: string; text: string }>(
+  cards: T[],
+  template: CmsPageTemplate | undefined,
+  key: string
+): T[] {
+  const paragraphs = templateParagraphs(template, key);
+  if (!paragraphs.length) return cards;
+
+  return cards.map((card, index) => {
+    const paragraph = paragraphs[index];
+    if (!paragraph) return card;
+
+    if (!/\|\|?/.test(paragraph)) {
+      return {
+        ...card,
+        text: paragraph,
+      };
+    }
+
+    const [title = "", ...textParts] = paragraph
+      .split(/\s*(?:\|\||\|)\s*/)
+      .map((part) => part.trim());
+    const text = textParts.join(" ").trim();
+
+    return {
+      ...card,
+      title: title || card.title,
+      text: text || card.text,
+    };
+  });
+}
+
 function productFaqsFromTemplate(
   template: CmsPageTemplate | undefined,
   fallbackFaqs: ProductModelFaq[]
@@ -451,12 +509,12 @@ export default function ProductModalClient({
     productTemplate,
     buildProductModelFaqs(modelData, isIndiaMarket)
   );
-  const productApplicationCards = overrideCardText(
+  const productApplicationCards = overrideCardContent(
     buildProductApplicationCards(modelData, isIndiaMarket),
     productTemplate,
     "applications"
   );
-  const bestSuitedIndustryCards = overrideCardText(
+  const bestSuitedIndustryCards = overrideCardContent(
     buildBestSuitedIndustryCards(modelData, isIndiaMarket),
     productTemplate,
     "industryFit"
@@ -628,10 +686,7 @@ export default function ProductModalClient({
               <h2>Overview</h2>
               {overviewContent?.title && <h3>{overviewContent.title}</h3>}
               <div className={styles.productHeroOverviewText}>
-                {Array.isArray(overviewContent?.description) &&
-                  overviewContent.description.map((paragraph, index) => (
-                    <p key={`${paragraph}-${index}`}>{paragraph}</p>
-                  ))}
+                <RichDescription paragraphs={overviewContent?.description} />
                 {isOverviewExpanded &&
                   overviewExtraParagraphs.map((paragraph, index) => (
                     <p key={`overview-extra-${index}`}>{paragraph}</p>
@@ -1029,7 +1084,8 @@ export default function ProductModalClient({
               </section>
             )}
 
-            {isTemplateSectionEnabled(productTemplate, "industryFit") && (
+            {isTemplateSectionEnabled(productTemplate, "industryFit") &&
+              bestSuitedIndustryCards.length > 0 && (
               <section className={styles.productIndustryFitSection}>
               <div className={styles.productIndustryFitHeader}>
                 <p className={styles.productIndustryFitEyebrow}>
@@ -1136,7 +1192,7 @@ export default function ProductModalClient({
               seriesItems.length > 0 && (
               <div className={styles.moreModels}>
                 <h2 className={styles.modelContainerHeading}>
-                  {`More Models in ${modelData?.series} Series`}
+                  {`More Models in ${modelData?.productName || "This Product"}`}
                 </h2>
                 <div className={styles.modelCardContainer}>
                   {seriesItems.map((eachModel: any, ids: number) => {

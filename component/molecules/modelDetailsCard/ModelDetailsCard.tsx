@@ -5,6 +5,8 @@ interface ModelOverviewProps {
   data: ModelDescription;
 }
 
+const HTML_PATTERN = /<\/?[a-z][\s\S]*>/i;
+
 // Helper function to convert YouTube watch URL to embed URL
 const getYouTubeEmbedUrl = (url: string): string => {
   if (!url) return "";
@@ -36,16 +38,25 @@ const ModelOverview: React.FC<ModelOverviewProps> = ({ data }) => {
   const paragraphs = Array.isArray(description) ? description : [];
 
   const embedUrl = getYouTubeEmbedUrl(youtubeLink);
+  const richHtml = paragraphs.length === 1 && HTML_PATTERN.test(paragraphs[0]);
+
   return (
     <section className={styles.modelOverviewWrapper}>
       <div className={styles.contentBox}>
         <h2>{title || "-"}</h2>
-        <div className={styles.paragraphHolder}>
-          {paragraphs.length > 0 &&
-            paragraphs.map((paragraph: string, ind: number) => (
-              <p key={`paragraph -- ${ind}`}>{paragraph || "-"}</p>
-            ))}
-        </div>
+        {richHtml ? (
+          <div
+            className={styles.paragraphHolder}
+            dangerouslySetInnerHTML={{ __html: paragraphs[0] }}
+          />
+        ) : (
+          <div className={styles.paragraphHolder}>
+            {paragraphs.length > 0 &&
+              paragraphs.map((paragraph: string, ind: number) => (
+                <p key={`paragraph -- ${ind}`}>{paragraph || "-"}</p>
+              ))}
+          </div>
+        )}
       </div>
       <div className={styles.imageBox}>
         {youtubeLink && embedUrl ? (

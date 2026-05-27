@@ -1,7 +1,7 @@
 import {
   getModelByProductSlugAndModelNumberSlug,
-  getModelsBySeries,
 } from "@/actions/modelAction";
+import { getProductById } from "@/actions/productAction";
 import ProductModalClient from "@/app/(main)/product/[slug]/ProductModalClient";
 import ModelStructuredData from "@/app/(main)/product/[slug]/ModelStructuredData";
 import ModelQueryCleanup from "@/app/(main)/product/[slug]/ModelQueryCleanup";
@@ -46,10 +46,12 @@ export default async function ProductNestedModelPage({
 
   const { modelData } = resolved;
 
-  let seriesData = null;
-  if (modelData.series) {
-    seriesData = await getModelsBySeries(modelData.series);
-  }
+  const parentProductData = modelData.productId
+    ? await getProductById(modelData.productId)
+    : null;
+  const parentProductModels =
+    parentProductData?.models.filter((model) => model.id !== modelData.id) ||
+    null;
 
   const pageUrl = `${SITE}/products/${productSlug}/${modelNumberSegment}`;
 
@@ -63,7 +65,7 @@ export default async function ProductNestedModelPage({
       <ModelStructuredData modelData={modelData} pageUrl={pageUrl} />
       <ProductModalClient
         modelData={modelData}
-        seriesData={seriesData}
+        seriesData={parentProductModels}
         pageVariant="productModel"
         modelBasePath={`/products/${productSlug}`}
       />

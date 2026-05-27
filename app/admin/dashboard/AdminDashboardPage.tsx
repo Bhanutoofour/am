@@ -39,6 +39,8 @@ type SectionKey =
   | "blogs"
   | "media";
 
+const KEY_FEATURE_DESCRIPTION_LIMIT = 6;
+
 type NavItem = {
   label: string;
   section?: SectionKey;
@@ -1364,35 +1366,61 @@ function buildModelPayload(
     (feature) => feature.name.trim() || feature.value.trim()
   );
   const cleanDescription = form.modelDescription
-    .filter((item) => item.title.trim() || item.image.trim())
+    .filter(
+      (item) =>
+        item.title.trim() ||
+        item.image.trim() ||
+        item.description.some((line) => line.trim())
+    )
     .map((item) => ({
       ...item,
       description: item.description.filter((line) => line.trim()),
-    }));
+    }))
+    .slice(0, 1);
   const cleanIndustrySections = form.industryProductTemplateSections
     .filter((section) => section.key.trim())
-    .map((section) => ({
-      key: section.key.trim(),
-      enabled: section.enabled !== false,
-      ...(section.eyebrow.trim() ? { eyebrow: section.eyebrow.trim() } : {}),
-      ...(section.heading.trim() ? { heading: section.heading.trim() } : {}),
-      ...(section.intro.trim() ? { intro: section.intro.trim() } : {}),
-      ...(section.paragraphs.some((line) => line.trim())
-        ? { paragraphs: section.paragraphs.filter((line) => line.trim()) }
-        : {}),
-    }));
+    .map((section) => {
+      const key = section.key.trim();
+      const storesParagraphs = [
+        "applications",
+        "faqs",
+        "industryfit",
+        "keyfeatures",
+      ].includes(key.toLowerCase());
+
+      return {
+        key,
+        enabled: section.enabled !== false,
+        ...(section.eyebrow.trim() ? { eyebrow: section.eyebrow.trim() } : {}),
+        ...(section.heading.trim() ? { heading: section.heading.trim() } : {}),
+        ...(section.intro.trim() ? { intro: section.intro.trim() } : {}),
+        ...(storesParagraphs && section.paragraphs.some((line) => line.trim())
+          ? { paragraphs: section.paragraphs.filter((line) => line.trim()) }
+          : {}),
+      };
+    });
   const cleanProductSections = form.productTemplateSections
     .filter((section) => section.key.trim())
-    .map((section) => ({
-      key: section.key.trim(),
-      enabled: section.enabled !== false,
-      ...(section.eyebrow.trim() ? { eyebrow: section.eyebrow.trim() } : {}),
-      ...(section.heading.trim() ? { heading: section.heading.trim() } : {}),
-      ...(section.intro.trim() ? { intro: section.intro.trim() } : {}),
-      ...(section.paragraphs.some((line) => line.trim())
-        ? { paragraphs: section.paragraphs.filter((line) => line.trim()) }
-        : {}),
-    }));
+    .map((section) => {
+      const key = section.key.trim();
+      const storesParagraphs = [
+        "applications",
+        "faqs",
+        "industryfit",
+        "keyfeatures",
+      ].includes(key.toLowerCase());
+
+      return {
+        key,
+        enabled: section.enabled !== false,
+        ...(section.eyebrow.trim() ? { eyebrow: section.eyebrow.trim() } : {}),
+        ...(section.heading.trim() ? { heading: section.heading.trim() } : {}),
+        ...(section.intro.trim() ? { intro: section.intro.trim() } : {}),
+        ...(storesParagraphs && section.paragraphs.some((line) => line.trim())
+          ? { paragraphs: section.paragraphs.filter((line) => line.trim()) }
+          : {}),
+      };
+    });
 
   return {
     ...(form.id ? { id: form.id } : {}),
@@ -2365,8 +2393,13 @@ function ProductModelManager({ createNonce }: { createNonce: number }) {
               >
               <TemplateSectionsEditor
                 title="Product template sections"
-                helperText="Section keys: hero, specs, keyFeatures, industryFit, applications, moreModels, faqs, contact. Paragraphs override hero read-more copy, key feature descriptions, industry/application card text, and FAQs. For FAQs use: Question || Answer."
+                helperText="Section keys: hero, specs, keyFeatures, industryFit, applications, moreModels, faqs, contact. Use headings and intro here; model page description content belongs in the main editor. Key Features and FAQ sections show their own content boxes."
                 values={modelForm.productTemplateSections}
+                keyFeatures={modelForm.keyFeatures}
+                industries={productIndustries.filter((industry) =>
+                  modelForm.industryIds.includes(industry.id)
+                )}
+                modelLabel={modelForm.modelNumber}
                 onChange={(productTemplateSections) =>
                   setModelForm((current) => ({
                     ...current,
@@ -3446,6 +3479,360 @@ function DynamicStringList({
   );
 }
 
+function parseFaqParagraph(value: string) {
+  const [question = "", ...answerParts] = String(value || "")
+    .split(/\s*(?:\|\||\|)\s*/)
+    .map((part) => part.trim());
+
+  return {
+    question,
+    answer: answerParts.join(" ").trim(),
+  };
+}
+
+function formatFaqParagraph(question: string, answer: string) {
+  const cleanQuestion = question.trim();
+  const cleanAnswer = answer.trim();
+
+  if (!cleanQuestion && !cleanAnswer) return "";
+  return `${cleanQuestion} || ${cleanAnswer}`.trim();
+}
+
+function DynamicFaqList({
+  label,
+  values,
+  onChange,
+}: {
+  label: string;
+  values?: string[];
+  onChange: (values: string[]) => void;
+}) {
+  const listValues = Array.isArray(values) && values.length ? values : [""];
+
+  const update = (
+    index: number,
+    field: "question" | "answer",
+    value: string
+  ) => {
+    onChange(
+      listValues.map((item, itemIndex) => {
+        if (itemIndex !== index) return item;
+
+        const faq = parseFaqParagraph(item);
+        return formatFaqParagraph(
+          field === "question" ? value : faq.question,
+          field === "answer" ? value : faq.answer
+        );
+      })
+    );
+  };
+
+  return (
+    <div className={styles.repeatGroup}>
+      <div className={styles.repeatHeader}>
+        <div>
+          <p>{label}</p>
+          <p className={styles.workflowText}>
+            Add one question and answer per FAQ.
+          </p>
+        </div>
+        <button
+          className={styles.button}
+          type="button"
+          onClick={() => onChange([...listValues, ""])}
+        >
+          Add FAQ
+        </button>
+      </div>
+      {listValues.map((item, index) => {
+        const faq = parseFaqParagraph(item);
+
+        return (
+          <div key={`${label}-${index}`} className={styles.faqEditorRow}>
+            <CmsInput
+              label="Question"
+              value={faq.question}
+              onChange={(value) => update(index, "question", value)}
+            />
+            <CmsTextarea
+              label="Answer"
+              value={faq.answer}
+              onChange={(value) => update(index, "answer", value)}
+            />
+            <button
+              className={styles.button}
+              type="button"
+              onClick={() =>
+                onChange(listValues.filter((_, itemIndex) => itemIndex !== index))
+              }
+            >
+              Remove FAQ
+            </button>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+function parseCardParagraph(value: string) {
+  const rawValue = String(value || "").trim();
+  if (!rawValue) return { title: "", text: "" };
+  if (!/\|\|?/.test(rawValue)) return { title: "", text: rawValue };
+
+  const [title = "", ...textParts] = String(value || "")
+    .split(/\s*(?:\|\||\|)\s*/)
+    .map((part) => part.trim());
+
+  return {
+    title,
+    text: textParts.join(" ").trim(),
+  };
+}
+
+function inferIndustryFitCard(
+  value: string,
+  modelLabel = ""
+) {
+  const card = parseCardParagraph(value);
+  if (!card.title || !card.text) return card;
+
+  const titleLower = card.title.toLowerCase();
+  const modelLower = modelLabel.trim().toLowerCase();
+  if (
+    modelLower &&
+    titleLower.startsWith(modelLower) &&
+    titleLower.includes(" is suited for ")
+  ) {
+    return {
+      title: "",
+      text: value,
+    };
+  }
+
+  return card;
+}
+
+function formatCardParagraph(title: string, text: string) {
+  const cleanTitle = title.trim();
+  const cleanText = text.trim();
+
+  if (!cleanTitle && !cleanText) return "";
+  return `${cleanTitle} || ${cleanText}`.trim();
+}
+
+function DynamicIndustryFitCardList({
+  values,
+  industries,
+  modelLabel,
+  onChange,
+}: {
+  values?: string[];
+  industries?: IndustryOption[];
+  modelLabel?: string;
+  onChange: (values: string[]) => void;
+}) {
+  const industryRows = Array.isArray(industries) ? industries.slice(0, 6) : [];
+  const rowCount = Math.max(1, values?.length || industryRows.length || 6);
+  const listValues = Array.from({ length: rowCount }, (_, index) =>
+    Array.isArray(values) ? values[index] || "" : ""
+  );
+
+  const update = (index: number, field: "title" | "text", value: string) => {
+    onChange(
+      listValues.map((item, itemIndex) => {
+        if (itemIndex !== index) return item;
+
+        const card = inferIndustryFitCard(item, modelLabel);
+        return formatCardParagraph(
+          field === "title" ? value : card.title,
+          field === "text" ? value : card.text
+        );
+      })
+    );
+  };
+
+  return (
+    <div className={styles.repeatGroup}>
+      <div className={styles.repeatHeader}>
+        <div>
+          <p>Industry fit cards</p>
+          <p className={styles.workflowText}>
+            Add as many points as this model needs. Blank titles fall back to selected industries.
+          </p>
+        </div>
+        <button
+          className={styles.button}
+          type="button"
+          onClick={() => onChange([...listValues, ""])}
+        >
+          Add point
+        </button>
+      </div>
+      {listValues.map((item, index) => {
+        const card = inferIndustryFitCard(item, modelLabel);
+        const industry = industryRows[index];
+
+        return (
+          <div key={`industry-fit-card-${index}`} className={styles.cardEditorRow}>
+            <input
+              placeholder={industry?.title || `Point ${index + 1} title`}
+              value={card.title}
+              onChange={(event) => update(index, "title", event.target.value)}
+            />
+            <input
+              placeholder="Point description"
+              value={card.text}
+              onChange={(event) => update(index, "text", event.target.value)}
+            />
+            <span className={styles.countPill}>
+              {String(index + 1).padStart(2, "0")}
+            </span>
+            <button
+              className={styles.button}
+              type="button"
+              onClick={() =>
+                onChange(listValues.filter((_, itemIndex) => itemIndex !== index))
+              }
+            >
+              Remove
+            </button>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+function DynamicApplicationCardList({
+  values,
+  onChange,
+}: {
+  values?: string[];
+  onChange: (values: string[]) => void;
+}) {
+  const defaults = [
+    "Project Applications",
+    "Site Planning",
+    "Fleet Fit",
+    "Operational Value",
+  ];
+  const rowCount = Math.max(defaults.length, values?.length || 0);
+  const listValues = Array.from({ length: rowCount }, (_, index) =>
+    Array.isArray(values) ? values[index] || "" : ""
+  );
+
+  const update = (index: number, field: "title" | "text", value: string) => {
+    onChange(
+      listValues.map((item, itemIndex) => {
+        if (itemIndex !== index) return item;
+
+        const card = parseCardParagraph(item);
+        return formatCardParagraph(
+          field === "title" ? value : card.title,
+          field === "text" ? value : card.text
+        );
+      })
+    );
+  };
+
+  return (
+    <div className={styles.repeatGroup}>
+      <div className={styles.repeatHeader}>
+        <div>
+          <p>Product fit cards</p>
+          <p className={styles.workflowText}>
+            These four cards appear in the Product Fit section.
+          </p>
+        </div>
+      </div>
+      {listValues.map((item, index) => {
+        const card = parseCardParagraph(item);
+
+        return (
+          <div key={`application-card-${index}`} className={styles.repeatRowTwo}>
+            <input
+              placeholder={defaults[index] || `Card ${index + 1} title`}
+              value={card.title}
+              onChange={(event) => update(index, "title", event.target.value)}
+            />
+            <input
+              placeholder="Card description"
+              value={card.text}
+              onChange={(event) => update(index, "text", event.target.value)}
+            />
+            <span className={styles.countPill}>
+              {String(index + 1).padStart(2, "0")}
+            </span>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+function DynamicKeyFeatureDescriptionList({
+  values,
+  keyFeatures,
+  onChange,
+}: {
+  values?: string[];
+  keyFeatures?: { name: string; value: string }[];
+  onChange: (values: string[]) => void;
+}) {
+  const featureRows = Array.isArray(keyFeatures)
+    ? keyFeatures
+        .filter((feature) => feature.name.trim() || feature.value.trim())
+        .slice(0, KEY_FEATURE_DESCRIPTION_LIMIT)
+    : [];
+  const rowCount = Math.max(featureRows.length, values?.length || 0, 1);
+  const listValues = Array.from({ length: rowCount }, (_, index) =>
+    Array.isArray(values) ? values[index] || "" : ""
+  );
+
+  const update = (index: number, value: string) => {
+    onChange(
+      listValues.map((item, itemIndex) =>
+        itemIndex === index ? value : item
+      )
+    );
+  };
+
+  return (
+    <div className={styles.repeatGroup}>
+      <div className={styles.repeatHeader}>
+        <div>
+          <p>Key feature descriptions</p>
+          <p className={styles.workflowText}>
+            These descriptions appear under the key feature cards in order.
+          </p>
+        </div>
+      </div>
+      {listValues.map((item, index) => {
+        const feature = featureRows[index];
+        const label =
+          feature?.name ||
+          feature?.value ||
+          `Feature ${index + 1}`;
+
+        return (
+          <label
+            key={`key-feature-description-${index}`}
+            className={styles.fieldControl}
+          >
+            <span>{label}</span>
+            <textarea
+              value={item}
+              rows={3}
+              onChange={(event) => update(index, event.target.value)}
+            />
+          </label>
+        );
+      })}
+    </div>
+  );
+}
+
 function DynamicKeyValueList({
   label,
   values,
@@ -3502,6 +3889,15 @@ function DynamicKeyValueList({
   );
 }
 
+function escapeHtml(value: string) {
+  return value
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
 function ModelDescriptionEditor({
   values,
   onChange,
@@ -3515,83 +3911,68 @@ function ModelDescriptionEditor({
     url: string
   ) => void;
 }) {
+  const descriptionItem = values[0] || emptyModelForm.modelDescription[0];
   const update = (
-    index: number,
     field: keyof ModelDescriptionForm,
     value: string | string[]
   ) => {
-    onChange(
-      values.map((item, itemIndex) =>
-        itemIndex === index ? { ...item, [field]: value } : item
-      )
-    );
+    onChange([{ ...descriptionItem, [field]: value }]);
+  };
+  const toEditorValue = (description: string[]) => {
+    const lines = Array.isArray(description) ? description.filter(Boolean) : [];
+    if (lines.some((line) => /<\/?[a-z][\s\S]*>/i.test(line))) {
+      return lines.join("");
+    }
+
+    return lines
+      .map((line) => line.trim())
+      .filter(Boolean)
+      .map((line) => `<p>${escapeHtml(line)}</p>`)
+      .join("");
   };
 
   return (
     <div className={styles.repeatGroup}>
       <div className={styles.repeatHeader}>
-        <p>Model detail sections</p>
-        <button
-          className={styles.button}
-          type="button"
-          onClick={() =>
-            onChange([
-              ...values,
-              {
-                image: "",
-                imageAltText: "",
-                title: "",
-                description: [""],
-                youtubeLink: "",
-              },
-            ])
-          }
-        >
-          Add section
-        </button>
+        <div>
+          <p>Model page description</p>
+          <p className={styles.workflowText}>
+            Use one content box for as much model page description as needed.
+          </p>
+        </div>
       </div>
-      {values.map((item, index) => (
-        <div key={`description-${index}`} className={styles.detailEditor}>
-          <p className={styles.listHeading}>Section {index + 1}</p>
+        <div className={styles.detailEditor}>
           <div className={styles.formGrid}>
             <FileUploadField
               label="Detail image"
               folder="models/details"
-              currentValue={item.image}
-              onUploaded={(url) => setUploadedUrl(index, "image", url)}
+              currentValue={descriptionItem.image}
+              onUploaded={(url) => setUploadedUrl(0, "image", url)}
             />
             <CmsInput
               label="Detail image alt text"
-              value={item.imageAltText}
-              onChange={(value) => update(index, "imageAltText", value)}
+              value={descriptionItem.imageAltText}
+              onChange={(value) => update("imageAltText", value)}
             />
             <CmsInput
               label="Section title"
-              value={item.title}
-              onChange={(value) => update(index, "title", value)}
+              value={descriptionItem.title}
+              onChange={(value) => update("title", value)}
             />
             <CmsInput
               label="YouTube link"
-              value={item.youtubeLink || ""}
-              onChange={(value) => update(index, "youtubeLink", value)}
+              value={descriptionItem.youtubeLink || ""}
+              onChange={(value) => update("youtubeLink", value)}
             />
           </div>
-          <DynamicStringList
-            label="Description lines"
-            values={item.description}
-            onChange={(description) => update(index, "description", description)}
-          />
-          <button
-            className={styles.button}
-            type="button"
-            onClick={() =>
-              onChange(values.filter((_, itemIndex) => itemIndex !== index))
-            }
-          >
-            Remove section
-          </button>
+          <div className={styles.fieldControl}>
+            <span>Model page description</span>
+            <RichBlogEditor
+              value={toEditorValue(descriptionItem.description)}
+              onChange={(content) => update("description", [content])}
+            />
+          </div>
         </div>
-      ))}
     </div>
   );
 }
@@ -3630,11 +4011,17 @@ function TemplateSectionsEditor({
   title,
   helperText,
   values,
+  keyFeatures,
+  industries,
+  modelLabel,
   onChange,
 }: {
   title: string;
   helperText: string;
   values?: TemplateSectionForm[];
+  keyFeatures?: { name: string; value: string }[];
+  industries?: IndustryOption[];
+  modelLabel?: string;
   onChange: (values: TemplateSectionForm[]) => void;
 }) {
   const sectionValues = Array.isArray(values) ? values : [];
@@ -3717,11 +4104,31 @@ function TemplateSectionsEditor({
               onChange={(value) => update(index, "intro", value)}
             />
           </div>
-          <DynamicStringList
-            label="Paragraphs"
-            values={section.paragraphs}
-            onChange={(paragraphs) => update(index, "paragraphs", paragraphs)}
-          />
+          {section.key.trim().toLowerCase() === "faqs" ? (
+            <DynamicFaqList
+              label="FAQs"
+              values={section.paragraphs}
+              onChange={(paragraphs) => update(index, "paragraphs", paragraphs)}
+            />
+          ) : section.key.trim().toLowerCase() === "keyfeatures" ? (
+            <DynamicKeyFeatureDescriptionList
+              values={section.paragraphs}
+              keyFeatures={keyFeatures}
+              onChange={(paragraphs) => update(index, "paragraphs", paragraphs)}
+            />
+          ) : section.key.trim().toLowerCase() === "industryfit" ? (
+            <DynamicIndustryFitCardList
+              values={section.paragraphs}
+              industries={industries}
+              modelLabel={modelLabel}
+              onChange={(paragraphs) => update(index, "paragraphs", paragraphs)}
+            />
+          ) : section.key.trim().toLowerCase() === "applications" ? (
+            <DynamicApplicationCardList
+              values={section.paragraphs}
+              onChange={(paragraphs) => update(index, "paragraphs", paragraphs)}
+            />
+          ) : null}
           <button
             className={styles.button}
             type="button"

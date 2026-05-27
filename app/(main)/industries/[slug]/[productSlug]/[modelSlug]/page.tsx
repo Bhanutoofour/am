@@ -1,8 +1,8 @@
 import {
   getModelByIndustryProductAndModelNumberSlug,
-  getModelsBySeries,
 } from "@/actions/modelAction";
 import { getIndustryBySlug } from "@/actions/industryAction";
+import { getProductById } from "@/actions/productAction";
 import ProductModalClient from "@/app/(main)/product/[slug]/ProductModalClient";
 import ModelStructuredData from "@/app/(main)/product/[slug]/ModelStructuredData";
 import ModelQueryCleanup from "@/app/(main)/product/[slug]/ModelQueryCleanup";
@@ -53,10 +53,12 @@ export default async function IndustryProductModelPage({
   const { modelData } = resolved;
   const industryResolved = await getIndustryBySlug(slug);
 
-  let seriesData = null;
-  if (modelData.series) {
-    seriesData = await getModelsBySeries(modelData.series);
-  }
+  const parentProductData = modelData.productId
+    ? await getProductById(modelData.productId)
+    : null;
+  const parentProductModels =
+    parentProductData?.models.filter((model) => model.id !== modelData.id) ||
+    null;
 
   const pagePath =
     productsModelPathFromModelData(modelData) ||
@@ -72,7 +74,7 @@ export default async function IndustryProductModelPage({
       <ModelStructuredData modelData={modelData} pageUrl={`${SITE}${pagePath}`} />
       <ProductModalClient
         modelData={modelData}
-        seriesData={seriesData}
+        seriesData={parentProductModels}
         pageVariant="industry"
         modelBasePath={`/industries/${slug}/${productSlug}`}
         industryTitle={industryResolved?.industryData.title}

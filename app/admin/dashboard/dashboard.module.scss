@@ -1434,6 +1434,20 @@
   gap: 0.5rem;
 }
 
+.faqEditorRow {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.2fr) auto;
+  gap: 0.6rem;
+  align-items: end;
+}
+
+.cardEditorRow {
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.05fr) auto auto;
+  gap: 0.6rem;
+  align-items: center;
+}
+
 .detailEditor,
 .relatedBox {
   display: grid;
@@ -1517,7 +1531,9 @@
   .formGrid,
   .checkboxGrid,
   .repeatRow,
-  .repeatRowTwo {
+  .repeatRowTwo,
+  .faqEditorRow,
+  .cardEditorRow {
     grid-template-columns: 1fr;
   }
 

@@ -328,6 +328,7 @@ export const getModelById = async (
         modelDescription: models.modelDescription,
         seoDescription: models.seoDescription,
         seoMetadata: models.seoMetadata,
+        productId: products.id,
         // Product fields
         productName: products.title,
         generalImage: products.generalImage,
@@ -374,6 +375,7 @@ export const getModelById = async (
 
     const resultData = {
       id: modelData.id,
+      productId: modelData.productId,
       modelNumber: modelData.modelNumber,
       modelTitle: modelData.modelTitle,
       machineType: modelData.machineType,
