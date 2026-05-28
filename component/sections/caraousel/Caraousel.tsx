@@ -148,16 +148,21 @@ const Caraousel: React.FC<CaraouselProps> = ({ heroData }) => {
                   height: "100%",
                 }}
               >
-                <img
-                  src={src.image}
-                  alt={src.altText || `Hero image ${idx + 1}`}
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    objectFit: "cover",
-                    objectPosition: "center center",
-                  }}
-                />
+                <picture className={styles.heroPicture}>
+                  {src.mobileImage && (
+                    <source media="(max-width: 767px)" srcSet={src.mobileImage} />
+                  )}
+                  <img
+                    src={src.image}
+                    alt={src.altText || `Hero image ${idx + 1}`}
+                    style={{
+                      width: "100%",
+                      height: "100%",
+                      objectFit: "cover",
+                      objectPosition: "center center",
+                    }}
+                  />
+                </picture>
                 <div
                   style={{
                     position: "absolute",

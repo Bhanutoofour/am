@@ -4,10 +4,12 @@ import db from "@/db/drizzle";
 import { heroSection } from "@/db/schema";
 import { asc, desc, sql } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
+import { ensureHeroMobileImageColumn } from "@/lib/server/hero-section-schema";
 
 // GET: List with pagination for React-Admin
 export async function GET(req: NextRequest) {
   try {
+    await ensureHeroMobileImageColumn();
     const rangeHeader = req.headers.get("Range");
     const { searchParams } = new URL(req.url);
     const page = Number(searchParams.get("page")) || 1;
@@ -74,6 +76,7 @@ export async function GET(req: NextRequest) {
 // POST: Create a new item
 export async function POST(req: NextRequest) {
   try {
+    await ensureHeroMobileImageColumn();
     const body = await req.json();
     // Ensure DB auto-generates primary key
     delete (body as any).id;

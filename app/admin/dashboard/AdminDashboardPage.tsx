@@ -495,6 +495,7 @@ const resourceConfig: Record<
       title: "",
       description: "",
       image: "",
+      mobileImage: "",
       altText: "",
     },
   },
@@ -5357,6 +5358,43 @@ function RichBlogEditor({
   );
 }
 
+function HeroSlidePreview({ record }: { record: ResourceRecord | null }) {
+  const image = String(record?.image || "");
+  const mobileImage = String(record?.mobileImage || "");
+  const title = String(record?.title || "Slide heading");
+  const description = String(record?.description || "Slide description");
+
+  return (
+    <div className={styles.shopifyPreview}>
+      <div className={styles.previewToolbar}>
+        <span>Live preview</span>
+        <span>Homepage hero</span>
+      </div>
+      <div className={styles.heroPreviewFrame}>
+        {image || mobileImage ? (
+          <img
+            src={mobileImage || image}
+            alt={String(record?.altText || title)}
+            className={styles.heroPreviewImage}
+          />
+        ) : (
+          <div className={styles.heroPreviewEmpty}>Upload an image to preview</div>
+        )}
+        <div className={styles.heroPreviewOverlay} />
+        <div className={styles.heroPreviewContent}>
+          <h4>{title}</h4>
+          <p>{description}</p>
+          <span>GET A QUOTE</span>
+        </div>
+      </div>
+      <p className={styles.workflowText}>
+        Preview shows the mobile crop when available. Click Publish to save it
+        to the live website.
+      </p>
+    </div>
+  );
+}
+
 function ResourceManager({
   config,
   sectionKey,
@@ -5423,6 +5461,7 @@ function ResourceManager({
       return null;
     }
   }, [editorValue]);
+  const isHeroEditor = sectionKey === "hero";
 
   const updateEditorField = (field: string, value: unknown) => {
     let currentRecord: ResourceRecord = { ...config.emptyRecord };
@@ -5636,7 +5675,13 @@ function ResourceManager({
                   onClick={saveRecord}
                   disabled={isSaving}
                 >
-                  {isSaving ? "Saving..." : isCreating ? "Create" : "Update"}
+                  {isSaving
+                    ? "Saving..."
+                    : isHeroEditor
+                      ? "Publish"
+                      : isCreating
+                        ? "Create"
+                        : "Update"}
                 </button>
               </div>
             )}
@@ -5645,42 +5690,56 @@ function ResourceManager({
             <p className={styles.statusText}>Opening content...</p>
           ) : isCreating || selected ? (
             <>
-              {sectionKey === "hero" && (
-                <div className={styles.heroUploadPanel}>
-                  <CmsInput
-                    label="Slide heading"
-                    value={String(editorRecord?.title || "")}
-                    onChange={(title) => updateEditorField("title", title)}
-                  />
-                  <CmsTextarea
-                    label="Slide description"
-                    value={String(editorRecord?.description || "")}
-                    onChange={(description) =>
-                      updateEditorField("description", description)
-                    }
-                  />
-                  <FileUploadField
-                    label="Hero image"
-                    folder="hero"
-                    currentValue={String(editorRecord?.image || "")}
-                    onUploaded={(url) => updateEditorField("image", url)}
-                    uploadSuccessMessage="Hero image uploaded successfully."
-                    replacementSuccessMessage="Hero image has been replaced."
-                  />
-                  <label className={styles.fieldControl}>
-                    <span>Hero image alt text</span>
-                    <input
-                      type="text"
-                      value={String(editorRecord?.altText || "")}
-                      placeholder="Describe the hero image"
-                      onChange={(event) =>
-                        updateEditorField("altText", event.target.value)
-                      }
-                    />
-                  </label>
+              {isHeroEditor ? (
+                <div className={styles.shopifyEditorLayout}>
+                  <div className={styles.shopifyControls}>
+                    <div className={styles.heroUploadPanel}>
+                      <CmsInput
+                        label="Slide heading"
+                        value={String(editorRecord?.title || "")}
+                        onChange={(title) => updateEditorField("title", title)}
+                      />
+                      <CmsTextarea
+                        label="Slide description"
+                        value={String(editorRecord?.description || "")}
+                        onChange={(description) =>
+                          updateEditorField("description", description)
+                        }
+                      />
+                      <FileUploadField
+                        label="Hero image"
+                        folder="hero"
+                        currentValue={String(editorRecord?.image || "")}
+                        onUploaded={(url) => updateEditorField("image", url)}
+                        uploadSuccessMessage="Hero image uploaded successfully."
+                        replacementSuccessMessage="Hero image has been replaced."
+                      />
+                      <FileUploadField
+                        label="Mobile hero image"
+                        folder="hero/mobile"
+                        currentValue={String(editorRecord?.mobileImage || "")}
+                        onUploaded={(url) =>
+                          updateEditorField("mobileImage", url)
+                        }
+                        uploadSuccessMessage="Mobile hero image uploaded successfully."
+                        replacementSuccessMessage="Mobile hero image has been replaced."
+                      />
+                      <label className={styles.fieldControl}>
+                        <span>Hero image alt text</span>
+                        <input
+                          type="text"
+                          value={String(editorRecord?.altText || "")}
+                          placeholder="Describe the hero image"
+                          onChange={(event) =>
+                            updateEditorField("altText", event.target.value)
+                          }
+                        />
+                      </label>
+                    </div>
+                  </div>
+                  <HeroSlidePreview record={editorRecord} />
                 </div>
-              )}
-              {sectionKey === "hero" ? null : (
+              ) : (
                 <textarea
                   className={styles.jsonEditor}
                   value={editorValue}

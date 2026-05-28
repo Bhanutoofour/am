@@ -886,6 +886,115 @@
   background: #ffffff;
 }
 
+.shopifyEditorLayout {
+  display: grid;
+  grid-template-columns: minmax(19rem, 0.42fr) minmax(24rem, 0.58fr);
+  gap: 1rem;
+  align-items: start;
+}
+
+.shopifyControls {
+  min-width: 0;
+}
+
+.shopifyControls .heroUploadPanel {
+  grid-template-columns: 1fr;
+  margin-bottom: 0;
+}
+
+.shopifyPreview {
+  min-width: 0;
+  display: grid;
+  gap: 0.75rem;
+  padding: 0.85rem;
+  border: 1px solid var(--cms-border);
+  border-radius: 0.55rem;
+  background: #ffffff;
+}
+
+.previewToolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  color: var(--cms-muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.heroPreviewFrame {
+  position: relative;
+  min-height: 22rem;
+  overflow: hidden;
+  border: 1px solid var(--cms-border);
+  border-radius: 0.45rem;
+  background: #f0f2f4;
+}
+
+.heroPreviewImage {
+  width: 100%;
+  height: 100%;
+  min-height: 22rem;
+  display: block;
+  object-fit: cover;
+}
+
+.heroPreviewEmpty {
+  min-height: 22rem;
+  display: grid;
+  place-items: center;
+  color: var(--cms-muted);
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.heroPreviewOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.12) 0%,
+    rgba(1, 6, 10, 0.28) 100%
+  );
+}
+
+.heroPreviewContent {
+  position: absolute;
+  left: 2rem;
+  bottom: 2rem;
+  max-width: min(28rem, calc(100% - 4rem));
+  display: grid;
+  gap: 0.75rem;
+}
+
+.heroPreviewContent h4 {
+  margin: 0;
+  color: #01060a;
+  font-size: clamp(1.75rem, 4vw, 3rem);
+  font-weight: 900;
+  line-height: 1.05;
+}
+
+.heroPreviewContent p {
+  margin: 0;
+  color: #01060a;
+  font-size: 1rem;
+  line-height: 1.4;
+}
+
+.heroPreviewContent span {
+  width: fit-content;
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.35rem;
+  background: #f9c300;
+  color: #01060a;
+  padding: 0 1.15rem;
+  font-size: 0.78rem;
+  font-weight: 800;
+}
+
 .productModelEditor {
   background:
     linear-gradient(180deg, rgba(249, 195, 0, 0.05), transparent 14rem),
@@ -1513,6 +1622,10 @@
   }
 
   .heroUploadPanel {
+    grid-template-columns: 1fr;
+  }
+
+  .shopifyEditorLayout {
     grid-template-columns: 1fr;
   }
 

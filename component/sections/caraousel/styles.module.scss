@@ -127,7 +127,7 @@
         font-variation-settings: "wdth" 75;
         letter-spacing: 0;
         font-style: normal;
-        color: $text-secondary;
+        color: #01060a;
         @include sm-max {
           font-size: 1.5rem;
           line-height: 120%;
@@ -164,7 +164,7 @@
         line-height: 140%;
         letter-spacing: 0;
         font-style: normal;
-        color: $text-secondary;
+        color: #01060a;
         @include sm-max {
           font-size: 0.875rem;
           line-height: 140%;
@@ -191,6 +191,16 @@
           text-align: center;
         }
       }
+    }
+
+    .heroPicture {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .heroPicture img {
+      display: block;
     }
   }
 }

@@ -3,6 +3,7 @@ type HeroSection = {
   title: string;
   description: string;
   image: string;
+  mobileImage?: string;
   altText: string;
 };
 

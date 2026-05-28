@@ -14,6 +14,7 @@ export const heroSection = pgTable("hero-section", {
   title: text("title").notNull(),
   description: text("description").notNull(),
   image: text("image").notNull(),
+  mobileImage: text("mobile_image").notNull().default(""),
   altText: text("alt_text").notNull().default(""),
 });
 

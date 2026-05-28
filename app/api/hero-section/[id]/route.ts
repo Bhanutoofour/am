@@ -4,6 +4,7 @@ import db from "@/db/drizzle";
 import { heroSection } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
+import { ensureHeroMobileImageColumn } from "@/lib/server/hero-section-schema";
 
 function getIdFromRequest(req: NextRequest): number | null {
   const url = new URL(req.url);
@@ -14,6 +15,7 @@ function getIdFromRequest(req: NextRequest): number | null {
 // GET: Get one
 export async function GET(req: NextRequest) {
   try {
+    await ensureHeroMobileImageColumn();
     const id = getIdFromRequest(req);
     if (!id) return NextResponse.json({ error: "Invalid ID" }, { status: 400 });
 
@@ -36,6 +38,7 @@ export async function GET(req: NextRequest) {
 // PUT: Update
 export async function PUT(req: NextRequest) {
   try {
+    await ensureHeroMobileImageColumn();
     const id = getIdFromRequest(req);
     if (!id) return NextResponse.json({ error: "Invalid ID" }, { status: 400 });
 
@@ -67,6 +70,7 @@ export async function PUT(req: NextRequest) {
 // DELETE: Remove
 export async function DELETE(req: NextRequest) {
   try {
+    await ensureHeroMobileImageColumn();
     const id = getIdFromRequest(req);
     if (!id) return NextResponse.json({ error: "Invalid ID" }, { status: 400 });
 

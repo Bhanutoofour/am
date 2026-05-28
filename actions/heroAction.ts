@@ -2,11 +2,13 @@
 
 import db from "@/db/drizzle";
 import { heroSection } from "@/db/schema";
+import { ensureHeroMobileImageColumn } from "@/lib/server/hero-section-schema";
 import { revalidatePath } from "next/cache";
 
 // GET all hero section entries
 export const getHeroSections = async (): Promise<HeroSection[]> => {
   try {
+    await ensureHeroMobileImageColumn();
     const result = await db.select().from(heroSection).orderBy(heroSection.id);
     return result;
   } catch (error) {
