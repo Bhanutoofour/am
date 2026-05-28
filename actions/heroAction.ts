@@ -19,6 +19,7 @@ export const getHeroSections = async (): Promise<HeroSection[]> => {
 export const revalidateHeroData = async () => {
   // Force Next.js to revalidate homepage
   revalidatePath("/");
+  revalidatePath("/en-in");
 
   console.log("🔄 Hero page revalidated");
 };

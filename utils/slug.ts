@@ -25,6 +25,12 @@ function segmentSlug(text: string): string {
 
 /** URL segment from DB `model_number` (nested industry → product → model routes). */
 export function modelNumberSlug(modelNumber: string): string {
+  const normalized = modelNumber.trim().toLowerCase().replace(/[^a-z0-9]+/g, "");
+
+  if (normalized === "sandfiller") {
+    return "sandfiller";
+  }
+
   return segmentSlug(modelNumber.trim());
 }
 

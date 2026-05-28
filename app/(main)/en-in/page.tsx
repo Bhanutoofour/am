@@ -2,6 +2,9 @@ import HomeContent from "@/app/(main)/HomeContent";
 import type { Metadata } from "next";
 import { indiaCanonical, rootCanonical } from "@/utils/locale";
 
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 export const metadata: Metadata = {
   title:
     "Trencher Machine Manufacturer in India | Autocracy Machinery",

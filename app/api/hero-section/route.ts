@@ -81,6 +81,7 @@ export async function POST(req: NextRequest) {
 
     // Force Next.js to revalidate homepage
     revalidatePath("/");
+    revalidatePath("/en-in");
 
     console.log("🔄 New hero section created - page revalidated");
 

@@ -50,6 +50,7 @@ export async function PUT(req: NextRequest) {
 
     // Force Next.js to revalidate homepage
     revalidatePath("/");
+    revalidatePath("/en-in");
     
     console.log("🔄 Hero section updated - page revalidated");
 
@@ -78,6 +79,7 @@ export async function DELETE(req: NextRequest) {
 
     // Force Next.js to revalidate homepage
     revalidatePath("/");
+    revalidatePath("/en-in");
     
     console.log("🔄 Hero section deleted - page revalidated");
 
