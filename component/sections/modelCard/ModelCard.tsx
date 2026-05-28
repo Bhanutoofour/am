@@ -33,11 +33,16 @@ const ModelCard: React.FC<ModelState> = ({
     productSeg && numberSlug
       ? `/products/${productSeg}/${numberSlug}`
       : `/product/${slug}`;
+  const detailHref = basePath ? `${basePath}/${numberSlug}` : productsPathHref;
 
   return (
     <div className={styles.cardWrapper}>
       <div className={styles.cardContent}>
-        <div className={styles.imageSection}>
+        <Link
+          href={detailHref}
+          className={styles.imageSection}
+          aria-label={`View details for ${model?.modelNumber || "model"}`}
+        >
           <Image
             src={model?.thumbnail}
             alt={model?.thumbnailAltText || "Model thumbnail image"}
@@ -45,11 +50,13 @@ const ModelCard: React.FC<ModelState> = ({
             height={150}
             className={styles.productImage}
           />
-        </div>
+        </Link>
         <div className={styles.detailsSection}>
           <p className={styles.seriesTitle}>{model?.series || "-"} Series</p>
           <div className={styles.titleArea}>
-            <p className={styles.modelTitle}>{model?.modelNumber || "-"}</p>
+            <Link href={detailHref} className={styles.titleLink}>
+              <p className={styles.modelTitle}>{model?.modelNumber || "-"}</p>
+            </Link>
             <p className={styles.subtitle}>
               {model?.modelTitle} | {model?.machineType}
             </p>
@@ -67,10 +74,7 @@ const ModelCard: React.FC<ModelState> = ({
                 ))}
           </div>
         </div>
-        <Link
-          href={basePath ? `${basePath}/${numberSlug}` : productsPathHref}
-          className={styles.ctaSection}
-        >
+        <Link href={detailHref} className={styles.ctaSection}>
           <button className={styles.viewDetailsBtn}>VIEW DETAILS</button>
         </Link>
       </div>

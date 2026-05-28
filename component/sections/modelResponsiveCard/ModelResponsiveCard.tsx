@@ -30,11 +30,14 @@ const ModelResponsiveCard: React.FC<ModelState> = ({
     productSeg && numberSlug
       ? `/products/${productSeg}/${numberSlug}`
       : `/product/${slug}`;
+  const detailHref = basePath ? `${basePath}/${numberSlug}` : productsPathHref;
 
   return (
     <div className={styles.card}>
       <div className={styles.header}>
-        <h2 className={styles.modelName}>{model.modelNumber || "-"}</h2>
+        <Link href={detailHref} className={styles.titleLink}>
+          <h2 className={styles.modelName}>{model.modelNumber || "-"}</h2>
+        </Link>
         {/* <span className={styles.seriesTag}>{model?.series || "-"} Series</span> */}
       </div>
 
@@ -42,7 +45,11 @@ const ModelResponsiveCard: React.FC<ModelState> = ({
         {model?.modelTitle} | {model?.machineType}
       </p>
 
-      <div className={styles.imageWrapper}>
+      <Link
+        href={detailHref}
+        className={styles.imageWrapper}
+        aria-label={`View details for ${model?.modelNumber || "model"}`}
+      >
         <Image
           src={model.thumbnail}
           alt={model.thumbnailAltText || "Model thumbnail image"}
@@ -50,7 +57,7 @@ const ModelResponsiveCard: React.FC<ModelState> = ({
           height={250}
           className={styles.image}
         />
-      </div>
+      </Link>
 
       <div className={styles.trenchWidths}>
         {keyFeatures.length > 0 &&
@@ -61,10 +68,7 @@ const ModelResponsiveCard: React.FC<ModelState> = ({
             </div>
           ))}
       </div>
-      <Link
-        href={basePath ? `${basePath}/${numberSlug}` : productsPathHref}
-        className={styles.ctaSection}
-      >
+      <Link href={detailHref} className={styles.ctaSection}>
         <button className={styles.ctaButton}>View Details</button>
       </Link>
     </div>
